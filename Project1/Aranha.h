@@ -4,6 +4,8 @@
 #include "Inimigo.h"
 
 class Aranha: public Inimigo {
+private:
+
 public:
 	Aranha();
 	~Aranha();

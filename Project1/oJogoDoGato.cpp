@@ -3,6 +3,6 @@
 int main() {
 	int a;
 	
-	cout << "HELLO WORLD!!!!!!" << endl;
+	cout << "HELLO WORLD!!!!!!!" << endl;
 	return 0;
 }

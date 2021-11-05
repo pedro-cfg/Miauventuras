@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "FasePrimeira.h"
 
-/**
- * FasePrimeira implementation
- */
+FasePrimeira::FasePrimeira() {
+
+}
+
+FasePrimeira::~FasePrimeira() {
+
+}

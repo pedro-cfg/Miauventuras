@@ -1,20 +1,14 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _FASE_H
-#define _FASE_H
+#ifndef _FASE_H_
+#define _FASE_H_
 
 #include "Ente.h"
 
 
 class Fase: public Ente {
-public: 
-    
-virtual virtual void excutar() = 0;
-    
-void gerenciar_colisoes();
+public:    
+	Fase();
+	~Fase();
+	void gerenciar_colisoes();
 };
 
-#endif //_FASE_H
+#endif

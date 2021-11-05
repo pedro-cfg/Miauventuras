@@ -1,15 +1,12 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _MENU_H
-#define _MENU_H
+#ifndef _MENU_H_
+#define _MENU_H_
 
 #include "Ente.h"
 
 
 class Menu: public Ente {
+public:
+
 };
 
-#endif //_MENU_H
+#endif

@@ -1,15 +1,12 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _FASESEGUNDA_H
-#define _FASESEGUNDA_H
+#ifndef _FASESEGUNDA_H_
+#define _FASESEGUNDA_H+
 
 #include "Fase.h"
 
-
 class FaseSegunda: public Fase {
+public:
+	FaseSegunda();
+	~FaseSegunda();
 };
 
-#endif //_FASESEGUNDA_H
+#endif 

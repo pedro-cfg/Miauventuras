@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Jogo.h"
 
-/**
- * Jogo implementation
- */
+Jogo::Jogo() {
+
+}
+
+Jogo::~Jogo() {
+
+}

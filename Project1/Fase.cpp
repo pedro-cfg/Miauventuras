@@ -1,25 +1,14 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Fase.h"
 
-/**
- * Fase implementation
- */
+Fase::Fase():Ente() {
 
-
-/**
- * @return virtual void
- */
-virtual virtual void Fase::excutar() {
-    return null;
 }
 
-/**
- * @return void
- */
+Fase::~Fase() {
+
+}
+
 void Fase::gerenciar_colisoes() {
-    return;
+
 }

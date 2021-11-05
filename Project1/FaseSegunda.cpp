@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "FaseSegunda.h"
 
-/**
- * FaseSegunda implementation
- */
+FaseSegunda::FaseSegunda() {
+
+}
+
+FaseSegunda::~FaseSegunda() {
+
+}

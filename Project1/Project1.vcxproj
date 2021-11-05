@@ -35,6 +35,7 @@
     <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
+    <ClCompile Include="oJogoDoGato.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aranha.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="Elemento.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="Espinhos.h" />

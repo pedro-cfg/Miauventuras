@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Ratao.h"
 
-/**
- * Ratao implementation
- */
+Ratao::Ratao() :Inimigo() {
+
+}
+
+Ratao::~Ratao() {
+
+}

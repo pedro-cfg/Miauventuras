@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Teia.h"
 
-/**
- * Teia implementation
- */
+Teia::Teia():Obstaculo() {
+
+}
+
+Teia::~Teia() {
+
+}

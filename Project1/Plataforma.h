@@ -1,15 +1,12 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _PLATAFORMA_H
-#define _PLATAFORMA_H
+#ifndef _PLATAFORMA_H_
+#define _PLATAFORMA_H_
 
 #include "Obstaculo.h"
 
-
 class Plataforma: public Obstaculo {
+public:
+	Plataforma();
+	~Plataforma();
 };
 
-#endif //_PLATAFORMA_H
+#endif

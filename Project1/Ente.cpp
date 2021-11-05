@@ -9,6 +9,10 @@ Ente::~Ente() {
 
 }
 
+void Ente::Executar() {
+
+}
+
 void Ente::imprimir_se() {
 
 }

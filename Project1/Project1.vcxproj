@@ -20,21 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aranha.cpp" />
-    <ClCompile Include="Elemento.cpp" />
     <ClCompile Include="Espinhos.cpp" />
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="FasePrimeira.cpp" />
     <ClCompile Include="FaseSegunda.cpp" />
+    <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="Lagartixa.cpp" />
-    <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Moeda.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="oJogoDoGato.cpp" />
     <ClCompile Include="Ente.cpp" />
+    <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -44,6 +45,8 @@
   <ItemGroup>
     <ClInclude Include="Aranha.h" />
     <ClInclude Include="Ente.h" />
+    <ClInclude Include="Gerenciador_Colisoes.h" />
+    <ClInclude Include="Moeda.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Elemento.h" />
     <ClInclude Include="Entidade.h" />

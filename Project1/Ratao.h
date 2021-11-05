@@ -1,15 +1,12 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _RATAO_H
-#define _RATAO_H
+#ifndef _RATAO_H_
+#define _RATAO_H_
 
 #include "Inimigo.h"
 
-
 class Ratao: public Inimigo {
+public:
+	Ratao();
+	~Ratao();
 };
 
-#endif //_RATAO_H
+#endif 

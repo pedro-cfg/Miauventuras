@@ -1,5 +1,5 @@
 #ifndef _FASESEGUNDA_H_
-#define _FASESEGUNDA_H+
+#define _FASESEGUNDA_H_
 
 #include "Fase.h"
 

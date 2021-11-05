@@ -6,7 +6,8 @@
 
 class Menu: public Ente {
 public:
-
+	Menu();
+	~Menu();
 };
 
 #endif

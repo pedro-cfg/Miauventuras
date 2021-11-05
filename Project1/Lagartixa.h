@@ -1,16 +1,13 @@
-/**
- * Project Untitled
- */
+#ifndef _LAGARTIXA_H_
+#define _LAGARTIXA_H_
 
-
-#ifndef _LAGARTIXA_H
-#define _LAGARTIXA_H
-
-#include "Personagem.h"
 #include "Inimigo.h"
 
 
-class Lagartixa: public Personagem, public Inimigo {
+class Lagartixa: public Inimigo {
+public:
+	Lagartixa();
+	~Lagartixa();
 };
 
-#endif //_LAGARTIXA_H
+#endif 

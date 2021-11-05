@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Espinhos.h"
 
-/**
- * Espinhos implementation
- */
+Espinhos::Espinhos() :Obstaculo() {
+
+}
+
+Espinhos::~Espinhos() {
+
+}

@@ -1,10 +1,11 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Plataforma.h"
 
-/**
- * Plataforma implementation
- */
+Plataforma::Plataforma() :Obstaculo() {
+
+}
+
+Plataforma::~Plataforma() {
+
+}
+

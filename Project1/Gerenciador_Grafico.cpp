@@ -1,10 +1,11 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Gerenciador_Grafico.h"
 
-/**
- * Gerenciador_Grafico implementation
- */
+
+Gerenciador_Grafico::Gerenciador_Grafico() {
+
+}
+
+Gerenciador_Grafico::~Gerenciador_Grafico() {
+
+}

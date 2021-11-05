@@ -7,7 +7,7 @@ protected:
 public:
 	Ente();
 	~Ente();
-	virtual void Executar() = 0;
+	virtual void Executar();
 	void imprimir_se();
 };
 

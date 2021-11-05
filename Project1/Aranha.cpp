@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Aranha.h"
 
-/**
- * Aranha implementation
- */
+Aranha::Aranha() :Inimigo() {
+
+}
+
+Aranha::~Aranha() {
+
+}

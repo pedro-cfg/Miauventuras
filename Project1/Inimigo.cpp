@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Inimigo.h"
 
-/**
- * Inimigo implementation
- */
+Inimigo::Inimigo() :Personagem() {
+
+}
+
+Inimigo::~Inimigo() {
+
+}

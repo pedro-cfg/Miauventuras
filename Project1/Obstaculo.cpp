@@ -1,10 +1,11 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Obstaculo.h"
 
-/**
- * Obstaculo implementation
- */
+Obstaculo::Obstaculo() :Entidade() {
+
+}
+
+Obstaculo::~Obstaculo() {
+
+}
+

@@ -1,25 +1,15 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _ENTIDADE_H
-#define _ENTIDADE_H
+#ifndef _ENTIDADE_H_
+#define _ENTIDADE_H_
 
 #include "Ente.h"
 
-
 class Entidade: public Ente {
-public: 
-    
-void Entidade();
-    
-void Entidade();
-    
-virtual virtual void executar() = 0;
-protected: 
+protected:
     int x;
     int y;
+public: 
+    Entidade();
+    ~Entidade();
 };
 
-#endif //_ENTIDADE_H
+#endif 

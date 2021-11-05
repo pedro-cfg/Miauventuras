@@ -1,10 +1,11 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Projetil.h"
 
-/**
- * Projetil implementation
- */
+Projetil::Projetil() :Entidade() {
+
+}
+
+Projetil::~Projetil() {
+
+}
+

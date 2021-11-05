@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Personagem.h"
 
-/**
- * Personagem implementation
- */
+Personagem::Personagem() :Entidade() {
+
+}
+
+Personagem::~Personagem() {
+
+}

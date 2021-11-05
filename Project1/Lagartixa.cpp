@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Lagartixa.h"
 
-/**
- * Lagartixa implementation
- */
+Lagartixa::Lagartixa() :Inimigo() {
+
+}
+
+Lagartixa::~Lagartixa() {
+
+}

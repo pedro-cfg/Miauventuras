@@ -1,15 +1,12 @@
-/**
- * Project Untitled
- */
+#ifndef _TEIA_H_
+#define _TEIA_H_
 
-
-#ifndef _TEIA_H
-#define _TEIA_H
-
-#include "../Obstaculo.h"
-
+#include "Obstaculo.h"
 
 class Teia: public Obstaculo {
+public:
+	Teia();
+	~Teia();
 };
 
-#endif //_TEIA_H
+#endif 

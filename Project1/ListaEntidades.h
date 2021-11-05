@@ -1,17 +1,14 @@
-/**
- * Project Untitled
- */
+#ifndef _LISTAENTIDADES_H_
+#define _LISTAENTIDADES_H_
 
+#include "Lista.h"
 
-#ifndef _LISTAENTIDADES_H
-#define _LISTAENTIDADES_H
-
-#include "Conhecer.h"
-
-
-class ListaEntidades: public Conhecer {
+template <class Entidade>
+class ListaEntidades{
 public: 
     Lista<Entidade> LEs;
+    ListaEntidades() {}
+    ~ListaEntidades() {}
 };
 
-#endif //_LISTAENTIDADES_H
+#endif

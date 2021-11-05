@@ -1,10 +1,10 @@
-/**
- * Project Untitled
- */
-
-
+#include "stdafx.h"
 #include "Jogador.h"
 
-/**
- * Jogador implementation
- */
+Jogador::Jogador() :Personagem() {
+
+}
+
+Jogador::~Jogador() {
+
+}

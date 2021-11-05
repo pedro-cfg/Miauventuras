@@ -1,15 +1,13 @@
-/**
- * Project Untitled
- */
-
-
-#ifndef _PROJETIL_H
-#define _PROJETIL_H
+#ifndef _PROJETIL_H_
+#define _PROJETIL_H_
 
 #include "Entidade.h"
 
 
 class Projetil: public Entidade {
+public:
+	Projetil();
+	~Projetil();
 };
 
-#endif //_PROJETIL_H
+#endif 

@@ -3,10 +3,14 @@
 
 #include "Personagem.h"
 
-class Inimigo: public Personagem {
+class Inimigo: public Personagem
+{
+protected:
+
 public:
 	Inimigo();
 	~Inimigo();
+	
 };
 
 #endif

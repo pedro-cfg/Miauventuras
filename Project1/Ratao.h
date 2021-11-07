@@ -3,7 +3,8 @@
 
 #include "Inimigo.h"
 
-class Ratao: public Inimigo {
+class Ratao: public Inimigo 
+{
 public:
 	Ratao();
 	~Ratao();

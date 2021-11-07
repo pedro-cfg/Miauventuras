@@ -3,7 +3,8 @@
 
 #include "Inimigo.h"
 
-class Aranha: public Inimigo {
+class Aranha: public Inimigo 
+{
 private:
 
 public:

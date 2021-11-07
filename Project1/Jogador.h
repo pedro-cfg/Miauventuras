@@ -3,9 +3,10 @@
 
 #include "Personagem.h"
 
-class Jogador: public Personagem {
+class Jogador: public Personagem
+{
 private: 
-    int pontos;
+    //int pontos;
 public:
     Jogador();
     ~Jogador();

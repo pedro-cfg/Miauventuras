@@ -4,7 +4,8 @@
 #include "Inimigo.h"
 
 
-class Lagartixa: public Inimigo {
+class Lagartixa: public Inimigo 
+{
 public:
 	Lagartixa();
 	~Lagartixa();

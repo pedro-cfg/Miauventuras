@@ -6,7 +6,7 @@
 
 int main() 
 {
-    sf::RenderWindow window(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste");
+    sf::RenderWindow window(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
     
     Jogador j1;
     Aranha a1;

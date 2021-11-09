@@ -4,29 +4,30 @@
 #include "ListaEntidades.h"
 #include "Inimigo.h"
 #include "Obstaculo.h"
-#include "Moeda.h"
-#include "Personagem.h"
+#include "Entidade.h"
 
 class Gerenciador_Colisoes {
 private:
-	/*ListaEntidades<Inimigo*> LIs;
-	ListaEntidades<Obstaculo> LOs;
-	ListaEntidades<Moeda> LMs;*/
-
+	list<Inimigo*> LIs;
+	list<Obstaculo*> LOs;
+	
 	bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
-	Personagem* jogador;
+	Entidade* jogador;
 
 public:
-	Gerenciador_Colisoes(Personagem* jog);
+	Gerenciador_Colisoes(Entidade* jog);
 	~Gerenciador_Colisoes();
 		
-	void Checa_Colisao(Personagem* segundo);
-	void Reset_Checagem();
+	bool getColidiuCima() const;
+	bool getColidiuBaixo() const;
+	bool getColidiuDireita() const;
+	bool getColidiuEsquerda() const;
 
-	bool getColidiuCima();
-	bool getColidiuBaixo();
-	bool getColidiuDireita();
-	bool getColidiuEsquerda();
+	void InserirInimigo(Inimigo* pI);
+	void InserirObstaculo(Obstaculo* pO);
+
+	void Checa_Colisao();
+	void Checa_Colisao_Individual(Entidade* segundo);
 };
 
 #endif 

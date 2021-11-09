@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Personagem* jog)
+Gerenciador_Colisoes::Gerenciador_Colisoes(Entidade* jog)
 {
 	jogador = jog;
 	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
@@ -11,7 +11,22 @@ Gerenciador_Colisoes::~Gerenciador_Colisoes() {
 
 }
 
-void Gerenciador_Colisoes::Checa_Colisao(Personagem* segundo)
+void Gerenciador_Colisoes::Checa_Colisao()
+{
+	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
+	list<Inimigo*>::const_iterator iteInim = LIs.begin();
+	list<Obstaculo*>::const_iterator iteObs = LOs.begin();
+	while (iteInim != LIs.end()) {
+		Checa_Colisao_Individual(*iteInim);
+		iteInim++;
+	}
+	while (iteObs != LOs.end()) {
+		Checa_Colisao_Individual(*iteObs);
+		iteObs++;
+	}
+}
+
+void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 {
 	sf::Vector2f posicao = jogador->getForma().getPosition();
 	sf::Vector2f meio_tamanho = jogador->getForma().getSize() / 2.f;
@@ -39,23 +54,28 @@ void Gerenciador_Colisoes::Checa_Colisao(Personagem* segundo)
 	}
 }
 
-void Gerenciador_Colisoes::Reset_Checagem()
-{
-	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
-}
-
-bool Gerenciador_Colisoes::getColidiuCima() {
+bool Gerenciador_Colisoes::getColidiuCima() const {
 	return colidiu_cima;
 }
 
-bool Gerenciador_Colisoes::getColidiuBaixo() {
+bool Gerenciador_Colisoes::getColidiuBaixo() const {
 	return colidiu_baixo;
 }
 
-bool Gerenciador_Colisoes::getColidiuDireita() {
+bool Gerenciador_Colisoes::getColidiuDireita() const {
 	return colidiu_direita;
 }
 
-bool Gerenciador_Colisoes::getColidiuEsquerda() {
+bool Gerenciador_Colisoes::getColidiuEsquerda() const {
 	return colidiu_esquerda;
+}
+
+void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)
+{
+	LIs.push_back(pI);
+}
+
+void Gerenciador_Colisoes::InserirObstaculo(Obstaculo* pO)
+{
+	LOs.push_back(pO);
 }

@@ -21,7 +21,11 @@ int main()
     Aranha a1;
     Lagartixa l1;
     Ratao r1;
+    
     Gerenciador_Colisoes gerenciador_colisoes(&j1);
+    gerenciador_colisoes.InserirInimigo(&a1);
+    gerenciador_colisoes.InserirInimigo(&l1);
+    gerenciador_colisoes.InserirInimigo(&r1);
 
     while (janela.isOpen())
     {
@@ -39,10 +43,7 @@ int main()
             }
         }
         
-        gerenciador_colisoes.Reset_Checagem();
-        gerenciador_colisoes.Checa_Colisao(&a1);
-        gerenciador_colisoes.Checa_Colisao(&l1);
-        gerenciador_colisoes.Checa_Colisao(&r1);
+        gerenciador_colisoes.Checa_Colisao();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {

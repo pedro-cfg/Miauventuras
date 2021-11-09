@@ -6,6 +6,7 @@
 //#include <Windows.h>
 
 #include <iostream>
+#include <list>
 using namespace std;
 
 #define LARGURA_JANELA 1280

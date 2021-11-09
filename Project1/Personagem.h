@@ -17,6 +17,8 @@ public:
     sf::RectangleShape getForma() const;
 
     void mover(float dx, float dy);
+
+    sf::Vector2f getPosicao();
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include "Aranha.h"
 #include "Lagartixa.h"
 #include "Ratao.h"
+#include "Gerenciador_Colisoes.h"
 
 int main() 
 {
@@ -12,6 +13,7 @@ int main()
     Aranha a1;
     Lagartixa l1;
     Ratao r1;
+    Gerenciador_Colisoes gerenciador_colisoes(&j1);
 
     while (window.isOpen())
     {
@@ -22,21 +24,30 @@ int main()
                 window.close();
         }
         
+        gerenciador_colisoes.Reset_Checagem();
+        gerenciador_colisoes.Checa_Colisao(&a1);
+        gerenciador_colisoes.Checa_Colisao(&l1);
+        gerenciador_colisoes.Checa_Colisao(&r1);
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            j1.mover(1.f, 0.f);
+            if(!gerenciador_colisoes.getColidiuDireita())
+                j1.mover(0.1f, 0.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            j1.mover(-1.f, 0.f);
+            if(!gerenciador_colisoes.getColidiuEsquerda())
+                j1.mover(-0.1f, 0.f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            j1.mover(0.f, -1.f);
+            if(!gerenciador_colisoes.getColidiuCima())
+                j1.mover(0.f, -0.1f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            j1.mover(0.f, 1.f);
+            if(!gerenciador_colisoes.getColidiuBaixo())
+                j1.mover(0.f, 0.1f);
         }
         
         window.clear();

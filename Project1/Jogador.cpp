@@ -2,7 +2,7 @@
 
 Jogador::Jogador()
 {
-	forma.setPosition(sf::Vector2f(0.f, 0.f));
+	forma.setPosition(sf::Vector2f(512.f, 512.f));
 	textura.loadFromFile("Texturas/jogadortmp.png");
 	forma.setTexture(&textura);
 }

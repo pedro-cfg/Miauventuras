@@ -5,9 +5,17 @@
 #include "Ratao.h"
 #include "Gerenciador_Colisoes.h"
 
+void RedimensionarVista(sf::RenderWindow& janela, sf::View& vista)
+{
+    float razao = (float)janela.getSize().x / (float)janela.getSize().y;
+
+    vista.setSize(ALTURA_JANELA * razao, ALTURA_JANELA);
+}
+
 int main() 
 {
-    sf::RenderWindow window(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
+    sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
+    sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
     
     Jogador j1;
     Aranha a1;
@@ -15,13 +23,20 @@ int main()
     Ratao r1;
     Gerenciador_Colisoes gerenciador_colisoes(&j1);
 
-    while (window.isOpen())
+    while (janela.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (janela.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            switch (event.type)
+            {
+            case sf::Event::Closed:
+                janela.close();
+                break;
+            case sf::Event::Resized:
+                RedimensionarVista(janela, vista);
+                break;
+            }
         }
         
         gerenciador_colisoes.Reset_Checagem();
@@ -50,12 +65,14 @@ int main()
                 j1.mover(0.f, 0.1f);
         }
         
-        window.clear();
-        window.draw(j1.getForma());
-        window.draw(a1.getForma());
-        window.draw(l1.getForma());
-        window.draw(r1.getForma());
-        window.display();
+        vista.setCenter(j1.getPosicao());
+        janela.clear();
+        janela.setView(vista);
+        janela.draw(j1.getForma());
+        janela.draw(a1.getForma());
+        janela.draw(l1.getForma());
+        janela.draw(r1.getForma());
+        janela.display();
     }
 
     return 0;

@@ -3,13 +3,22 @@
 
 #include "Personagem.h"
 
+class Gerenciador_Colisoes;
+
 class Jogador: public Personagem
 {
 private: 
-    //int pontos;
+    int pontos;
+    float velocidadeX;
+    float velocidadeY;
+    float velocidadeEscalar;
+    float alturaPulo;
+    bool podePular;
 public:
-    Jogador();
+    Jogador(float x, float y);
     ~Jogador();
+
+    void mover(float dT, Gerenciador_Colisoes* gerenciador);
 };
 
 #endif

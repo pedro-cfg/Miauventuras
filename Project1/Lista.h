@@ -4,43 +4,51 @@
 #include "Elemento.h"
 
 template <class TL >
-class Lista {
+class Lista 
+{
 private: 
     int tam;
     Elemento<TL>* pPrimeiro;
     Elemento<TL>* pUltimo;
 public:
-    Lista() {
-        pPrimeiro = pUltimo = NULL;
+    Lista() 
+	{
+        pPrimeiro = pUltimo = nullptr;
         tam = 0;
     }
-    ~Lista() {
+    ~Lista() 
+	{
         Elemento<TL>* paux;
-        while (pPrimeiro != NULL) {
+        while (pPrimeiro != nullptr)
+		{
             paux = pPrimeiro->getProx();
             delete pPrimeiro;
             pPrimeiro = paux;
         }
     }
-	void inserir(TL* pitem) {
+	void inserir(TL pitem) 
+	{
 		Elemento<TL>* pnovo = new Elemento<TL>(pitem);
-		if (pPrimeiro == NULL)
+		if (pPrimeiro == nullptr)
 			pPrimeiro = pUltimo = pnovo;
-		else {
+		else 
+		{
 			pUltimo->setProx(pnovo);
 			pUltimo = pUltimo->getProx();
 		}
 		tam++;
 	}
-	TL* buscar(const int ppos) {
+	TL buscar(const int ppos) 
+	{
 		Elemento<TL>* paux = pPrimeiro;
-		if (ppos >= 0 && ppos < tam) {
+		if (ppos >= 0 && ppos < tam) 
+		{
 			for (int i = 0; i < ppos; i++)
 				paux = paux->getProx();
-			return paux->getValor();
+			return paux->getInfo();
 		}
 		else
-			return NULL;
+			return nullptr;
 	}
 	int quantidade() {
 		return tam;

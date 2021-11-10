@@ -7,7 +7,7 @@
 class Lagartixa: public Inimigo 
 {
 public:
-	Lagartixa();
+	Lagartixa(float x, float y);
 	~Lagartixa();
 };
 

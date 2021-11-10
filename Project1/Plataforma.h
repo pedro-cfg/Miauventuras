@@ -3,9 +3,10 @@
 
 #include "Obstaculo.h"
 
-class Plataforma: public Obstaculo {
+class Plataforma: public Obstaculo 
+{
 public:
-	Plataforma();
+	Plataforma(float x, float y);
 	~Plataforma();
 };
 

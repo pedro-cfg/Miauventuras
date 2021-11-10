@@ -3,8 +3,8 @@
 
 #include "Entidade.h"
 
-
-class Projetil: public Entidade {
+class Projetil: public Entidade 
+{
 public:
 	Projetil();
 	~Projetil();

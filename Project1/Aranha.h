@@ -8,7 +8,7 @@ class Aranha: public Inimigo
 private:
 
 public:
-	Aranha();
+	Aranha(float x, float y);
 	~Aranha();
 };
 

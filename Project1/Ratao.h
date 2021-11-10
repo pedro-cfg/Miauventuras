@@ -6,7 +6,7 @@
 class Ratao: public Inimigo 
 {
 public:
-	Ratao();
+	Ratao(float x, float y);
 	~Ratao();
 };
 

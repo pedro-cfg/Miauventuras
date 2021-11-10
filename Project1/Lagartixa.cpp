@@ -1,11 +1,12 @@
 #include "Lagartixa.h"
 
-Lagartixa::Lagartixa() :
+Lagartixa::Lagartixa(float x, float y) :
 	Inimigo() 
 {
-	forma.setPosition(sf::Vector2f(200.f, 200.f));
-	textura.loadFromFile("Texturas/lagartixatmp.png");
-	forma.setTexture(&textura);
+	this->x = x;
+	this->y = y;
+	CarregaTextura("Texturas/lagartixatmp.png");
+	forma.setPosition(sf::Vector2f((float)x, (float)y));
 }
 
 Lagartixa::~Lagartixa() 

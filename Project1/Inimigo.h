@@ -10,7 +10,6 @@ protected:
 public:
 	Inimigo();
 	~Inimigo();
-	
 };
 
 #endif

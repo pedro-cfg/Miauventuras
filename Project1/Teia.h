@@ -3,7 +3,8 @@
 
 #include "Obstaculo.h"
 
-class Teia: public Obstaculo {
+class Teia: public Obstaculo 
+{
 public:
 	Teia();
 	~Teia();

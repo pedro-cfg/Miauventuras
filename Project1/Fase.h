@@ -3,11 +3,12 @@
 
 #include "Ente.h"
 
-
-class Fase: public Ente {
+class Fase: public Ente 
+{
 public:    
 	Fase();
 	~Fase();
+	//virtual void Executar();
 	void gerenciar_colisoes();
 };
 

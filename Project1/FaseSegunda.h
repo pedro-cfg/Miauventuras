@@ -3,10 +3,13 @@
 
 #include "Fase.h"
 
-class FaseSegunda: public Fase {
+class FaseSegunda: public Fase 
+{
 public:
 	FaseSegunda();
 	~FaseSegunda();
+
+	//void Executar();
 };
 
 #endif 

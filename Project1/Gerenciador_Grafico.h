@@ -3,9 +3,11 @@
 
 #include "stdafx.h"
 #include "Gerenciador_Colisoes.h"
+#include "Entidade.h"
 #include "Jogador.h"
 
-class Gerenciador_Grafico {
+class Gerenciador_Grafico 
+{
 private:
 	sf::RenderWindow janela;
 	sf::View vista;
@@ -14,10 +16,12 @@ public:
 	~Gerenciador_Grafico();
 
 	bool JanelaAberta();
-	void RedimensionarVista(sf::RenderWindow& janela, sf::View& vista);
-	void Fechar_Redimensionar();
-	void Mover_Teclado(Gerenciador_Colisoes* gerenciador, Jogador* jogador);
-	void Desenha(Entidade* e1, Entidade* e2, Entidade* e3, Entidade* e4);
+	void RedimensionarVista();
+	void AjustarVista(Jogador* jogador);
+	void EventosJanela();
+
+	void DesenhaForma(sf::RectangleShape& forma);
+	void DesenhaTudo(Entidade* e1, Entidade* e2, Entidade* e3, Entidade* e4, Entidade* e5);
 };
 
 #endif

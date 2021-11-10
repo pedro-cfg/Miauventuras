@@ -1,11 +1,12 @@
 #include "Aranha.h"
 
-Aranha::Aranha():
+Aranha::Aranha(float x, float y):
 	Inimigo()
 {
-	forma.setPosition(sf::Vector2f(100.f, 100.f));
-	textura.loadFromFile("Texturas/aranhatmp.png");
-	forma.setTexture(&textura);
+	this->x = x;
+	this->y = y;
+	CarregaTextura("Texturas/aranhatmp.png");
+	forma.setPosition(sf::Vector2f((float)x, (float)y));
 }
 
 Aranha::~Aranha() 

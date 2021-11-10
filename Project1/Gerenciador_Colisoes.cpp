@@ -1,13 +1,13 @@
-#include "stdafx.h"
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Entidade* jog)
+Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* jog)
 {
 	jogador = jog;
 	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
 }
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {
+Gerenciador_Colisoes::~Gerenciador_Colisoes() 
+{
 
 }
 
@@ -16,36 +16,50 @@ void Gerenciador_Colisoes::Checa_Colisao()
 	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
 	list<Inimigo*>::const_iterator iteInim = LIs.begin();
 	list<Obstaculo*>::const_iterator iteObs = LOs.begin();
-	while (iteInim != LIs.end()) {
-		Checa_Colisao_Individual(*iteInim);
+	while (iteInim != LIs.end()) 
+	{
+		Entidade* pAux = static_cast<Entidade*> (*iteInim);
+		Checa_Colisao_Individual(pAux);
 		iteInim++;
 	}
-	while (iteObs != LOs.end()) {
-		Checa_Colisao_Individual(*iteObs);
+	while (iteObs != LOs.end()) 
+	{
+		Entidade* pAux = static_cast<Entidade*> (*iteObs);
+		Checa_Colisao_Individual(pAux);
 		iteObs++;
 	}
 }
 
 void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 {
-	sf::Vector2f posicao = jogador->getForma().getPosition();
-	sf::Vector2f meio_tamanho = jogador->getForma().getSize() / 2.f;
-	sf::Vector2f posicao_outro = segundo->getForma().getPosition();
-	sf::Vector2f meio_tamanho_outro = segundo->getForma().getSize() / 2.f;
+	float posicaoX = (float)jogador->getX();
+	float posicaoY = (float)jogador->getY();
 
-	float deltaX = posicao.x - posicao_outro.x;
-	float deltaY = posicao.y - posicao_outro.y;
-	float intersecaoX = abs(deltaX) - (meio_tamanho.x + meio_tamanho_outro.x);
-	float intersecaoY = abs(deltaY) - (meio_tamanho.y + meio_tamanho_outro.y);
+	float meio_tamanhoX = jogador->getLargura() / 2.0f;
+	float meio_tamanhoY = jogador->getAltura() / 2.0f;
 
-	if (intersecaoX < 0.f && intersecaoY < 0.f) {
-		if (abs(intersecaoX) < abs(intersecaoY)) {
+	float posicao_outroX = (float)segundo->getX();
+	float posicao_outroY = (float)segundo->getY();
+
+	float meio_tamanho_outroX = jogador->getLargura() / 2.0f;
+	float meio_tamanho_outroY = jogador->getAltura() / 2.0f;
+
+	float deltaX = posicaoX - posicao_outroX;
+	float deltaY = posicaoY - posicao_outroY;
+	float intersecaoX = abs(deltaX) - (meio_tamanhoX + meio_tamanho_outroX);
+	float intersecaoY = abs(deltaY) - (meio_tamanhoY + meio_tamanho_outroY);
+
+	if (intersecaoX < 0.f && intersecaoY < 0.f) 
+	{
+		if (abs(intersecaoX) < abs(intersecaoY)) 
+		{
 			if (deltaX > 0.f)
 				colidiu_esquerda = true;
 			else
 				colidiu_direita = true;
 		}
-		else {
+		else 
+		{
 			if (deltaY > 0.f)
 				colidiu_cima = true;
 			else
@@ -54,19 +68,23 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 	}
 }
 
-bool Gerenciador_Colisoes::getColidiuCima() const {
+bool Gerenciador_Colisoes::getColidiuCima() const 
+{
 	return colidiu_cima;
 }
 
-bool Gerenciador_Colisoes::getColidiuBaixo() const {
+bool Gerenciador_Colisoes::getColidiuBaixo() const 
+{
 	return colidiu_baixo;
 }
 
-bool Gerenciador_Colisoes::getColidiuDireita() const {
+bool Gerenciador_Colisoes::getColidiuDireita() const 
+{
 	return colidiu_direita;
 }
 
-bool Gerenciador_Colisoes::getColidiuEsquerda() const {
+bool Gerenciador_Colisoes::getColidiuEsquerda() const 
+{
 	return colidiu_esquerda;
 }
 

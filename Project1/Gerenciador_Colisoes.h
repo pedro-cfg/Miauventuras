@@ -5,17 +5,19 @@
 #include "Inimigo.h"
 #include "Obstaculo.h"
 #include "Entidade.h"
+#include "Jogador.h"
 
-class Gerenciador_Colisoes {
+class Gerenciador_Colisoes 
+{
 private:
 	list<Inimigo*> LIs;
 	list<Obstaculo*> LOs;
 	
 	bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
-	Entidade* jogador;
+	Jogador* jogador;
 
 public:
-	Gerenciador_Colisoes(Entidade* jog);
+	Gerenciador_Colisoes(Jogador* jog);
 	~Gerenciador_Colisoes();
 		
 	bool getColidiuCima() const;

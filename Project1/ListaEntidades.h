@@ -2,13 +2,14 @@
 #define _LISTAENTIDADES_H_
 
 #include "Lista.h"
+#include "Entidade.h"
 
-template <class Entidade>
-class ListaEntidades{
+class ListaEntidades
+{
 public: 
     Lista<Entidade> LEs;
-    ListaEntidades() {}
-    ~ListaEntidades() {}
+    ListaEntidades();
+    ~ListaEntidades();
 };
 
 #endif

@@ -1,20 +1,32 @@
 #ifndef _ENTIDADE_H_
 #define _ENTIDADE_H_
 
-#include "Ente.h"
 #include "stdafx.h"
+#include "Ente.h"
 
-class Entidade: public Ente {
+class Gerenciador_Grafico;
+
+class Entidade: public Ente 
+{
 protected:
-    /*int x;
-    int y;*/
+    float x;
+    float y;
+
     sf::Texture textura;
     sf::RectangleShape forma;
+
 public: 
     Entidade();
     ~Entidade();
-    virtual sf::RectangleShape getForma() const;
-    sf::Vector2f getPosicao();
+    void desenhar();
+    void setX(float x);
+    void setY(float y);
+    float getX() const;
+    float getY() const;
+    float getAltura() const;
+    float getLargura() const;
+
+    void CarregaTextura(string caminho);
 };
 
 #endif 

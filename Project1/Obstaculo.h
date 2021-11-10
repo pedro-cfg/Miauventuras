@@ -3,7 +3,8 @@
 
 #include "Entidade.h"
 
-class Obstaculo: public Entidade {
+class Obstaculo: public Entidade 
+{
 public:
 	Obstaculo();
 	~Obstaculo();

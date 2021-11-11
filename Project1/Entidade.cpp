@@ -22,6 +22,12 @@ void Entidade::CarregaTextura(string caminho)
 	forma.setTexture(&textura);
 	forma.setOrigin(forma.getSize() / 2.0f);
 }
+
+void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* ger)
+{
+	gerenciador = ger;
+}
+
 void Entidade::desenhar()
 {
 	gerenciar_graficos->DesenhaForma(forma);

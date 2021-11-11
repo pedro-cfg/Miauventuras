@@ -10,5 +10,5 @@
 #include <list>
 using namespace std;
 
-#define LARGURA_JANELA 1280
-#define ALTURA_JANELA 720
+#define LARGURA_JANELA 1920
+#define ALTURA_JANELA 1080

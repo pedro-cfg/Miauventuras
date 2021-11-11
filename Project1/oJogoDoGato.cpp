@@ -5,6 +5,5 @@ int main()
 {
     Jogo oJogoDoGato;
 
-    
     return 0;
 }

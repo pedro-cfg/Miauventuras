@@ -2,7 +2,7 @@
 
 Gerenciador_Grafico::Gerenciador_Grafico() :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
-	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f))
+	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_JANELA, ALTURA_JANELA))
 {
 	sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
 	sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
@@ -27,7 +27,13 @@ void Gerenciador_Grafico::RedimensionarVista()
 
 void Gerenciador_Grafico::AjustarVista(Jogador* jogador)
 {
-    vista.setCenter((float)jogador->getX(), (float)jogador->getY());
+    float coordY = (float)jogador->getY();
+    float coordX = (float)jogador->getX() + 200.f;
+    if (coordY > -280)
+        coordY = -280;
+    if (coordX < 0)
+        coordX = 0;
+    vista.setCenter(coordX, coordY);
 }
 
 void Gerenciador_Grafico::EventosJanela()

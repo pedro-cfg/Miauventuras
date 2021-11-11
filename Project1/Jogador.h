@@ -18,7 +18,7 @@ public:
     Jogador(float x, float y);
     ~Jogador();
 
-    void mover(float dT, Gerenciador_Colisoes* gerenciador);
+    void mover(float dT);
 };
 
 #endif

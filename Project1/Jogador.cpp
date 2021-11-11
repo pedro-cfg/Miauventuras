@@ -4,10 +4,10 @@
 Jogador::Jogador(float x, float y):
     Personagem()
 {
-    velocidadeEscalar = 200.0f;
+    velocidadeEscalar = 400.0f;
     velocidadeX = 0.0f;
     velocidadeY = 0.0f;
-    alturaPulo = 390.0f;
+    alturaPulo = 150.0f;
     podePular = true;
 	this->x = x;
 
@@ -21,7 +21,7 @@ Jogador::~Jogador()
 
 }
 
-void Jogador::mover(float dT, Gerenciador_Colisoes* gerenciador)
+void Jogador::mover(float dT)
 {
     velocidadeX = 0.0f;
 
@@ -46,7 +46,7 @@ void Jogador::mover(float dT, Gerenciador_Colisoes* gerenciador)
         if (!gerenciador->getColidiuEsquerda())
             velocidadeX -= velocidadeEscalar;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular && gerenciador->getColidiuBaixo())
     {
         podePular = false;
         velocidadeY = -sqrt(2.0f * 981.0f * alturaPulo);

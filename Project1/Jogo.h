@@ -18,7 +18,7 @@ private:
 	Aranha a1;
 	Lagartixa l1;
 	Ratao r1;
-	Plataforma p1;
+	Plataforma p1, p2;
 	Gerenciador_Colisoes gerenciador_colisoes;
 	Gerenciador_Grafico gerenciador_grafico;
 	Lista<Entidade> lista_entidades;

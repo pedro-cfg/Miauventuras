@@ -5,6 +5,7 @@
 #include "Ente.h"
 
 class Gerenciador_Grafico;
+class Gerenciador_Colisoes;
 
 class Entidade: public Ente 
 {
@@ -15,6 +16,7 @@ protected:
     sf::Texture textura;
     sf::RectangleShape forma;
 
+    Gerenciador_Colisoes *gerenciador;
 public: 
     Entidade();
     ~Entidade();
@@ -27,6 +29,7 @@ public:
     float getLargura() const;
 
     void CarregaTextura(string caminho);
+    void setGerenciadorColisoes(Gerenciador_Colisoes* ger);
 };
 
 #endif 

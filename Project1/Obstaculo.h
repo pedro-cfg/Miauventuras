@@ -8,6 +8,8 @@ class Obstaculo: public Entidade
 public:
 	Obstaculo();
 	~Obstaculo();
+
+	void Rotacionar();
 };
 
 #endif

@@ -8,6 +8,8 @@
 #include "Plataforma.h"
 #include "Gerenciador_Colisoes.h"
 #include "Gerenciador_Grafico.h"
+#include "Lista.h"
+#include "Entidade.h"
 
 class Jogo 
 {
@@ -19,12 +21,14 @@ private:
 	Plataforma p1;
 	Gerenciador_Colisoes gerenciador_colisoes;
 	Gerenciador_Grafico gerenciador_grafico;
+	Lista<Entidade> lista_entidades;
 public:
 	Jogo();
 	~Jogo();
 
 	void Executar();
 
+	void Inserir_Entidade();
 	void Inserir_Colisao();
 };
 

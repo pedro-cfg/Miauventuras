@@ -1,6 +1,7 @@
 #ifndef _LISTA_H_
 #define _LISTA_H_
 
+#include "stdafx.h"
 #include "Elemento.h"
 
 template <class TL >
@@ -13,23 +14,23 @@ private:
 public:
     Lista() 
 	{
-        pPrimeiro = pUltimo = nullptr;
+        pPrimeiro = pUltimo = NULL;
         tam = 0;
     }
     ~Lista() 
 	{
-        Elemento<TL>* paux;
-        while (pPrimeiro != nullptr)
+        /*Elemento<TL>* paux;
+        while (pPrimeiro != NULL)
 		{
             paux = pPrimeiro->getProx();
             delete pPrimeiro;
             pPrimeiro = paux;
-        }
+        }*/
     }
-	void inserir(TL pitem) 
+	void Inserir(TL* pitem) 
 	{
 		Elemento<TL>* pnovo = new Elemento<TL>(pitem);
-		if (pPrimeiro == nullptr)
+		if (pPrimeiro == NULL)
 			pPrimeiro = pUltimo = pnovo;
 		else 
 		{
@@ -38,7 +39,8 @@ public:
 		}
 		tam++;
 	}
-	TL buscar(const int ppos) 
+
+	TL* Buscar(const int ppos) 
 	{
 		Elemento<TL>* paux = pPrimeiro;
 		if (ppos >= 0 && ppos < tam) 
@@ -48,9 +50,10 @@ public:
 			return paux->getInfo();
 		}
 		else
-			return nullptr;
+			return NULL;
 	}
-	int quantidade() {
+
+	int Quantidade() {
 		return tam;
 	}
 };

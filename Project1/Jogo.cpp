@@ -15,6 +15,8 @@ Jogo::Jogo() :
 	r1.setGerenciadorGrafico(&gerenciador_grafico);
 	p1.setGerenciadorGrafico(&gerenciador_grafico);
 
+	Inserir_Entidade();
+
 	Executar();
 }
 
@@ -42,10 +44,17 @@ void Jogo::Executar()
 
 		gerenciador_grafico.AjustarVista(&j1);
 
-		gerenciador_grafico.DesenhaTudo(static_cast<Entidade*>(&j1), static_cast<Entidade*>(&a1), 
-										static_cast<Entidade*>(&l1), static_cast<Entidade*>(&r1), 
-										static_cast<Entidade*>(&p1));
+		gerenciador_grafico.DesenhaTudo(lista_entidades);
 	}
+}
+
+void Jogo::Inserir_Entidade()
+{
+	lista_entidades.Inserir(static_cast<Entidade*>(&j1));
+	lista_entidades.Inserir(static_cast<Entidade*>(&a1));
+	lista_entidades.Inserir(static_cast<Entidade*>(&l1));
+	lista_entidades.Inserir(static_cast<Entidade*>(&r1));
+	lista_entidades.Inserir(static_cast<Entidade*>(&p1));
 }
 
 void Jogo::Inserir_Colisao()

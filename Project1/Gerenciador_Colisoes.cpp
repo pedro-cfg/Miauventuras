@@ -32,24 +32,24 @@ void Gerenciador_Colisoes::Checa_Colisao()
 
 void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 {
-	float posicaoX = (float)jogador->getX();
-	float posicaoY = (float)jogador->getY();
+	float posicaoX = jogador->getX();
+	float posicaoY = jogador->getY();
 
 	float meio_tamanhoX = jogador->getLargura() / 2.0f;
 	float meio_tamanhoY = jogador->getAltura() / 2.0f;
 
-	float posicao_outroX = (float)segundo->getX();
-	float posicao_outroY = (float)segundo->getY();
+	float posicao_outroX = segundo->getX();
+	float posicao_outroY = segundo->getY();
 
-	float meio_tamanho_outroX = jogador->getLargura() / 2.0f;
-	float meio_tamanho_outroY = jogador->getAltura() / 2.0f;
+	float meio_tamanho_outroX = segundo->getLargura() / 2.0f;
+	float meio_tamanho_outroY = segundo->getAltura() / 2.0f;
 
 	float deltaX = posicaoX - posicao_outroX;
 	float deltaY = posicaoY - posicao_outroY;
 	float intersecaoX = abs(deltaX) - (meio_tamanhoX + meio_tamanho_outroX);
 	float intersecaoY = abs(deltaY) - (meio_tamanhoY + meio_tamanho_outroY);
 
-	if (intersecaoX < 0.f && intersecaoY < 0.f) 
+	if (intersecaoX < 0.f && intersecaoY < 0.f && abs(abs(intersecaoX) - abs(intersecaoY))> 0.1f)
 	{
 		if (abs(intersecaoX) < abs(intersecaoY)) 
 		{
@@ -61,7 +61,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 		else 
 		{
 			if (deltaY > 0.f)
-				colidiu_cima = true;
+   				colidiu_cima = true;
 			else
 				colidiu_baixo = true;
 		}

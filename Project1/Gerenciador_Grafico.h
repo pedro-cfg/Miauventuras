@@ -21,7 +21,7 @@ public:
 	void EventosJanela();
 
 	void DesenhaForma(sf::RectangleShape& forma);
-	void DesenhaTudo(Entidade* e1, Entidade* e2, Entidade* e3, Entidade* e4, Entidade* e5);
+	void DesenhaTudo(Lista<Entidade> lista);
 };
 
 #endif

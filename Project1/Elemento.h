@@ -1,20 +1,22 @@
 #ifndef _ELEMENTO_H_
 #define _ELEMENTO_H_
 
+#include "stdafx.h"
+
 template <class TE >
 class Elemento 
 {
 private: 
     Elemento<TE>* pProx;
-    TE info;
+    TE* info;
 public:
-    Elemento(TE info) 
+    Elemento(TE* info) 
 	{
 		this->info = info;
 		pProx = nullptr;
 	}
     ~Elemento() {}
-	TE getInfo() 
+	TE* getInfo() 
 	{
 		return info;
 	}

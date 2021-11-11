@@ -52,16 +52,16 @@ void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
     janela.draw(forma);
 }
 
-void Gerenciador_Grafico::DesenhaTudo(Entidade* e1, Entidade* e2, Entidade* e3, Entidade* e4, Entidade* e5)
+void Gerenciador_Grafico::DesenhaTudo(Lista<Entidade> lista)
 {
     janela.clear();
     janela.setView(vista);
 
-    e1->desenhar();
-    e2->desenhar();
-    e3->desenhar();
-    e4->desenhar();
-    e5->desenhar();
+    for (int i = 0; i < lista.Quantidade(); i++) {
+        Entidade* pE = lista.Buscar(i);
+        if(pE != NULL)
+            pE->desenhar();
+    }
 
     janela.display();
 }

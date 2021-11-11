@@ -7,9 +7,10 @@ Jogador::Jogador(float x, float y):
     velocidadeEscalar = 200.0f;
     velocidadeX = 0.0f;
     velocidadeY = 0.0f;
-    alturaPulo = 100.0f;
+    alturaPulo = 390.0f;
     podePular = true;
 	this->x = x;
+
 	this->y = y;
 	forma.setPosition(sf::Vector2f((float)x, (float)y));
 	CarregaTextura("Texturas/jogadortmp.png");
@@ -24,6 +25,17 @@ void Jogador::mover(float dT, Gerenciador_Colisoes* gerenciador)
 {
     velocidadeX = 0.0f;
 
+    if (gerenciador->getColidiuCima())
+        velocidadeY = 0.f;
+
+    if (!gerenciador->getColidiuBaixo())
+        velocidadeY += 981.0f * dT;
+    else
+    {
+        podePular = true;
+        velocidadeY = 0.0f;
+    }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         if (!gerenciador->getColidiuDireita())
@@ -37,18 +49,7 @@ void Jogador::mover(float dT, Gerenciador_Colisoes* gerenciador)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular)
     {
         podePular = false;
-        if (!gerenciador->getColidiuCima())
-        {
-            velocidadeY = -sqrt(2.0f * 981.0f * alturaPulo);
-        }
-    }
-
-    if (!gerenciador->getColidiuBaixo())
-        velocidadeY += 981.0f * dT;
-    else
-    {
-        podePular = true;
-        velocidadeY = 0.0f;
+        velocidadeY = -sqrt(2.0f * 981.0f * alturaPulo);
     }
 
 	float dx = velocidadeX * dT;

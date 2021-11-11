@@ -2,7 +2,6 @@
 #define _GERENCIADOR_GRAFICO_H
 
 #include "stdafx.h"
-#include "Gerenciador_Colisoes.h"
 #include "Entidade.h"
 #include "Jogador.h"
 

@@ -1,5 +1,6 @@
 #include "Entidade.h"
 #include "Gerenciador_Grafico.h"
+#include "Gerenciador_Colisoes.h"
 
 Entidade::Entidade() :
 	Ente(),

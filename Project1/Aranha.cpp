@@ -5,8 +5,8 @@ Aranha::Aranha(float x, float y):
 {
 	this->x = x;
 	this->y = y;
-	CarregaTextura("Texturas/aranhatmp.png");
-	forma.setPosition(sf::Vector2f((float)x, (float)y));
+	CarregaTextura("Texturas/aranha.png");
+	forma.setPosition(sf::Vector2f(x, y));
 }
 
 Aranha::~Aranha() 

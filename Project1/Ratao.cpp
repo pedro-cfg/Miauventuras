@@ -5,8 +5,8 @@ Ratao::Ratao(float x, float y) :
 {
 	this->x = x;
 	this->y = y;
-	CarregaTextura("Texturas/rataotmp.png");
-	forma.setPosition(sf::Vector2f((float)x, (float)y));
+	CarregaTextura("Texturas/ratao.png");
+	forma.setPosition(sf::Vector2f(x, y));
 }
 
 Ratao::~Ratao() 

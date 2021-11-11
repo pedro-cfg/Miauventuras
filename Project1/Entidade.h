@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Ente.h"
+#include "Lista.h"
 
 class Gerenciador_Grafico;
 class Gerenciador_Colisoes;

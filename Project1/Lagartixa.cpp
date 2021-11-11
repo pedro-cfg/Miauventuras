@@ -5,8 +5,8 @@ Lagartixa::Lagartixa(float x, float y) :
 {
 	this->x = x;
 	this->y = y;
-	CarregaTextura("Texturas/lagartixatmp.png");
-	forma.setPosition(sf::Vector2f((float)x, (float)y));
+	CarregaTextura("Texturas/lagartixa.png");
+	forma.setPosition(sf::Vector2f(x, y));
 }
 
 Lagartixa::~Lagartixa() 

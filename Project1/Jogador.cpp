@@ -12,8 +12,8 @@ Jogador::Jogador(float x, float y):
 	this->x = x;
 
 	this->y = y;
-	forma.setPosition(sf::Vector2f((float)x, (float)y));
-	CarregaTextura("Texturas/jogadortmp.png");
+	forma.setPosition(sf::Vector2f(x, y));
+	CarregaTextura("Texturas/jogador.png");
 }
 
 Jogador::~Jogador() 

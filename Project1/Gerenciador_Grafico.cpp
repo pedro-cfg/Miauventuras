@@ -27,8 +27,8 @@ void Gerenciador_Grafico::RedimensionarVista()
 
 void Gerenciador_Grafico::AjustarVista(Jogador* jogador)
 {
-    float coordY = (float)jogador->getY();
-    float coordX = (float)jogador->getX() + 200.f;
+    float coordY = jogador->getY();
+    float coordX = jogador->getX() + 200.f;
     if (coordY > -280)
         coordY = -280;
     if (coordX < 0)
@@ -60,7 +60,7 @@ void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
 
 void Gerenciador_Grafico::DesenhaTudo(Lista<Entidade> lista)
 {
-    janela.clear();
+    janela.clear(sf::Color (255, 255, 255, 255));
     janela.setView(vista);
 
     for (int i = 0; i < lista.Quantidade(); i++) {

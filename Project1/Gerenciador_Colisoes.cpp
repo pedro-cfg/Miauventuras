@@ -81,22 +81,28 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 	if (pJ->getColidiuDireita()) {
 		pJ->operator--();
 		pJ->setColidiuDireita(false);
-		pJ->Movimentar(-50.f, 0.f);
-		pJ->setX(pJ->getX() - 50.f);
-		pJ->getMarcador()->Movimentar(-50.f, 0.f);
-		pJ->getMarcador()->setX(pJ->getMarcador()->getX() -50.f);
+		for (int i = 0; i < 150; i++) {
+			pJ->Movimentar(-1.f, 0.f);
+			pJ->setX(pJ->getX() - 1.f);
+			if (pJ->getX() > -143.f) {
+				pJ->getMarcador()->Movimentar(-1.f, 0.f);
+				pJ->getMarcador()->setX(pJ->getMarcador()->getX() - 1.f);
+			}
+		}
 	}
 	else if (pJ->getColidiuEsquerda()) {
 		pJ->operator--();
 		pJ->setColidiuEsquerda(false);
-		pJ->Movimentar(50.f, 0.f);
-		pJ->setX(pJ->getX() + 50.f);
-		pJ->getMarcador()->Movimentar(50.f, 0.f);
-		pJ->getMarcador()->setX(pJ->getMarcador()->getX() + 50.f);
+		for (int i = 0; i < 150; i++) {
+			pJ->Movimentar(1.f, 0.f);
+			pJ->setX(pJ->getX() + 1.f);
+			pJ->getMarcador()->Movimentar(1.f, 0.f);
+			pJ->getMarcador()->setX(pJ->getMarcador()->getX() + 1.f);
+		}
 	}
 	else if (pJ->getColidiuBaixo()) {
 		inimigo->operator--();
-		
+
 	}
 	switch (pJ->getVidas())
 	{

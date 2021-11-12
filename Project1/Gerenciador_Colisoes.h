@@ -6,6 +6,7 @@
 #include "Obstaculo.h"
 #include "Entidade.h"
 #include "Jogador.h"
+#include "Lista.h"
 
 class Gerenciador_Colisoes 
 {
@@ -13,12 +14,17 @@ private:
 	list<Inimigo*> LIs;
 	list<Obstaculo*> LOs;
 
+	Lista<Entidade>* pLista;
+
 public:
-	Gerenciador_Colisoes();
+	Gerenciador_Colisoes(Lista<Entidade>* pL);
 	~Gerenciador_Colisoes();
 
 	void InserirInimigo(Inimigo* pI);
 	void InserirObstaculo(Obstaculo* pO);
+
+	void ExcluirInimigo(Inimigo* pI);
+	void ExcluirObstaculo(Obstaculo* pO);
 
 	void Checa_Colisao(Jogador* pJ);
 	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro);

@@ -17,7 +17,7 @@ public:
 	}
     ~Elemento() {}
 	TE* getInfo() 
-	{
+ 	{
 		return info;
 	}
 	void setProx(Elemento* el)

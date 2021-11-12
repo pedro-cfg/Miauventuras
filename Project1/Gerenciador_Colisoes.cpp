@@ -1,8 +1,8 @@
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes()
+Gerenciador_Colisoes::Gerenciador_Colisoes(Lista<Entidade>* pL)
 {
-
+	pLista = pL;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
@@ -18,14 +18,15 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 	while (iteInim != LIs.end())
 	{
 		Entidade* pAux = static_cast<Entidade*> (*iteInim);
-		Checa_Colisao_Individual(pJ, pAux);
 		iteInim++;
+		if(pAux != NULL)
+			Checa_Colisao_Individual(pJ, pAux);
 	}
 	while (iteObs != LOs.end())
 	{
 		Entidade* pAux = static_cast<Entidade*> (*iteObs);
-		Checa_Colisao_Individual(pJ, pAux);
 		iteObs++;
+		Checa_Colisao_Individual(pJ, pAux);
 	}
 }
 
@@ -102,7 +103,13 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 	}
 	else if (pJ->getColidiuBaixo()) {
 		inimigo->operator--();
-
+		for (int i = 0; i < 150; i++) {
+			pJ->Movimentar(0.f, -1.f);
+			pJ->setY(pJ->getY() - 1.f);
+		}
+		if (inimigo->getVidas() == 0) {
+			ExcluirInimigo(inimigo);
+		}
 	}
 	switch (pJ->getVidas())
 	{
@@ -130,4 +137,14 @@ void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)
 void Gerenciador_Colisoes::InserirObstaculo(Obstaculo* pO)
 {
 	LOs.push_back(pO);
+}
+
+void Gerenciador_Colisoes::ExcluirInimigo(Inimigo* pI)
+{
+	LIs.remove(pI);
+	pLista->Retirar(pI);
+}
+
+void Gerenciador_Colisoes::ExcluirObstaculo(Obstaculo* pO)
+{
 }

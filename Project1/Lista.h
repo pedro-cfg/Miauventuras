@@ -53,6 +53,29 @@ public:
 			return NULL;
 	}
 
+	void Retirar(TL* pitem) 
+	{
+		Elemento<TL>* paux = pPrimeiro;
+		if (pPrimeiro->getInfo() == pitem) {
+			pPrimeiro = pPrimeiro->getProx();
+			delete paux;
+			tam--;
+		}
+		else {
+			while (paux->getProx() != NULL) {
+				if (paux->getProx()->getInfo() == pitem) {
+					paux->setProx(paux->getProx()->getProx());
+					tam--;
+				}
+				else {
+					paux = paux->getProx();
+				}
+			}
+			paux = paux->getProx();
+			delete paux;
+		}
+	}
+
 	int Quantidade() {
 		return tam;
 	}

@@ -8,7 +8,7 @@ Jogo::Jogo() :
 	r1(700, -25),
 	p1(1950, 118),
 	p2(-903, 100),
-	gerenciador_colisoes()
+	gerenciador_colisoes(&lista_entidades)
 {
 	m1 = j1.getMarcador();
 

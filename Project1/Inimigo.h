@@ -10,6 +10,8 @@ protected:
 public:
 	Inimigo();
 	~Inimigo();
+
+	void setTipo();
 };
 
 #endif

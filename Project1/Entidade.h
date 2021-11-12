@@ -18,6 +18,9 @@ protected:
     sf::RectangleShape forma;
 
     Gerenciador_Colisoes *gerenciador;
+
+     string tipo;
+
 public: 
     Entidade();
     ~Entidade();
@@ -31,6 +34,11 @@ public:
 
     void CarregaTextura(string caminho);
     void setGerenciadorColisoes(Gerenciador_Colisoes* ger);
+
+    void Movimentar(float x, float y);
+
+    virtual void setTipo();
+    const string getTipo() const;
 };
 
 #endif 

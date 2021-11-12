@@ -10,6 +10,7 @@ public:
 	~Obstaculo();
 
 	void Rotacionar();
+	void setTipo();
 };
 
 #endif

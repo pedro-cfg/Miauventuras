@@ -12,24 +12,19 @@ class Gerenciador_Colisoes
 private:
 	list<Inimigo*> LIs;
 	list<Obstaculo*> LOs;
-	
-	bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
-	Jogador* jogador;
 
 public:
-	Gerenciador_Colisoes(Jogador* jog);
+	Gerenciador_Colisoes();
 	~Gerenciador_Colisoes();
-		
-	bool getColidiuCima() const;
-	bool getColidiuBaixo() const;
-	bool getColidiuDireita() const;
-	bool getColidiuEsquerda() const;
 
 	void InserirInimigo(Inimigo* pI);
 	void InserirObstaculo(Obstaculo* pO);
 
-	void Checa_Colisao();
-	void Checa_Colisao_Individual(Entidade* segundo);
+	void Checa_Colisao(Jogador* pJ);
+	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro);
+
+	void Executa_Colisao(Jogador* pJ, Inimigo* inimigo);
+	void Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo);
 };
 
 #endif 

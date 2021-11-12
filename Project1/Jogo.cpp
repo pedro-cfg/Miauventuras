@@ -2,20 +2,23 @@
 #include "Jogo.h"
 
 Jogo::Jogo() :
-	j1(-265, 0),
-	a1(100, 0),
-	l1(400, 0),
-	r1(700, 0),
+	j1(-265, -29),
+	a1(100, 5),
+	l1(400, 30),
+	r1(700, -25),
 	p1(1950, 118),
 	p2(-903, 100),
-	gerenciador_colisoes(&j1)
+	gerenciador_colisoes()
 {
+	m1 = j1.getMarcador();
+
 	j1.setGerenciadorGrafico(&gerenciador_grafico);
 	a1.setGerenciadorGrafico(&gerenciador_grafico);
 	l1.setGerenciadorGrafico(&gerenciador_grafico);
 	r1.setGerenciadorGrafico(&gerenciador_grafico);
 	p1.setGerenciadorGrafico(&gerenciador_grafico);
 	p2.setGerenciadorGrafico(&gerenciador_grafico);
+	m1->setGerenciadorGrafico(&gerenciador_grafico);
 
 	j1.setGerenciadorColisoes(&gerenciador_colisoes);
 	a1.setGerenciadorColisoes(&gerenciador_colisoes);
@@ -49,7 +52,7 @@ void Jogo::Executar()
 
 		gerenciador_grafico.EventosJanela();
 
-		gerenciador_colisoes.Checa_Colisao();
+		gerenciador_colisoes.Checa_Colisao(&j1);
 
 		j1.mover(dT);
 
@@ -67,6 +70,7 @@ void Jogo::Inserir_Entidade()
 	lista_entidades.Inserir(static_cast<Entidade*>(&r1));
 	lista_entidades.Inserir(static_cast<Entidade*>(&p1));
 	lista_entidades.Inserir(static_cast<Entidade*>(&p2));
+	lista_entidades.Inserir(static_cast<Entidade*>(m1));
 }
 
 void Jogo::Inserir_Colisao()

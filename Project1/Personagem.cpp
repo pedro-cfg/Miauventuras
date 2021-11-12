@@ -8,3 +8,14 @@ Personagem::Personagem():
 Personagem::~Personagem() {
 
 }
+
+int Personagem::getVidas() const
+{
+	return vidas;
+}
+
+void Personagem::operator--()
+{
+	vidas--;
+}
+

@@ -3,14 +3,20 @@
 
 #include "Entidade.h"
 #include "stdafx.h"
+#include "Marcador_Vida.h"
 
 class Personagem: public Entidade 
 {
 protected: 
-    int num_vidas;
+    int vidas;
 public:
     Personagem();
     ~Personagem();
+
+    int getVidas() const;
+
+    void operator--();
+
 };
 
 #endif

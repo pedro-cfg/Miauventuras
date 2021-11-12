@@ -9,6 +9,7 @@ Entidade::Entidade() :
 	x(0),
 	y(0)
 {
+	setTipo();
 }
 
 Entidade::~Entidade() 
@@ -27,6 +28,21 @@ void Entidade::CarregaTextura(string caminho)
 void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* ger)
 {
 	gerenciador = ger;
+}
+
+void Entidade::Movimentar(float x, float y)
+{
+	forma.move(x, y);
+}
+
+void Entidade::setTipo()
+{
+	tipo = "";
+}
+
+const string Entidade::getTipo() const
+{
+	return tipo;
 }
 
 void Entidade::desenhar()

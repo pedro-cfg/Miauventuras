@@ -1,48 +1,47 @@
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Jogador* jog)
-{
-	jogador = jog;
-	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
-}
-
-Gerenciador_Colisoes::~Gerenciador_Colisoes() 
+Gerenciador_Colisoes::Gerenciador_Colisoes()
 {
 
 }
 
-void Gerenciador_Colisoes::Checa_Colisao()
+Gerenciador_Colisoes::~Gerenciador_Colisoes()
 {
-	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
+
+}
+
+void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
+{
+	pJ->zera_colidiu();
 	list<Inimigo*>::const_iterator iteInim = LIs.begin();
 	list<Obstaculo*>::const_iterator iteObs = LOs.begin();
-	while (iteInim != LIs.end()) 
+	while (iteInim != LIs.end())
 	{
 		Entidade* pAux = static_cast<Entidade*> (*iteInim);
-		Checa_Colisao_Individual(pAux);
+		Checa_Colisao_Individual(pJ, pAux);
 		iteInim++;
 	}
-	while (iteObs != LOs.end()) 
+	while (iteObs != LOs.end())
 	{
 		Entidade* pAux = static_cast<Entidade*> (*iteObs);
-		Checa_Colisao_Individual(pAux);
+		Checa_Colisao_Individual(pJ, pAux);
 		iteObs++;
 	}
 }
 
-void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
+void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro)
 {
-	float posicaoX = jogador->getX();
-	float posicaoY = jogador->getY();
+	float posicaoX = pJ->getX();
+	float posicaoY = pJ->getY();
 
-	float meio_tamanhoX = jogador->getLargura() / 2.0f;
-	float meio_tamanhoY = jogador->getAltura() / 2.0f;
+	float meio_tamanhoX = pJ->getLargura() / 2.0f;
+	float meio_tamanhoY = pJ->getAltura() / 2.0f;
 
-	float posicao_outroX = segundo->getX();
-	float posicao_outroY = segundo->getY();
+	float posicao_outroX = outro->getX();
+	float posicao_outroY = outro->getY();
 
-	float meio_tamanho_outroX = segundo->getLargura() / 2.0f;
-	float meio_tamanho_outroY = segundo->getAltura() / 2.0f;
+	float meio_tamanho_outroX = outro->getLargura() / 2.0f;
+	float meio_tamanho_outroY = outro->getAltura() / 2.0f;
 
 	float deltaX = posicaoX - posicao_outroX;
 	float deltaY = posicaoY - posicao_outroY;
@@ -51,41 +50,70 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Entidade* segundo)
 
 	if (intersecaoX < 0.f && intersecaoY < 0.f && abs(abs(intersecaoX) - abs(intersecaoY))> 0.1f)
 	{
-		if (abs(intersecaoX) < abs(intersecaoY)) 
+		if (abs(intersecaoX) < abs(intersecaoY))
 		{
-			if (deltaX > 0.f)
-				colidiu_esquerda = true;
+			if (deltaX > 0.f) {
+				pJ->setColidiuEsquerda(true);
+			}
 			else
-				colidiu_direita = true;
+				pJ->setColidiuDireita(true);
 		}
-		else 
+		else
 		{
 			if (deltaY > 0.f)
-   				colidiu_cima = true;
+				pJ->setColidiuCima(true);
 			else
-				colidiu_baixo = true;
+				pJ->setColidiuBaixo(true);
+		}
+		if (outro->getTipo() == "Inimigo") {
+			Inimigo* pI = static_cast<Inimigo*>(outro);
+			Executa_Colisao(pJ, pI);
+		}
+		else if (outro->getTipo() == "Obstaculo") {
+			Obstaculo* pO = static_cast<Obstaculo*>(outro);
+			Executa_Colisao(pJ, pO);
 		}
 	}
 }
 
-bool Gerenciador_Colisoes::getColidiuCima() const 
+void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 {
-	return colidiu_cima;
+	if (pJ->getColidiuDireita()) {
+		pJ->operator--();
+		pJ->setColidiuDireita(false);
+		pJ->Movimentar(-50.f, 0.f);
+		pJ->setX(pJ->getX() - 50.f);
+		pJ->getMarcador()->Movimentar(-50.f, 0.f);
+		pJ->getMarcador()->setX(pJ->getMarcador()->getX() -50.f);
+	}
+	else if (pJ->getColidiuEsquerda()) {
+		pJ->operator--();
+		pJ->setColidiuEsquerda(false);
+		pJ->Movimentar(50.f, 0.f);
+		pJ->setX(pJ->getX() + 50.f);
+		pJ->getMarcador()->Movimentar(50.f, 0.f);
+		pJ->getMarcador()->setX(pJ->getMarcador()->getX() + 50.f);
+	}
+	else if (pJ->getColidiuBaixo()) {
+		inimigo->operator--();
+		
+	}
+	switch (pJ->getVidas())
+	{
+	case 1:
+		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero1.png");
+		break;
+	case 2:
+		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero2.png");
+		break;
+	case 3:
+		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero3.png");
+		break;
+	}
 }
 
-bool Gerenciador_Colisoes::getColidiuBaixo() const 
+void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo)
 {
-	return colidiu_baixo;
-}
-
-bool Gerenciador_Colisoes::getColidiuDireita() const 
-{
-	return colidiu_direita;
-}
-
-bool Gerenciador_Colisoes::getColidiuEsquerda() const 
-{
-	return colidiu_esquerda;
 }
 
 void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)

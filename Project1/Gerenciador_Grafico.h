@@ -10,6 +10,25 @@ class Gerenciador_Grafico
 private:
 	sf::RenderWindow janela;
 	sf::View vista;
+
+	class Marcador_Vida
+	{
+	private:
+		float x;
+		float y;
+		Jogador* pJogador;
+		sf::Texture textura_1;
+		sf::Texture textura_2;
+		sf::Texture textura_3;
+		sf::RectangleShape forma_marcador;
+	public:
+		Marcador_Vida(float x1, float y1, Jogador* pJ);
+		~Marcador_Vida();
+
+		void AtualizaMarcador();
+		sf::RectangleShape& getforma();
+	};
+
 public:
 	Gerenciador_Grafico(Jogador* pJ);
 	~Gerenciador_Grafico();
@@ -22,23 +41,6 @@ public:
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(Lista<Entidade> lista);
 
-	class Marcador_Vida {
-	private:
-		float x;
-		float y;
-		Jogador* jogador;
-		sf::Texture textura_1;
-		sf::Texture textura_2;
-		sf::Texture textura_3;
-		sf::RectangleShape forma_marcador;
-	public:
-		Marcador_Vida(float x1, float y1, Jogador* pJ);
-		~Marcador_Vida();
-		sf::RectangleShape& getforma();
-		sf::Texture* getTextura1();
-		sf::Texture* getTextura2();
-		sf::Texture* getTextura3();
-	};
 private:
 	Marcador_Vida marcador1;
 	//Marcador_Vida marcador2;

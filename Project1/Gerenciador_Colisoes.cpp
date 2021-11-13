@@ -13,25 +13,70 @@ Gerenciador_Colisoes::~Gerenciador_Colisoes()
 
 void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 {
-	pJ->zera_colidiu();
+	pJ->reseta_colidiu();
+	pJ->reseta_velocidade();
+
 	list<Inimigo*>::const_iterator iteInim = LIs.begin();
 	list<Obstaculo*>::const_iterator iteObs = LOs.begin();
+
+	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
+
 	while (iteInim != LIs.end())
 	{
-		Entidade* pAux = static_cast<Entidade*> (*iteInim);
+		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
+
+		Inimigo* pInim = (*iteInim);
+		Entidade* pAux = static_cast<Entidade*> (pInim);
 		iteInim++;
-		if(pAux != NULL)
-			Checa_Colisao_Individual(pJ, pAux);
+
+		if (pAux != NULL)
+		{
+			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+		}
+
+		if (colidiuCima || colidiuEsquerda || colidiuDireita)
+		{
+			pJ->sofreDano();
+		}
+		else if (colidiuBaixo)
+		{
+			pInim->sofreDano();
+
+			if (pInim->getVidas() <= 0)
+			{
+				ExcluirInimigo(pInim);
+			}
+		}
 	}
+
 	while (iteObs != LOs.end())
 	{
-		Entidade* pAux = static_cast<Entidade*> (*iteObs);
+		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
+
+		Obstaculo* pObs = (*iteObs);
+		Entidade* pAux = static_cast<Entidade*> (pObs);
 		iteObs++;
-		Checa_Colisao_Individual(pJ, pAux);
+		
+		if (pAux != NULL)
+		{
+			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+		}
+
+		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
+		{
+			if (pObs->getEhPlataforma())
+			{
+				pObs->ExecutaImpedimento(pJ, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+			}
+			else
+			{
+				pObs->ExecutaImpedimento(pJ);
+			}
+		}
 	}
 }
 
-void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro)
+void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo)
 {
 	float posicaoX = pJ->getX();
 	float posicaoY = pJ->getY();
@@ -54,19 +99,32 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 	{
 		if (abs(intersecaoX) < abs(intersecaoY))
 		{
-			if (deltaX > 0.f) {
-				pJ->setColidiuEsquerda(true);
+			if (deltaX > 0.f) 
+			{
+				esq = true;
+				//pJ->setColidiuEsquerda(true);
 			}
 			else
-				pJ->setColidiuDireita(true);
+			{
+				dir = true;
+			}
+				//pJ->setColidiuDireita(true);
 		}
 		else
 		{
 			if (deltaY > 0.f)
-				pJ->setColidiuCima(true);
+			{
+				cima = true;
+			}
+				//pJ->setColidiuCima(true);
 			else
-				pJ->setColidiuBaixo(true);
+			{
+				baixo = true;
+			}
+				//pJ->setColidiuBaixo(true);
 		}
+
+		/*
 		if (outro->getTipo() == "Inimigo") {
 			Inimigo* pI = static_cast<Inimigo*>(outro);
 			Executa_Colisao(pJ, pI);
@@ -75,9 +133,11 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 			Obstaculo* pO = static_cast<Obstaculo*>(outro);
 			Executa_Colisao(pJ, pO);
 		}
+		*/
 	}
 }
 
+/*
 void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 {
 	if (pJ->getColidiuDireita()) {
@@ -122,7 +182,7 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo)
 {
 }
-
+*/
 void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)
 {
 	LIs.push_back(pI);

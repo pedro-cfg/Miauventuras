@@ -6,8 +6,10 @@
 class Espinho: public Obstaculo 
 {
 public:
-	Espinho();
+	Espinho(float x, float y);
 	~Espinho();
+
+	void ExecutaImpedimento(Jogador* pJ);
 };
 
 #endif

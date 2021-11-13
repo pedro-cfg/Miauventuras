@@ -1,8 +1,15 @@
 #include "Ente.h"
 #include "Gerenciador_Grafico.h"
 
-Ente::Ente() :
-	gerenciar_graficos(NULL)
+/*Ponteiro estático para gerenciador gráfico*/
+Gerenciador_Grafico* Ente::pGG = NULL;
+
+void Ente::setGerenciadorGrafico(Gerenciador_Grafico* pG)
+{
+	pGG = pG;
+}
+
+Ente::Ente()
 {
 
 }
@@ -11,10 +18,7 @@ Ente::~Ente() {
 
 }
 
-void Ente::setGerenciadorGrafico(Gerenciador_Grafico* pG)
-{
-	gerenciar_graficos = pG;
-}
+
 
 void Ente::Executar() {
 

@@ -8,6 +8,8 @@ class Plataforma: public Obstaculo
 public:
 	Plataforma(float x, float y);
 	~Plataforma();
+
+	void ExecutaImpedimento(Jogador* pJ, bool esq, bool dir, bool cima, bool baixo);
 };
 
 #endif

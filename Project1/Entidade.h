@@ -17,7 +17,7 @@ protected:
     sf::Texture textura;
     sf::RectangleShape forma;
 
-    Gerenciador_Colisoes *gerenciador;
+    static Gerenciador_Colisoes* pGC;
 
      string tipo;
 
@@ -33,7 +33,8 @@ public:
     float getLargura() const;
 
     void CarregaTextura(string caminho);
-    void setGerenciadorColisoes(Gerenciador_Colisoes* ger);
+    
+    static void setGerenciadorColisoes(Gerenciador_Colisoes* pG);
 
     void Movimentar(float x, float y);
 

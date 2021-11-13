@@ -28,10 +28,11 @@ public:
 	void ExcluirObstaculo(Obstaculo* pO);
 
 	void Checa_Colisao(Jogador* pJ);
-	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro);
+	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo);
 
+	/*
 	void Executa_Colisao(Jogador* pJ, Inimigo* inimigo);
-	void Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo);
+	void Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo);*/
 };
 
 #endif 

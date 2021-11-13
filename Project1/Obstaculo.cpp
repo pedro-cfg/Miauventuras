@@ -11,6 +11,11 @@ Obstaculo::~Obstaculo() {
 
 }
 
+bool Obstaculo::getEhPlataforma()
+{
+	return ehPlataforma;
+}
+
 void Obstaculo::Rotacionar()
 {
 	forma.setSize(sf::Vector2f(forma.getSize().y, forma.getSize().x));

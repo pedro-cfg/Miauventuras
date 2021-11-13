@@ -4,7 +4,7 @@ Inimigo::Inimigo():
 	Personagem()
 {
 	setTipo();
-	vidas = 1;
+	//vidas = 3;
 }
 
 Inimigo::~Inimigo() 

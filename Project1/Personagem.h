@@ -14,6 +14,7 @@ public:
 
     int getVidas() const;
 
+    void sofreDano();
     void operator--();
 
 };

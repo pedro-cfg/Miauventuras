@@ -5,16 +5,20 @@ Jogador::Jogador(float x, float y) :
 	Personagem()
 {
 	pontos = 0;
-	vidas = 3;
-	velocidadeEscalar = 400.0f;
+	//vidas = 3;
+
+	CarregaTextura("Texturas/jogador.png");
+	forma.setPosition(sf::Vector2f(x, y));
+	this->x = x;
+	this->y = y;
+
+	reseta_colidiu();
+	reseta_velocidade();
+
 	velocidadeX = 0.0f;
 	velocidadeY = 0.0f;
 	alturaPulo = 160.0f;
 	podePular = true;
-	this->x = x;
-	this->y = y;
-	forma.setPosition(sf::Vector2f(x, y));
-	CarregaTextura("Texturas/jogador.png");
 }
 
 Jogador::~Jogador()
@@ -27,10 +31,14 @@ void Jogador::mover(float dT)
 	velocidadeX = 0.0f;
 
 	if (colidiu_cima)
-		velocidadeY = 0.f;
+	{
+		velocidadeY = 0.0f;
+	}
 
 	if (!colidiu_baixo)
+	{
 		velocidadeY += 981.0f * dT;
+	}
 	else
 	{
 		podePular = true;
@@ -55,16 +63,18 @@ void Jogador::mover(float dT)
 
 	float dx = velocidadeX * dT;
 	float dy = velocidadeY * dT;
-	x += dx;
-	y += dy;
 
-	forma.move(dx, dy);
-	
+	Movimentar(dx, dy);
 }
 
-void Jogador::zera_colidiu()
+void Jogador::reseta_colidiu()
 {
 	colidiu_baixo = colidiu_cima = colidiu_direita = colidiu_esquerda = false;
+}
+
+void Jogador::reseta_velocidade()
+{
+	velocidadeEscalar = 400.0f;
 }
 
 void Jogador::setColidiuCima(bool colidiu)
@@ -106,5 +116,15 @@ bool Jogador::getColidiuDireita() const
 bool Jogador::getColidiuEsquerda() const
 {
 	return colidiu_esquerda;
+}
+
+void Jogador::setVelocidadeEscalar(float v)
+{
+	velocidadeEscalar = v;
+}
+
+float Jogador::getVelocidadeEscalar() const
+{
+	return velocidadeEscalar;
 }
 

@@ -3,10 +3,10 @@
 Ratao::Ratao(float x, float y) :
 	Inimigo() 
 {
-	this->x = x;
-	this->y = y;
 	CarregaTextura("Texturas/ratao.png");
 	forma.setPosition(sf::Vector2f(x, y));
+	this->x = x;
+	this->y = y;
 }
 
 Ratao::~Ratao() 

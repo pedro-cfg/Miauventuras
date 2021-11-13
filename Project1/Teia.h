@@ -6,8 +6,10 @@
 class Teia: public Obstaculo 
 {
 public:
-	Teia();
+	Teia(float x, float y);
 	~Teia();
+
+	void ExecutaImpedimento(Jogador* pJ);
 };
 
 #endif 

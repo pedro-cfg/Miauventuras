@@ -10,6 +10,9 @@
 #include "Gerenciador_Grafico.h"
 #include "Lista.h"
 #include "Entidade.h"
+#include "Obstaculo.h"
+#include "Teia.h"
+#include "Espinho.h"
 
 class Jogo 
 {
@@ -19,6 +22,8 @@ private:
 	Lagartixa l1;
 	Ratao r1;
 	Plataforma p1, p2;
+	Teia t1;
+	Espinho e1;
 	Gerenciador_Colisoes gerenciador_colisoes;
 	Gerenciador_Grafico gerenciador_grafico;
 	Lista<Entidade> lista_entidades;

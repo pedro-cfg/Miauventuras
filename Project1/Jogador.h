@@ -22,7 +22,8 @@ public:
 
     void mover(float dT);
 
-    void zera_colidiu();
+    void reseta_colidiu();
+    void reseta_velocidade();
 
     void setColidiuCima(bool colidiu);
     void setColidiuBaixo(bool colidiu);
@@ -34,7 +35,8 @@ public:
     bool getColidiuDireita() const;
     bool getColidiuEsquerda() const;
 
-
+    void setVelocidadeEscalar(float v);
+    float getVelocidadeEscalar() const; 
 };
 
 #endif

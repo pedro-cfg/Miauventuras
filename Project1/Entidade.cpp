@@ -2,6 +2,14 @@
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Colisoes.h"
 
+/*Ponteiro estático para gerenciador de colisões*/
+Gerenciador_Colisoes* Entidade::pGC = NULL;
+
+void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* pG)
+{
+	pGC = pG;
+}
+
 Entidade::Entidade() :
 	Ente(),
 	textura(),
@@ -25,14 +33,11 @@ void Entidade::CarregaTextura(string caminho)
 	forma.setOrigin(forma.getSize() / 2.0f);
 }
 
-void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* ger)
+void Entidade::Movimentar(float dx, float dy)
 {
-	gerenciador = ger;
-}
-
-void Entidade::Movimentar(float x, float y)
-{
-	forma.move(x, y);
+	forma.move(dx, dy);
+	x += dx;
+	y += dy;
 }
 
 void Entidade::setTipo()
@@ -47,7 +52,7 @@ const string Entidade::getTipo() const
 
 void Entidade::desenhar()
 {
-	gerenciar_graficos->DesenhaForma(forma);
+	pGG->DesenhaForma(forma);
 }
 
 

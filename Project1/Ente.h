@@ -6,12 +6,13 @@ class Gerenciador_Grafico;
 class Ente 
 {
 protected:
-	Gerenciador_Grafico* gerenciar_graficos;
+	static Gerenciador_Grafico* pGG;
 public:
 	Ente();
 	~Ente();
 
-	void setGerenciadorGrafico(Gerenciador_Grafico* pG);
+	static void setGerenciadorGrafico(Gerenciador_Grafico* pG);
+
 	virtual void Executar();
 	void imprimir_se();
 };

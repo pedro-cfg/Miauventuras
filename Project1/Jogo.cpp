@@ -8,9 +8,9 @@ Jogo::Jogo() :
 	r1(700, -25),
 	p1(1950, 118),
 	p2(-903, 100),
-	gerenciador_colisoes(&lista_entidades)
+	gerenciador_grafico(&j1),
+	gerenciador_colisoes(&lista_entidades, &gerenciador_grafico)
 {
-	m1 = j1.getMarcador();
 
 	j1.setGerenciadorGrafico(&gerenciador_grafico);
 	a1.setGerenciadorGrafico(&gerenciador_grafico);
@@ -18,7 +18,6 @@ Jogo::Jogo() :
 	r1.setGerenciadorGrafico(&gerenciador_grafico);
 	p1.setGerenciadorGrafico(&gerenciador_grafico);
 	p2.setGerenciadorGrafico(&gerenciador_grafico);
-	m1->setGerenciadorGrafico(&gerenciador_grafico);
 
 	j1.setGerenciadorColisoes(&gerenciador_colisoes);
 	a1.setGerenciadorColisoes(&gerenciador_colisoes);
@@ -70,7 +69,6 @@ void Jogo::Inserir_Entidade()
 	lista_entidades.Inserir(static_cast<Entidade*>(&r1));
 	lista_entidades.Inserir(static_cast<Entidade*>(&p1));
 	lista_entidades.Inserir(static_cast<Entidade*>(&p2));
-	lista_entidades.Inserir(static_cast<Entidade*>(m1));
 }
 
 void Jogo::Inserir_Colisao()

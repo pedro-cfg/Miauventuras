@@ -1,8 +1,9 @@
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Lista<Entidade>* pL)
+Gerenciador_Colisoes::Gerenciador_Colisoes(Lista<Entidade>* pL, Gerenciador_Grafico* pG)
 {
 	pLista = pL;
+	pGerenciador_Grafico = pG;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
@@ -85,10 +86,6 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 		for (int i = 0; i < 150; i++) {
 			pJ->Movimentar(-1.f, 0.f);
 			pJ->setX(pJ->getX() - 1.f);
-			if (pJ->getX() > -143.f) {
-				pJ->getMarcador()->Movimentar(-1.f, 0.f);
-				pJ->getMarcador()->setX(pJ->getMarcador()->getX() - 1.f);
-			}
 		}
 	}
 	else if (pJ->getColidiuEsquerda()) {
@@ -97,8 +94,6 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 		for (int i = 0; i < 150; i++) {
 			pJ->Movimentar(1.f, 0.f);
 			pJ->setX(pJ->getX() + 1.f);
-			pJ->getMarcador()->Movimentar(1.f, 0.f);
-			pJ->getMarcador()->setX(pJ->getMarcador()->getX() + 1.f);
 		}
 	}
 	else if (pJ->getColidiuBaixo()) {
@@ -114,13 +109,12 @@ void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
 	switch (pJ->getVidas())
 	{
 	case 1:
-		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero1.png");
+		pGerenciador_Grafico->getMarcador()->getforma().setTexture(pGerenciador_Grafico->getMarcador()->getTextura1());
 		break;
 	case 2:
-		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero2.png");
+		pGerenciador_Grafico->getMarcador()->getforma().setTexture(pGerenciador_Grafico->getMarcador()->getTextura2());
 		break;
 	case 3:
-		pJ->getMarcador()->CarregaTextura("Texturas/Numeros/numero3.png");
 		break;
 	}
 }

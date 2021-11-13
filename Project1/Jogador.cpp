@@ -2,8 +2,7 @@
 #include "Gerenciador_Colisoes.h"
 
 Jogador::Jogador(float x, float y) :
-	Personagem(),
-	marcador(800, -800)
+	Personagem()
 {
 	pontos = 0;
 	vidas = 3;
@@ -60,8 +59,7 @@ void Jogador::mover(float dT)
 	y += dy;
 
 	forma.move(dx, dy);
-	if (x > -143.f)
-		marcador.Movimentar(dx, 0.f);
+	
 }
 
 void Jogador::zera_colidiu()
@@ -110,7 +108,3 @@ bool Jogador::getColidiuEsquerda() const
 	return colidiu_esquerda;
 }
 
-Marcador_Vida* Jogador::getMarcador()
-{
-	return &marcador;
-}

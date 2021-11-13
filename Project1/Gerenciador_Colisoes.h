@@ -7,6 +7,7 @@
 #include "Entidade.h"
 #include "Jogador.h"
 #include "Lista.h"
+#include "Gerenciador_Grafico.h"
 
 class Gerenciador_Colisoes 
 {
@@ -15,9 +16,9 @@ private:
 	list<Obstaculo*> LOs;
 
 	Lista<Entidade>* pLista;
-
+	Gerenciador_Grafico* pGerenciador_Grafico;
 public:
-	Gerenciador_Colisoes(Lista<Entidade>* pL);
+	Gerenciador_Colisoes(Lista<Entidade>* pL, Gerenciador_Grafico* pG);
 	~Gerenciador_Colisoes();
 
 	void InserirInimigo(Inimigo* pI);

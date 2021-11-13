@@ -14,7 +14,7 @@ private:
     float velocidadeEscalar;
     float alturaPulo;
     bool podePular;
-    Marcador_Vida marcador;
+    
     bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
 public:
     Jogador(float x, float y);
@@ -34,7 +34,7 @@ public:
     bool getColidiuDireita() const;
     bool getColidiuEsquerda() const;
 
-    Marcador_Vida* getMarcador();
+
 };
 
 #endif

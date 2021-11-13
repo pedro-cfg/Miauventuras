@@ -3,7 +3,6 @@
 
 #include "Entidade.h"
 #include "stdafx.h"
-#include "Marcador_Vida.h"
 
 class Personagem: public Entidade 
 {

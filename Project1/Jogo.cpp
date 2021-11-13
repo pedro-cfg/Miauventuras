@@ -43,7 +43,7 @@ void Jogo::Executar()
 
 		gerenciador_colisoes.Checa_Colisao(&j1);
 
-		j1.mover(dT);
+		lista_entidades.Executar(dT);
 
 		gerenciador_grafico.AjustarVista(&j1);
 

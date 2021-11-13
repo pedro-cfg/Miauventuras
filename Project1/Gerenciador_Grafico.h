@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Entidade.h"
 #include "Jogador.h"
+#include "ListaEntidades.h"
 
 class Gerenciador_Grafico 
 {
@@ -39,7 +40,7 @@ public:
 	void EventosJanela();
 
 	void DesenhaForma(sf::RectangleShape& forma);
-	void DesenhaTudo(Lista<Entidade> lista);
+	void DesenhaTudo(ListaEntidades lista);
 
 private:
 	Marcador_Vida marcador1;

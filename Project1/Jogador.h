@@ -9,21 +9,22 @@ class Jogador: public Personagem
 {
 private: 
     int pontos;
-    float velocidadeX;
-    float velocidadeY;
-    float velocidadeEscalar;
     float alturaPulo;
     bool podePular;
-    
+    float velocidadeX;
+    float velocidadeY;
+    float contador_tempo;
     bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
 public:
     Jogador(float x, float y);
     ~Jogador();
 
+    void Executar(float dT);
     void mover(float dT);
 
     void reseta_colidiu();
     void reseta_velocidade();
+    void setVelocidadeY(float v);
 
     void setColidiuCima(bool colidiu);
     void setColidiuBaixo(bool colidiu);
@@ -35,8 +36,8 @@ public:
     bool getColidiuDireita() const;
     bool getColidiuEsquerda() const;
 
-    void setVelocidadeEscalar(float v);
-    float getVelocidadeEscalar() const; 
+    void Atualiza_Contador(float dT, bool zera = false);
+    float getContador();
 };
 
 #endif

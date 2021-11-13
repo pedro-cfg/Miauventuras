@@ -7,6 +7,7 @@ Lagartixa::Lagartixa(float x, float y) :
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;
+	velocidadeEscalar = 500.f;
 }
 
 Lagartixa::~Lagartixa() 

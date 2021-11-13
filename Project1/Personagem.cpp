@@ -25,3 +25,19 @@ void Personagem::operator--()
 	vidas--;
 }
 
+void Personagem::mover(float dT)
+{
+}
+
+void Personagem::setVelocidadeEscalar(float v)
+{
+	velocidadeEscalar = v;
+}
+
+
+
+float Personagem::getVelocidadeEscalar() const
+{
+	return velocidadeEscalar;
+}
+

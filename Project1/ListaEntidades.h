@@ -10,6 +10,12 @@ public:
     Lista<Entidade> LEs;
     ListaEntidades();
     ~ListaEntidades();
+
+    void Inserir(Entidade* pE);
+    void Retirar(Entidade* pE);
+
+    void Executar(float dT);
+    void Desenha();
 };
 
 #endif

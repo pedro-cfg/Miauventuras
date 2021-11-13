@@ -1,6 +1,6 @@
 #include "Gerenciador_Colisoes.h"
 
-Gerenciador_Colisoes::Gerenciador_Colisoes(Lista<Entidade>* pL, Gerenciador_Grafico* pG)
+Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL, Gerenciador_Grafico* pG)
 {
 	pLista = pL;
 	pGerenciador_Grafico = pG;
@@ -33,20 +33,23 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		{
 			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 		}
-
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
-			pJ->sofreDano();
+			if (pJ->getContador() > 1.f) {
+				pJ->sofreDano();
+			}
+			pJ->Atualiza_Contador(0.f, true);
 		}
 		else if (colidiuBaixo)
 		{
 			pInim->sofreDano();
-
 			if (pInim->getVidas() <= 0)
 			{
 				ExcluirInimigo(pInim);
 			}
+			pJ->setVelocidadeY(-500.f);
 		}
+
 	}
 
 	while (iteObs != LOs.end())
@@ -56,7 +59,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		Obstaculo* pObs = (*iteObs);
 		Entidade* pAux = static_cast<Entidade*> (pObs);
 		iteObs++;
-		
+
 		if (pAux != NULL)
 		{
 			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
@@ -99,90 +102,30 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 	{
 		if (abs(intersecaoX) < abs(intersecaoY))
 		{
-			if (deltaX > 0.f) 
+			if (deltaX > 0.f)
 			{
 				esq = true;
-				//pJ->setColidiuEsquerda(true);
 			}
 			else
 			{
 				dir = true;
 			}
-				//pJ->setColidiuDireita(true);
 		}
 		else
 		{
-			if (deltaY > 0.f)
+			if (deltaY > -1 * meio_tamanhoY)
 			{
 				cima = true;
 			}
-				//pJ->setColidiuCima(true);
 			else
 			{
 				baixo = true;
 			}
-				//pJ->setColidiuBaixo(true);
 		}
-
-		/*
-		if (outro->getTipo() == "Inimigo") {
-			Inimigo* pI = static_cast<Inimigo*>(outro);
-			Executa_Colisao(pJ, pI);
-		}
-		else if (outro->getTipo() == "Obstaculo") {
-			Obstaculo* pO = static_cast<Obstaculo*>(outro);
-			Executa_Colisao(pJ, pO);
-		}
-		*/
 	}
 }
 
-/*
-void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Inimigo* inimigo)
-{
-	if (pJ->getColidiuDireita()) {
-		pJ->operator--();
-		pJ->setColidiuDireita(false);
-		for (int i = 0; i < 150; i++) {
-			pJ->Movimentar(-1.f, 0.f);
-			pJ->setX(pJ->getX() - 1.f);
-		}
-	}
-	else if (pJ->getColidiuEsquerda()) {
-		pJ->operator--();
-		pJ->setColidiuEsquerda(false);
-		for (int i = 0; i < 150; i++) {
-			pJ->Movimentar(1.f, 0.f);
-			pJ->setX(pJ->getX() + 1.f);
-		}
-	}
-	else if (pJ->getColidiuBaixo()) {
-		inimigo->operator--();
-		for (int i = 0; i < 150; i++) {
-			pJ->Movimentar(0.f, -1.f);
-			pJ->setY(pJ->getY() - 1.f);
-		}
-		if (inimigo->getVidas() == 0) {
-			ExcluirInimigo(inimigo);
-		}
-	}
-	switch (pJ->getVidas())
-	{
-	case 1:
-		pGerenciador_Grafico->getMarcador()->getforma().setTexture(pGerenciador_Grafico->getMarcador()->getTextura1());
-		break;
-	case 2:
-		pGerenciador_Grafico->getMarcador()->getforma().setTexture(pGerenciador_Grafico->getMarcador()->getTextura2());
-		break;
-	case 3:
-		break;
-	}
-}
 
-void Gerenciador_Colisoes::Executa_Colisao(Jogador* pJ, Obstaculo* obstaculo)
-{
-}
-*/
 void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)
 {
 	LIs.push_back(pI);

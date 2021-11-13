@@ -13,7 +13,7 @@ public:
 
 	static void setGerenciadorGrafico(Gerenciador_Grafico* pG);
 
-	virtual void Executar();
+	virtual void Executar(float dT);
 	void imprimir_se();
 };
 

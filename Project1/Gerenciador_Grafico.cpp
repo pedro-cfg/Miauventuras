@@ -62,17 +62,9 @@ void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
 	janela.draw(forma);
 }
 
-void Gerenciador_Grafico::DesenhaTudo(Lista<Entidade> lista)
+void Gerenciador_Grafico::DesenhaTudo(ListaEntidades lista)
 {
-	for (int i = 0; i < lista.Quantidade(); i++) 
-	{
-		Entidade* pE = lista.Buscar(i);
-
-		if (pE != NULL)
-		{
-			pE->desenhar();
-		}
-	}
+	lista.Desenha();
 
 	janela.display();
 	janela.clear(sf::Color(255, 255, 255, 255));

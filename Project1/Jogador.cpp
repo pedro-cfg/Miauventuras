@@ -17,13 +17,21 @@ Jogador::Jogador(float x, float y) :
 
 	velocidadeX = 0.0f;
 	velocidadeY = 0.0f;
-	alturaPulo = 160.0f;
+	alturaPulo = 260.0f;
 	podePular = true;
+
+	contador_tempo = 0.f;
 }
 
 Jogador::~Jogador()
 {
 
+}
+
+void Jogador::Executar(float dT)
+{
+	mover(dT);
+	Atualiza_Contador(dT);
 }
 
 void Jogador::mover(float dT)
@@ -77,6 +85,11 @@ void Jogador::reseta_velocidade()
 	velocidadeEscalar = 400.0f;
 }
 
+void Jogador::setVelocidadeY(float v)
+{
+	velocidadeY = v;
+}
+
 void Jogador::setColidiuCima(bool colidiu)
 {
 	colidiu_cima = colidiu;
@@ -118,13 +131,16 @@ bool Jogador::getColidiuEsquerda() const
 	return colidiu_esquerda;
 }
 
-void Jogador::setVelocidadeEscalar(float v)
+void Jogador::Atualiza_Contador(float dT, bool zera)
 {
-	velocidadeEscalar = v;
+	if (zera)
+		contador_tempo = 0.f;
+	else 
+		contador_tempo += dT;
 }
 
-float Jogador::getVelocidadeEscalar() const
+float Jogador::getContador()
 {
-	return velocidadeEscalar;
+	return contador_tempo;
 }
 

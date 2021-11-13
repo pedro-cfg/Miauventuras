@@ -18,5 +18,8 @@ Espinho::~Espinho() {
 
 void Espinho::ExecutaImpedimento(Jogador* pJ)
 {
-	pJ->sofreDano();
+	if (pJ->getContador() > 1.f) {
+		pJ->sofreDano();
+	}
+	pJ->Atualiza_Contador(0.f, true);
 }

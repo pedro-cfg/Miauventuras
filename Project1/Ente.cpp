@@ -20,7 +20,7 @@ Ente::~Ente() {
 
 
 
-void Ente::Executar() {
+void Ente::Executar(float dT) {
 
 }
 

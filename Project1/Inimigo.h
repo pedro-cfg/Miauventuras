@@ -9,6 +9,7 @@ protected:
 	float Xinicial;
 	float amplitude;
 	int valor;
+	float direcao;
 public:
 	Inimigo();
 	~Inimigo();
@@ -17,8 +18,10 @@ public:
 
 	int getValor() const;
 
-	void Executar(float dT);
+	virtual void Executar(float dT);
 	void mover(float dT);
+
+	float getDirecao() const;
 };
 
 #endif

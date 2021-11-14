@@ -14,7 +14,7 @@ private:
     bool podePular;
     float velocidadeX;
     float velocidadeY;
-    float contador_tempo;
+    //float contador_tempo;
     bool colidiu_cima, colidiu_baixo, colidiu_esquerda, colidiu_direita;
 public:
     Jogador(float x, float y);
@@ -39,9 +39,9 @@ public:
 
     void Pontua(Inimigo* pI);
     void operator++();
-
-    void Atualiza_Contador(float dT, bool zera = false);
-    float getContador();
+    
+    //void Atualiza_Contador(float dT, bool zera = false);
+    //float getContador();
 };
 
 #endif

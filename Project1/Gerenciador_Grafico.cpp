@@ -62,7 +62,7 @@ void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
 	janela.draw(forma);
 }
 
-void Gerenciador_Grafico::DesenhaTudo(ListaEntidades lista)
+void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista)
 {
 	lista.Desenha();
 

@@ -2,7 +2,7 @@
 #define _GERENCIADOR_GRAFICO_H
 
 #include "stdafx.h"
-#include "Entidade.h"
+//#include "Entidade.h"
 #include "Jogador.h"
 #include "ListaEntidades.h"
 
@@ -40,7 +40,7 @@ public:
 	void EventosJanela();
 
 	void DesenhaForma(sf::RectangleShape& forma);
-	void DesenhaTudo(ListaEntidades lista);
+	void DesenhaTudo(ListaEntidades& lista);
 
 private:
 	Marcador_Vida marcador1;

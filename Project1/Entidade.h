@@ -3,10 +3,9 @@
 
 #include "stdafx.h"
 #include "Ente.h"
-#include "Lista.h"
 
-class Gerenciador_Grafico;
 class Gerenciador_Colisoes;
+class ListaEntidades;
 
 class Entidade: public Ente 
 {
@@ -18,8 +17,9 @@ protected:
     sf::RectangleShape forma;
 
     static Gerenciador_Colisoes* pGC;
+    static ListaEntidades* pLista;
 
-     string tipo;
+    string tipo;
 
 public: 
     Entidade();
@@ -35,11 +35,15 @@ public:
     void CarregaTextura(string caminho);
     
     static void setGerenciadorColisoes(Gerenciador_Colisoes* pG);
+    static void setPonteiroLista(ListaEntidades* pL);
 
-    void Movimentar(float x, float y);
+    void Deslocar(float dx, float dy);
 
     virtual void setTipo();
     const string getTipo() const;
+
+    virtual void mover(float dT);
+    virtual void Executar(float dT);
 };
 
 #endif 

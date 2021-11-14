@@ -1,9 +1,16 @@
 #include "Gerenciador_Colisoes.h"
+//#include "Entidade.h"
 
+/*
 Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL, Gerenciador_Grafico* pG)
 {
 	pLista = pL;
 	pGerenciador_Grafico = pG;
+}*/
+
+Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
+{
+	pLista = pL;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
@@ -16,8 +23,9 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 	pJ->reseta_colidiu();
 	pJ->reseta_velocidade();
 
-	list<Inimigo*>::const_iterator iteInim = LIs.begin();
-	list<Obstaculo*>::const_iterator iteObs = LOs.begin();
+	iteInim = LIs.begin();
+	iteObs = LOs.begin();
+	iteProj = LPs.begin();
 
 	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
 
@@ -35,7 +43,8 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		}
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
-			if (pJ->getContador() > 1.f) {
+			if (pJ->getContador() > 1.f) 
+			{
 				pJ->sofreDano();
 			}
 			pJ->Atualiza_Contador(0.f, true);
@@ -45,7 +54,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			pInim->sofreDano();
 			if (pInim->getVidas() <= 0)
 			{
-				ExcluirInimigo(pInim);
+				Excluir(pInim);
 				pJ->Pontua(pInim);
 			}
 			pJ->setVelocidadeY(-500.f);
@@ -76,6 +85,26 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			{
 				pObs->ExecutaImpedimento(pJ);
 			}
+		}
+	}
+
+	while (iteProj != LPs.end())
+	{
+		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
+
+		Projetil* pProj = (*iteProj);
+		Entidade* pAux = static_cast<Entidade*> (pProj);
+		iteProj++;
+
+		if (pAux != NULL)
+		{
+			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+		}
+
+		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
+		{
+			pJ->sofreDano();
+			Excluir(pProj);
 		}
 	}
 }
@@ -126,23 +155,29 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 	}
 }
 
-
-void Gerenciador_Colisoes::InserirInimigo(Inimigo* pI)
+void Gerenciador_Colisoes::Inserir(Inimigo* pI)
 {
 	LIs.push_back(pI);
 }
 
-void Gerenciador_Colisoes::InserirObstaculo(Obstaculo* pO)
+void Gerenciador_Colisoes::Inserir(Obstaculo* pO)
 {
 	LOs.push_back(pO);
 }
 
-void Gerenciador_Colisoes::ExcluirInimigo(Inimigo* pI)
+void Gerenciador_Colisoes::Inserir(Projetil* pP)
 {
-	LIs.remove(pI);
-	pLista->Retirar(pI);
+	LPs.push_back(pP);
 }
 
-void Gerenciador_Colisoes::ExcluirObstaculo(Obstaculo* pO)
+void Gerenciador_Colisoes::Excluir(Inimigo* pI)
 {
+	LIs.remove(pI);
+	pLista->Retirar(static_cast<Entidade*>(pI));
+}
+
+void Gerenciador_Colisoes::Excluir(Projetil* pP)
+ {
+	LPs.remove(pP);
+	pLista->Retirar(static_cast<Entidade*>(pP));
 }

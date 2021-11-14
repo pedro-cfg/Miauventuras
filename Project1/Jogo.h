@@ -12,7 +12,9 @@
 #include "Obstaculo.h"
 #include "Teia.h"
 #include "Espinho.h"
+#include "Projetil.h"
 #include "ListaEntidades.h"
+#include "Ente.h"
 
 class Jogo 
 {
@@ -24,6 +26,7 @@ private:
 	Plataforma p1, p2;
 	Teia t1;
 	Espinho e1;
+	Projetil pr1;
 	Gerenciador_Colisoes gerenciador_colisoes;
 	Gerenciador_Grafico gerenciador_grafico;
 	ListaEntidades lista_entidades;

@@ -19,10 +19,10 @@ Ente::~Ente() {
 }
 
 
-
+/*
 void Ente::Executar(float dT) {
 
-}
+}*/
 
 void Ente::imprimir_se() {
 

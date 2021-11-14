@@ -3,6 +3,8 @@
 
 #include "Inimigo.h"
 
+class Projetil;
+
 class Aranha: public Inimigo 
 {
 private:
@@ -10,6 +12,9 @@ private:
 public:
 	Aranha(float x, float y);
 	~Aranha();
+
+	void Executar(float dT);
+	void lancaProjetil();
 };
 
 #endif

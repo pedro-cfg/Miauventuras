@@ -4,9 +4,12 @@ Personagem::Personagem():
 	Entidade()
 {
 	vidas = 3;
+
+	contador_tempo = 0.f;
 }
 
-Personagem::~Personagem() {
+Personagem::~Personagem() 
+{
 
 }
 
@@ -34,10 +37,24 @@ void Personagem::setVelocidadeEscalar(float v)
 	velocidadeEscalar = v;
 }
 
-
-
 float Personagem::getVelocidadeEscalar() const
 {
 	return velocidadeEscalar;
 }
 
+void Personagem::Atualiza_Contador(float dT, bool zera)
+{
+	if (zera)
+	{
+		contador_tempo = 0.f;
+	}
+	else
+	{
+		contador_tempo += dT;
+	}
+}
+
+float Personagem::getContador()
+{
+	return contador_tempo;
+}

@@ -1,6 +1,7 @@
 #ifndef _ENTE_H_
 #define _ENTE_H_
 
+//#include "Gerenciador_Grafico.h"
 class Gerenciador_Grafico;
 
 class Ente 
@@ -13,7 +14,7 @@ public:
 
 	static void setGerenciadorGrafico(Gerenciador_Grafico* pG);
 
-	virtual void Executar(float dT);
+	//virtual void Executar(float dT);
 	void imprimir_se();
 };
 

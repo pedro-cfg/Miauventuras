@@ -10,14 +10,15 @@ Jogo::Jogo() :
 	p2(-903, 100),
 	t1(1000, 10),
 	e1(1500, 10),
+	pr1(&a1),
 	gerenciador_grafico(&j1),
-	gerenciador_colisoes(&lista_entidades, &gerenciador_grafico)
+	gerenciador_colisoes(&lista_entidades)
 {
 	Ente::setGerenciadorGrafico(&gerenciador_grafico);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
+	Entidade::setPonteiroLista(&lista_entidades);
 
 	p2.Rotacionar();
-
 	Inserir_Entidade();
 
 	Executar();
@@ -61,17 +62,19 @@ void Jogo::Inserir_Entidade()
 	lista_entidades.Inserir(static_cast<Entidade*>(&p2));
 	lista_entidades.Inserir(static_cast<Entidade*>(&t1));
 	lista_entidades.Inserir(static_cast<Entidade*>(&e1));
-
+	lista_entidades.Inserir(static_cast<Entidade*>(&pr1));
 }
 
 void Jogo::Inserir_Colisao()
 {
-	gerenciador_colisoes.InserirInimigo(static_cast<Inimigo*>(&a1));
-	gerenciador_colisoes.InserirInimigo(static_cast<Inimigo*>(&l1));
-	gerenciador_colisoes.InserirInimigo(static_cast<Inimigo*>(&r1));
+	gerenciador_colisoes.Inserir(static_cast<Inimigo*>(&a1));
+	gerenciador_colisoes.Inserir(static_cast<Inimigo*>(&l1));
+	gerenciador_colisoes.Inserir(static_cast<Inimigo*>(&r1));
 
-	gerenciador_colisoes.InserirObstaculo(static_cast<Obstaculo*>(&p1));
-	gerenciador_colisoes.InserirObstaculo(static_cast<Obstaculo*>(&p2));
-	gerenciador_colisoes.InserirObstaculo(static_cast<Obstaculo*>(&t1));
-	gerenciador_colisoes.InserirObstaculo(static_cast<Obstaculo*>(&e1));
+	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(&p1));
+	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(&p2));
+	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(&t1));
+	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(&e1));
+
+	gerenciador_colisoes.Inserir(&pr1);
 }

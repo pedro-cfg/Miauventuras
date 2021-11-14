@@ -20,7 +20,7 @@ Jogador::Jogador(float x, float y) :
 	alturaPulo = 260.0f;
 	podePular = true;
 
-	contador_tempo = 0.f;
+	//contador_tempo = 0.f;
 }
 
 Jogador::~Jogador()
@@ -72,7 +72,7 @@ void Jogador::mover(float dT)
 	float dx = velocidadeX * dT;
 	float dy = velocidadeY * dT;
 
-	Movimentar(dx, dy);
+	Deslocar(dx, dy);
 }
 
 void Jogador::reseta_colidiu()
@@ -146,7 +146,7 @@ void Jogador::operator++()
 {
 	pontos++;
 }
-
+/*
 void Jogador::Atualiza_Contador(float dT, bool zera)
 {
 	if (zera)
@@ -159,4 +159,4 @@ float Jogador::getContador()
 {
 	return contador_tempo;
 }
-
+*/

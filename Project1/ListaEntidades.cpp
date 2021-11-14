@@ -1,4 +1,5 @@
 #include "ListaEntidades.h"
+#include "Entidade.h"
 
 ListaEntidades::ListaEntidades()
 {

@@ -2,12 +2,14 @@
 #define _LISTAENTIDADES_H_
 
 #include "Lista.h"
-#include "Entidade.h"
+
+class Entidade;
 
 class ListaEntidades
 {
-public: 
+private:
     Lista<Entidade> LEs;
+public: 
     ListaEntidades();
     ~ListaEntidades();
 

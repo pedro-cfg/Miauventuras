@@ -19,13 +19,13 @@ public:
     }
     ~Lista() 
 	{
-        /*Elemento<TL>* paux;
+        Elemento<TL>* paux;
         while (pPrimeiro != NULL)
 		{
             paux = pPrimeiro->getProx();
             delete pPrimeiro;
             pPrimeiro = paux;
-        }*/
+        }
     }
 	void Inserir(TL* pitem) 
 	{
@@ -56,18 +56,23 @@ public:
 	void Retirar(TL* pitem) 
 	{
 		Elemento<TL>* paux = pPrimeiro;
-		if (pPrimeiro->getInfo() == pitem) {
+		if (pPrimeiro != NULL && pPrimeiro->getInfo() == pitem) 
+		{
 			pPrimeiro = pPrimeiro->getProx();
 			delete paux;
 			tam--;
 		}
-		else {
-			while (paux->getProx() != NULL) {
-				if (paux->getProx()->getInfo() == pitem) {
+		else 
+		{
+			while (paux->getProx() != NULL) 
+			{
+				if (paux->getProx()->getInfo() == pitem) 
+				{
 					paux->setProx(paux->getProx()->getProx());
 					tam--;
 				}
-				else {
+				else 
+				{
 					paux = paux->getProx();
 				}
 			}
@@ -76,7 +81,8 @@ public:
 		}
 	}
 
-	int Quantidade() {
+	int Quantidade() 
+	{
 		return tam;
 	}
 };

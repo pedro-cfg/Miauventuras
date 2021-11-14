@@ -1,14 +1,22 @@
 #include "Entidade.h"
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Colisoes.h"
+#include "ListaEntidades.h"
 
-/*Ponteiro estático para gerenciador de colisões*/
+/*Ponteiro estático para gerenciador de colisões e lista de entidades*/
 Gerenciador_Colisoes* Entidade::pGC = NULL;
-
 void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* pG)
 {
 	pGC = pG;
 }
+
+
+ListaEntidades* Entidade::pLista = NULL;
+void Entidade::setPonteiroLista(ListaEntidades* pL)
+{
+	pLista = pL;
+}
+
 
 Entidade::Entidade() :
 	Ente(),
@@ -33,7 +41,7 @@ void Entidade::CarregaTextura(string caminho)
 	forma.setOrigin(forma.getSize() / 2.0f);
 }
 
-void Entidade::Movimentar(float dx, float dy)
+void Entidade::Deslocar(float dx, float dy)
 {
 	forma.move(dx, dy);
 	x += dx;
@@ -48,6 +56,14 @@ void Entidade::setTipo()
 const string Entidade::getTipo() const
 {
 	return tipo;
+}
+
+void Entidade::mover(float dT)
+{
+}
+
+void Entidade::Executar(float dT)
+{
 }
 
 void Entidade::desenhar()

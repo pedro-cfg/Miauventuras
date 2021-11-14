@@ -46,6 +46,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			if (pInim->getVidas() <= 0)
 			{
 				ExcluirInimigo(pInim);
+				pJ->Pontua(pInim);
 			}
 			pJ->setVelocidadeY(-500.f);
 		}

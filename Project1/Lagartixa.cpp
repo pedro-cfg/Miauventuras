@@ -8,6 +8,8 @@ Lagartixa::Lagartixa(float x, float y) :
 	this->x = x;
 	this->y = y;
 	velocidadeEscalar = 500.f;
+
+	valor = 2;
 }
 
 Lagartixa::~Lagartixa() 

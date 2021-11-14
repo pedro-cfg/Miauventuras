@@ -2,6 +2,7 @@
 #define _JOGADOR_H_
 
 #include "Personagem.h"
+#include "Inimigo.h"
 
 class Gerenciador_Colisoes;
 
@@ -35,6 +36,9 @@ public:
     bool getColidiuBaixo() const;
     bool getColidiuDireita() const;
     bool getColidiuEsquerda() const;
+
+    void Pontua(Inimigo* pI);
+    void operator++();
 
     void Atualiza_Contador(float dT, bool zera = false);
     float getContador();

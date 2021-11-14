@@ -19,6 +19,11 @@ void Inimigo::setTipo() {
 	tipo = "Inimigo";
 }
 
+int Inimigo::getValor() const
+{
+	return valor;
+}
+
 void Inimigo::Executar(float dT)
 {
 	mover(dT);

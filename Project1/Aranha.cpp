@@ -7,6 +7,8 @@ Aranha::Aranha(float x, float y):
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;
+
+	valor = 1;
 }
 
 Aranha::~Aranha() 

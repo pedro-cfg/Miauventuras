@@ -131,6 +131,22 @@ bool Jogador::getColidiuEsquerda() const
 	return colidiu_esquerda;
 }
 
+void Jogador::Pontua(Inimigo* pI)
+{
+	int valorInimigo = pI->getValor();
+	for (int i = 0; i < valorInimigo; i++)
+	{
+		this->operator++();
+	}
+	/*Temporário!!!!!*/
+	cout << pontos << endl;
+}
+
+void Jogador::operator++()
+{
+	pontos++;
+}
+
 void Jogador::Atualiza_Contador(float dT, bool zera)
 {
 	if (zera)

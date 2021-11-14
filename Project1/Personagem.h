@@ -10,7 +10,6 @@ protected:
     int vidas;
     float velocidadeEscalar;
 
-    float contador_tempo;
 public:
     Personagem();
     ~Personagem();
@@ -24,7 +23,6 @@ public:
     void setVelocidadeEscalar(float v);
     float getVelocidadeEscalar() const;
 
-    void Atualiza_Contador(float dT, bool zera = false);
     float getContador();
 };
 

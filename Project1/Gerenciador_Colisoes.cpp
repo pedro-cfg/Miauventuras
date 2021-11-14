@@ -178,6 +178,6 @@ void Gerenciador_Colisoes::Excluir(Inimigo* pI)
 
 void Gerenciador_Colisoes::Excluir(Projetil* pP)
  {
-	LPs.remove(pP);
+  	LPs.remove(pP);
 	pLista->Retirar(static_cast<Entidade*>(pP));
 }

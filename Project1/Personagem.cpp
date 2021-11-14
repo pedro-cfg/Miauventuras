@@ -5,7 +5,6 @@ Personagem::Personagem():
 {
 	vidas = 3;
 
-	contador_tempo = 0.f;
 }
 
 Personagem::~Personagem() 
@@ -40,18 +39,6 @@ void Personagem::setVelocidadeEscalar(float v)
 float Personagem::getVelocidadeEscalar() const
 {
 	return velocidadeEscalar;
-}
-
-void Personagem::Atualiza_Contador(float dT, bool zera)
-{
-	if (zera)
-	{
-		contador_tempo = 0.f;
-	}
-	else
-	{
-		contador_tempo += dT;
-	}
 }
 
 float Personagem::getContador()

@@ -26,7 +26,7 @@ void Aranha::Executar(float dT)
 	Atualiza_Contador(dT);
 	if (contador_tempo > 3.0f)
 	{
-		//lancaProjetil();
+		lancaProjetil();
 		Atualiza_Contador(dT, true);
 	}
 }
@@ -34,7 +34,7 @@ void Aranha::Executar(float dT)
 void Aranha::lancaProjetil()
 {
 	Projetil* pNovo = new Projetil(this);
-
+	
 	if (pNovo)
 	{
 		pLista->Inserir(pNovo);

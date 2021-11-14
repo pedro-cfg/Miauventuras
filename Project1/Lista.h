@@ -68,6 +68,8 @@ public:
 			{
 				if (paux->getProx()->getInfo() == pitem) 
 				{
+					if (paux->getProx()->getProx() == NULL)
+						pUltimo = paux;
 					paux->setProx(paux->getProx()->getProx());
 					tam--;
 				}

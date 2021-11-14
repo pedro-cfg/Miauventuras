@@ -21,6 +21,8 @@ protected:
 
     string tipo;
 
+    float contador_tempo;
+
 public: 
     Entidade();
     ~Entidade();
@@ -44,6 +46,8 @@ public:
 
     virtual void mover(float dT);
     virtual void Executar(float dT);
+
+    void Atualiza_Contador(float dT, bool zera = false);
 };
 
 #endif 

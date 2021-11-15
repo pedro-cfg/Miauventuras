@@ -11,6 +11,8 @@ Aranha::Aranha(float x, float y):
 	this->x = x;
 	this->y = y;
 
+	Xinicial = x;
+
 	valor = 1;
 
 }

@@ -19,8 +19,8 @@ Jogador::Jogador(float x, float y) :
 	velocidadeY = 0.0f;
 	alturaPulo = 260.0f;
 	podePular = true;
+	empurrado = false;
 
-	//contador_tempo = 0.f;
 }
 
 Jogador::~Jogador()
@@ -36,34 +36,38 @@ void Jogador::Executar(float dT)
 
 void Jogador::mover(float dT)
 {
-	velocidadeX = 0.0f;
+	if(!empurrado)
+		velocidadeX = 0.0f;
 
 	if (colidiu_cima)
 	{
 		velocidadeY = 0.0f;
 	}
 
-	if (!colidiu_baixo)
+	if (!colidiu_baixo && abs(y) >= getAltura()/2.f)
 	{
 		velocidadeY += 981.0f * dT;
 	}
-	else
+	else if(!empurrado)
 	{
 		podePular = true;
 		velocidadeY = 0.0f;
 	}
 
+	if (abs(y) <= getAltura() / 2.f)
+		empurrado = false;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		if (!colidiu_direita)
+		if (!colidiu_direita && !empurrado)
 			velocidadeX += velocidadeEscalar;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		if (!colidiu_esquerda)
+		if (!colidiu_esquerda && !empurrado)
 			velocidadeX -= velocidadeEscalar;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular && colidiu_baixo)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular && !empurrado)
 	{
 		podePular = false;
 		velocidadeY = -sqrt(2.0f * 981.0f * alturaPulo);
@@ -88,6 +92,16 @@ void Jogador::reseta_velocidade()
 void Jogador::setVelocidadeY(float v)
 {
 	velocidadeY = v;
+}
+
+void Jogador::setVelocidadeX(float v)
+{
+	velocidadeX = v;
+}
+
+void Jogador::setEmpurrado(bool emp)
+{
+	empurrado = emp;
 }
 
 void Jogador::setColidiuCima(bool colidiu)

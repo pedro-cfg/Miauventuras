@@ -8,6 +8,8 @@ Ratao::Ratao(float x, float y) :
 	this->x = x;
 	this->y = y;
 
+	Xinicial = x;
+
 	vidas = 3;
 	valor = 3;
 }

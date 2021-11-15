@@ -7,6 +7,11 @@ Gerenciador_Grafico::Gerenciador_Grafico(Jogador* pJ) :
 {
 	sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
 	sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
+	textura_fundo.loadFromFile("Texturas/wallpaper.png");
+	fundo.setSize((sf::Vector2f)textura_fundo.getSize());
+	fundo.setTexture(&textura_fundo);
+	//fundo.setOrigin(fundo.getSize() / 2.0f);
+	fundo.setPosition(sf::Vector2f(-1000.f,-1080.f));
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
@@ -34,9 +39,12 @@ void Gerenciador_Grafico::AjustarVista(Jogador* jogador)
 		coordY = -380;
 	if (coordX < 57)
 		coordX = 57;
+	if (coordX > 8950)
+		coordX = 8950;
 	vista.setCenter(coordX, coordY);
 	marcador1.getforma().setPosition(coordX + 800, coordY - 400);
 	marcador1.AtualizaMarcador();
+	DesenhaForma(fundo);
 	DesenhaForma(marcador1.getforma());
 }
 

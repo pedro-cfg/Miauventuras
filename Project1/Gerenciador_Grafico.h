@@ -11,6 +11,8 @@ class Gerenciador_Grafico
 private:
 	sf::RenderWindow janela;
 	sf::View vista;
+	sf::Texture textura_fundo;
+	sf::RectangleShape fundo;
 
 	class Marcador_Vida
 	{

@@ -6,7 +6,6 @@ Inimigo::Inimigo() :
 	setTipo();
 	velocidadeEscalar = 100.f;
 	amplitude = 500.f;
-	Xinicial = getX();
 	vidas = 1;
 	direcao = 1.0f;
 }
@@ -32,12 +31,12 @@ void Inimigo::Executar(float dT)
 
 void Inimigo::mover(float dT)
 {
-	if (abs(getX() - Xinicial) > amplitude) 
+	if (abs(x - Xinicial) >= amplitude) 
 	{
 		velocidadeEscalar = -velocidadeEscalar;
 		direcao = (abs(velocidadeEscalar) / velocidadeEscalar);
 
-		if ((getX() - Xinicial) > 0.f)
+		if (x - Xinicial > 0.f)
 		{
 			Deslocar(-1.f, 0.f);
 		}

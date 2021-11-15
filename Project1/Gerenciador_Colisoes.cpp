@@ -43,11 +43,18 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		}
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
-			if (pJ->getContador() > 1.f) 
-			{
+			pJ->setEmpurrado(true);
+			if (pJ->getContador() > 1.f) {
 				pJ->sofreDano();
 			}
 			pJ->Atualiza_Contador(0.f, true);
+			if (colidiuEsquerda || colidiuCima) {
+				pJ->setVelocidadeX(500.f);
+			}
+			if (colidiuDireita) {
+				pJ->setVelocidadeX(-500.f);
+			}
+			pJ->setVelocidadeY(-500.f);
 		}
 		else if (colidiuBaixo)
 		{
@@ -143,7 +150,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 		}
 		else
 		{
-			if (deltaY > -1 * meio_tamanhoY)
+			if (deltaY > 0.f)
 			{
 				cima = true;
 			}
@@ -177,7 +184,7 @@ void Gerenciador_Colisoes::Excluir(Inimigo* pI)
 }
 
 void Gerenciador_Colisoes::Excluir(Projetil* pP)
- {
-  	LPs.remove(pP);
+{
+	LPs.remove(pP);
 	pLista->Retirar(static_cast<Entidade*>(pP));
 }

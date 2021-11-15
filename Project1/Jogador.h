@@ -12,6 +12,7 @@ private:
     int pontos;
     float alturaPulo;
     bool podePular;
+    bool empurrado;
     float velocidadeX;
     float velocidadeY;
     //float contador_tempo;
@@ -26,6 +27,8 @@ public:
     void reseta_colidiu();
     void reseta_velocidade();
     void setVelocidadeY(float v);
+    void setVelocidadeX(float v);
+    void setEmpurrado(bool emp);
 
     void setColidiuCima(bool colidiu);
     void setColidiuBaixo(bool colidiu);

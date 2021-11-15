@@ -10,7 +10,6 @@ Gerenciador_Grafico::Gerenciador_Grafico(Jogador* pJ) :
 	textura_fundo.loadFromFile("Texturas/wallpaper.png");
 	fundo.setSize((sf::Vector2f)textura_fundo.getSize());
 	fundo.setTexture(&textura_fundo);
-	//fundo.setOrigin(fundo.getSize() / 2.0f);
 	fundo.setPosition(sf::Vector2f(-1000.f,-1080.f));
 }
 

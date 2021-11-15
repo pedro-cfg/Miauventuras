@@ -10,6 +10,8 @@ public:
 	~FasePrimeira();
 
 	//void Executar();
+
+	void Inserir_Inimigos();
 };
 
 #endif 

@@ -8,14 +8,20 @@ class Ente
 {
 protected:
 	static Gerenciador_Grafico* pGG;
+	bool executando;
+	float contador_tempo;
 public:
 	Ente();
 	~Ente();
 
 	static void setGerenciadorGrafico(Gerenciador_Grafico* pG);
 
-	//virtual void Executar(float dT);
-	void imprimir_se();
+	virtual void Executar(float dT);
+	virtual void imprimir_se();
+
+	void Atualiza_Contador(float dT, bool zera = false);
+
+	void setExecutando(bool exec);
 };
 
 #endif 

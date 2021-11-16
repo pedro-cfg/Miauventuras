@@ -36,6 +36,7 @@ public:
 
 	void Excluir(Inimigo* pI);
 	void Excluir(Projetil* pP);
+	void Excluir(Jogador* pJ);
 
 	void Checa_Colisao(Jogador* pJ);
 	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo);

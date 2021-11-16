@@ -4,27 +4,27 @@
 #include "stdafx.h"
 
 template <class TE >
-class Elemento 
+class Elemento
 {
-private: 
-    Elemento<TE>* pProx;
-    TE* info;
+private:
+	Elemento<TE>* pProx;
+	TE* info;
 public:
-    Elemento(TE* info) 
+	Elemento(TE* info)
 	{
 		this->info = info;
 		pProx = nullptr;
 	}
-    ~Elemento() {}
-	TE* getInfo() 
- 	{
+	~Elemento() {}
+	TE* getInfo()
+	{
 		return info;
 	}
 	void setProx(Elemento* el)
 	{
 		pProx = el;
 	}
-	Elemento* getProx() 
+	Elemento* getProx()
 	{
 		return pProx;
 	}

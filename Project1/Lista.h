@@ -43,7 +43,7 @@ public:
 	TL* Buscar(const int ppos) 
 	{
 		Elemento<TL>* paux = pPrimeiro;
-		if (ppos >= 0 && ppos < tam) 
+		if (ppos >= 0 && ppos < tam)
 		{
 			for (int i = 0; i < ppos; i++)
 				paux = paux->getProx();

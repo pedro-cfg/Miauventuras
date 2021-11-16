@@ -3,8 +3,9 @@
 
 Jogo::Jogo() :
 	j1(0, -100),
-	gerenciador_grafico(&j1),
-	primeira_fase(&j1)
+	gerenciador_grafico(&j1,&menu_principal),
+	primeira_fase(&j1),
+	menu_principal(LARGURA_JANELA/2.f, ALTURA_JANELA/2.f, &primeira_fase)
 {
 	Ente::setGerenciadorGrafico(&gerenciador_grafico);
 
@@ -29,12 +30,12 @@ void Jogo::Executar()
 	{
 		dT = relogio.restart().asSeconds();
 
+		menu_principal.Executar(dT);
+
 		gerenciador_grafico.EventosJanela();
 
 		primeira_fase.Executar(dT);
 
-		gerenciador_grafico.AjustarVista(&j1);
-
-		gerenciador_grafico.DesenhaTudo(primeira_fase.getLista());
+		gerenciador_grafico.LimparTela();
 	}
 }

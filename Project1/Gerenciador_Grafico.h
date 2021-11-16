@@ -2,9 +2,9 @@
 #define _GERENCIADOR_GRAFICO_H
 
 #include "stdafx.h"
-//#include "Entidade.h"
 #include "Jogador.h"
 #include "ListaEntidades.h"
+#include "Menu.h"
 
 class Gerenciador_Grafico 
 {
@@ -13,6 +13,8 @@ private:
 	sf::View vista;
 	sf::Texture textura_fundo;
 	sf::RectangleShape fundo;
+
+	Menu* pM;
 
 	class Marcador_Vida
 	{
@@ -33,7 +35,7 @@ private:
 	};
 
 public:
-	Gerenciador_Grafico(Jogador* pJ);
+	Gerenciador_Grafico(Jogador* pJ, Menu* pM);
 	~Gerenciador_Grafico();
 
 	bool JanelaAberta();
@@ -41,8 +43,11 @@ public:
 	void AjustarVista(Jogador* jogador);
 	void EventosJanela();
 
+	void DesenhaTexto(sf::Text* texto);
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(ListaEntidades& lista);
+
+	void LimparTela();
 
 private:
 	Marcador_Vida marcador1;

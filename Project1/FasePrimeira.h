@@ -9,7 +9,9 @@ public:
 	FasePrimeira(Jogador* j1);
 	~FasePrimeira();
 
-	//void Executar();
+	void Executar(float dT);
+
+	void Gerar_Objetos();
 
 	void Inserir_Inimigos();
 };

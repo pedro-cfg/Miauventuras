@@ -1,9 +1,10 @@
 #include "Gerenciador_Grafico.h"
 
-Gerenciador_Grafico::Gerenciador_Grafico(Jogador* pJ) :
+Gerenciador_Grafico::Gerenciador_Grafico(Jogador* pJ, Menu* pM) :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
 	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_EXIBICAO, ALTURA_EXIBICAO)),
-	marcador1(-265, -29,pJ)
+	marcador1(-265, -29, pJ),
+	pM(pM)
 {
 	sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
 	sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
@@ -60,8 +61,31 @@ void Gerenciador_Grafico::EventosJanela()
 		case sf::Event::Resized:
 			RedimensionarVista();
 			break;
+		case sf::Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case sf::Keyboard::W:
+				pM->opcao_acima();
+				break;
+			case sf::Keyboard::S:
+				pM->opcao_abaixo();
+				break;
+			case sf::Keyboard::Space:
+				pM->Escolher_Opcao(janela);
+				break;
+			}
+			break;
+		default:
+			break;
 		}
 	}
+}
+
+void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
+{
+	janela.draw(*texto);
+	janela.draw(*(texto + 1));
+	janela.draw(*(texto + 2));
 }
 
 void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
@@ -72,10 +96,13 @@ void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)
 void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista)
 {
 	lista.Desenha();
-
-	janela.display();
-	janela.clear(sf::Color(255, 255, 255, 255));
 	janela.setView(vista);
+}
+
+void Gerenciador_Grafico::LimparTela()
+{
+	janela.display();
+	janela.clear();
 }
 
 Gerenciador_Grafico::Marcador_Vida* Gerenciador_Grafico::getMarcador()
@@ -127,19 +154,3 @@ sf::RectangleShape& Gerenciador_Grafico::Marcador_Vida::getforma()
 	return forma_marcador;
 }
 
-/*
-sf::Texture* Gerenciador_Grafico::Marcador_Vida::getTextura1()
-{
-	return &textura_1;
-}
-
-sf::Texture* Gerenciador_Grafico::Marcador_Vida::getTextura2()
-{
-	return &textura_2;
-}
-
-sf::Texture* Gerenciador_Grafico::Marcador_Vida::getTextura3()
-{
-	return &textura_3;
-}
-*/

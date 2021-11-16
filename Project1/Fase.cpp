@@ -15,7 +15,6 @@ Fase::Fase(Jogador* pJ) :
 	/*Inserir_Entidades_Prontas();
 	Inserir_Colisoes_Prontas();*/
 	pJ1 = pJ;
-	Inserir_Obstaculos();
 }
 
 Fase::~Fase() {
@@ -24,11 +23,6 @@ Fase::~Fase() {
 
 void Fase::Executar(float dT)
 {
-	gerenciador_colisoes.Checa_Colisao(pJ1);
-	lista_entidades.Executar(dT);
-}
-
-void Fase::gerenciar_colisoes() {
 
 }
 
@@ -60,7 +54,7 @@ void Fase::Inserir_Obstaculos()
 	int instancias, posicao;
 
 	srand(time(NULL));
-	instancias = rand() % 5;
+	instancias = (rand() % 7) + 1;
 	for (int i = 0; i < instancias; i++) {
 		posicao = rand() % 9000;
 		Espinho* pE = new Espinho(posicao, -75);
@@ -68,10 +62,10 @@ void Fase::Inserir_Obstaculos()
 		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pE));
 	}
 
-	instancias = rand() % 5;
+	instancias = (rand() % 7) + 1;
 	for (int i = 0; i < instancias; i++) {
 		posicao = rand() % 9000;
-		Teia* pT = new Teia(posicao, -75);
+		Teia* pT = new Teia(posicao, -200);
 		lista_entidades.Inserir(static_cast<Entidade*>(pT));
 		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pT));
 	}

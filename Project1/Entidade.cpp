@@ -26,7 +26,6 @@ Entidade::Entidade() :
 	y(0)
 {
 	setTipo();
-	contador_tempo = 0.f;
 }
 
 Entidade::~Entidade() 
@@ -98,18 +97,4 @@ float Entidade::getAltura() const
 float Entidade::getLargura() const
 {
 	return forma.getSize().x;
-}
-
-void Entidade::Atualiza_Contador(float dT, bool zera)
-{
-	if (zera)
-	{
-		contador_tempo = 0.f;
-	}
-	else
-	{
-		contador_tempo += dT;
-		if (contador_tempo > 20.f)
-			contador_tempo = 0.f;
-	}
 }

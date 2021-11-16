@@ -17,7 +17,7 @@ Jogador::Jogador(float x, float y) :
 
 	velocidadeX = 0.0f;
 	velocidadeY = 0.0f;
-	alturaPulo = 260.0f;
+	alturaPulo = 350.0f;
 	podePular = true;
 	empurrado = false;
 
@@ -32,6 +32,10 @@ void Jogador::Executar(float dT)
 {
 	mover(dT);
 	Atualiza_Contador(dT);
+	if (getVidas() <= 0) {
+		pLista->~ListaEntidades();
+		pGC->~Gerenciador_Colisoes();
+	}
 }
 
 void Jogador::mover(float dT)

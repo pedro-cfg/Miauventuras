@@ -7,6 +7,7 @@ ListaEntidades::ListaEntidades()
 
 ListaEntidades::~ListaEntidades()
 {
+	LEs.~Lista();
 }
 
 void ListaEntidades::Inserir(Entidade* pE)

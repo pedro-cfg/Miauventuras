@@ -13,6 +13,7 @@
 #include "Espinho.h"
 #include "Projetil.h"
 #include "Jogador.h"
+#include "Gerenciador_Grafico.h"
 
 class Fase: public Ente 
 {
@@ -32,7 +33,6 @@ public:
 	~Fase();
 
 	virtual void Executar(float dT);
-	void gerenciar_colisoes();
 
 	/*void Inserir_Entidades_Prontas();
 	void Inserir_Colisoes_Prontas();*/

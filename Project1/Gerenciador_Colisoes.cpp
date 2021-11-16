@@ -15,7 +15,9 @@ Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
 {
-
+	LIs.clear();
+	LOs.clear();
+	LPs.clear();
 }
 
 void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
@@ -187,4 +189,9 @@ void Gerenciador_Colisoes::Excluir(Projetil* pP)
 {
 	LPs.remove(pP);
 	pLista->Retirar(static_cast<Entidade*>(pP));
+}
+
+void Gerenciador_Colisoes::Excluir(Jogador* pJ)
+{
+	pLista->Retirar(static_cast<Entidade*>(pJ));
 }

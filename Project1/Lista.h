@@ -5,30 +5,30 @@
 #include "Elemento.h"
 
 template <class TL >
-class Lista 
+class Lista
 {
-private: 
-    int tam;
-    Elemento<TL>* pPrimeiro;
-    Elemento<TL>* pUltimo;
+private:
+	int tam;
+	Elemento<TL>* pPrimeiro;
+	Elemento<TL>* pUltimo;
 public:
-    Lista() 
+	Lista()
 	{
-        pPrimeiro = pUltimo = NULL;
-        tam = 0;
-    }
-    ~Lista() 
+		pPrimeiro = pUltimo = NULL;
+		tam = 0;
+	}
+	~Lista()
 	{
 		Limpar();
 		pPrimeiro = pUltimo = NULL;
 		tam = 0;
-    }
-	void Inserir(TL* pitem) 
+	}
+	void Inserir(TL* pitem)
 	{
 		Elemento<TL>* pnovo = new Elemento<TL>(pitem);
 		if (pPrimeiro == NULL)
 			pPrimeiro = pUltimo = pnovo;
-		else 
+		else
 		{
 			pUltimo->setProx(pnovo);
 			pUltimo = pUltimo->getProx();
@@ -36,7 +36,7 @@ public:
 		tam++;
 	}
 
-	TL* Buscar(const int ppos) 
+	TL* Buscar(const int ppos)
 	{
 		Elemento<TL>* paux = pPrimeiro;
 		if (ppos >= 0 && ppos < tam)
@@ -49,27 +49,27 @@ public:
 			return NULL;
 	}
 
-	void Retirar(TL* pitem) 
+	void Retirar(TL* pitem)
 	{
 		Elemento<TL>* paux = pPrimeiro;
-		if (pPrimeiro != NULL && pPrimeiro->getInfo() == pitem) 
+		if (pPrimeiro != NULL && pPrimeiro->getInfo() == pitem)
 		{
 			pPrimeiro = pPrimeiro->getProx();
 			delete paux;
 			tam--;
 		}
-		else 
+		else
 		{
-			while (paux->getProx() != NULL) 
+			while (paux->getProx() != NULL)
 			{
-				if (paux->getProx()->getInfo() == pitem) 
+				if (paux->getProx()->getInfo() == pitem)
 				{
 					if (paux->getProx()->getProx() == NULL)
 						pUltimo = paux;
 					paux->setProx(paux->getProx()->getProx());
 					tam--;
 				}
-				else 
+				else
 				{
 					paux = paux->getProx();
 				}
@@ -82,23 +82,34 @@ public:
 	void Limpar(int ind = 0)
 	{
 		Elemento<TL>* paux1 = pPrimeiro;
-		Elemento<TL>* paux2 = NULL;
+		//Elemento<TL>* paux2 = NULL;
 
-		for (int i = 0; i < ind; i++)
+		for (int i = 1; i < ind; i++)
 		{
 			paux1 = paux1->getProx();
 		}
 
-		while (paux1 != NULL)
+		TL* pT = new TL;
+
+		for (int i = ind; i < tam; i++) {
+			pT = Buscar(i);
+			Retirar(pT);
+		}
+
+		pUltimo = paux1;
+		tam = ind;
+		if (pUltimo != NULL)
+			pUltimo->setProx(NULL);
+		/*while (paux1 != NULL)
 		{
 			paux2 = paux1->getProx();
 			delete paux1;
 			paux1 = paux2;
 			tam--;
-		}
+		}*/
 	}
 
-	int Quantidade() 
+	int Quantidade()
 	{
 		return tam;
 	}

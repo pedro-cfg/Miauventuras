@@ -11,7 +11,6 @@ void Ente::setGerenciadorGrafico(Gerenciador_Grafico* pG)
 
 Ente::Ente()
 {
-	executando = false;
 	contador_tempo = 0.f;
 }
 
@@ -43,7 +42,9 @@ void Ente::Atualiza_Contador(float dT, bool zera)
 	}
 }
 
-void Ente::setExecutando(bool exec)
+int Ente::executando = 0;
+
+void Ente::setExecutando(int exec)
 {
 	executando = exec;
 }

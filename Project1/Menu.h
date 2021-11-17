@@ -16,6 +16,8 @@ public:
 	Menu(float largura, float altura, FasePrimeira* pFase);
 	~Menu();
 
+	void InicializaTexto(float largura, float altura);
+
 	void Executar(float dT);
 	void imprimir_se();
 

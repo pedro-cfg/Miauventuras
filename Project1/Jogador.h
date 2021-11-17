@@ -4,6 +4,7 @@
 #include "Personagem.h"
 #include "Inimigo.h"
 
+class Gerenciador_Grafico;
 class Gerenciador_Colisoes;
 
 class Jogador: public Personagem
@@ -19,6 +20,8 @@ public:
 
     void Executar(float dT);
     void mover(float dT);
+
+    void reseta_jogador();
 
     void reseta_velocidade();
     void setEmpurrado(bool emp);

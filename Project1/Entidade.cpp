@@ -30,7 +30,6 @@ Entidade::Entidade() :
 
 Entidade::~Entidade() 
 {
-
 }
 
 void Entidade::CarregaTextura(string caminho)

@@ -1,4 +1,5 @@
 #include "Inimigo.h"
+#include "Plataforma.h"
 
 Inimigo::Inimigo() :
 	Personagem()
@@ -41,6 +42,8 @@ void Inimigo::mover(float dT)
 	{
 		velocidadeY += 981.0f * dT;
 	}
+	else
+		velocidadeY = 0.0f;
 	if (direcao > 0)
 	{
 		if (!colidiu_direita)
@@ -85,6 +88,12 @@ float Inimigo::getDirecao() const
 void Inimigo::reseta_velocidade()
 {
 	velocidadeEscalar = 100.0f;
+}
+
+void Inimigo::InimigoEmPlataforma(Plataforma* pP)
+{
+	Xinicial = pP->getX();
+	amplitude = pP->getLargura()/2.f;
 }
 
 

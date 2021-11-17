@@ -1,5 +1,6 @@
 #include "Jogador.h"
 #include "Gerenciador_Colisoes.h"
+#include "Gerenciador_Grafico.h"
 
 Jogador::Jogador(float x, float y) :
 	Personagem()
@@ -28,10 +29,6 @@ void Jogador::Executar(float dT)
 {
 	mover(dT);
 	Atualiza_Contador(dT);
-	if (getVidas() <= 0) {
-		pLista->~ListaEntidades();
-		pGC->~Gerenciador_Colisoes();
-	}
 }
 
 void Jogador::mover(float dT)
@@ -54,7 +51,7 @@ void Jogador::mover(float dT)
 		velocidadeY = 0.0f;
 	}
 
-	if (abs(y) <= getAltura() / 2.f)
+	if (colidiu_baixo || abs(y) <= getAltura() / 2.f)
 		empurrado = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -77,6 +74,14 @@ void Jogador::mover(float dT)
 	float dy = velocidadeY * dT;
 
 	Deslocar(dx, dy);
+}
+
+void Jogador::reseta_jogador()
+{
+	vidas = 3;
+	forma.setPosition(0, -100);
+	x = 0;
+	y = -100;
 }
 
 void Jogador::reseta_velocidade()

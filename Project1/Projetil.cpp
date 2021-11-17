@@ -13,6 +13,7 @@ Projetil::Projetil(Aranha* pAr) :
 	velocidadeX = velocidadeEscalar * pAr->getDirecao();
 	velocidadeY = -velocidadeEscalar;
 
+	contador_tempo = 0.f;
 }
 
 Projetil::~Projetil() 

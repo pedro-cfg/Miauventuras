@@ -42,6 +42,7 @@ public:
 	bool JanelaAberta();
 	void RedimensionarVista();
 	void AjustarVista(Jogador* jogador);
+	void RestaurarVista();
 	void EventosJanela();
 
 	void DesenhaTexto(sf::Text* texto);

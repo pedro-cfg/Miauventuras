@@ -48,6 +48,11 @@ void Gerenciador_Grafico::AjustarVista(Jogador* jogador)
 	DesenhaForma(marcador1.getforma());
 }
 
+void Gerenciador_Grafico::RestaurarVista()
+{
+	vista.setCenter(800.f,420.f);
+}
+
 void Gerenciador_Grafico::EventosJanela()
 {
 	sf::Event event;
@@ -86,6 +91,7 @@ void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
 	janela.draw(*texto);
 	janela.draw(*(texto + 1));
 	janela.draw(*(texto + 2));
+	janela.setView(vista);
 }
 
 void Gerenciador_Grafico::DesenhaForma(sf::RectangleShape& forma)

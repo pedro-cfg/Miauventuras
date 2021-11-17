@@ -26,9 +26,9 @@ void Jogo::Executar()
 	{
 		dT = relogio.restart().asSeconds();
 
-		menu_principal.Executar(dT);
-
 		gerenciador_grafico.EventosJanela();
+
+		menu_principal.Executar(dT);
 
 		primeira_fase.Executar(dT);
 
@@ -46,5 +46,5 @@ void Jogo::Inicializar()
 
 	primeira_fase.setJogador(pJ1);
 	primeira_fase.Inserir_Entidade(static_cast<Entidade*>(pJ1));
-
+	primeira_fase.Gerar_Objetos();
 }

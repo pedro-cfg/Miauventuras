@@ -1,11 +1,28 @@
 #include "Gerenciador_Colisoes.h"
+#include "FasePrimeira.h"
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
 {
 	pLista = pL;
+	pF1 = NULL;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
+{
+}
+
+void Gerenciador_Colisoes::Fim_de_Fase(Jogador* pJ)
+{
+	if (  pJ->getVidas() <= 0 || pJ->getX() >= 9915.f) {
+		pLista->Limpar(1);
+		LimpaListas();
+		Ente::setExecutando(0);
+		pJ->reseta_jogador();
+		pF1->Gerar_Objetos();
+	}
+}
+
+void Gerenciador_Colisoes::LimpaListas()
 {
 	LIs.clear();
 	LOs.clear();
@@ -139,6 +156,9 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 					Checa_Colisao_Individual(static_cast<Personagem*>(pI), pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 				}
 
+				if (colidiuBaixo)
+					pI->InimigoEmPlataforma(static_cast<Plataforma*>(pObs));
+
 				if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
 				{
 					pObs->ExecutaImpedimento(static_cast<Personagem*>(pI), colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
@@ -192,6 +212,11 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* ou
 			}
 		}
 	}
+}
+
+void Gerenciador_Colisoes::setPrimeiraFase(FasePrimeira* pF)
+{
+	pF1 = pF;
 }
 
 

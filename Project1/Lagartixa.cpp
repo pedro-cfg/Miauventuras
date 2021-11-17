@@ -18,3 +18,8 @@ Lagartixa::~Lagartixa()
 {
 
 }
+
+void Lagartixa::reseta_velocidade()
+{
+	velocidadeEscalar = 500.0f;
+}

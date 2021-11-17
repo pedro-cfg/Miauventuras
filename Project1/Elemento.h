@@ -8,17 +8,23 @@ class Elemento
 {
 private:
 	Elemento<TE>* pProx;
-	TE* info;
+	TE* pInfo;
 public:
-	Elemento(TE* info)
+	Elemento(TE* pInfo)
 	{
-		this->info = info;
+		this->pInfo = pInfo;
 		pProx = nullptr;
 	}
-	~Elemento() {}
+	~Elemento() 
+	{
+		if (pInfo != NULL)
+		{
+			delete pInfo;
+		}
+	}
 	TE* getInfo()
 	{
-		return info;
+		return pInfo;
 	}
 	void setProx(Elemento* el)
 	{

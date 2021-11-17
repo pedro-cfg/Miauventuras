@@ -1,12 +1,4 @@
 #include "Gerenciador_Colisoes.h"
-//#include "Entidade.h"
-
-/*
-Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL, Gerenciador_Grafico* pG)
-{
-	pLista = pL;
-	pGerenciador_Grafico = pG;
-}*/
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
 {
@@ -41,7 +33,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 		if (pAux != NULL)
 		{
-			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+			Checa_Colisao_Individual(static_cast<Personagem*>(pJ), pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 		}
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
@@ -88,7 +80,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		{
 			if (pObs->getEhPlataforma())
 			{
-				pObs->ExecutaImpedimento(pJ, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+				pObs->ExecutaImpedimento(static_cast<Personagem*>(pJ), colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 			}
 			else
 			{
@@ -107,7 +99,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 		if (pAux != NULL)
 		{
-			Checa_Colisao_Individual(pJ, pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+			Checa_Colisao_Individual(static_cast<Personagem*>(pJ), pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 		}
 
 		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
@@ -118,13 +110,51 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 	}
 }
 
-void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo)
+void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 {
-	float posicaoX = pJ->getX();
-	float posicaoY = pJ->getY();
+	iteInim = LIs.begin();
+	while (iteInim != LIs.end())
+	{
+		Inimigo* pI = (*iteInim);
+		iteInim++;
 
-	float meio_tamanhoX = pJ->getLargura() / 2.0f;
-	float meio_tamanhoY = pJ->getAltura() / 2.0f;
+		pI->reseta_colidiu();
+		pI->reseta_velocidade();
+
+		iteObs = LOs.begin();
+		bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
+
+		while (iteObs != LOs.end())
+		{
+			colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
+
+			Obstaculo* pObs = (*iteObs);
+			Entidade* pAux = static_cast<Entidade*> (pObs);
+			iteObs++;
+			
+			if (pObs->getEhPlataforma())
+			{
+				if (pAux != NULL)
+				{
+					Checa_Colisao_Individual(static_cast<Personagem*>(pI), pAux, colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+				}
+
+				if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
+				{
+					pObs->ExecutaImpedimento(static_cast<Personagem*>(pI), colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
+				}
+			}
+		}
+	}
+}
+
+void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo)
+{
+	float posicaoX = pP->getX();
+	float posicaoY = pP->getY();
+
+	float meio_tamanhoX = pP->getLargura() / 2.0f;
+	float meio_tamanhoY = pP->getAltura() / 2.0f;
 
 	float posicao_outroX = outro->getX();
 	float posicao_outroY = outro->getY();
@@ -163,6 +193,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Jogador* pJ, Entidade* outro
 		}
 	}
 }
+
 
 void Gerenciador_Colisoes::Inserir(Inimigo* pI)
 {

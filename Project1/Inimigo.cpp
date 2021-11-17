@@ -31,10 +31,35 @@ void Inimigo::Executar(float dT)
 
 void Inimigo::mover(float dT)
 {
+	velocidadeX = 0.0f;
+
+	if (colidiu_cima)
+	{
+		velocidadeY = 0.0f;
+	}
+	if (!colidiu_baixo && abs(y) >= getAltura() / 2.f)
+	{
+		velocidadeY += 981.0f * dT;
+	}
+	if (direcao > 0)
+	{
+		if (!colidiu_direita)
+		{
+			velocidadeX += velocidadeEscalar;
+		}
+	}
+	if (direcao < 0)
+	{
+		if (!colidiu_esquerda)
+		{
+			velocidadeX -= velocidadeEscalar;
+		}
+	}
+
 	if (abs(x - Xinicial) >= amplitude) 
 	{
-		velocidadeEscalar = -velocidadeEscalar;
-		direcao = (abs(velocidadeEscalar) / velocidadeEscalar);
+		velocidadeX = -velocidadeX;
+		direcao = (abs(velocidadeX) / velocidadeX);
 
 		if (x - Xinicial > 0.f)
 		{
@@ -46,13 +71,20 @@ void Inimigo::mover(float dT)
 		}
 	}
 
-	float dx = velocidadeEscalar * dT;
-	Deslocar(dx, 0.f);
+	float dx = velocidadeX * dT;
+	float dy = velocidadeY * dT;
+
+	Deslocar(dx, dy);
 }
 
 float Inimigo::getDirecao() const
 {
 	return direcao;
+}
+
+void Inimigo::reseta_velocidade()
+{
+	velocidadeEscalar = 100.0f;
 }
 
 

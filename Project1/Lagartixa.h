@@ -9,6 +9,8 @@ class Lagartixa: public Inimigo
 public:
 	Lagartixa(float x, float y);
 	~Lagartixa();
+
+	void reseta_velocidade();
 };
 
 #endif 

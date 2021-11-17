@@ -6,14 +6,17 @@
 class FasePrimeira: public Fase 
 {
 public:
-	FasePrimeira(Jogador* j1);
+	FasePrimeira();
 	~FasePrimeira();
 
 	void Executar(float dT);
 
 	void Gerar_Objetos();
 
-	void Inserir_Inimigos();
+	void Gerar_Inimigos();
+	void Gerar_Obstaculos();
+
+	void Gerar_Plataformas();
 };
 
 #endif 

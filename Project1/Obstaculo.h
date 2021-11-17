@@ -16,7 +16,7 @@ public:
 	bool getEhPlataforma();
 
 	virtual void ExecutaImpedimento(Jogador* pJ) {}
-	virtual void ExecutaImpedimento(Jogador* pJ, bool esq, bool dir, bool cima, bool baixo) {}
+	virtual void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo) {}
 
 	void Rotacionar();
 	void setTipo();

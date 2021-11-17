@@ -45,3 +45,8 @@ void ListaEntidades::Desenha()
 		}
 	}
 }
+
+void ListaEntidades::Limpar(int ind)
+{
+	LEs.Limpar(ind);
+}

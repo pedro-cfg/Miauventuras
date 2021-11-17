@@ -22,24 +22,15 @@ protected:
 	ListaEntidades lista_entidades;
 
 	Jogador* pJ1;
-
-	/*Aranha a1;
-	Lagartixa l1;
-	Ratao r1;
-	Teia t1;
-	Espinho e1;*/
 public:    
-	Fase(Jogador* pJ);
+	Fase();
 	~Fase();
 
 	virtual void Executar(float dT);
 
-	/*void Inserir_Entidades_Prontas();
-	void Inserir_Colisoes_Prontas();*/
-
 	void Inserir_Entidade(Entidade* pE);
 
-	void Inserir_Obstaculos();
+	void setJogador(Jogador* pJ);
 
 	ListaEntidades& getLista();
 };

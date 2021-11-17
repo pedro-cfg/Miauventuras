@@ -6,7 +6,7 @@
 class FaseSegunda: public Fase 
 {
 public:
-	FaseSegunda(Jogador* pJ);
+	FaseSegunda();
 	~FaseSegunda();
 
 	//void Executar();

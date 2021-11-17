@@ -27,15 +27,16 @@ private:
 		sf::Texture textura_3;
 		sf::RectangleShape forma_marcador;
 	public:
-		Marcador_Vida(float x1, float y1, Jogador* pJ);
+		Marcador_Vida(float x1, float y1);
 		~Marcador_Vida();
 
+		void setJogador(Jogador* pJ);
 		void AtualizaMarcador();
 		sf::RectangleShape& getforma();
 	};
 
 public:
-	Gerenciador_Grafico(Jogador* pJ, Menu* pM);
+	Gerenciador_Grafico(Menu* pM);
 	~Gerenciador_Grafico();
 
 	bool JanelaAberta();

@@ -9,7 +9,7 @@ public:
 	Plataforma(float x, float y);
 	~Plataforma();
 
-	void ExecutaImpedimento(Jogador* pJ, bool esq, bool dir, bool cima, bool baixo);
+	void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo);
 };
 
 #endif

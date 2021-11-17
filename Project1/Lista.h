@@ -19,13 +19,9 @@ public:
     }
     ~Lista() 
 	{
-        Elemento<TL>* paux;
-        while (pPrimeiro != NULL)
-		{
-            paux = pPrimeiro->getProx();
-            delete pPrimeiro;
-            pPrimeiro = paux;
-        }
+		Limpar();
+		pPrimeiro = pUltimo = NULL;
+		tam = 0;
     }
 	void Inserir(TL* pitem) 
 	{
@@ -80,6 +76,25 @@ public:
 			}
 			paux = paux->getProx();
 			delete paux;
+		}
+	}
+
+	void Limpar(int ind = 0)
+	{
+		Elemento<TL>* paux1 = pPrimeiro;
+		Elemento<TL>* paux2 = NULL;
+
+		for (int i = 0; i < ind; i++)
+		{
+			paux1 = paux1->getProx();
+		}
+
+		while (paux1 != NULL)
+		{
+			paux2 = paux1->getProx();
+			delete paux1;
+			paux1 = paux2;
+			tam--;
 		}
 	}
 

@@ -8,6 +8,7 @@
 #include "Jogador.h"
 #include "Projetil.h"
 #include "Entidade.h"
+#include "Personagem.h"
 //#include "Gerenciador_Grafico.h"
 
 //class Entidade;
@@ -39,8 +40,9 @@ public:
 	void Excluir(Jogador* pJ);
 
 	void Checa_Colisao(Jogador* pJ);
-	void Checa_Colisao_Individual(Jogador* pJ, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo);
+	void Checa_Colisao_Inimigos();
+	void Checa_Colisao_Individual(Personagem* pP, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo);
 };
 
-#endif 
+#endif
 

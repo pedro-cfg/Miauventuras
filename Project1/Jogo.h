@@ -10,7 +10,7 @@
 class Jogo 
 {
 private:
-	Jogador j1;
+	Jogador* pJ1;
 	Gerenciador_Grafico gerenciador_grafico;
 
 	Menu menu_principal;
@@ -22,6 +22,7 @@ public:
 
 	void Executar();
 
+	void Inicializar();
 };
 
 #endif 

@@ -1,14 +1,14 @@
 #include "Gerenciador_Grafico.h"
 
-Gerenciador_Grafico::Gerenciador_Grafico(Jogador* pJ, Menu* pM) :
+Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
 	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_EXIBICAO, ALTURA_EXIBICAO)),
-	marcador1(-265, -29, pJ),
+	marcador1(0, 0),
 	pM(pM)
 {
 	sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
 	sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
-	textura_fundo.loadFromFile("Texturas/wallpaper.png");
+	textura_fundo.loadFromFile("Texturas/fundo1.png");
 	fundo.setSize((sf::Vector2f)textura_fundo.getSize());
 	fundo.setTexture(&textura_fundo);
 	fundo.setPosition(sf::Vector2f(-1000.f,-1080.f));
@@ -110,12 +110,11 @@ Gerenciador_Grafico::Marcador_Vida* Gerenciador_Grafico::getMarcador()
 	return &marcador1;
 }
 
-Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1, Jogador* pJ):
-	x(0),y(0)
+Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1):
+	x(0),y(0), pJogador(NULL)
 {
 	x = x1;
 	y = y1;
-	pJogador = pJ;
 
 	textura_1.loadFromFile("Texturas/Numeros/numero1.png");
 	textura_2.loadFromFile("Texturas/Numeros/numero2.png");
@@ -129,6 +128,11 @@ Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1, Jogador* p
 
 Gerenciador_Grafico::Marcador_Vida::~Marcador_Vida()
 {
+}
+
+void Gerenciador_Grafico::Marcador_Vida::setJogador(Jogador* pJ)
+{
+	pJogador = pJ;
 }
 
 void Gerenciador_Grafico::Marcador_Vida::AtualizaMarcador()

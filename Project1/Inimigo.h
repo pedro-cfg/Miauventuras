@@ -22,6 +22,8 @@ public:
 	void mover(float dT);
 
 	float getDirecao() const;
+
+	virtual void reseta_velocidade();
 };
 
 #endif

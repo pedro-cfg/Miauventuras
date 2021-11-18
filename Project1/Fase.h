@@ -28,6 +28,13 @@ public:
 
 	virtual void Executar(float dT);
 
+	void Gerar_Objetos();
+	void Gerar_Inimigos();
+	void Gerar_Obstaculos();
+
+	virtual void Gerar_Plataformas();
+	virtual void Gerar_Chefao();
+
 	void Inserir_Entidade(Entidade* pE);
 
 	void setJogador(Jogador* pJ);

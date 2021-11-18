@@ -6,8 +6,8 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 	marcador1(0, 0),
 	pM(pM)
 {
-	sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
-	sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
+	//sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
+	//sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
 	textura_fundo.loadFromFile("Texturas/fundo1.png");
 	fundo.setSize((sf::Vector2f)textura_fundo.getSize());
 	fundo.setTexture(&textura_fundo);
@@ -53,7 +53,7 @@ void Gerenciador_Grafico::RestaurarVista()
 	vista.setCenter(800.f,420.f);
 }
 
-void Gerenciador_Grafico::EventosJanela()
+void Gerenciador_Grafico::EventosJanela(int estado_jogo)
 {
 	sf::Event event;
 	while (janela.pollEvent(event))
@@ -67,17 +67,20 @@ void Gerenciador_Grafico::EventosJanela()
 			RedimensionarVista();
 			break;
 		case sf::Event::KeyReleased:
-			switch (event.key.code)
+			if (estado_jogo == 0)
 			{
-			case sf::Keyboard::W:
-				pM->opcao_acima();
-				break;
-			case sf::Keyboard::S:
-				pM->opcao_abaixo();
-				break;
-			case sf::Keyboard::Space:
-				pM->Escolher_Opcao(janela);
-				break;
+				switch (event.key.code)
+				{
+				case sf::Keyboard::W:
+					pM->opcao_acima();
+					break;
+				case sf::Keyboard::S:
+					pM->opcao_abaixo();
+					break;
+				case sf::Keyboard::Space:
+					pM->Escolher_Opcao();
+					break;
+				}
 			}
 			break;
 		default:
@@ -111,6 +114,11 @@ void Gerenciador_Grafico::LimparTela()
 	janela.clear();
 }
 
+void Gerenciador_Grafico::FecharJanela()
+{
+	janela.close();
+}
+
 Gerenciador_Grafico::Marcador_Vida* Gerenciador_Grafico::getMarcador()
 {
 	return &marcador1;
@@ -122,18 +130,39 @@ Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1):
 	x = x1;
 	y = y1;
 
-	textura_1.loadFromFile("Texturas/Numeros/numero1.png");
-	textura_2.loadFromFile("Texturas/Numeros/numero2.png");
-	textura_3.loadFromFile("Texturas/Numeros/numero3.png");
+	CarregaTextura("Texturas/Numeros/1.png");
+	CarregaTextura("Texturas/Numeros/2.png");
+	CarregaTextura("Texturas/Numeros/3.png");
+	CarregaTextura("Texturas/Numeros/4.png");
+	CarregaTextura("Texturas/Numeros/5.png");
+	CarregaTextura("Texturas/Numeros/6.png");
+	CarregaTextura("Texturas/Numeros/7.png");
 
-	forma_marcador.setSize((sf::Vector2f)textura_3.getSize());
-	forma_marcador.setTexture(&textura_3);
+	forma_marcador.setSize((sf::Vector2f)texturas[0]->getSize());
+	forma_marcador.setTexture(texturas[0]);
 	forma_marcador.setOrigin(forma_marcador.getSize() / 2.0f);
 	forma_marcador.setPosition(sf::Vector2f(x, y));
 }
 
 Gerenciador_Grafico::Marcador_Vida::~Marcador_Vida()
 {
+	int tam = (int)texturas.size();
+	for (int i = 0; i < tam; i++)
+	{
+		if (texturas[i] != NULL)
+		{
+			delete texturas[i];
+		}
+	}
+	texturas.clear();
+}
+
+void Gerenciador_Grafico::Marcador_Vida::CarregaTextura(string caminho)
+{
+	sf::Texture* pTextura = new sf::Texture();
+	pTextura->loadFromFile(caminho);
+
+	texturas.push_back(pTextura);
 }
 
 void Gerenciador_Grafico::Marcador_Vida::setJogador(Jogador* pJ)
@@ -145,17 +174,9 @@ void Gerenciador_Grafico::Marcador_Vida::AtualizaMarcador()
 {
 	int vidas = pJogador->getVidas();
 	
-	switch (vidas)
+	if (0 < vidas && vidas <= 7)
 	{
-	case 3:
-		forma_marcador.setTexture(&textura_3);
-		break;
-	case 2:
-		forma_marcador.setTexture(&textura_2);
-		break;
-	case 1:
-		forma_marcador.setTexture(&textura_1);
-		break;
+		forma_marcador.setTexture(texturas[vidas - 1]);
 	}
 }
 

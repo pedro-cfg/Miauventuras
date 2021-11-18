@@ -8,7 +8,7 @@ class Ente
 {
 protected:
 	static Gerenciador_Grafico* pGG;
-	static int executando; //0 -> Menu;    1 -> 1 Fase;    2-> 2 Fase
+	//static int executando; //0 -> Menu;    1 -> 1 Fase;    2-> 2 Fase
 	float contador_tempo;
 public:
 	Ente();

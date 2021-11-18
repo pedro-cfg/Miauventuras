@@ -2,7 +2,7 @@
 #define _INIMIGO_H_
 
 #include "Personagem.h"
-class Plataforma;
+class Obstaculo;
 
 class Inimigo: public Personagem
 {
@@ -26,7 +26,7 @@ public:
 
 	virtual void reseta_velocidade();
 	
-	void InimigoEmPlataforma(Plataforma* pP);
+	void InimigoEmPlataforma(Obstaculo* pO);
 };
 
 #endif

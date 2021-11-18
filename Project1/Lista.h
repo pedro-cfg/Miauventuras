@@ -2,15 +2,47 @@
 #define _LISTA_H_
 
 #include "stdafx.h"
-#include "Elemento.h"
+//#include "Elemento.h"
 
-template <class TL >
+template <class TIPO >
 class Lista
 {
 private:
+	class Elemento
+	{
+	private:
+		Elemento* pProx;
+		TIPO* pInfo;
+	public:
+		Elemento(TIPO* pInfo)
+		{
+			this->pInfo = pInfo;
+			pProx = nullptr;
+		}
+		~Elemento()
+		{
+			if (pInfo != NULL)
+			{
+				delete pInfo;
+			}
+		}
+		TIPO* getInfo()
+		{
+			return pInfo;
+		}
+		void setProx(Elemento* el)
+		{
+			pProx = el;
+		}
+		Elemento* getProx()
+		{
+			return pProx;
+		}
+	};
+
 	int tam;
-	Elemento<TL>* pPrimeiro;
-	Elemento<TL>* pUltimo;
+	Elemento* pPrimeiro;
+	Elemento* pUltimo;
 public:
 	Lista()
 	{
@@ -23,9 +55,9 @@ public:
 		pPrimeiro = pUltimo = NULL;
 		tam = 0;
 	}
-	void Inserir(TL* pitem)
+	void Inserir(TIPO* pitem)
 	{
-		Elemento<TL>* pnovo = new Elemento<TL>(pitem);
+		Elemento* pnovo = new Elemento(pitem);
 		if (pPrimeiro == NULL)
 			pPrimeiro = pUltimo = pnovo;
 		else
@@ -36,9 +68,9 @@ public:
 		tam++;
 	}
 
-	TL* Buscar(const int ppos)
+	TIPO* Buscar(const int ppos)
 	{
-		Elemento<TL>* paux = pPrimeiro;
+		Elemento* paux = pPrimeiro;
 		if (ppos >= 0 && ppos < tam)
 		{
 			for (int i = 0; i < ppos; i++)
@@ -49,9 +81,9 @@ public:
 			return NULL;
 	}
 
-	void Retirar(TL* pitem)
+	void Retirar(TIPO* pitem)
 	{
-		Elemento<TL>* paux = pPrimeiro;
+		Elemento* paux = pPrimeiro;
 		if (pPrimeiro != NULL && pPrimeiro->getInfo() == pitem)
 		{
 			pPrimeiro = pPrimeiro->getProx();
@@ -79,35 +111,46 @@ public:
 		}
 	}
 
-	void Limpar(int ind = 0)
+	void Limpar()
 	{
-		Elemento<TL>* paux1 = pPrimeiro;
-		//Elemento<TL>* paux2 = NULL;
-
-		for (int i = 1; i < ind; i++)
+		Elemento* paux;
+		while (pPrimeiro != NULL)
 		{
-			paux1 = paux1->getProx();
+			paux = pPrimeiro->getProx();
+			delete pPrimeiro;
+			pPrimeiro = paux;
 		}
-
-		TL* pT = new TL;
-
-		for (int i = ind; i < tam; i++) {
-			pT = Buscar(i);
-			Retirar(pT);
-		}
-
-		pUltimo = paux1;
-		tam = ind;
-		if (pUltimo != NULL)
-			pUltimo->setProx(NULL);
-		/*while (paux1 != NULL)
-		{
-			paux2 = paux1->getProx();
-			delete paux1;
-			paux1 = paux2;
-			tam--;
-		}*/
 	}
+
+	//void Limpar(int ind = 0)
+	//{
+	//	Elemento<TL>* paux1 = pPrimeiro;
+	//	//Elemento<TL>* paux2 = NULL;
+
+	//	for (int i = 1; i < ind; i++)
+	//	{
+	//		paux1 = paux1->getProx();
+	//	}
+
+	//	TL* pT = new TL;
+
+	//	for (int i = ind; i < tam; i++) {
+	//		pT = Buscar(i);
+	//		Retirar(pT);
+	//	}
+
+	//	pUltimo = paux1;
+	//	tam = ind;
+	//	if (pUltimo != NULL)
+	//		pUltimo->setProx(NULL);
+	//	/*while (paux1 != NULL)
+	//	{
+	//		paux2 = paux1->getProx();
+	//		delete paux1;
+	//		paux1 = paux2;
+	//		tam--;
+	//	}*/
+	//}
 
 	int Quantidade()
 	{

@@ -22,14 +22,16 @@ private:
 		float x;
 		float y;
 		Jogador* pJogador;
-		sf::Texture textura_1;
-		sf::Texture textura_2;
-		sf::Texture textura_3;
+		vector<sf::Texture*> texturas;
+		//sf::Texture textura_1;
+		//sf::Texture textura_2;
+		//sf::Texture textura_3;
 		sf::RectangleShape forma_marcador;
 	public:
 		Marcador_Vida(float x1, float y1);
 		~Marcador_Vida();
 
+		void CarregaTextura(string caminho);
 		void setJogador(Jogador* pJ);
 		void AtualizaMarcador();
 		sf::RectangleShape& getforma();
@@ -43,7 +45,7 @@ public:
 	void RedimensionarVista();
 	void AjustarVista(Jogador* jogador);
 	void RestaurarVista();
-	void EventosJanela();
+	void EventosJanela(int estado_jogo);
 
 	void DesenhaTexto(sf::Text* texto);
 	void DesenhaForma(sf::RectangleShape& forma);
@@ -51,6 +53,7 @@ public:
 
 	void LimparTela();
 
+	void FecharJanela();
 private:
 	Marcador_Vida marcador1;
 	//Marcador_Vida marcador2;

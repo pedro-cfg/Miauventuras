@@ -3,9 +3,18 @@
 #include "Gerenciador_Grafico.h"
 #include "FasePrimeira.h"
 
-Menu::Menu(float largura, float altura, FasePrimeira* pFase) :
-	Ente(), 
-	pF(pFase)
+//Menu::Menu(float largura, float altura, FasePrimeira* pFase) :
+//	Ente(), 
+//	pF(pFase)
+//{
+//	InicializaTexto(largura, altura);
+//}
+
+
+
+Menu::Menu(float largura, float altura, int& estado):
+	Ente(),
+	estado_jogo(estado)
 {
 	InicializaTexto(largura, altura);
 }
@@ -37,9 +46,9 @@ void Menu::InicializaTexto(float largura, float altura)
 
 void Menu::Executar(float dT)
 {
-	if (executando == 0)
-		pGG->RestaurarVista();
-		imprimir_se();
+	//if (executando == 0)
+	pGG->RestaurarVista();
+	imprimir_se();
 }
 
 void Menu::imprimir_se()
@@ -47,25 +56,39 @@ void Menu::imprimir_se()
 	pGG->DesenhaTexto(texto);
 }
 
-void Menu::Escolher_Opcao(sf::Window& janela)
+void Menu::Escolher_Opcao()
 {
-	if (executando == 0) {
-		switch (indice) {
-		case 0:
-			setExecutando(1);
-			break;
-		case 1:
-			break;
-		case 2:
-			janela.close();
-			break;
-		}
+	switch (indice)
+	{
+	case 0:
+		estado_jogo = 1;
+	case 1:
+		/**/
+		break;
+	case 2:
+		estado_jogo = -1;
+		break;
+	default:
+		break;
 	}
+	//if (executando == 0) {
+	//	switch (indice) {
+	//	case 0:
+	//		setExecutando(1);
+	//		break;
+	//	case 1:
+	//		break;
+	//	case 2:
+	//		janela.close();
+	//		break;
+	//	}
+	//}
 }
 
 void Menu::opcao_acima()
 {
-	if (indice > 0) {
+	if (indice > 0) 
+	{
 		texto[indice].setFillColor(sf::Color::White);
 		indice--;
 		texto[indice].setFillColor(sf::Color::Green);
@@ -74,7 +97,8 @@ void Menu::opcao_acima()
 
 void Menu::opcao_abaixo()
 {
-	if (indice < 2) {
+	if (indice < 2) 
+	{
 		texto[indice].setFillColor(sf::Color::White);
 		indice++;
 		texto[indice].setFillColor(sf::Color::Green);

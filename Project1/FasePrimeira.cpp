@@ -4,7 +4,7 @@
 FasePrimeira::FasePrimeira() :
 	Fase() 
 {
-	gerenciador_colisoes.setPrimeiraFase(this);
+	//gerenciador_colisoes.setPrimeiraFase(this);
 }
 
 FasePrimeira::~FasePrimeira() {
@@ -13,72 +13,21 @@ FasePrimeira::~FasePrimeira() {
 
 void FasePrimeira::Executar(float dT)
 {
-	if (executando == 1) 
-	{
-		gerenciador_colisoes.Checa_Colisao(pJ1);
-		gerenciador_colisoes.Checa_Colisao_Inimigos();
-		lista_entidades.Executar(dT);
+	//if (executando == 1) 
+	//{
+	gerenciador_colisoes.Checa_Colisao(pJ1);
+	gerenciador_colisoes.Checa_Colisao_Inimigos();
 
-		pGG->AjustarVista(pJ1);
-		pGG->DesenhaTudo(getLista());
+	pJ1->Executar(dT);
+	lista_entidades.Executar(dT);
+
+	pGG->AjustarVista(pJ1);
+
+	pJ1->desenhar();
+	pGG->DesenhaTudo(lista_entidades);
 		
-		gerenciador_colisoes.Fim_de_Fase(pJ1);
-	}
-}
-
-void FasePrimeira::Gerar_Objetos()
-{
-	srand(time(NULL));
-	Gerar_Inimigos();
-	Gerar_Obstaculos();
-}
-
-void FasePrimeira::Gerar_Inimigos()
-{
-	/*Aranha* pA = new Aranha(1300, -700);
-	lista_entidades.Inserir(static_cast<Entidade*>(pA));
-	gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pA));*/
-	int instancias, posicao;
-
-	instancias = (rand() % 3) + 3;
-	for (int i = 0; i < instancias; i++) 
-	{
-		posicao = (rand() % 9000) + 300;
-		Aranha* pA = new Aranha((float)posicao, -1000);
-		lista_entidades.Inserir(static_cast<Entidade*>(pA));
-		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pA));
-	}
-
-	instancias = (rand() % 3) + 3;
-	for (int i = 0; i < instancias; i++) 
-	{
-		posicao = (rand() % 9000) + 300;
-		Lagartixa* pL = new Lagartixa((float)posicao, -1000);
-		lista_entidades.Inserir(static_cast<Entidade*>(pL));
-		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pL));
-	}
-}
-
-void FasePrimeira::Gerar_Obstaculos()
-{
-	Gerar_Plataformas();
-	int instancias, posicao;
-
-	instancias = (rand() % 3) + 3;
-	for (int i = 0; i < instancias; i++) {
-		posicao = (rand() % 9000) + 300;
-		Espinho* pE = new Espinho((float)posicao, -75);
-		lista_entidades.Inserir(static_cast<Entidade*>(pE));
-		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pE));
-	}
-
-	instancias = (rand() % 3) + 3;
-	for (int i = 0; i < instancias; i++) {
-		posicao = (rand() % 9000) + 300;
-		Teia* pT = new Teia((float)posicao, -200);
-		lista_entidades.Inserir(static_cast<Entidade*>(pT));
-		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pT));
-	}
+		//gerenciador_colisoes.Fim_de_Fase(pJ1);
+	//}
 }
 
 void FasePrimeira::Gerar_Plataformas()

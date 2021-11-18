@@ -42,10 +42,10 @@ void Ente::Atualiza_Contador(float dT, bool zera)
 	}
 }
 
-int Ente::executando = 0;
+//int Ente::executando = 0;
 
-void Ente::setExecutando(int exec)
-{
-	executando = exec;
-}
+//void Ente::setExecutando(int exec)
+//{
+//	executando = exec;
+//}
 

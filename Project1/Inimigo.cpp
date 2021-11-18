@@ -1,9 +1,10 @@
 #include "Inimigo.h"
-#include "Plataforma.h"
+#include "Obstaculo.h"
 
 Inimigo::Inimigo() :
 	Personagem()
 {
+	vidas = 1;
 	setTipo();
 	velocidadeEscalar = 100.f;
 	amplitude = 500.f;
@@ -90,10 +91,10 @@ void Inimigo::reseta_velocidade()
 	velocidadeEscalar = 100.0f;
 }
 
-void Inimigo::InimigoEmPlataforma(Plataforma* pP)
+void Inimigo::InimigoEmPlataforma(Obstaculo* pO)
 {
-	Xinicial = pP->getX();
-	amplitude = pP->getLargura()/2.f;
+	Xinicial = pO->getX();
+	amplitude = pO->getLargura()/2.f;
 }
 
 

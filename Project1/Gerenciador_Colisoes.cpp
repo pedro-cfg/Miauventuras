@@ -1,26 +1,29 @@
 #include "Gerenciador_Colisoes.h"
-#include "FasePrimeira.h"
+//#include "FasePrimeira.h"
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
 {
 	pLista = pL;
-	pF1 = NULL;
+	//pF1 = NULL;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
 {
+	LimpaListas();
+	//pF1 = NULL;
+	pLista = NULL;
 }
 
-void Gerenciador_Colisoes::Fim_de_Fase(Jogador* pJ)
-{
-	if (  pJ->getVidas() <= 0 || pJ->getX() >= 9915.f) {
-		pLista->Limpar(1);
-		LimpaListas();
-		Ente::setExecutando(0);
-		pJ->reseta_jogador();
-		pF1->Gerar_Objetos();
-	}
-}
+//void Gerenciador_Colisoes::Fim_de_Fase(Jogador* pJ)
+//{
+//	if (  pJ->getVidas() <= 0 || pJ->getX() >= 9915.f) {
+//		pLista->Limpar(1);
+//		LimpaListas();
+//		Ente::setExecutando(0);
+//		pJ->reseta_jogador();
+//		pF1->Gerar_Objetos();
+//	}
+//}
 
 void Gerenciador_Colisoes::LimpaListas()
 {
@@ -157,7 +160,9 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 				}
 
 				if (colidiuBaixo)
-					pI->InimigoEmPlataforma(static_cast<Plataforma*>(pObs));
+				{
+					pI->InimigoEmPlataforma(pObs);
+				}
 
 				if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
 				{
@@ -214,11 +219,10 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* ou
 	}
 }
 
-void Gerenciador_Colisoes::setPrimeiraFase(FasePrimeira* pF)
-{
-	pF1 = pF;
-}
-
+//void Gerenciador_Colisoes::setPrimeiraFase(FasePrimeira* pF)
+//{
+//	pF1 = pF;
+//}
 
 void Gerenciador_Colisoes::Inserir(Inimigo* pI)
 {

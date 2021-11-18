@@ -3,7 +3,7 @@
 Personagem::Personagem():
 	Entidade()
 {
-	vidas = 3;
+	vidas = 0;
 	velocidadeX = 0.0f;
 	velocidadeY = 0.0f;
 	reseta_colidiu();

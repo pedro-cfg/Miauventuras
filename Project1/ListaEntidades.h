@@ -19,8 +19,10 @@ public:
     void Executar(float dT);
     void Desenha();
 
-    /*Limpa a lista a partir de um determinado índice ind*/
-    void Limpar(int ind = 0);
+    void Limpar();
+
+    ///*Limpa a lista a partir de um determinado índice ind*/
+    //void Limpar(int ind = 0);
 };
 
 #endif

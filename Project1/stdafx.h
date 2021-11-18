@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <vector>
 using namespace std;
 
 #define LARGURA_JANELA 1280

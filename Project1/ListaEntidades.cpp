@@ -7,7 +7,7 @@ ListaEntidades::ListaEntidades()
 
 ListaEntidades::~ListaEntidades()
 {
-	LEs.~Lista();
+	Limpar();
 }
 
 void ListaEntidades::Inserir(Entidade* pE)
@@ -46,7 +46,12 @@ void ListaEntidades::Desenha()
 	}
 }
 
-void ListaEntidades::Limpar(int ind)
+void ListaEntidades::Limpar()
 {
-	LEs.Limpar(ind);
+	LEs.Limpar();
 }
+
+//void ListaEntidades::Limpar(int ind)
+//{
+//	LEs.Limpar(ind);
+//}

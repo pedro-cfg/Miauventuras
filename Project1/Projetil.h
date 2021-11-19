@@ -13,6 +13,7 @@ private:
 	float velocidadeY;
 
 public:
+	Projetil();
 	Projetil(Aranha* pAr);
 	~Projetil();
 
@@ -20,6 +21,10 @@ public:
 	void Executar(float dT);
 
 	static void Excluir(Projetil* pP);
+
+	void setTipo();
+
+	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
 };
 
 #endif 

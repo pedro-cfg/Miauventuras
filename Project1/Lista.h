@@ -120,6 +120,8 @@ public:
 			delete pPrimeiro;
 			pPrimeiro = paux;
 		}
+		pUltimo = NULL;
+		tam = 0;
 	}
 
 	//void Limpar(int ind = 0)

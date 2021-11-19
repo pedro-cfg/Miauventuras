@@ -5,7 +5,7 @@ Inimigo::Inimigo() :
 	Personagem()
 {
 	vidas = 1;
-	setTipo();
+	//setTipo();
 	velocidadeEscalar = 100.f;
 	amplitude = 500.f;
 	vidas = 1;
@@ -17,9 +17,9 @@ Inimigo::~Inimigo()
 
 }
 
-void Inimigo::setTipo() {
-	tipo = "Inimigo";
-}
+//void Inimigo::setTipo() {
+//	tipo = "Inimigo";
+//}
 
 int Inimigo::getValor() const
 {
@@ -95,6 +95,11 @@ void Inimigo::InimigoEmPlataforma(Obstaculo* pO)
 {
 	Xinicial = pO->getX();
 	amplitude = pO->getLargura()/2.f;
+}
+
+const float Inimigo::getXinicial() const
+{
+	return Xinicial;
 }
 
 

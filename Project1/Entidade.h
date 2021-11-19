@@ -37,6 +37,7 @@ public:
     static void setGerenciadorColisoes(Gerenciador_Colisoes* pG);
     static void setPonteiroLista(ListaEntidades* pL);
 
+    void Reposicionar(float X, float Y);
     void Deslocar(float dx, float dy);
 
     virtual void setTipo();
@@ -45,6 +46,7 @@ public:
     virtual void mover(float dT);
     virtual void Executar(float dT);
 
+    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
 };
 
 #endif 

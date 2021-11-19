@@ -6,6 +6,8 @@
 #include "Gerenciador_Grafico.h"
 #include "FasePrimeira.h"
 #include "Menu.h"
+#include "Aranha.h"
+#include "Lagartixa.h"
 
 class Jogo 
 {
@@ -17,6 +19,7 @@ private:
 	FasePrimeira primeira_fase;
 
 	int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2 */
+
 public:
 	Jogo();
 	~Jogo();
@@ -24,6 +27,11 @@ public:
 	void Executar();
 
 	void Inicializar();
+
+	void Gravar();
+	void Ler();
+	void GravarJogador(fstream& arquivo);
+	void LerJogador(fstream& arquivo);
 };
 
 #endif 

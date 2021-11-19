@@ -1,5 +1,14 @@
 #include "stdafx.h"
 #include "Espinho.h"
+#include "ListaEntidades.h"
+#include "Gerenciador_Colisoes.h"
+
+Espinho::Espinho():Obstaculo()
+{
+	CarregaTextura("Texturas/espinho.png");
+	setTipo();
+	ehPlataforma = false;
+}
 
 Espinho::Espinho(float x, float y) :
 	Obstaculo() 
@@ -9,6 +18,7 @@ Espinho::Espinho(float x, float y) :
 	CarregaTextura("Texturas/espinho.png");
 	forma.setPosition(sf::Vector2f(x, y));
 
+	setTipo();
 	ehPlataforma = false;
 }
 
@@ -22,4 +32,17 @@ void Espinho::ExecutaImpedimento(Jogador* pJ)
 		pJ->sofreDano();
 	}
 	pJ->Atualiza_Contador(0.f, true);
+}
+
+void Espinho::setTipo()
+{
+	tipo = "Espinho";
+}
+
+void Espinho::Recuperar(float cX, float cY, float XI, int numVidas)
+{
+	Reposicionar(cX, cY);
+
+	pLista->Inserir(this);
+	pGC->Inserir(this);
 }

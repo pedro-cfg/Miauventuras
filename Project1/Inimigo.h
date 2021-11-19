@@ -2,6 +2,7 @@
 #define _INIMIGO_H_
 
 #include "Personagem.h"
+
 class Obstaculo;
 
 class Inimigo: public Personagem
@@ -15,7 +16,7 @@ public:
 	Inimigo();
 	~Inimigo();
 
-	void setTipo();
+	/*void setTipo();*/
 
 	int getValor() const;
 
@@ -27,6 +28,8 @@ public:
 	virtual void reseta_velocidade();
 	
 	void InimigoEmPlataforma(Obstaculo* pO);
+
+	const float getXinicial() const;
 };
 
 #endif

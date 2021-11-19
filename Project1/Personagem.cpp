@@ -19,6 +19,11 @@ int Personagem::getVidas() const
 	return vidas;
 }
 
+void Personagem::setVidas(int v)
+{
+	vidas = v;
+}
+
 void Personagem::sofreDano()
 {
 	this->operator--();

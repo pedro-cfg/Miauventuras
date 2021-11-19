@@ -18,6 +18,7 @@ public:
     ~Personagem();
 
     int getVidas() const;
+    void setVidas(int v);
 
     void sofreDano();
     void operator--();

@@ -18,6 +18,8 @@ Jogador::Jogador(float x, float y) :
 	alturaPulo = 350.0f;
 	podePular = true;
 	empurrado = false;
+
+	setTipo();
 }
 
 Jogador::~Jogador()
@@ -108,4 +110,9 @@ void Jogador::Pontua(Inimigo* pI)
 void Jogador::operator++()
 {
 	pontos++;
+}
+
+void Jogador::setTipo()
+{
+	tipo = "Jogador";
 }

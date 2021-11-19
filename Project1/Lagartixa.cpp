@@ -1,4 +1,13 @@
 #include "Lagartixa.h"
+#include "ListaEntidades.h"
+#include "Gerenciador_Colisoes.h"
+
+Lagartixa::Lagartixa():Inimigo()
+{
+	CarregaTextura("Texturas/lagartixa.png");
+	valor = 2;
+	setTipo();
+}
 
 Lagartixa::Lagartixa(float x, float y) :
 	Inimigo() 
@@ -12,6 +21,7 @@ Lagartixa::Lagartixa(float x, float y) :
 	Xinicial = x;
 
 	valor = 2;
+	setTipo();
 }
 
 Lagartixa::~Lagartixa() 
@@ -22,4 +32,20 @@ Lagartixa::~Lagartixa()
 void Lagartixa::reseta_velocidade()
 {
 	velocidadeEscalar = 500.0f;
+}
+
+void Lagartixa::setTipo()
+{
+	tipo = "Lagartixa";
+}
+
+void Lagartixa::Recuperar(float cX, float cY, float XI, int numVidas)
+{
+	setVidas(numVidas);
+	Reposicionar(cX, cY);
+
+	Xinicial = cX;
+
+	pLista->Inserir(this);
+	pGC->Inserir(this);
 }

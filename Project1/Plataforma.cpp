@@ -1,6 +1,15 @@
 #include "Plataforma.h"
+#include "ListaEntidades.h"
+#include "Gerenciador_Colisoes.h"
 
-Plataforma::Plataforma(float x, float y) : 
+Plataforma::Plataforma()
+{
+	CarregaTextura("Texturas/plataforma.png");
+	setTipo();
+	ehPlataforma = true;
+}
+
+Plataforma::Plataforma(float x, float y) :
 	Obstaculo() 
 {
 	CarregaTextura("Texturas/plataforma.png");
@@ -8,6 +17,7 @@ Plataforma::Plataforma(float x, float y) :
 	this->x = x;
 	this->y = y;
 
+	setTipo();
 	ehPlataforma = true;
 }
 
@@ -22,6 +32,19 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cim
 	pP->setColidiuDireita(dir);
 	pP->setColidiuCima(cima);
 	pP->setColidiuBaixo(baixo);
+}
+
+void Plataforma::setTipo()
+{
+	tipo = "Plataforma";
+}
+
+void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas)
+{
+	Reposicionar(cX, cY);
+
+	pLista->Inserir(this);
+	pGC->Inserir(this);
 }
 
 

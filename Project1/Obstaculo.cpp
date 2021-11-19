@@ -23,7 +23,7 @@ void Obstaculo::Rotacionar()
 	forma.setRotation(180.f);
 }
 
-void Obstaculo::setTipo() {
-	tipo = "Obstaculo";
-}
+//void Obstaculo::setTipo() {
+//	tipo = "Obstaculo";
+//}
 

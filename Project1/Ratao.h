@@ -6,8 +6,13 @@
 class Ratao: public Inimigo 
 {
 public:
+	Ratao();
 	Ratao(float x, float y);
 	~Ratao();
+
+	void setTipo();
+
+	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
 };
 
 #endif 

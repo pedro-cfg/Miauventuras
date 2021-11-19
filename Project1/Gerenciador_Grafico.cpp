@@ -53,7 +53,7 @@ void Gerenciador_Grafico::RestaurarVista()
 	vista.setCenter(800.f,420.f);
 }
 
-void Gerenciador_Grafico::EventosJanela(int estado_jogo)
+void Gerenciador_Grafico::EventosJanela(int& estado_jogo)
 {
 	sf::Event event;
 	while (janela.pollEvent(event))
@@ -82,6 +82,14 @@ void Gerenciador_Grafico::EventosJanela(int estado_jogo)
 					break;
 				}
 			}
+			else {
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Escape:
+					estado_jogo = 0;
+					break;
+				}
+			}
 			break;
 		default:
 			break;
@@ -94,6 +102,8 @@ void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
 	janela.draw(*texto);
 	janela.draw(*(texto + 1));
 	janela.draw(*(texto + 2));
+	janela.draw(*(texto + 3));
+	janela.draw(*(texto + 4));
 	janela.setView(vista);
 }
 

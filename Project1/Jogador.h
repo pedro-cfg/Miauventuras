@@ -28,6 +28,8 @@ public:
 
     void Pontua(Inimigo* pI);
     void operator++();
+
+    void setTipo();
 };
 
 #endif

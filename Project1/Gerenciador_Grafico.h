@@ -45,7 +45,7 @@ public:
 	void RedimensionarVista();
 	void AjustarVista(Jogador* jogador);
 	void RestaurarVista();
-	void EventosJanela(int estado_jogo);
+	void EventosJanela(int& estado_jogo);
 
 	void DesenhaTexto(sf::Text* texto);
 	void DesenhaForma(sf::RectangleShape& forma);

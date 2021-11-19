@@ -1,4 +1,13 @@
 #include "Ratao.h"
+#include "ListaEntidades.h"
+#include "Gerenciador_Colisoes.h"
+
+Ratao::Ratao():Inimigo()
+{
+	CarregaTextura("Texturas/ratao.png");
+	valor = 3;
+	setTipo();
+}
 
 Ratao::Ratao(float x, float y) :
 	Inimigo() 
@@ -10,6 +19,7 @@ Ratao::Ratao(float x, float y) :
 
 	Xinicial = x;
 
+	setTipo();
 	vidas = 3;
 	valor = 3;
 }
@@ -17,4 +27,20 @@ Ratao::Ratao(float x, float y) :
 Ratao::~Ratao() 
 {
 
+}
+
+void Ratao::setTipo()
+{
+	tipo = "Ratao";
+}
+
+void Ratao::Recuperar(float cX, float cY, float XI, int numVidas)
+{
+	setVidas(numVidas);
+	Reposicionar(cX, cY);
+
+	Xinicial = cX;
+
+	pLista->Inserir(this);
+	pGC->Inserir(this);
 }

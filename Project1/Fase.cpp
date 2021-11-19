@@ -94,3 +94,4 @@ ListaEntidades& Fase::getLista()
 {
 	return lista_entidades;
 }
+

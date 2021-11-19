@@ -19,7 +19,7 @@ public:
 	virtual void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo) {}
 
 	void Rotacionar();
-	void setTipo();
+	/*void setTipo();*/
 };
 
 #endif

@@ -5,13 +5,23 @@
 
 class FasePrimeira: public Fase 
 {
+private:
+	int& estado_jogo;
 public:
-	FasePrimeira();
+	FasePrimeira(int& estado);
 	~FasePrimeira();
 
 	void Executar(float dT);
 
 	void Gerar_Plataformas();
+
+	void Limpar();
+
+	void GravarLista(fstream& arquivo);
+
+	void LerLista(fstream& arquivo);
+
+	void LerLista_Individual(fstream& arquivo);
 };
 
 #endif 

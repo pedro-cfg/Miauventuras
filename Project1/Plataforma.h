@@ -6,10 +6,15 @@
 class Plataforma: public Obstaculo 
 {
 public:
+	Plataforma();
 	Plataforma(float x, float y);
 	~Plataforma();
 
 	void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo);
+
+	void setTipo();
+
+	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
 };
 
 #endif

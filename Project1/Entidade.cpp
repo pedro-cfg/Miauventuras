@@ -40,6 +40,14 @@ void Entidade::CarregaTextura(string caminho)
 	forma.setOrigin(forma.getSize() / 2.0f);
 }
 
+void Entidade::Reposicionar(float X, float Y)
+{
+	forma.setPosition(sf::Vector2f(X, Y));
+	setX(X);
+	setY(Y);
+	
+}
+
 void Entidade::Deslocar(float dx, float dy)
 {
 	forma.move(dx, dy);
@@ -62,6 +70,10 @@ void Entidade::mover(float dT)
 }
 
 void Entidade::Executar(float dT)
+{
+}
+
+void Entidade::Recuperar(float cX, float cY, float XI, int numVidas)
 {
 }
 

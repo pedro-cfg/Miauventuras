@@ -5,6 +5,7 @@
 #include "Jogador.h"
 #include "Gerenciador_Grafico.h"
 #include "FasePrimeira.h"
+#include "FaseSegunda.h"
 #include "Menu.h"
 #include "Aranha.h"
 #include "Lagartixa.h"
@@ -12,14 +13,15 @@
 class Jogo 
 {
 private:
+	int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2 */
+
 	Jogador* pJ1;
 	Gerenciador_Grafico gerenciador_grafico;
 
 	Menu menu_principal;
 	FasePrimeira primeira_fase;
 
-	int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2 */
-
+	FaseSegunda segunda_fase;
 public:
 	Jogo();
 	~Jogo();

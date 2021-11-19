@@ -22,6 +22,8 @@ Ratao::Ratao(float x, float y) :
 	setTipo();
 	vidas = 3;
 	valor = 3;
+
+	ehChefao = true;
 }
 
 Ratao::~Ratao() 

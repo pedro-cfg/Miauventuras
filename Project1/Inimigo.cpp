@@ -10,6 +10,7 @@ Inimigo::Inimigo() :
 	amplitude = 500.f;
 	vidas = 1;
 	direcao = 1.0f;
+	ehChefao = false;
 }
 
 Inimigo::~Inimigo()
@@ -24,6 +25,11 @@ Inimigo::~Inimigo()
 int Inimigo::getValor() const
 {
 	return valor;
+}
+
+bool Inimigo::getEhChefao() const
+{
+	return ehChefao;
 }
 
 void Inimigo::Executar(float dT)

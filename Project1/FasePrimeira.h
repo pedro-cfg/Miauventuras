@@ -8,10 +8,10 @@ class FasePrimeira: public Fase
 private:
 	int& estado_jogo;
 public:
-	FasePrimeira(int& estado);
+	FasePrimeira(int* estado);
 	~FasePrimeira();
 
-	void Executar(float dT);
+	void Passou_Fase();
 
 	void Gerar_Plataformas();
 

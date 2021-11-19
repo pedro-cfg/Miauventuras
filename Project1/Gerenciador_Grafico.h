@@ -50,6 +50,7 @@ public:
 	void DesenhaTexto(sf::Text* texto);
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(ListaEntidades& lista);
+	void MudaFundo(string caminho);
 
 	void LimparTela();
 

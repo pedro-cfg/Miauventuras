@@ -14,6 +14,7 @@ private:
     float alturaPulo;
     bool podePular;
     bool empurrado;
+    bool venceu;
 public:
     Jogador(float x, float y);
     ~Jogador();
@@ -21,10 +22,13 @@ public:
     void Executar(float dT);
     void mover(float dT);
 
-    void reseta_jogador();
+    void reseta_jogador(const bool resetaPontos = false);
 
     void reseta_velocidade();
     void setEmpurrado(bool emp);
+
+    void setVenceu(const bool v);
+    bool getVenceu() const;
 
     void Pontua(Inimigo* pI);
     void operator++();

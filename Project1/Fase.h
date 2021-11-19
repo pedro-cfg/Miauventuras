@@ -22,11 +22,13 @@ protected:
 	ListaEntidades lista_entidades;
 
 	Jogador* pJ1;
+
+	int* estado_jogo;
 public:    
 	Fase();
 	~Fase();
 
-	virtual void Executar(float dT);
+	void Executar(float dT);
 
 	void Gerar_Objetos();
 	void Gerar_Inimigos();
@@ -36,6 +38,10 @@ public:
 	virtual void Gerar_Chefao();
 
 	void Inserir_Entidade(Entidade* pE);
+
+	void reseta_fase();
+
+	virtual void Passou_Fase();
 
 	void setJogador(Jogador* pJ);
 

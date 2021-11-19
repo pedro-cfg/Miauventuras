@@ -3,12 +3,13 @@
 
 Jogo::Jogo() :
 	//j1(0, -100),
+	estado_de_jogo(0),
 	pJ1(NULL),
 	gerenciador_grafico(&menu_principal),
-	primeira_fase(estado_de_jogo),
-	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, estado_de_jogo)
+	primeira_fase(&estado_de_jogo),
+	segunda_fase(&estado_de_jogo),
+	menu_principal(LARGURA_JANELA/2.f, ALTURA_JANELA/2.f, estado_de_jogo)
 {
-	estado_de_jogo = 0;
 	Inicializar();
 	Executar();
 }
@@ -44,11 +45,14 @@ void Jogo::Executar()
 			primeira_fase.Executar(dT);
 			break;
 		case 2:
-			Ler();
-			estado_de_jogo = 0;
+			segunda_fase.Executar(dT);
 			break;
 		case 3:
 			Gravar();
+			estado_de_jogo = 0;
+			break;
+		case 4:
+			Ler();
 			estado_de_jogo = 0;
 			break;
 		default:
@@ -68,8 +72,14 @@ void Jogo::Inicializar()
 	gerenciador_grafico.getMarcador()->setJogador(pJ1);
 
 	primeira_fase.setJogador(pJ1);
-	//primeira_fase.Inserir_Entidade(static_cast<Entidade*>(pJ1));
 	primeira_fase.Gerar_Objetos();
+
+	segunda_fase.setJogador(pJ1);
+	segunda_fase.Gerar_Objetos();
+
+	//primeira_fase.setJogador(pJ1);
+	//primeira_fase.Inserir_Entidade(static_cast<Entidade*>(pJ1));
+	//primeira_fase.Gerar_Objetos();
 }
 
 void Jogo::Gravar()

@@ -41,7 +41,7 @@ void Aranha::Executar(float dT)
 }
 
 void Aranha::lancaProjetil()
-{
+ {
 	Projetil* pNovo = new Projetil(this);
 	
 	if (pNovo)

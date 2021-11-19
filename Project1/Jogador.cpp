@@ -19,7 +19,7 @@ Jogador::Jogador(float x, float y) :
 	podePular = true;
 	empurrado = false;
 
-	setTipo();
+	venceu = false;
 }
 
 Jogador::~Jogador()
@@ -78,8 +78,14 @@ void Jogador::mover(float dT)
 	Deslocar(dx, dy);
 }
 
-void Jogador::reseta_jogador()
+void Jogador::reseta_jogador(const bool resetaPontos)
 {
+	if (resetaPontos)
+	{
+		pontos = 0;
+	}
+	reseta_colidiu();
+	reseta_velocidade();
 	vidas = 7;
 	forma.setPosition(0, -100);
 	x = 0;
@@ -94,6 +100,16 @@ void Jogador::reseta_velocidade()
 void Jogador::setEmpurrado(bool emp)
 {
 	empurrado = emp;
+}
+
+void Jogador::setVenceu(const bool v)
+{
+	venceu = v;
+}
+
+bool Jogador::getVenceu() const
+{
+	return venceu;
 }
 
 void Jogador::Pontua(Inimigo* pI)

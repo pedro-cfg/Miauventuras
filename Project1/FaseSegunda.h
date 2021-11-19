@@ -6,10 +6,13 @@
 class FaseSegunda: public Fase 
 {
 public:
-	FaseSegunda();
+	FaseSegunda(int* estado);
 	~FaseSegunda();
 
-	//void Executar();
+	void Passou_Fase();
+
+	void Gerar_Plataformas();
+	void Gerar_Chefao();
 };
 
 #endif 

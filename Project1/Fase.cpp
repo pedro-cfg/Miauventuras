@@ -4,19 +4,40 @@
 Fase::Fase() :
 	Ente(),
 	gerenciador_colisoes(&lista_entidades),
-	pJ1(NULL)
+	pJ1(NULL),
+	estado_jogo(NULL)
 {
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
 	Entidade::setPonteiroLista(&lista_entidades);
 }
 
-Fase::~Fase() {
-
+Fase::~Fase() 
+{
 }
 
 void Fase::Executar(float dT)
 {
+	Entidade::setPonteiroLista(&lista_entidades);
+	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
 
+	gerenciador_colisoes.Checa_Colisao(pJ1);
+	gerenciador_colisoes.Checa_Colisao_Inimigos();
+
+	pJ1->Executar(dT);
+	lista_entidades.Executar(dT);
+
+	pGG->AjustarVista(pJ1);
+
+	pJ1->desenhar();
+	pGG->DesenhaTudo(lista_entidades);
+
+	Passou_Fase();
+	if (pJ1->getVidas() <= 0)
+	{
+		pJ1->reseta_jogador(true);
+		/*reseta_fase();*/
+		*estado_jogo = 0;
+	}
 }
 
 void Fase::Gerar_Objetos()
@@ -83,6 +104,18 @@ void Fase::Gerar_Chefao()
 void Fase::Inserir_Entidade(Entidade* pE)
 {
 	lista_entidades.Inserir(pE);
+}
+
+void Fase::reseta_fase()
+{
+	lista_entidades.Limpar();
+	gerenciador_colisoes.LimpaListas();
+
+	Gerar_Objetos();
+}
+
+void Fase::Passou_Fase()
+{
 }
 
 void Fase::setJogador(Jogador* pJ)

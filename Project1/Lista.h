@@ -2,19 +2,19 @@
 #define _LISTA_H_
 
 #include "stdafx.h"
-//#include "Elemento.h"
 
-template <class TIPO >
+template <class TL >
 class Lista
 {
 private:
+	template <class TE >
 	class Elemento
 	{
 	private:
-		Elemento* pProx;
-		TIPO* pInfo;
+		Elemento<TE>* pProx;
+		TE* pInfo;
 	public:
-		Elemento(TIPO* pInfo)
+		Elemento(TE* pInfo)
 		{
 			this->pInfo = pInfo;
 			pProx = nullptr;
@@ -26,23 +26,23 @@ private:
 				delete pInfo;
 			}
 		}
-		TIPO* getInfo()
+		TE* getInfo()
 		{
 			return pInfo;
 		}
-		void setProx(Elemento* el)
+		void setProx(Elemento<TE>* el)
 		{
 			pProx = el;
 		}
-		Elemento* getProx()
+		Elemento<TE>* getProx()
 		{
 			return pProx;
 		}
 	};
 
 	int tam;
-	Elemento* pPrimeiro;
-	Elemento* pUltimo;
+	Elemento<TL>* pPrimeiro;
+	Elemento<TL>* pUltimo;
 public:
 	Lista()
 	{
@@ -55,9 +55,9 @@ public:
 		pPrimeiro = pUltimo = NULL;
 		tam = 0;
 	}
-	void Inserir(TIPO* pitem)
+	void Inserir(TL* pitem)
 	{
-		Elemento* pnovo = new Elemento(pitem);
+		Elemento<TL>* pnovo = new Elemento<TL>(pitem);
 		if (pPrimeiro == NULL)
 			pPrimeiro = pUltimo = pnovo;
 		else
@@ -68,9 +68,9 @@ public:
 		tam++;
 	}
 
-	TIPO* Buscar(const int ppos)
+	TL* Buscar(const int ppos)
 	{
-		Elemento* paux = pPrimeiro;
+		Elemento<TL>* paux = pPrimeiro;
 		if (ppos >= 0 && ppos < tam)
 		{
 			for (int i = 0; i < ppos; i++)
@@ -81,9 +81,9 @@ public:
 			return NULL;
 	}
 
-	void Retirar(TIPO* pitem)
+	void Retirar(TL* pitem)
 	{
-		Elemento* paux = pPrimeiro;
+		Elemento<TL>* paux = pPrimeiro;
 		if (pPrimeiro != NULL && pPrimeiro->getInfo() == pitem)
 		{
 			pPrimeiro = pPrimeiro->getProx();
@@ -113,7 +113,7 @@ public:
 
 	void Limpar()
 	{
-		Elemento* paux;
+		Elemento<TL>* paux;
 		while (pPrimeiro != NULL)
 		{
 			paux = pPrimeiro->getProx();

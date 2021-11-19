@@ -91,6 +91,7 @@ void Jogador::reseta_jogador(const bool resetaPontos, const bool resetaVidas)
 	forma.setPosition(0, -100);
 	x = 0;
 	y = -100;
+	venceu = false;
 }
 
 void Jogador::reseta_velocidade()

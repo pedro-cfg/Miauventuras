@@ -86,9 +86,6 @@
     <ClInclude Include="Aranha.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Elemento.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Entidade.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>

@@ -13,7 +13,6 @@ protected:
     float x;
     float y;
 
-    sf::Texture textura;
     sf::RectangleShape forma;
 
     static Gerenciador_Colisoes* pGC;

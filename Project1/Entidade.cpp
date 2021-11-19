@@ -20,7 +20,6 @@ void Entidade::setPonteiroLista(ListaEntidades* pL)
 
 Entidade::Entidade() :
 	Ente(),
-	textura(),
 	forma(),
 	x(0),
 	y(0)
@@ -34,9 +33,9 @@ Entidade::~Entidade()
 
 void Entidade::CarregaTextura(string caminho)
 {
-	textura.loadFromFile(caminho);
-	forma.setSize((sf::Vector2f)textura.getSize());
-	forma.setTexture(&textura);
+	sf::Texture* pAux = pGG->getMapaTexturas()[caminho];
+	forma.setSize((sf::Vector2f)pAux->getSize());
+	forma.setTexture(pAux);
 	forma.setOrigin(forma.getSize() / 2.0f);
 }
 

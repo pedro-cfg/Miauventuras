@@ -6,7 +6,7 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 	marcador1(0, 0),
 	pM(pM)
 {
-	InicializaMapaTexturas(); 
+	InicializaMapaTexturas();
 
 	fundo.setSize((sf::Vector2f)(mapa_texturas[FUNDO1]->getSize()));
 	fundo.setTexture(mapa_texturas[FUNDO1]);

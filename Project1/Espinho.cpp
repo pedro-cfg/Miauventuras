@@ -5,7 +5,7 @@
 
 Espinho::Espinho():Obstaculo()
 {
-	CarregaTextura("Texturas/espinho.png");
+	CarregaTextura(ESPINHO);
 	setTipo();
 	ehPlataforma = false;
 }
@@ -15,7 +15,7 @@ Espinho::Espinho(float x, float y) :
 {
 	this->x = x;
 	this->y = y;
-	CarregaTextura("Texturas/espinho.png");
+	CarregaTextura(ESPINHO);
 	forma.setPosition(sf::Vector2f(x, y));
 
 	setTipo();

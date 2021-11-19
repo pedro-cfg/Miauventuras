@@ -8,7 +8,7 @@ Jogador::Jogador(float x, float y) :
 	pontos = 0;
 	vidas = 7;
 
-	CarregaTextura("Texturas/jogador.png");
+	CarregaTextura(JOGADOR1);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;

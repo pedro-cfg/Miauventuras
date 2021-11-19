@@ -4,7 +4,7 @@
 
 Teia::Teia()
 {
-	CarregaTextura("Texturas/teia.png");
+	CarregaTextura(TEIA);
 	setTipo();
 	ehPlataforma = false;
 }
@@ -14,7 +14,7 @@ Teia::Teia(float x, float y):
 {
 	this->x = x;
 	this->y = y;
-	CarregaTextura("Texturas/teia.png");
+	CarregaTextura(TEIA);
 	forma.setPosition(sf::Vector2f(x, y));
 
 	setTipo();

@@ -5,7 +5,7 @@
 
 Projetil::Projetil()
 {
-	CarregaTextura("Texturas/projetil.png");
+	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
 	setTipo();
@@ -16,7 +16,7 @@ Projetil::Projetil(Aranha* pAr) :
 {
 	x = pAr->getX();
 	y = pAr->getY();
-	CarregaTextura("Texturas/projetil.png");
+	CarregaTextura(PROJETIL);
 	forma.setPosition(sf::Vector2f(x, y));
 
 	velocidadeEscalar = 700.f;

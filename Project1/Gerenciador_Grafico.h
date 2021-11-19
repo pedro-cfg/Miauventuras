@@ -9,10 +9,9 @@
 class Gerenciador_Grafico 
 {
 private:
+	map<string, sf::Texture*> mapa_texturas;
 	sf::RenderWindow janela;
 	sf::View vista;
-	sf::Texture textura_fundo1;
-	sf::Texture textura_fundo2;
 	sf::RectangleShape fundo;
 
 	Menu* pM;
@@ -24,9 +23,6 @@ private:
 		float y;
 		Jogador* pJogador;
 		vector<sf::Texture*> texturas;
-		//sf::Texture textura_1;
-		//sf::Texture textura_2;
-		//sf::Texture textura_3;
 		sf::RectangleShape forma_marcador;
 	public:
 		Marcador_Vida(float x1, float y1);
@@ -52,6 +48,9 @@ public:
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(ListaEntidades& lista);
 	void MudaFundo(int fase);
+
+	map<string, sf::Texture*> getMapaTexturas() const;
+	void InicializaMapaTexturas();
 
 	void LimparTela();
 

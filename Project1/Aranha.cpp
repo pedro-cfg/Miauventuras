@@ -5,7 +5,7 @@
 
 Aranha::Aranha():Inimigo()
 {
-	CarregaTextura("Texturas/aranha.png");
+	CarregaTextura(ARANHA);
 	setTipo();
 	valor = 1;
 }
@@ -13,7 +13,7 @@ Aranha::Aranha():Inimigo()
 Aranha::Aranha(float x, float y):
 	Inimigo()
 {
-	CarregaTextura("Texturas/aranha.png");
+	CarregaTextura(ARANHA);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;

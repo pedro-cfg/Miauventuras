@@ -4,7 +4,7 @@
 
 Plataforma::Plataforma()
 {
-	CarregaTextura("Texturas/plataforma.png");
+	CarregaTextura(PLATAFORMA);
 	setTipo();
 	ehPlataforma = true;
 }
@@ -12,7 +12,7 @@ Plataforma::Plataforma()
 Plataforma::Plataforma(float x, float y) :
 	Obstaculo() 
 {
-	CarregaTextura("Texturas/plataforma.png");
+	CarregaTextura(PLATAFORMA);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;

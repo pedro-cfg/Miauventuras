@@ -6,18 +6,26 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 	marcador1(0, 0),
 	pM(pM)
 {
-	//sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
-	//sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
-	textura_fundo1.loadFromFile("Texturas/fundo1.png");
-	textura_fundo2.loadFromFile("Texturas/fundo2.png");
-	fundo.setSize((sf::Vector2f)textura_fundo1.getSize());
-	fundo.setTexture(&textura_fundo1);
+	InicializaMapaTexturas();
+
+	fundo.setSize((sf::Vector2f)(mapa_texturas[FUNDO1]->getSize()));
+	fundo.setTexture(mapa_texturas[FUNDO1]);
 	fundo.setPosition(sf::Vector2f(-1000.f, -1080.f));
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
-
+	map<string, sf::Texture*>::const_iterator it = mapa_texturas.begin();
+	while (it != mapa_texturas.end())
+	{
+		sf::Texture* pAux = it->second;
+		if (pAux != NULL)
+		{
+			delete pAux;
+		}
+		it++;
+	}
+	mapa_texturas.clear();
 }
 
 bool Gerenciador_Grafico::JanelaAberta()
@@ -123,9 +131,57 @@ void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista)
 void Gerenciador_Grafico::MudaFundo(int fase)
 {
 	if (fase == 1)
-		fundo.setTexture(&textura_fundo1);
+		fundo.setTexture(mapa_texturas[FUNDO1]);
 	else
-		fundo.setTexture(&textura_fundo2);
+		fundo.setTexture(mapa_texturas[FUNDO2]);
+}
+
+map<string, sf::Texture*> Gerenciador_Grafico::getMapaTexturas() const
+{
+	return mapa_texturas;
+}
+
+void Gerenciador_Grafico::InicializaMapaTexturas()
+{
+	sf::Texture* tJ = new sf::Texture();
+	tJ->loadFromFile(JOGADOR1);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(JOGADOR1, tJ));
+
+	sf::Texture* tA = new sf::Texture();
+	tA->loadFromFile(ARANHA);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(ARANHA, tA));
+
+	sf::Texture* tL = new sf::Texture();
+	tL->loadFromFile(LAGARTIXA);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(LAGARTIXA, tL));
+
+	sf::Texture* tR = new sf::Texture();
+	tR->loadFromFile(RATAO);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(RATAO, tR));
+
+	sf::Texture* tP = new sf::Texture();
+	tP->loadFromFile(PLATAFORMA);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(PLATAFORMA, tP));
+
+	sf::Texture* tT = new sf::Texture();
+	tT->loadFromFile(TEIA);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(TEIA, tT));
+
+	sf::Texture* tE = new sf::Texture();
+	tE->loadFromFile(ESPINHO);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(ESPINHO, tE));
+
+	sf::Texture* tPr = new sf::Texture();
+	tPr->loadFromFile(PROJETIL);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(PROJETIL, tPr));
+
+	sf::Texture* tF1 = new sf::Texture();
+	tF1->loadFromFile(FUNDO1);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(FUNDO1, tF1));
+
+	sf::Texture* tF2 = new sf::Texture();
+	tF2->loadFromFile(FUNDO2);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(FUNDO2, tF2));
 }
 
 void Gerenciador_Grafico::LimparTela()

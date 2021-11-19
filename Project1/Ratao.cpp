@@ -4,7 +4,7 @@
 
 Ratao::Ratao():Inimigo()
 {
-	CarregaTextura("Texturas/ratao.png");
+	CarregaTextura(RATAO);
 	valor = 3;
 	setTipo();
 }
@@ -12,7 +12,7 @@ Ratao::Ratao():Inimigo()
 Ratao::Ratao(float x, float y) :
 	Inimigo() 
 {
-	CarregaTextura("Texturas/ratao.png");
+	CarregaTextura(RATAO);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;

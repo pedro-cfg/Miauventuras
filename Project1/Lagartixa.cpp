@@ -4,7 +4,7 @@
 
 Lagartixa::Lagartixa():Inimigo()
 {
-	CarregaTextura("Texturas/lagartixa.png");
+	CarregaTextura(LAGARTIXA);
 	valor = 2;
 	setTipo();
 }
@@ -12,7 +12,7 @@ Lagartixa::Lagartixa():Inimigo()
 Lagartixa::Lagartixa(float x, float y) :
 	Inimigo() 
 {
-	CarregaTextura("Texturas/lagartixa.png");
+	CarregaTextura(LAGARTIXA);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;

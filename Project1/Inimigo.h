@@ -11,6 +11,7 @@ protected:
 	float amplitude;
 	int valor;
 	float direcao;
+	bool ehChefao;
 public:
 	Inimigo();
 	~Inimigo();
@@ -18,6 +19,7 @@ public:
 	void setTipo();
 
 	int getValor() const;
+	bool getEhChefao() const;
 
 	virtual void Executar(float dT);
 	void mover(float dT);

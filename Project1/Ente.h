@@ -21,7 +21,7 @@ public:
 
 	void Atualiza_Contador(float dT, bool zera = false);
 
-	static void setExecutando(int exec);
+	//static void setExecutando(int exec);
 };
 
 #endif 

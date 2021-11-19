@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "FasePrimeira.h"
 
-FasePrimeira::FasePrimeira() :
+FasePrimeira::FasePrimeira(int* estado) :
 	Fase() 
 {
+	estado_jogo = estado;
 	//gerenciador_colisoes.setPrimeiraFase(this);
 }
 
@@ -11,23 +12,13 @@ FasePrimeira::~FasePrimeira() {
 
 }
 
-void FasePrimeira::Executar(float dT)
+void FasePrimeira::Passou_Fase()
 {
-	//if (executando == 1) 
-	//{
-	gerenciador_colisoes.Checa_Colisao(pJ1);
-	gerenciador_colisoes.Checa_Colisao_Inimigos();
-
-	pJ1->Executar(dT);
-	lista_entidades.Executar(dT);
-
-	pGG->AjustarVista(pJ1);
-
-	pJ1->desenhar();
-	pGG->DesenhaTudo(lista_entidades);
-		
-		//gerenciador_colisoes.Fim_de_Fase(pJ1);
-	//}
+	if (pJ1->getX() >= 10000)
+	{
+		pJ1->reseta_jogador();
+		*estado_jogo = 2;
+	}
 }
 
 void FasePrimeira::Gerar_Plataformas()

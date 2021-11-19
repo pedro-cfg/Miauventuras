@@ -11,7 +11,7 @@ private:
 	int indice;
 	int& estado_jogo;
 	sf::Font fonte;
-	sf::Text texto[3];
+	sf::Text texto[4];
 	//FasePrimeira* pF;
 public:
 	//Menu(float largura, float altura, FasePrimeira* pFase);

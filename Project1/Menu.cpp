@@ -30,18 +30,23 @@ void Menu::InicializaTexto(float largura, float altura)
 
 	texto[0].setFont(fonte);
 	texto[0].setFillColor(sf::Color::Green);
-	texto[0].setString("Jogar");
+	texto[0].setString("Jogar Primeira Fase");
 	texto[0].setPosition(sf::Vector2f(largura / 2.f, altura / 2.f * 1));
 
 	texto[1].setFont(fonte);
 	texto[1].setFillColor(sf::Color::White);
-	texto[1].setString("Placar");
+	texto[1].setString("Jogar Segunda Fase");
 	texto[1].setPosition(sf::Vector2f(largura / 2.f, altura / 2.f * 2));
 
 	texto[2].setFont(fonte);
 	texto[2].setFillColor(sf::Color::White);
-	texto[2].setString("Sair");
+	texto[2].setString("Placar");
 	texto[2].setPosition(sf::Vector2f(largura / 2.f, altura / 2.f * 3));
+
+	texto[3].setFont(fonte);
+	texto[3].setFillColor(sf::Color::White);
+	texto[3].setString("Sair");
+	texto[3].setPosition(sf::Vector2f(largura / 2.f, altura / 2.f * 4));
 }
 
 void Menu::Executar(float dT)
@@ -62,12 +67,15 @@ void Menu::Escolher_Opcao()
 	{
 	case 0:
 		estado_jogo = 1;
+		break;
 	case 1:
-		/**/
+		estado_jogo = 2;
 		break;
 	case 2:
-		estado_jogo = -1;
+		/**/
 		break;
+	case 3:
+		estado_jogo = -1;
 	default:
 		break;
 	}
@@ -97,7 +105,7 @@ void Menu::opcao_acima()
 
 void Menu::opcao_abaixo()
 {
-	if (indice < 2) 
+	if (indice < 3) 
 	{
 		texto[indice].setFillColor(sf::Color::White);
 		indice++;

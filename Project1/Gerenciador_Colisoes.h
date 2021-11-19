@@ -43,7 +43,7 @@ public:
 
 	void Checa_Colisao(Jogador* pJ);
 	void Checa_Colisao_Inimigos();
-	void Checa_Colisao_Individual(Personagem* pP, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo);
+	void Checa_Colisao_Individual(Personagem* pP, Entidade* pOutro, bool& esq, bool& dir, bool& cima, bool& baixo);
 
 	//void setPrimeiraFase(FasePrimeira* pF);
 };

@@ -12,6 +12,8 @@ Ratao::Ratao(float x, float y) :
 
 	vidas = 3;
 	valor = 3;
+
+	ehChefao = true;
 }
 
 Ratao::~Ratao() 

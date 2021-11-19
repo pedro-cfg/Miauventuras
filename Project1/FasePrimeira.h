@@ -6,10 +6,10 @@
 class FasePrimeira: public Fase 
 {
 public:
-	FasePrimeira();
+	FasePrimeira(int* estado);
 	~FasePrimeira();
 
-	void Executar(float dT);
+	void Passou_Fase();
 
 	void Gerar_Plataformas();
 };

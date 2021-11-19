@@ -75,8 +75,12 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			pInim->sofreDano();
 			if (pInim->getVidas() <= 0)
 			{
-				Excluir(pInim);
 				pJ->Pontua(pInim);
+				if (pInim->getEhChefao())
+				{
+					pJ->setVenceu(true);
+				}
+				Excluir(pInim);
 			}
 			pJ->setVelocidadeY(-500.f);
 		}
@@ -173,7 +177,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 	}
 }
 
-void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* outro, bool& esq, bool& dir, bool& cima, bool& baixo)
+void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* pOutro, bool& esq, bool& dir, bool& cima, bool& baixo)
 {
 	float posicaoX = pP->getX();
 	float posicaoY = pP->getY();
@@ -181,11 +185,11 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* ou
 	float meio_tamanhoX = pP->getLargura() / 2.0f;
 	float meio_tamanhoY = pP->getAltura() / 2.0f;
 
-	float posicao_outroX = outro->getX();
-	float posicao_outroY = outro->getY();
+	float posicao_outroX = pOutro->getX();
+	float posicao_outroY = pOutro->getY();
 
-	float meio_tamanho_outroX = outro->getLargura() / 2.0f;
-	float meio_tamanho_outroY = outro->getAltura() / 2.0f;
+	float meio_tamanho_outroX = pOutro->getLargura() / 2.0f;
+	float meio_tamanho_outroY = pOutro->getAltura() / 2.0f;
 
 	float deltaX = posicaoX - posicao_outroX;
 	float deltaY = posicaoY - posicao_outroY;

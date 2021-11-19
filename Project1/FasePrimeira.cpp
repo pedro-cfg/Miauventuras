@@ -18,7 +18,7 @@ void FasePrimeira::Passou_Fase()
 	if (pJ1->getX() >= 10000)
 	{
 		pJ1->reseta_jogador();
-		*reinicio = true;
+		*reinicio = true; 
 		*estado_jogo = 2;
 	}
 }

@@ -5,13 +5,14 @@ Fase::Fase() :
 	Ente(),
 	gerenciador_colisoes(&lista_entidades),
 	pJ1(NULL),
-	estado_jogo(NULL)
+	estado_jogo(NULL),
+	reinicio(NULL)
 {
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
 	Entidade::setPonteiroLista(&lista_entidades);
 }
 
-Fase::~Fase() 
+Fase::~Fase()
 {
 }
 
@@ -35,6 +36,7 @@ void Fase::Executar(float dT)
 	if (pJ1->getVidas() <= 0)
 	{
 		pJ1->reseta_jogador(true);
+		*reinicio = true;
 		/*reseta_fase();*/
 		*estado_jogo = 0;
 	}
@@ -110,6 +112,7 @@ void Fase::reseta_fase()
 {
 	lista_entidades.Limpar();
 	gerenciador_colisoes.LimpaListas();
+	pJ1->reseta_jogador(true, true);
 
 	Gerar_Objetos();
 }
@@ -128,3 +131,78 @@ ListaEntidades& Fase::getLista()
 	return lista_entidades;
 }
 
+void Fase::Limpar()
+{
+	lista_entidades.Limpar();
+}
+
+void Fase::GravarLista(fstream& arquivo)
+{
+	lista_entidades.Gravar(arquivo);
+}
+
+void Fase::LerLista(fstream& arquivo)
+{
+	Entidade::setPonteiroLista(&lista_entidades);
+	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
+
+	Limpar();
+	gerenciador_colisoes.LimpaListas();
+
+	int tamanho_lista;
+
+	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
+
+	for (int i = 0; i < tamanho_lista; i++) {
+		LerLista_Individual(arquivo);
+	}
+
+}
+
+void Fase::LerLista_Individual(fstream& arquivo)
+{
+	string tipo;
+	int tamanho_tipo;
+
+	float x, y, Xinicial;
+	int vidas;
+
+	arquivo.read((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	tipo.resize(tamanho_tipo);
+	arquivo.read((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.read((char*)&x, sizeof(x));
+	arquivo.read((char*)&y, sizeof(y));
+	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
+	arquivo.read((char*)&vidas, sizeof(vidas));
+
+
+	if (tipo == "Aranha") {
+		Aranha* pA = new Aranha;
+		pA->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Lagartixa") {
+		Lagartixa* pL = new Lagartixa;
+		pL->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Ratao") {
+		Ratao* pR = new Ratao;
+		pR->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Teia") {
+		Teia* pT = new Teia;
+		pT->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Espinho") {
+		Espinho* pEsp = new Espinho;
+		pEsp->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Plataforma") {
+		Plataforma* pP = new Plataforma;
+		pP->Recuperar(x, y, Xinicial, vidas);
+	}
+	else if (tipo == "Projetil") {
+		Projetil* pP = new Projetil;
+		pP->Recuperar(x, y, Xinicial, vidas);
+	}
+}

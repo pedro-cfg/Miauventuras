@@ -24,6 +24,7 @@ protected:
 	Jogador* pJ1;
 
 	int* estado_jogo;
+	bool* reinicio;
 public:    
 	Fase();
 	~Fase();
@@ -46,6 +47,12 @@ public:
 	void setJogador(Jogador* pJ);
 
 	ListaEntidades& getLista();
+
+	void Limpar();
+
+	void GravarLista(fstream& arquivo);
+	void LerLista(fstream& arquivo);
+	void LerLista_Individual(fstream& arquivo);
 };
 
 #endif

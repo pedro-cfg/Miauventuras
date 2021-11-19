@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "FaseSegunda.h"
 
-FaseSegunda::FaseSegunda(int* estado):
+FaseSegunda::FaseSegunda(int* estado, bool* reIni):
 	Fase() 
 {
 	estado_jogo = estado;
+	reinicio = reIni;
 }
 
 FaseSegunda::~FaseSegunda() 
@@ -17,7 +18,8 @@ void FaseSegunda::Passou_Fase()
 	if (pJ1->getVenceu())
 	{
 		pJ1->reseta_jogador();
-		*estado_jogo = 0;
+		*estado_jogo = 4;
+		*reinicio = true;
 	}
 }
 

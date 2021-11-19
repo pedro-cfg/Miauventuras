@@ -13,7 +13,8 @@
 class Jogo 
 {
 private:
-	int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2 */
+	int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2, carregar = 3, salvar = 4 */
+	bool reinicio;
 
 	Jogador* pJ1;
 	Gerenciador_Grafico gerenciador_grafico;

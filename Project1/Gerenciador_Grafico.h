@@ -11,7 +11,8 @@ class Gerenciador_Grafico
 private:
 	sf::RenderWindow janela;
 	sf::View vista;
-	sf::Texture textura_fundo;
+	sf::Texture textura_fundo1;
+	sf::Texture textura_fundo2;
 	sf::RectangleShape fundo;
 
 	Menu* pM;
@@ -50,7 +51,7 @@ public:
 	void DesenhaTexto(sf::Text* texto);
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(ListaEntidades& lista);
-	void MudaFundo(string caminho);
+	void MudaFundo(int fase);
 
 	void LimparTela();
 

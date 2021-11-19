@@ -8,10 +8,11 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 {
 	//sf::RenderWindow janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!");
 	//sf::View vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(640.f, 360.f));
-	textura_fundo.loadFromFile("Texturas/fundo1.png");
-	fundo.setSize((sf::Vector2f)textura_fundo.getSize());
-	fundo.setTexture(&textura_fundo);
-	fundo.setPosition(sf::Vector2f(-1000.f,-1080.f));
+	textura_fundo1.loadFromFile("Texturas/fundo1.png");
+	textura_fundo2.loadFromFile("Texturas/fundo2.png");
+	fundo.setSize((sf::Vector2f)textura_fundo1.getSize());
+	fundo.setTexture(&textura_fundo1);
+	fundo.setPosition(sf::Vector2f(-1000.f, -1080.f));
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
@@ -50,7 +51,7 @@ void Gerenciador_Grafico::AjustarVista(Jogador* jogador)
 
 void Gerenciador_Grafico::RestaurarVista()
 {
-	vista.setCenter(800.f,420.f);
+	vista.setCenter(800.f, 420.f);
 }
 
 void Gerenciador_Grafico::EventosJanela(int& estado_jogo)
@@ -86,7 +87,7 @@ void Gerenciador_Grafico::EventosJanela(int& estado_jogo)
 				switch (event.key.code)
 				{
 				case sf::Keyboard::Escape:
-					estado_jogo = 0;
+					estado_jogo = 4;
 					break;
 				}
 			}
@@ -104,6 +105,7 @@ void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
 	janela.draw(*(texto + 2));
 	janela.draw(*(texto + 3));
 	janela.draw(*(texto + 4));
+	/*janela.draw(*(texto + 5));*/
 	janela.setView(vista);
 }
 
@@ -116,6 +118,14 @@ void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista)
 {
 	lista.Desenha();
 	janela.setView(vista);
+}
+
+void Gerenciador_Grafico::MudaFundo(int fase)
+{
+	if (fase == 1)
+		fundo.setTexture(&textura_fundo1);
+	else
+		fundo.setTexture(&textura_fundo2);
 }
 
 void Gerenciador_Grafico::LimparTela()
@@ -134,8 +144,8 @@ Gerenciador_Grafico::Marcador_Vida* Gerenciador_Grafico::getMarcador()
 	return &marcador1;
 }
 
-Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1):
-	x(0),y(0), pJogador(NULL)
+Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x1, float y1) :
+	x(0), y(0), pJogador(NULL)
 {
 	x = x1;
 	y = y1;
@@ -183,7 +193,7 @@ void Gerenciador_Grafico::Marcador_Vida::setJogador(Jogador* pJ)
 void Gerenciador_Grafico::Marcador_Vida::AtualizaMarcador()
 {
 	int vidas = pJogador->getVidas();
-	
+
 	if (0 < vidas && vidas <= 7)
 	{
 		forma_marcador.setTexture(texturas[vidas - 1]);

@@ -15,6 +15,8 @@ private:
     bool podePular;
     bool empurrado;
     bool venceu;
+
+    int fase;
 public:
     Jogador(float x, float y);
     ~Jogador();
@@ -22,7 +24,7 @@ public:
     void Executar(float dT);
     void mover(float dT);
 
-    void reseta_jogador(const bool resetaPontos = false);
+    void reseta_jogador(const bool resetaPontos = false, const bool resetaVidas = false);
 
     void reseta_velocidade();
     void setEmpurrado(bool emp);
@@ -34,6 +36,9 @@ public:
     void operator++();
 
     void setTipo();
+
+    void setFase(int f);
+    const int getFase() const;
 };
 
 #endif

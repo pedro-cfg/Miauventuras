@@ -20,6 +20,8 @@ Jogador::Jogador(float x, float y) :
 	empurrado = false;
 
 	venceu = false;
+
+	fase = 1;
 }
 
 Jogador::~Jogador()
@@ -35,7 +37,7 @@ void Jogador::Executar(float dT)
 
 void Jogador::mover(float dT)
 {
-	if(!empurrado)
+	if (!empurrado)
 		velocidadeX = 0.0f;
 
 	if (colidiu_cima)
@@ -43,11 +45,11 @@ void Jogador::mover(float dT)
 		velocidadeY = 0.0f;
 	}
 
-	if (!colidiu_baixo && abs(y) >= getAltura()/2.f)
+	if (!colidiu_baixo && abs(y) >= getAltura() / 2.f)
 	{
 		velocidadeY += 981.0f * dT;
 	}
-	else if(!empurrado)
+	else if (!empurrado)
 	{
 		podePular = true;
 		velocidadeY = 0.0f;
@@ -78,15 +80,14 @@ void Jogador::mover(float dT)
 	Deslocar(dx, dy);
 }
 
-void Jogador::reseta_jogador(const bool resetaPontos)
+void Jogador::reseta_jogador(const bool resetaPontos, const bool resetaVidas)
 {
 	if (resetaPontos)
-	{
 		pontos = 0;
-	}
 	reseta_colidiu();
 	reseta_velocidade();
-	vidas = 7;
+	if (resetaVidas)
+		vidas = 7;
 	forma.setPosition(0, -100);
 	x = 0;
 	y = -100;
@@ -131,4 +132,14 @@ void Jogador::operator++()
 void Jogador::setTipo()
 {
 	tipo = "Jogador";
+}
+
+const int Jogador::getFase() const
+{
+	return fase;
+}
+
+void Jogador::setFase(int f)
+{
+	fase = f;
 }

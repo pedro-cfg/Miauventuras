@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "FasePrimeira.h"
 
-FasePrimeira::FasePrimeira(int* estado) :
+FasePrimeira::FasePrimeira(int* estado, bool* reIni) :
 	Fase() 
 {
 	estado_jogo = estado;
+	reinicio = reIni;
 	//gerenciador_colisoes.setPrimeiraFase(this);
 }
 
@@ -17,6 +18,7 @@ void FasePrimeira::Passou_Fase()
 	if (pJ1->getX() >= 10000)
 	{
 		pJ1->reseta_jogador();
+		*reinicio = true;
 		*estado_jogo = 2;
 	}
 }
@@ -56,75 +58,4 @@ void FasePrimeira::Gerar_Plataformas()
 	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(p8));
 }
 
-void FasePrimeira::Limpar()
-{
-	lista_entidades.Limpar();
-}
 
-void FasePrimeira::GravarLista(fstream& arquivo)
-{
-	lista_entidades.Gravar(arquivo);
-}
-
-void FasePrimeira::LerLista(fstream& arquivo)
-{
-	Limpar();
-	gerenciador_colisoes.LimpaListas();
-
-	int tamanho_lista;
-
-	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
-
-	for (int i = 0; i < tamanho_lista; i++) {
-		LerLista_Individual(arquivo);
-	}
-
-}
-
-void FasePrimeira::LerLista_Individual(fstream& arquivo)
-{
-	string tipo;
-	int tamanho_tipo;
-
-	float x, y, Xinicial;
-	int vidas;
-
-	arquivo.read((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	tipo.resize(tamanho_tipo);
-	arquivo.read((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.read((char*)&x, sizeof(x));
-	arquivo.read((char*)&y, sizeof(y));
-	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
-	arquivo.read((char*)&vidas, sizeof(vidas));
-
-
-	if (tipo == "Aranha") {
-		Aranha* pA = new Aranha;
-		pA->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Lagartixa") {
-		Lagartixa* pL = new Lagartixa;
-		pL->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Ratao") {
-		Ratao* pR = new Ratao;
-		pR->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Teia") {
-		Teia* pT = new Teia;
-		pT->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Espinho") {
-		Espinho* pEsp = new Espinho;
-		pEsp->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Plataforma") {
-		Plataforma* pP = new Plataforma;
-		pP->Recuperar(x, y, Xinicial, vidas);
-	}
-	else if (tipo == "Projetil") {
-		Projetil* pP = new Projetil;
-		pP->Recuperar(x, y, Xinicial, vidas);
-	}
-}

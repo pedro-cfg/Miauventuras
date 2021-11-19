@@ -4,11 +4,12 @@
 Jogo::Jogo() :
 	//j1(0, -100),
 	estado_de_jogo(0),
+	reinicio(true),
 	pJ1(NULL),
 	gerenciador_grafico(&menu_principal),
-	primeira_fase(&estado_de_jogo),
-	segunda_fase(&estado_de_jogo),
-	menu_principal(LARGURA_JANELA/2.f, ALTURA_JANELA/2.f, estado_de_jogo)
+	primeira_fase(&estado_de_jogo, &reinicio),
+	segunda_fase(&estado_de_jogo, &reinicio),
+	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, estado_de_jogo)
 {
 	Inicializar();
 	Executar();
@@ -42,18 +43,34 @@ void Jogo::Executar()
 			menu_principal.Executar(dT);
 			break;
 		case 1:
+			if (reinicio) {
+				primeira_fase.reseta_fase();
+				gerenciador_grafico.MudaFundo(1);
+				pJ1->setFase(1);
+				reinicio = false;
+			}
 			primeira_fase.Executar(dT);
 			break;
 		case 2:
+			if (reinicio) {
+				segunda_fase.reseta_fase();
+				gerenciador_grafico.MudaFundo(2);
+				pJ1->setFase(2);
+				reinicio = false;
+			}
 			segunda_fase.Executar(dT);
 			break;
 		case 3:
-			Gravar();
-			estado_de_jogo = 0;
+			Ler();
+			reinicio = false;
+			estado_de_jogo = pJ1->getFase();
 			break;
 		case 4:
-			Ler();
+			Gravar();
+			reinicio = true;
 			estado_de_jogo = 0;
+			/*primeira_fase.reseta_fase();
+			segunda_fase.reseta_fase();*/
 			break;
 		default:
 			break;
@@ -76,28 +93,38 @@ void Jogo::Inicializar()
 
 	segunda_fase.setJogador(pJ1);
 	segunda_fase.Gerar_Objetos();
-
-	//primeira_fase.setJogador(pJ1);
-	//primeira_fase.Inserir_Entidade(static_cast<Entidade*>(pJ1));
-	//primeira_fase.Gerar_Objetos();
 }
 
 void Jogo::Gravar()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/cudosimao.bin", ios::binary | ios::out | ios::trunc);
+	arquivo.open("Persistencia/memoria.bin", ios::binary | ios::out | ios::trunc);
+
+	int fase = pJ1->getFase();
+	arquivo.write((char*)&fase, sizeof(fase));
 
 	GravarJogador(arquivo);
-	primeira_fase.GravarLista(arquivo);
+	if (fase == 1)
+		primeira_fase.GravarLista(arquivo);
+	else
+		segunda_fase.GravarLista(arquivo);
 }
 
 void Jogo::Ler()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/cudosimao.bin", ios::binary | ios::in);
+	arquivo.open("Persistencia/memoria.bin", ios::binary | ios::in);
+
+	int fase;
+	arquivo.read((char*)&fase, sizeof(fase));
+
+	pJ1->setFase(fase);
 
 	LerJogador(arquivo);
-	primeira_fase.LerLista(arquivo);
+	if (fase == 1)
+		primeira_fase.LerLista(arquivo);
+	else
+		segunda_fase.LerLista(arquivo);
 }
 
 void Jogo::GravarJogador(fstream& arquivo)

@@ -2,14 +2,14 @@
 #include "Jogo.h"
 
 Jogo::Jogo() :
-	//j1(0, -100),
 	estado_de_jogo(0),
 	reinicio(true),
 	pJ1(NULL),
+	pJ2(NULL),
 	gerenciador_grafico(&menu_principal),
 	primeira_fase(&estado_de_jogo, &reinicio),
 	segunda_fase(&estado_de_jogo, &reinicio),
-	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, estado_de_jogo)
+	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, &estado_de_jogo)
 {
 	Inicializar();
 	Executar();
@@ -20,6 +20,10 @@ Jogo::~Jogo()
 	if (pJ1 != NULL)
 	{
 		delete pJ1;
+	}
+	if (pJ2 != NULL)
+	{
+		delete pJ2;
 	}
 }
 
@@ -32,7 +36,7 @@ void Jogo::Executar()
 	{
 		dT = relogio.restart().asSeconds();
 
-		gerenciador_grafico.EventosJanela(estado_de_jogo);
+		gerenciador_grafico.EventosJanela(&estado_de_jogo);
 
 		switch (estado_de_jogo)
 		{
@@ -42,21 +46,23 @@ void Jogo::Executar()
 		case 0: //Menu Principal
 			menu_principal.Executar(dT);
 			break;
-		case 1: //Primeira Fase
+		case 1:
 			if (reinicio) {
 				primeira_fase.reseta_fase();
 				reinicio = false;
 			}
 			gerenciador_grafico.MudaFundo(1);
+			//pJ2->setFase(1);
 			pJ1->setFase(1);
 			primeira_fase.Executar(dT);
 			break;
-		case 2: //Segunda Fase
+		case 2:
 			if (reinicio) {
 				segunda_fase.reseta_fase();
 				reinicio = false;
 			}
 			gerenciador_grafico.MudaFundo(2);
+			//pJ2->setFase(2);
 			pJ1->setFase(2);
 			segunda_fase.Executar(dT);
 			break;
@@ -87,7 +93,7 @@ void Jogo::Executar()
 			break;
 		}
 
-		gerenciador_grafico.LimparTela();
+		gerenciador_grafico.AtualizarTela();
 	}
 }
 
@@ -95,15 +101,19 @@ void Jogo::Inicializar()
 {
 	Ente::setGerenciadorGrafico(&gerenciador_grafico);
 
-	pJ1 = new Jogador(0, -100);
+	pJ1 = new Jogador1(0, -100);
+	//pJ2 = new Jogador2(0, -100);
 
-	gerenciador_grafico.getMarcador()->setJogador(pJ1);
+	gerenciador_grafico.getMarcador1()->setJogador(static_cast<Jogador*>(pJ1));
+	gerenciador_grafico.getMarcador2()->setJogador(static_cast<Jogador*>(pJ2));
 
-	primeira_fase.setJogador(pJ1);
+	/*primeira_fase.setJogador1(pJ1);
+	primeira_fase.setJogador2(pJ2);
 	primeira_fase.Gerar_Objetos();
 
-	segunda_fase.setJogador(pJ1);
-	segunda_fase.Gerar_Objetos();
+	segunda_fase.setJogador1(pJ1);
+	segunda_fase.setJogador2(pJ2);
+	segunda_fase.Gerar_Objetos();*/
 }
 
 void Jogo::Gravar()

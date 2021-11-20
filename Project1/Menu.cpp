@@ -10,7 +10,7 @@
 //	InicializaTexto(largura, altura);
 //}
 
-Menu::Menu(float largura, float altura, int& estado) :
+Menu::Menu(float largura, float altura, int* estado):
 	Ente(),
 	estado_jogo(estado),
 	estado_menu(0),

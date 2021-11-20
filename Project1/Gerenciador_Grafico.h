@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 #include "Jogador.h"
+#include "Jogador1.h"
+#include "Jogador2.h"
 #include "ListaEntidades.h"
 #include "Menu.h"
 
@@ -25,12 +27,12 @@ private:
 		vector<sf::Texture*> texturas;
 		sf::RectangleShape forma_marcador;
 	public:
-		Marcador_Vida(float x1, float y1);
+		Marcador_Vida(float x0, float y0);
 		~Marcador_Vida();
 
 		void CarregaTextura(string caminho);
 		void setJogador(Jogador* pJ);
-		void AtualizaMarcador();
+		void AtualizaMarcador(sf::View* vista);
 		sf::RectangleShape& getforma();
 	};
 
@@ -40,26 +42,27 @@ public:
 
 	bool JanelaAberta();
 	void RedimensionarVista();
-	void AjustarVista(Jogador* jogador);
+	void AjustarVista(Jogador1* pJ1, Jogador2* pJ2 = NULL);
 	void RestaurarVista();
-	void EventosJanela(int& estado_jogo);
+	void EventosJanela(int* estado_jogo);
 
 	void DesenhaTexto(sf::Text* texto, int tamanho);
 	void DesenhaForma(sf::RectangleShape& forma);
-	void DesenhaTudo(ListaEntidades& lista);
+	void DesenhaTudo(ListaEntidades& lista, Jogador1* pJ1, Jogador2* pJ2 = NULL);
 	void MudaFundo(int fase);
 
 	map<string, sf::Texture*> getMapaTexturas() const;
 	void InicializaMapaTexturas();
 
-	void LimparTela();
+	void AtualizarTela();
 
 	void FecharJanela();
 private:
 	Marcador_Vida marcador1;
-	//Marcador_Vida marcador2;
+	Marcador_Vida marcador2;
 public:
-	Marcador_Vida* getMarcador();
+	Marcador_Vida* getMarcador1();
+	Marcador_Vida* getMarcador2();
 };
 
 #endif

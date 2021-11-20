@@ -38,11 +38,12 @@ void Ratao::setTipo()
 	tipo = "Ratao";
 }
 
-void Ratao::Recuperar(float cX, float cY, float XI, int numVidas)
+void Ratao::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	setVidas(numVidas);
 	Reposicionar(cX, cY);
 
+	velocidadeX = velX;
 	Xinicial = cX;
 
 	pLista->Inserir(this);

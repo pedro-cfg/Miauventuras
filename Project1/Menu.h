@@ -10,13 +10,14 @@ class Menu: public Ente
 private:
 	int indice;
 	int* estado_jogo;
+	bool* dois_jogadores;
 	int estado_menu;
 	int tamanho_texto;
 	bool inicializar;
 	sf::Font fonte;
 	sf::Text texto[6];
 public:
-	Menu(float largura, float altura, int* estado);
+	Menu(float largura, float altura, int* estado, bool* dois_j);
 
 	~Menu();
 

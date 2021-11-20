@@ -9,7 +9,7 @@ Jogo::Jogo() :
 	gerenciador_grafico(&menu_principal),
 	primeira_fase(&estado_de_jogo, &reinicio),
 	segunda_fase(&estado_de_jogo, &reinicio),
-	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, &estado_de_jogo)
+	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, &estado_de_jogo, &dois_jogadores)
 {
 	Inicializar();
 	Executar();
@@ -46,23 +46,29 @@ void Jogo::Executar()
 		case 0: //Menu Principal
 			menu_principal.Executar(dT);
 			break;
-		case 1:
+		case 1: //Fase 1
 			if (reinicio) {
-				primeira_fase.reseta_fase();
+				if (dois_jogadores)
+					primeira_fase.reseta_fase(pJ1, pJ2);
+				else
+					primeira_fase.reseta_fase(pJ1, NULL);
 				reinicio = false;
 			}
 			gerenciador_grafico.MudaFundo(1);
-			//pJ2->setFase(1);
+			pJ2->setFase(1);
 			pJ1->setFase(1);
 			primeira_fase.Executar(dT);
 			break;
-		case 2:
+		case 2: //Fase 2
 			if (reinicio) {
-				segunda_fase.reseta_fase();
+				if (dois_jogadores)
+					segunda_fase.reseta_fase(pJ1, pJ2);
+				else
+					segunda_fase.reseta_fase(pJ1, NULL);
 				reinicio = false;
 			}
 			gerenciador_grafico.MudaFundo(2);
-			//pJ2->setFase(2);
+			pJ2->setFase(2);
 			pJ1->setFase(2);
 			segunda_fase.Executar(dT);
 			break;
@@ -102,7 +108,7 @@ void Jogo::Inicializar()
 	Ente::setGerenciadorGrafico(&gerenciador_grafico);
 
 	pJ1 = new Jogador1(0, -100);
-	//pJ2 = new Jogador2(0, -100);
+	pJ2 = new Jogador2(0, -100);
 
 	gerenciador_grafico.getMarcador1()->setJogador(static_cast<Jogador*>(pJ1));
 	gerenciador_grafico.getMarcador2()->setJogador(static_cast<Jogador*>(pJ2));
@@ -125,6 +131,7 @@ void Jogo::Gravar()
 	arquivo.write((char*)&fase, sizeof(fase));
 
 	GravarJogador(arquivo);
+
 	if (fase == 1)
 		primeira_fase.GravarLista(arquivo);
 	else
@@ -142,30 +149,49 @@ void Jogo::Ler()
 	pJ1->setFase(fase);
 
 	LerJogador(arquivo);
-	if (fase == 1)
-		primeira_fase.LerLista(arquivo);
-	else
-		segunda_fase.LerLista(arquivo);
+
+	if (fase == 1) {
+		if (dois_jogadores)
+			primeira_fase.LerLista(arquivo, pJ1, pJ2);
+		else
+			primeira_fase.LerLista(arquivo, pJ1, NULL);
+	}
+	else {
+		if (dois_jogadores)
+			segunda_fase.LerLista(arquivo, pJ1, pJ2);
+		else
+			segunda_fase.LerLista(arquivo, pJ1, NULL);
+	}
 }
 
 void Jogo::GravarJogador(fstream& arquivo)
 {
-	float x, y;
-	int vidas;
+	float x, y, x2, y2;
+	int vidas, vidas2;
 
 	x = pJ1->getX();
 	y = pJ1->getY();
 	vidas = pJ1->getVidas();
 
+	x2 = pJ2->getX();
+	y2 = pJ2->getY();
+	vidas2 = pJ2->getVidas();
+
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&vidas, sizeof(vidas));
+
+	arquivo.write((char*)&x2, sizeof(x2));
+	arquivo.write((char*)&y2, sizeof(y2));
+	arquivo.write((char*)&vidas2, sizeof(vidas2));
+
+	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
 }
 
 void Jogo::LerJogador(fstream& arquivo)
 {
-	float x, y;
-	int vidas;
+	float x, y, x2, y2;
+	int vidas, vidas2;
 
 	arquivo.read((char*)&x, sizeof(x));
 	arquivo.read((char*)&y, sizeof(y));
@@ -173,6 +199,15 @@ void Jogo::LerJogador(fstream& arquivo)
 
 	pJ1->setVidas(vidas);
 	pJ1->Reposicionar(x, y);
+
+	arquivo.read((char*)&x2, sizeof(x2));
+	arquivo.read((char*)&y2, sizeof(y2));
+	arquivo.read((char*)&vidas2, sizeof(vidas2));
+
+	pJ2->setVidas(vidas2);
+	pJ2->Reposicionar(x2, y2);
+
+	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));
 }
 
 

@@ -45,7 +45,7 @@ public:
     virtual void mover(float dT);
     virtual void Executar(float dT);
 
-    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
+    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
 };
 
 #endif 

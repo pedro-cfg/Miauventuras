@@ -39,7 +39,7 @@ void Espinho::setTipo()
 	tipo = "Espinho";
 }
 
-void Espinho::Recuperar(float cX, float cY, float XI, int numVidas)
+void Espinho::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	Reposicionar(cX, cY);
 

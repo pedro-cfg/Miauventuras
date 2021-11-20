@@ -3,6 +3,7 @@
 
 #include "Lista.h"
 #include "Inimigo.h"
+#include "Projetil.h"
 
 class Entidade;
 

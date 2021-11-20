@@ -56,7 +56,7 @@ public:
 	void Limpar();
 
 	void GravarLista(fstream& arquivo);
-	void LerLista(fstream& arquivo);
+	void LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2);
 	void LerLista_Individual(fstream& arquivo);
 };
 

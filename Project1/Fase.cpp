@@ -176,7 +176,7 @@ void Fase::GravarLista(fstream& arquivo)
 	lista_entidades.Gravar(arquivo);
 }
 
-void Fase::LerLista(fstream& arquivo)
+void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
 {
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
@@ -185,6 +185,9 @@ void Fase::LerLista(fstream& arquivo)
 	gerenciador_colisoes.LimpaListas();
 
 	int tamanho_lista;
+
+	pJ1 = p1;
+	pJ2 = p2;
 
 	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
 
@@ -199,7 +202,7 @@ void Fase::LerLista_Individual(fstream& arquivo)
 	string tipo;
 	int tamanho_tipo;
 
-	float x, y, Xinicial;
+	float x, y, Xinicial, velX, velY;
 	int vidas;
 
 	arquivo.read((char*)&tamanho_tipo, sizeof(tamanho_tipo));
@@ -210,34 +213,35 @@ void Fase::LerLista_Individual(fstream& arquivo)
 	arquivo.read((char*)&y, sizeof(y));
 	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
 	arquivo.read((char*)&vidas, sizeof(vidas));
-
+	arquivo.read((char*)&velX, sizeof(velX));
+	arquivo.read((char*)&velY, sizeof(velY));
 
 	if (tipo == "Aranha") {
 		Aranha* pA = new Aranha;
-		pA->Recuperar(x, y, Xinicial, vidas);
+		pA->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Lagartixa") {
 		Lagartixa* pL = new Lagartixa;
-		pL->Recuperar(x, y, Xinicial, vidas);
+		pL->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Ratao") {
 		Ratao* pR = new Ratao;
-		pR->Recuperar(x, y, Xinicial, vidas);
+		pR->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Teia") {
 		Teia* pT = new Teia;
-		pT->Recuperar(x, y, Xinicial, vidas);
+		pT->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Espinho") {
 		Espinho* pEsp = new Espinho;
-		pEsp->Recuperar(x, y, Xinicial, vidas);
+		pEsp->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Plataforma") {
 		Plataforma* pP = new Plataforma;
-		pP->Recuperar(x, y, Xinicial, vidas);
+		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 	else if (tipo == "Projetil") {
 		Projetil* pP = new Projetil;
-		pP->Recuperar(x, y, Xinicial, vidas);
+		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
 }

@@ -9,13 +9,13 @@ class Menu: public Ente
 {
 private:
 	int indice;
-	int& estado_jogo;
+	int* estado_jogo;
 	sf::Font fonte;
 	sf::Text texto[5];
 	//FasePrimeira* pF;
 public:
 	//Menu(float largura, float altura, FasePrimeira* pFase);
-	Menu(float largura, float altura, int& estado);
+	Menu(float largura, float altura, int* estado);
 
 	~Menu();
 

@@ -2,16 +2,16 @@
 #include "Gerenciador_Colisoes.h"
 #include "Gerenciador_Grafico.h"
 
-Jogador::Jogador(float x, float y) :
+Jogador::Jogador() :
 	Personagem()
 {
 	pontos = 0;
 	vidas = 7;
 
-	CarregaTextura(JOGADOR1);
-	forma.setPosition(sf::Vector2f(x, y));
-	this->x = x;
-	this->y = y;
+	//CarregaTextura(JOGADOR1);
+	//forma.setPosition(sf::Vector2f(x, y));
+	//this->x = x;
+	//this->y = y;
 
 	reseta_velocidade();
 
@@ -58,17 +58,17 @@ void Jogador::mover(float dT)
 	if (colidiu_baixo || abs(y) <= getAltura() / 2.f)
 		empurrado = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (mover_dir())
 	{
 		if (!colidiu_direita && !empurrado)
 			velocidadeX += velocidadeEscalar;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (mover_esq())
 	{
 		if (!colidiu_esquerda && !empurrado)
 			velocidadeX -= velocidadeEscalar;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && podePular && !empurrado)
+	if (pular() && podePular && !empurrado)
 	{
 		podePular = false;
 		velocidadeY = -sqrt(2.0f * 981.0f * alturaPulo);
@@ -78,6 +78,21 @@ void Jogador::mover(float dT)
 	float dy = velocidadeY * dT;
 
 	Deslocar(dx, dy);
+}
+
+bool Jogador::mover_esq()
+{
+	return false;
+}
+
+bool Jogador::mover_dir()
+{
+	return false;
+}
+
+bool Jogador::pular()
+{
+	return false;
 }
 
 void Jogador::reseta_jogador(const bool resetaPontos, const bool resetaVidas)
@@ -112,6 +127,11 @@ void Jogador::setVenceu(const bool v)
 bool Jogador::getVenceu() const
 {
 	return venceu;
+}
+
+bool Jogador::Morreu() const
+{
+	return (vidas <= 0);
 }
 
 void Jogador::Pontua(Inimigo* pI)

@@ -15,11 +15,33 @@ FaseSegunda::~FaseSegunda()
 
 void FaseSegunda::Passou_Fase()
 {
-	if (pJ1->getVenceu())
+	if (pJ1 && pJ2)
 	{
-		pJ1->reseta_jogador();
-		*estado_jogo = 4;
-		*reinicio = true;
+		if (pJ1->getVenceu() || pJ2->getVenceu())
+		{
+			pJ1->reseta_jogador();
+			pJ2->reseta_jogador();
+			*estado_jogo = 4;
+			*reinicio = true;
+		}
+	}
+	else if (pJ1)
+	{
+		if (pJ1->getVenceu())
+		{
+			pJ1->reseta_jogador();
+			*estado_jogo = 4;
+			*reinicio = true;
+		}
+	}
+	else if (pJ2)
+	{
+		if (pJ2->getVenceu())
+		{
+			pJ2->reseta_jogador();
+			*estado_jogo = 4;
+			*reinicio = true;
+		}
 	}
 }
 

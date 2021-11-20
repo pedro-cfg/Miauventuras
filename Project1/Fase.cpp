@@ -5,6 +5,7 @@ Fase::Fase() :
 	Ente(),
 	gerenciador_colisoes(&lista_entidades),
 	pJ1(NULL),
+	pJ2(NULL),
 	estado_jogo(NULL),
 	reinicio(NULL)
 {
@@ -18,28 +19,26 @@ Fase::~Fase()
 
 void Fase::Executar(float dT)
 {
-	Entidade::setPonteiroLista(&lista_entidades);
-	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
-
-	gerenciador_colisoes.Checa_Colisao(pJ1);
+	if (pJ1)
+	{
+		gerenciador_colisoes.Checa_Colisao(static_cast<Jogador*>(pJ1));
+		pJ1->Executar(dT);
+	}
+	if (pJ2)
+	{
+		gerenciador_colisoes.Checa_Colisao(static_cast<Jogador*>(pJ2));
+		pJ2->Executar(dT);
+	}
 	gerenciador_colisoes.Checa_Colisao_Inimigos();
 
-	pJ1->Executar(dT);
 	lista_entidades.Executar(dT);
 
-	pGG->AjustarVista(pJ1);
+	pGG->AjustarVista(pJ1, pJ2);
 
-	pJ1->desenhar();
-	pGG->DesenhaTudo(lista_entidades);
+	pGG->DesenhaTudo(lista_entidades, pJ1, pJ2);
 
 	Passou_Fase();
-	if (pJ1->getVidas() <= 0)
-	{
-		pJ1->reseta_jogador(true);
-		*reinicio = true;
-		/*reseta_fase();*/
-		*estado_jogo = 0;
-	}
+	MorteJogadores();
 }
 
 void Fase::Gerar_Objetos()
@@ -108,22 +107,58 @@ void Fase::Inserir_Entidade(Entidade* pE)
 	lista_entidades.Inserir(pE);
 }
 
-void Fase::reseta_fase()
+void Fase::reseta_fase(Jogador1* p1, Jogador2* p2)
 {
 	lista_entidades.Limpar();
 	gerenciador_colisoes.LimpaListas();
-	pJ1->reseta_jogador(true, true);
+	pJ1 = p1;
+	pJ2 = p2;
+	if (pJ1)
+	{
+		pJ1->reseta_jogador(true, true);
+	}
+	if (pJ2)
+	{
+		pJ2->reseta_jogador(true, true);
+	}
 
 	Gerar_Objetos();
+
+	Entidade::setPonteiroLista(&lista_entidades);
+	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
 }
 
 void Fase::Passou_Fase()
 {
 }
 
-void Fase::setJogador(Jogador* pJ)
+void Fase::MorteJogadores()
+{
+	if (pJ1 && pJ1->Morreu())
+	{
+		pJ1->reseta_jogador(true);
+		pJ1 = NULL;
+	}
+	if (pJ2 && pJ2->Morreu())
+	{
+		pJ2->reseta_jogador(true);
+		pJ2 = NULL;
+	}
+	if (!(pJ1 || pJ2))
+	{
+		*reinicio = true;
+		*estado_jogo = 0;
+	}
+}
+
+void Fase::setJogador(Jogador1* pJ)
 {
 	pJ1 = pJ;
+}
+
+void Fase::setJogador(Jogador2* pJ)
+{
+	pJ2 = pJ;
 }
 
 ListaEntidades& Fase::getLista()

@@ -15,11 +15,33 @@ FasePrimeira::~FasePrimeira() {
 
 void FasePrimeira::Passou_Fase()
 {
-	if (pJ1->getX() >= 10000)
+	if (pJ1 && pJ2)
 	{
-		pJ1->reseta_jogador();
-		*reinicio = true; 
-		*estado_jogo = 2;
+		if (pJ1->getX() >= 10000 && pJ2->getX() >= 10000)
+		{
+			pJ1->reseta_jogador();
+			pJ2->reseta_jogador();
+			*reinicio = true;
+			*estado_jogo = 2;
+		}
+	}
+	else if (pJ1)
+	{
+		if (pJ1->getX() >= 10000)
+		{
+			pJ1->reseta_jogador();
+			*reinicio = true;
+			*estado_jogo = 2;
+		}
+	}
+	else if (pJ2)
+	{
+		if (pJ2->getX() >= 10000)
+		{
+			pJ2->reseta_jogador();
+			*reinicio = true;
+			*estado_jogo = 2;
+		}
 	}
 }
 
@@ -57,5 +79,3 @@ void FasePrimeira::Gerar_Plataformas()
 	lista_entidades.Inserir(static_cast<Entidade*>(p8));
 	gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(p8));
 }
-
-

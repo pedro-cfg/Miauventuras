@@ -18,11 +18,14 @@ private:
 
     int fase;
 public:
-    Jogador(float x, float y);
+    Jogador();
     ~Jogador();
 
     void Executar(float dT);
     void mover(float dT);
+    virtual bool mover_esq();
+    virtual bool mover_dir();
+    virtual bool pular();
 
     void reseta_jogador(const bool resetaPontos = false, const bool resetaVidas = false);
 
@@ -31,6 +34,8 @@ public:
 
     void setVenceu(const bool v);
     bool getVenceu() const;
+
+    bool Morreu() const;
 
     void Pontua(Inimigo* pI);
     void operator++();

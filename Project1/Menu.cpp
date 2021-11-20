@@ -10,7 +10,7 @@
 //	InicializaTexto(largura, altura);
 //}
 
-Menu::Menu(float largura, float altura, int& estado):
+Menu::Menu(float largura, float altura, int* estado):
 	Ente(),
 	estado_jogo(estado)
 {
@@ -74,19 +74,19 @@ void Menu::Escolher_Opcao()
 	switch (indice)
 	{
 	case 0:
-		estado_jogo = 1;
+		*estado_jogo = 1;
 		break;
 	case 1:
-		estado_jogo = 2;
+		*estado_jogo = 2;
 		break;
 	case 2:
-		estado_jogo = 3; 
+		*estado_jogo = 3;
 		break;
 	case 3:
-		
+		/**/
 		break;
 	case 4:
-		estado_jogo = -1;
+		*estado_jogo = -1;
 		break;
 	default:
 		break; 

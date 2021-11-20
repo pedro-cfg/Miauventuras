@@ -13,6 +13,8 @@
 #include "Espinho.h"
 #include "Projetil.h"
 #include "Jogador.h"
+#include "Jogador1.h"
+#include "Jogador2.h"
 #include "Gerenciador_Grafico.h"
 
 class Fase: public Ente 
@@ -21,7 +23,8 @@ protected:
 	Gerenciador_Colisoes gerenciador_colisoes;
 	ListaEntidades lista_entidades;
 
-	Jogador* pJ1;
+	Jogador1* pJ1;
+	Jogador2* pJ2;
 
 	int* estado_jogo;
 	bool* reinicio;
@@ -40,11 +43,13 @@ public:
 
 	void Inserir_Entidade(Entidade* pE);
 
-	void reseta_fase();
+	void reseta_fase(Jogador1* p1, Jogador2* p2);
 
 	virtual void Passou_Fase();
+	void MorteJogadores();
 
-	void setJogador(Jogador* pJ);
+	void setJogador(Jogador1* pJ);
+	void setJogador(Jogador2* pJ);
 
 	ListaEntidades& getLista();
 

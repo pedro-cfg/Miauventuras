@@ -18,7 +18,7 @@ void FaseSegunda::Passou_Fase()
 	if (pJ1->getVenceu())
 	{
 		pJ1->reseta_jogador();
-		*estado_jogo = 4;
+		*estado_jogo = 0;
 		*reinicio = true;
 	}
 }

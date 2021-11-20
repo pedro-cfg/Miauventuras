@@ -7,6 +7,8 @@ Ratao::Ratao():Inimigo()
 	CarregaTextura(RATAO);
 	valor = 3;
 	setTipo();
+
+	ehChefao = true;
 }
 
 Ratao::Ratao(float x, float y) :

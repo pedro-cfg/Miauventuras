@@ -106,14 +106,10 @@ void Gerenciador_Grafico::EventosJanela(int& estado_jogo)
 	}
 }
 
-void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
+void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto, int tamanho)
 {
-	janela.draw(*texto);
-	janela.draw(*(texto + 1));
-	janela.draw(*(texto + 2));
-	janela.draw(*(texto + 3));
-	janela.draw(*(texto + 4));
-	/*janela.draw(*(texto + 5));*/
+	for (int i = 0; i < tamanho; i++) 
+		janela.draw(*(texto + i));
 	janela.setView(vista);
 }
 
@@ -187,7 +183,7 @@ void Gerenciador_Grafico::InicializaMapaTexturas()
 void Gerenciador_Grafico::LimparTela()
 {
 	janela.display();
-	janela.clear();
+	janela.clear(sf::Color(173, 216, 230, 255));
 }
 
 void Gerenciador_Grafico::FecharJanela()

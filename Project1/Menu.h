@@ -10,21 +10,30 @@ class Menu: public Ente
 private:
 	int indice;
 	int& estado_jogo;
+	int estado_menu;
+	int tamanho_texto;
+	bool inicializar;
+
 	sf::Font fonte;
-	sf::Text texto[5];
-	//FasePrimeira* pF;
+	sf::Text texto[6];
 public:
-	//Menu(float largura, float altura, FasePrimeira* pFase);
+
 	Menu(float largura, float altura, int& estado);
 
 	~Menu();
 
-	void InicializaTexto(float largura, float altura);
-
+	void InicializaTexto();
+	
 	void Executar(float dT);
 	void imprimir_se();
 
+	void setTamanhoTexto(int tam);
+	void setEstadoMenu(int estado);
+	void setInicializar(bool ini);
+
 	void Escolher_Opcao();
+
+	float CalculaTamanho(sf::Text texto);
 
 	void opcao_acima();
 	void opcao_abaixo();

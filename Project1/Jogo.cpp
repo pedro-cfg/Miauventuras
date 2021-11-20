@@ -36,41 +36,52 @@ void Jogo::Executar()
 
 		switch (estado_de_jogo)
 		{
-		case -1:
+		case -1: //Fechar Jogo
 			gerenciador_grafico.FecharJanela();
 			break;
-		case 0:
+		case 0: //Menu Principal
 			menu_principal.Executar(dT);
 			break;
-		case 1:
+		case 1: //Primeira Fase
 			if (reinicio) {
 				primeira_fase.reseta_fase();
-				gerenciador_grafico.MudaFundo(1);
-				pJ1->setFase(1);
 				reinicio = false;
 			}
+			gerenciador_grafico.MudaFundo(1);
+			pJ1->setFase(1);
 			primeira_fase.Executar(dT);
 			break;
-		case 2:
+		case 2: //Segunda Fase
 			if (reinicio) {
 				segunda_fase.reseta_fase();
-				gerenciador_grafico.MudaFundo(2);
-				pJ1->setFase(2);
 				reinicio = false;
 			}
+			gerenciador_grafico.MudaFundo(2);
+			pJ1->setFase(2);
 			segunda_fase.Executar(dT);
 			break;
-		case 3:
+		case 3: //Recuperar
 			Ler();
 			reinicio = false;
-			estado_de_jogo = pJ1->getFase();
+			estado_de_jogo = 7;
 			break;
-		case 4:
+		case 4: //Menu de Pausa
+			estado_de_jogo = 0;
+			menu_principal.setEstadoMenu(2);
+			menu_principal.setInicializar(true);
+			menu_principal.setTamanhoTexto(4);
+			break;
+		case 5: //Gravar
 			Gravar();
+			estado_de_jogo = 0;
+			break;
+		case 6: //Zerar Fases
 			reinicio = true;
 			estado_de_jogo = 0;
-			/*primeira_fase.reseta_fase();
-			segunda_fase.reseta_fase();*/
+			break;
+		case 7: //Continuar Jogo
+			reinicio = false;
+			estado_de_jogo = pJ1->getFase();
 			break;
 		default:
 			break;

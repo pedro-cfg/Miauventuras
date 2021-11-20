@@ -44,7 +44,7 @@ public:
 	void RestaurarVista();
 	void EventosJanela(int& estado_jogo);
 
-	void DesenhaTexto(sf::Text* texto);
+	void DesenhaTexto(sf::Text* texto, int tamanho);
 	void DesenhaForma(sf::RectangleShape& forma);
 	void DesenhaTudo(ListaEntidades& lista);
 	void MudaFundo(int fase);

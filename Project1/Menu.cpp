@@ -137,10 +137,6 @@ void Menu::InicializaTexto()
 		texto[0].setFont(fonte);
 		texto[0].setFillColor(sf::Color::Black);
 		texto[0].setString("Voce fez " + to_string(pJ1->getPontuacao()) + " Pontos!");
-		/*if (pJ1->getVenceu() || pJ2->getVenceu())
-			texto[0].setString("Voce Venceu!");
-		else
-			texto[0].setString("Fim de Jogo!");*/
 		texto[0].setCharacterSize(180);
 		texto[0].setOrigin(sf::Vector2f(CalculaTamanho(texto[0]), 160.f));
 		texto[0].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 160.f, ALTURA_JANELA / 6.f * 1));
@@ -271,6 +267,8 @@ void Menu::Escolher_Opcao()
 	case 1:
 		inicializar = true;
 		if (estado_menu == 0) {
+			pJ1->reseta_jogador(true, true, true);
+			pJ2->reseta_jogador(true, true, true);
 			estado_menu = 4;
 			tamanho_texto = 4;
 		}
@@ -289,6 +287,7 @@ void Menu::Escolher_Opcao()
 				pJ1->setNome(texto[2].getString());
 				if (*dois_jogadores) {
 					inicializar = false;
+					texto[0].setString("Voce fez " + to_string(pJ2->getPontuacao()) + " Pontos!");
 					texto[1].setString("Jogador 2, informe seu nome:");
 					texto[2].setString("");
 				}

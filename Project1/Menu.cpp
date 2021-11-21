@@ -419,7 +419,7 @@ void Menu::retiraTexto()
 void Menu::SalvarPontuacao()
 {
 	string frase[5], n1, n2;
-	int pontuacao[5], p1, p2, i, j, tam;
+	int pontuacao[5], p1, p2, i, j, tam = 0;
 	bool posicionado = false;
 
 	for (int i = 0; i < 5; i++) {
@@ -484,7 +484,7 @@ void Menu::SalvarPontuacao()
 void Menu::RecuperarPontuacao()
 {
 	string frase[5];
-	int pontuacao[5], tam;
+	int pontuacao[5], tam = 0;
 
 	for (int i = 0; i < 5; i++) {
 		pontuacao[i] = 0; frase[i] = "...";

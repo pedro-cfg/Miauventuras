@@ -89,7 +89,7 @@ void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
 			RedimensionarVista();
 			break;
 		case sf::Event::KeyReleased:
-			if (*estado_jogo == 0)
+			if (*estado_jogo == 0 && pM->getEstado() != 3)
 			{
 				switch (event.key.code)
 				{
@@ -104,14 +104,25 @@ void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
 					break;
 				}
 			}
-			else 
+			else
 			{
 				switch (event.key.code)
 				{
 				case sf::Keyboard::Escape:
 					*estado_jogo = 4;
 					break;
+				case sf::Keyboard::Enter:
+					pM->Escolher_Opcao();
 				}
+			}
+			break;
+		case sf::Event::TextEntered:
+			if (pM->getEstado() == 3 && event.text.unicode <= 128) {
+				char tecla = static_cast<char>(event.text.unicode);
+				if (tecla == '\b')
+					pM->retiraTexto();
+				else
+					pM->incluiTexto(tecla);
 			}
 			break;
 		default:
@@ -120,14 +131,10 @@ void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
 	}
 }
 
-void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto)
+void Gerenciador_Grafico::DesenhaTexto(sf::Text* texto, int tamanho)
 {
-	janela.draw(*texto);
-	janela.draw(*(texto + 1));
-	janela.draw(*(texto + 2));
-	janela.draw(*(texto + 3));
-	janela.draw(*(texto + 4));
-	/*janela.draw(*(texto + 5));*/
+	for (int i = 0; i < tamanho; i++)
+		janela.draw(*(texto + i));
 	janela.setView(vista);
 }
 
@@ -214,7 +221,7 @@ void Gerenciador_Grafico::InicializaMapaTexturas()
 void Gerenciador_Grafico::AtualizarTela()
 {
 	janela.display();
-	janela.clear();
+	janela.clear(sf::Color(173, 216, 230, 255));
 }
 
 void Gerenciador_Grafico::FecharJanela()

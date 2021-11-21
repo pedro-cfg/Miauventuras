@@ -40,14 +40,27 @@ void Projetil::Executar(float dT)
 	}
 }
 
+const float Projetil::getVelX() const
+{
+	return velocidadeX;
+}
+
+const float Projetil::getVelY() const
+{
+	return velocidadeY;
+}
+
 void Projetil::setTipo()
 {
 	tipo = "Projetil";
 }
 
-void Projetil::Recuperar(float cX, float cY, float XI, int numVidas)
+void Projetil::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	Reposicionar(cX, cY);
+
+	velocidadeX = velX;
+	velocidadeY = velY;
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);

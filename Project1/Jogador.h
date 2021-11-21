@@ -1,6 +1,7 @@
 #ifndef _JOGADOR_H_
 #define _JOGADOR_H_
 
+#include "stdafx.h"
 #include "Personagem.h"
 #include "Inimigo.h"
 
@@ -10,6 +11,7 @@ class Gerenciador_Colisoes;
 class Jogador: public Personagem
 {
 private: 
+    string nome;
     int pontos;
     float alturaPulo;
     bool podePular;
@@ -44,6 +46,11 @@ public:
 
     void setFase(int f);
     const int getFase() const;
+
+    void setPontuacao(int pont);
+    const int getPontuacao() const;
+    void setNome(string n);
+    const string getNome() const;
 };
 
 #endif

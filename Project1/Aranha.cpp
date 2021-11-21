@@ -56,11 +56,12 @@ void Aranha::setTipo()
 	tipo = "Aranha";
 }
 
-void Aranha::Recuperar(float cX, float cY, float XI, int numVidas)
+void Aranha::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	setVidas(numVidas);
 	Reposicionar(cX, cY);
 	
+	direcao = velX/abs(velX);
 	Xinicial = XI; 
 
 	pLista->Inserir(this);

@@ -20,11 +20,14 @@ public:
 	void mover(float dT);
 	void Executar(float dT);
 
+	const float getVelX() const;
+	const float getVelY() const;
+
 	static void Excluir(Projetil* pP);
 
 	void setTipo();
 
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0);
+	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
 };
 
 #endif 

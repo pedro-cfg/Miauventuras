@@ -39,11 +39,12 @@ void Lagartixa::setTipo()
 	tipo = "Lagartixa";
 }
 
-void Lagartixa::Recuperar(float cX, float cY, float XI, int numVidas)
+void Lagartixa::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	setVidas(numVidas);
 	Reposicionar(cX, cY);
 
+	velocidadeX = velX;
 	Xinicial = cX;
 
 	pLista->Inserir(this);

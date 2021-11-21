@@ -3,7 +3,8 @@
 #include "Gerenciador_Grafico.h"
 
 Jogador::Jogador() :
-	Personagem()
+	Personagem(),
+	nome("")
 {
 	pontos = 0;
 	vidas = 7;
@@ -163,4 +164,25 @@ const int Jogador::getFase() const
 void Jogador::setFase(int f)
 {
 	fase = f;
+}
+
+void Jogador::setNome(string n)
+{
+	n.pop_back();
+	nome = n;
+}
+
+void Jogador::setPontuacao(int pont)
+{
+	pontos = pont;
+}
+
+const int Jogador::getPontuacao() const
+{
+	return pontos;
+}
+
+const string Jogador::getNome() const
+{
+	return nome;
 }

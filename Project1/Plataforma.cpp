@@ -39,7 +39,7 @@ void Plataforma::setTipo()
 	tipo = "Plataforma";
 }
 
-void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas)
+void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	Reposicionar(cX, cY);
 

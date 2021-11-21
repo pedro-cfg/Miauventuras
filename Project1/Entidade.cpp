@@ -72,7 +72,7 @@ void Entidade::Executar(float dT)
 {
 }
 
-void Entidade::Recuperar(float cX, float cY, float XI, int numVidas)
+void Entidade::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 }
 

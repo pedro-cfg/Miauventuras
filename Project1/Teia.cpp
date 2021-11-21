@@ -36,7 +36,7 @@ void Teia::setTipo()
 	tipo = "Teia";
 }
 
-void Teia::Recuperar(float cX, float cY, float XI, int numVidas)
+void Teia::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	Reposicionar(cX, cY);
 

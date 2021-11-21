@@ -66,7 +66,7 @@ void ListaEntidades::Gravar(fstream& arquivo)
 
 void ListaEntidades::Gravar_Individual(Entidade* pE, fstream& arquivo)
 {
-	float x, y, Xinicial = 0.f;
+	float x, y, Xinicial = 0.f, velX = 0.f, velY = 0.f;
 	int vidas = 0;
 
 	x = pE->getX();
@@ -81,12 +81,20 @@ void ListaEntidades::Gravar_Individual(Entidade* pE, fstream& arquivo)
 		Inimigo* pI = static_cast<Inimigo*>(pE);
 		Xinicial = pI->getXinicial();
 		vidas = pI->getVidas();
+		velX = pI->getVelX();
+	}
+	else if (tipo == "Projetil") {
+		Projetil* pP = static_cast<Projetil*>(pE);
+		velX = pP->getVelX();
+		velY = pP->getVelY();
 	}
 
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
 	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&velX, sizeof(velX));
+	arquivo.write((char*)&velY, sizeof(velY));
 }
 
 //void ListaEntidades::Limpar(int ind)

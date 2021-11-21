@@ -92,6 +92,11 @@ float Inimigo::getDirecao() const
 	return direcao;
 }
 
+float Inimigo::getVelX()
+{
+	return velocidadeX;
+}
+
 void Inimigo::reseta_velocidade()
 {
 	velocidadeEscalar = 100.0f;

@@ -136,10 +136,11 @@ void Menu::InicializaTexto()
 		fonte.loadFromFile("Fontes/SIXTY.ttf");
 		texto[0].setFont(fonte);
 		texto[0].setFillColor(sf::Color::Black);
-		if (pJ1->getVenceu() || pJ2->getVenceu())
+		texto[0].setString("Voce fez " + to_string(pJ1->getPontuacao()) + " Pontos!");
+		/*if (pJ1->getVenceu() || pJ2->getVenceu())
 			texto[0].setString("Voce Venceu!");
 		else
-			texto[0].setString("Fim de Jogo!");
+			texto[0].setString("Fim de Jogo!");*/
 		texto[0].setCharacterSize(180);
 		texto[0].setOrigin(sf::Vector2f(CalculaTamanho(texto[0]), 160.f));
 		texto[0].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 160.f, ALTURA_JANELA / 6.f * 1));
@@ -479,6 +480,9 @@ void Menu::SalvarPontuacao()
 	}
 
 	arquivo.close();
+
+	pJ1->reseta_jogador(true, true, true);
+	pJ2->reseta_jogador(true, true, true);
 }
 
 void Menu::RecuperarPontuacao()

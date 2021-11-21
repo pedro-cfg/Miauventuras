@@ -73,6 +73,8 @@ void Jogo::Executar()
 			segunda_fase.Executar(dT);
 			break;
 		case 3: //Recuperar
+			pJ1->reseta_jogador(true, true, true);
+			pJ2->reseta_jogador(true, true, true);
 			Ler();
 			reinicio = false;
 			estado_de_jogo = 7;

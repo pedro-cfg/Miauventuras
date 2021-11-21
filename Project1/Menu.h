@@ -4,6 +4,7 @@
 #include "Ente.h"
 
 class FasePrimeira;
+class Jogador;
 
 class Menu: public Ente 
 {
@@ -14,12 +15,18 @@ private:
 	int estado_menu;
 	int tamanho_texto;
 	bool inicializar;
-	sf::Font fonte;
-	sf::Text texto[6];
-public:
-	Menu(float largura, float altura, int* estado, bool* dois_j);
 
+	Jogador* pJ1;
+	Jogador* pJ2;
+
+	sf::Font fonte;
+	sf::Text texto[7];
+	string placar[5];
+public:
+	Menu(int* estado, bool* dois_j);
 	~Menu();
+
+	void setJogadores(Jogador* pJog1, Jogador* pJog2);
 
 	void InicializaTexto();
 	
@@ -36,6 +43,14 @@ public:
 
 	void opcao_acima();
 	void opcao_abaixo();
+
+	const int getEstado() const;
+
+	void incluiTexto(char letra);
+	void retiraTexto();
+
+	void SalvarPontuacao();
+	void RecuperarPontuacao();
 };
 
 #endif

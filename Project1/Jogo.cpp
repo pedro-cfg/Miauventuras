@@ -7,9 +7,9 @@ Jogo::Jogo() :
 	pJ1(NULL),
 	pJ2(NULL),
 	gerenciador_grafico(&menu_principal),
+	menu_principal(&estado_de_jogo, &dois_jogadores),
 	primeira_fase(&estado_de_jogo, &reinicio),
-	segunda_fase(&estado_de_jogo, &reinicio),
-	menu_principal(LARGURA_JANELA / 2.f, ALTURA_JANELA / 2.f, &estado_de_jogo, &dois_jogadores)
+	segunda_fase(&estado_de_jogo, &reinicio)
 {
 	Inicializar();
 	Executar();
@@ -95,6 +95,11 @@ void Jogo::Executar()
 			reinicio = false;
 			estado_de_jogo = pJ1->getFase();
 			break;
+		case 8: //Menu de Informar Nome
+			menu_principal.setEstadoMenu(3);
+			menu_principal.setInicializar(true);
+			menu_principal.setTamanhoTexto(3);
+			estado_de_jogo = 6;
 		default:
 			break;
 		}
@@ -110,6 +115,7 @@ void Jogo::Inicializar()
 	pJ1 = new Jogador1(0, -100);
 	pJ2 = new Jogador2(0, -100);
 
+	menu_principal.setJogadores(pJ1, pJ2);
 	gerenciador_grafico.getMarcador1()->setJogador(static_cast<Jogador*>(pJ1));
 	gerenciador_grafico.getMarcador2()->setJogador(static_cast<Jogador*>(pJ2));
 
@@ -167,23 +173,27 @@ void Jogo::Ler()
 void Jogo::GravarJogador(fstream& arquivo)
 {
 	float x, y, x2, y2;
-	int vidas, vidas2;
+	int vidas, vidas2, pontos, pontos2;
 
 	x = pJ1->getX();
 	y = pJ1->getY();
 	vidas = pJ1->getVidas();
+	pontos = pJ1->getPontuacao();
 
 	x2 = pJ2->getX();
 	y2 = pJ2->getY();
 	vidas2 = pJ2->getVidas();
+	pontos2 = pJ2->getPontuacao();
 
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&pontos, sizeof(pontos));
 
 	arquivo.write((char*)&x2, sizeof(x2));
 	arquivo.write((char*)&y2, sizeof(y2));
 	arquivo.write((char*)&vidas2, sizeof(vidas2));
+	arquivo.write((char*)&pontos2, sizeof(pontos2));
 
 	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
 }
@@ -191,20 +201,24 @@ void Jogo::GravarJogador(fstream& arquivo)
 void Jogo::LerJogador(fstream& arquivo)
 {
 	float x, y, x2, y2;
-	int vidas, vidas2;
+	int vidas, vidas2, pontos, pontos2;
 
 	arquivo.read((char*)&x, sizeof(x));
 	arquivo.read((char*)&y, sizeof(y));
 	arquivo.read((char*)&vidas, sizeof(vidas));
+	arquivo.read((char*)&pontos, sizeof(pontos));
 
 	pJ1->setVidas(vidas);
+	pJ1->setPontuacao(pontos);
 	pJ1->Reposicionar(x, y);
 
 	arquivo.read((char*)&x2, sizeof(x2));
 	arquivo.read((char*)&y2, sizeof(y2));
 	arquivo.read((char*)&vidas2, sizeof(vidas2));
+	arquivo.read((char*)&pontos2, sizeof(pontos2));
 
 	pJ2->setVidas(vidas2);
+	pJ2->setPontuacao(pontos2);
 	pJ2->Reposicionar(x2, y2);
 
 	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));

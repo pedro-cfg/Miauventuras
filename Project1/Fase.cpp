@@ -136,18 +136,18 @@ void Fase::MorteJogadores()
 {
 	if (pJ1 && pJ1->Morreu())
 	{
-		pJ1->reseta_jogador(true);
+		//pJ1->reseta_jogador(true);
 		pJ1 = NULL;
 	}
 	if (pJ2 && pJ2->Morreu())
 	{
-		pJ2->reseta_jogador(true);
+		//pJ2->reseta_jogador(true);
 		pJ2 = NULL;
 	}
 	if (!(pJ1 || pJ2))
 	{
 		*reinicio = true;
-		*estado_jogo = 0;
+		*estado_jogo = 8;
 	}
 }
 

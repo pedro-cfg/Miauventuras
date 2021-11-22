@@ -2,7 +2,7 @@
 
 Jogador2::Jogador2(float x, float y)
 {
-	CarregaTextura(JOGADOR1);
+	CarregaTextura(JOGADOR2);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
 	this->y = y;
@@ -10,7 +10,7 @@ Jogador2::Jogador2(float x, float y)
 
 Jogador2::Jogador2()
 {
-	CarregaTextura(JOGADOR1);
+	CarregaTextura(JOGADOR2);
 }
 
 Jogador2::~Jogador2()

@@ -4,8 +4,7 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
 	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_EXIBICAO, ALTURA_EXIBICAO)),
 	marcador1(800, -400),
-	marcador2(-800, -400),
-	pM(pM)
+	marcador2(-800, -400)
 {
 	InicializaMapaTexturas();
 
@@ -59,8 +58,6 @@ void Gerenciador_Grafico::AjustarVista(Jogador1* pJ1, Jogador2* pJ2)
 		coordY = (pJ2->getY());
 		coordX = (pJ2->getX()) + 200.0f;
 	}
-	//float coordY = pJ1->getY();
-	//float coordX = pJ1->getX() + 200.0f;
 	if (coordY > -380)
 		coordY = -380;
 	if (coordX < 57)
@@ -75,11 +72,12 @@ void Gerenciador_Grafico::RestaurarVista()
 	vista.setCenter(800.f, 420.f);
 }
 
-void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
+void Gerenciador_Grafico::EventosJanela(MaquinaEstados* pMaqEstados)
 {
 	sf::Event event;
 	while (janela.pollEvent(event))
 	{
+		idEstado id = pMaqEstados->getIdEstadoAtual();
 		switch (event.type)
 		{
 		case sf::Event::Closed:
@@ -89,8 +87,10 @@ void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
 			RedimensionarVista();
 			break;
 		case sf::Event::KeyReleased:
-			if (*estado_jogo == 0 && pM->getEstado() != 3)
+			if (id == MENU_PRINCIPAL || id == MENU_FASES || id == MENU_NUM_JOGADORES
+				|| id == MENU_PAUSA || id == MENU_PLACAR || id == MENU_FIM)
 			{
+				Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
 				switch (event.key.code)
 				{
 				case sf::Keyboard::W:
@@ -109,21 +109,41 @@ void Gerenciador_Grafico::EventosJanela(int* estado_jogo)
 				switch (event.key.code)
 				{
 				case sf::Keyboard::Escape:
+					pMaqEstados->setEstadoAtual(MENU_PAUSA);
+					break;
+				case sf::Keyboard::Enter:
+					if (id == MENU_NOME)
+					{
+						Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
+						pM->Escolher_Opcao();
+					}
+					break;
+				}
+			}
+			break;
+		case sf::Event::TextEntered:
+			if (id == MENU_NOME && event.text.unicode <= 128)
+			{
+				Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
+				char tecla = static_cast<char>(event.text.unicode);
+				if (tecla == '\b')
+					pM->retiraTexto();
+				//else if (tecla == '\n')
+				//	pM->Escolher_Opcao();
+				else
+					pM->incluiTexto(tecla);
+			}
+			/*else
+			{
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Escape:
 					*estado_jogo = 4;
 					break;
 				case sf::Keyboard::Enter:
 					pM->Escolher_Opcao();
 				}
-			}
-			break;
-		case sf::Event::TextEntered:
-			if (pM->getEstado() == 3 && event.text.unicode <= 128) {
-				char tecla = static_cast<char>(event.text.unicode);
-				if (tecla == '\b')
-					pM->retiraTexto();
-				else
-					pM->incluiTexto(tecla);
-			}
+			}*/
 			break;
 		default:
 			break;
@@ -177,9 +197,13 @@ map<string, sf::Texture*> Gerenciador_Grafico::getMapaTexturas() const
 
 void Gerenciador_Grafico::InicializaMapaTexturas()
 {
-	sf::Texture* tJ = new sf::Texture();
-	tJ->loadFromFile(JOGADOR1);
-	mapa_texturas.insert(map<string, sf::Texture*>::value_type(JOGADOR1, tJ));
+	sf::Texture* tJ1 = new sf::Texture();
+	tJ1->loadFromFile(JOGADOR1);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(JOGADOR1, tJ1));
+
+	sf::Texture* tJ2 = new sf::Texture();
+	tJ2->loadFromFile(JOGADOR2);
+	mapa_texturas.insert(map<string, sf::Texture*>::value_type(JOGADOR2, tJ2));
 
 	sf::Texture* tA = new sf::Texture();
 	tA->loadFromFile(ARANHA);
@@ -287,7 +311,6 @@ void Gerenciador_Grafico::Marcador_Vida::AtualizaMarcador(sf::View* vista)
 	{
 		float coordX = vista->getCenter().x;
 		float coordY = vista->getCenter().y;
-		//forma_marcador.setPosition(coordX + 800, coordY - 400);
 		forma_marcador.setPosition(coordX + x, coordY + y);
 		int vidas = pJogador->getVidas();
 

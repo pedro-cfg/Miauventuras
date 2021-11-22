@@ -6,7 +6,7 @@
 class FaseSegunda: public Fase 
 {
 public:
-	FaseSegunda(int* estado, bool* reIni);
+	FaseSegunda();
 	~FaseSegunda();
 
 	void Passou_Fase();

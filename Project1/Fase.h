@@ -15,9 +15,10 @@
 #include "Jogador.h"
 #include "Jogador1.h"
 #include "Jogador2.h"
-#include "Gerenciador_Grafico.h"
+#include "Estado.h"
+#include "MenuFim.h"
 
-class Fase: public Ente 
+class Fase: public Ente, public Estado
 {
 protected:
 	Gerenciador_Colisoes gerenciador_colisoes;
@@ -25,13 +26,11 @@ protected:
 
 	Jogador1* pJ1;
 	Jogador2* pJ2;
-
-	int* estado_jogo;
-	bool* reinicio;
 public:    
 	Fase();
 	~Fase();
 
+	void ExecutaEstado(float dT);
 	void Executar(float dT);
 
 	void Gerar_Objetos();
@@ -47,11 +46,6 @@ public:
 
 	virtual void Passou_Fase();
 	void MorteJogadores();
-
-	void setJogador(Jogador1* pJ);
-	void setJogador(Jogador2* pJ);
-
-	ListaEntidades& getLista();
 
 	void Limpar();
 

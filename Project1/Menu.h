@@ -2,55 +2,48 @@
 #define _MENU_H_
 
 #include "Ente.h"
+#include "Estado.h"
 
 class FasePrimeira;
 class Jogador;
+class Jogo;
 
-class Menu: public Ente 
+class Menu: public Ente, public Estado 
 {
-private:
-	int indice;
-	int* estado_jogo;
-	bool* dois_jogadores;
-	int estado_menu;
-	int tamanho_texto;
-	bool inicializar;
+protected:
+	static Jogo* pJogo;
+	static bool dois_jogadores;
 
-	Jogador* pJ1;
-	Jogador* pJ2;
+	int indice;
+
+	int num_opcoes;
+	int linhas_texto;
 
 	sf::Font fonte;
 	sf::Text texto[7];
-	string placar[5];
 public:
-	Menu(int* estado, bool* dois_j);
-	~Menu();
+	Menu();
+	virtual ~Menu();
 
-	void setJogadores(Jogador* pJog1, Jogador* pJog2);
+	static void setPonteiroJogo(Jogo* pJ);
 
-	void InicializaTexto();
+	virtual void InicializaTexto();
 	
-	void Executar(float dT);
+	void ExecutaEstado(float dT);
+	virtual void Executar(float dT);
 	void imprimir_se();
 
-	void setTamanhoTexto(int tam);
-	void setEstadoMenu(int estado);
-	void setInicializar(bool ini);
-
-	void Escolher_Opcao();
+	virtual void Escolher_Opcao();
 
 	float CalculaTamanho(sf::Text texto);
 
 	void opcao_acima();
 	void opcao_abaixo();
 
-	const int getEstado() const;
-
-	void incluiTexto(char letra);
-	void retiraTexto();
+	virtual void incluiTexto(char letra);
+	virtual void retiraTexto();
 
 	void SalvarPontuacao();
-	void RecuperarPontuacao();
 };
 
 #endif

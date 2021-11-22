@@ -164,10 +164,14 @@
     <ClInclude Include="Jogador2.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Elemento.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
       <Filter>Arquivos de Recurso</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "FaseSegunda.h"
 
-FaseSegunda::FaseSegunda(int* estado, bool* reIni):
+FaseSegunda::FaseSegunda():
 	Fase() 
 {
-	estado_jogo = estado;
-	reinicio = reIni;
 }
 
 FaseSegunda::~FaseSegunda() 
@@ -21,8 +19,9 @@ void FaseSegunda::Passou_Fase()
 		{
 			pJ1->reseta_jogador();
 			pJ2->reseta_jogador();
-			*estado_jogo = 8;
-			*reinicio = true;
+			pMaquinaEstados->setEstadoAtual(MENU_FIM);
+			MenuFim* pMenu = static_cast<MenuFim*>(pMaquinaEstados->getEstadoAtual());
+			pMenu->setVitoria(true);
 		}
 	}
 	else if (pJ1)
@@ -30,8 +29,9 @@ void FaseSegunda::Passou_Fase()
 		if (pJ1->getVenceu())
 		{
 			pJ1->reseta_jogador();
-			*estado_jogo = 8;
-			*reinicio = true;
+			pMaquinaEstados->setEstadoAtual(MENU_FIM);
+			MenuFim* pMenu = static_cast<MenuFim*>(pMaquinaEstados->getEstadoAtual());
+			pMenu->setVitoria(true);
 		}
 	}
 	else if (pJ2)
@@ -39,8 +39,9 @@ void FaseSegunda::Passou_Fase()
 		if (pJ2->getVenceu())
 		{
 			pJ2->reseta_jogador();
-			*estado_jogo = 8;
-			*reinicio = true;
+			pMaquinaEstados->setEstadoAtual(MENU_FIM);
+			MenuFim* pMenu = static_cast<MenuFim*>(pMaquinaEstados->getEstadoAtual());
+			pMenu->setVitoria(true);
 		}
 	}
 }

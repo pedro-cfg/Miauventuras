@@ -19,7 +19,8 @@ using namespace std;
 #define LARGURA_EXIBICAO 1920
 #define ALTURA_EXIBICAO 1080
 
-#define JOGADOR1 "Texturas/jogador.png"
+#define JOGADOR1 "Texturas/jogador1.png"
+#define JOGADOR2 "Texturas/jogador2.png"
 #define ARANHA "Texturas/aranha.png"
 #define LAGARTIXA "Texturas/lagartixa.png"
 #define RATAO "Texturas/ratao.png"

@@ -6,13 +6,12 @@
 class FasePrimeira: public Fase 
 {
 public:
-	FasePrimeira(int* estado, bool* reIni);
+	FasePrimeira();
 	~FasePrimeira();
 
 	void Passou_Fase();
 
 	void Gerar_Plataformas();
-
 };
 
 #endif 

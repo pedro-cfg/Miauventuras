@@ -7,6 +7,7 @@
 #include "Jogador2.h"
 #include "ListaEntidades.h"
 #include "Menu.h"
+#include "MaquinaEstados.h"
 
 class Gerenciador_Grafico 
 {
@@ -15,8 +16,6 @@ private:
 	sf::RenderWindow janela;
 	sf::View vista;
 	sf::RectangleShape fundo;
-
-	Menu* pM;
 
 	class Marcador_Vida
 	{
@@ -44,7 +43,7 @@ public:
 	void RedimensionarVista();
 	void AjustarVista(Jogador1* pJ1, Jogador2* pJ2 = NULL);
 	void RestaurarVista();
-	void EventosJanela(int* estado_jogo);
+	void EventosJanela(MaquinaEstados* pMaqEstados);
 
 	void DesenhaTexto(sf::Text* texto, int tamanho);
 	void DesenhaForma(sf::RectangleShape& forma);

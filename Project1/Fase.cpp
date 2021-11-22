@@ -1,20 +1,22 @@
 #include "stdafx.h"
 #include "Fase.h"
+#include "Gerenciador_Grafico.h"
 
 Fase::Fase() :
 	Ente(),
 	gerenciador_colisoes(&lista_entidades),
 	pJ1(NULL),
-	pJ2(NULL),
-	estado_jogo(NULL),
-	reinicio(NULL)
+	pJ2(NULL)
 {
-	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
-	Entidade::setPonteiroLista(&lista_entidades);
 }
 
 Fase::~Fase()
 {
+}
+
+void Fase::ExecutaEstado(float dT)
+{
+	this->Executar(dT);
 }
 
 void Fase::Executar(float dT)
@@ -136,34 +138,20 @@ void Fase::MorteJogadores()
 {
 	if (pJ1 && pJ1->Morreu())
 	{
-		//pJ1->reseta_jogador(true);
+		pJ1->reseta_jogador(true, true);
 		pJ1 = NULL;
 	}
 	if (pJ2 && pJ2->Morreu())
 	{
-		//pJ2->reseta_jogador(true);
+		pJ2->reseta_jogador(true, true);
 		pJ2 = NULL;
 	}
 	if (!(pJ1 || pJ2))
 	{
-		*reinicio = true;
-		*estado_jogo = 8;
+		pMaquinaEstados->setEstadoAtual(MENU_FIM);
+		MenuFim* pMenu = static_cast<MenuFim*>(pMaquinaEstados->getEstadoAtual());
+		pMenu->setVitoria(false);
 	}
-}
-
-void Fase::setJogador(Jogador1* pJ)
-{
-	pJ1 = pJ;
-}
-
-void Fase::setJogador(Jogador2* pJ)
-{
-	pJ2 = pJ;
-}
-
-ListaEntidades& Fase::getLista()
-{
-	return lista_entidades;
 }
 
 void Fase::Limpar()

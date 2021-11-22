@@ -1,12 +1,9 @@
 #include "stdafx.h"
 #include "FasePrimeira.h"
 
-FasePrimeira::FasePrimeira(int* estado, bool* reIni) :
+FasePrimeira::FasePrimeira() :
 	Fase() 
 {
-	estado_jogo = estado;
-	reinicio = reIni;
-	//gerenciador_colisoes.setPrimeiraFase(this);
 }
 
 FasePrimeira::~FasePrimeira() {
@@ -19,28 +16,31 @@ void FasePrimeira::Passou_Fase()
 	{
 		if (pJ1->getX() >= 10000 && pJ2->getX() >= 10000)
 		{
+			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
+			pSegFase->reseta_fase(pJ1, pJ2);
 			pJ1->reseta_jogador();
 			pJ2->reseta_jogador();
-			*reinicio = true;
-			*estado_jogo = 2;
+			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}
 	else if (pJ1)
 	{
 		if (pJ1->getX() >= 10000)
 		{
+			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
+			pSegFase->reseta_fase(pJ1, pJ2);
 			pJ1->reseta_jogador();
-			*reinicio = true;
-			*estado_jogo = 2;
+			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}
 	else if (pJ2)
 	{
 		if (pJ2->getX() >= 10000)
 		{
+			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
+			pSegFase->reseta_fase(pJ1, pJ2);
 			pJ2->reseta_jogador();
-			*reinicio = true;
-			*estado_jogo = 2;
+			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}
 }

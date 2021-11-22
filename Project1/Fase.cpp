@@ -117,11 +117,11 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2)
 	pJ2 = p2;
 	if (pJ1)
 	{
-		pJ1->reseta_jogador(true, true);
+		pJ1->reseta_jogador();
 	}
 	if (pJ2)
 	{
-		pJ2->reseta_jogador(true, true);
+		pJ2->reseta_jogador();
 	}
 
 	Gerar_Objetos();

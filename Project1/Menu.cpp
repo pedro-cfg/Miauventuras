@@ -19,6 +19,7 @@ Menu::Menu() :
 	linhas_texto(0),
 	indice(1)
 {
+
 }
 
 Menu::~Menu() 
@@ -244,6 +245,8 @@ void Menu::Escolher_Opcao()
 	case 1:
 		inicializar = true;
 		if (estado_menu == 0) {
+			pJ1->reseta_jogador(true, true, true);
+			pJ2->reseta_jogador(true, true, true);
 			estado_menu = 4;
 			tamanho_texto = 4;
 		}
@@ -262,6 +265,7 @@ void Menu::Escolher_Opcao()
 				pJ1->setNome(texto[2].getString());
 				if (*dois_jogadores) {
 					inicializar = false;
+					texto[0].setString("Voce fez " + to_string(pJ2->getPontuacao()) + " Pontos!");
 					texto[1].setString("Jogador 2, informe seu nome:");
 					texto[2].setString("");
 				}
@@ -441,6 +445,9 @@ void Menu::SalvarPontuacao()
 	}
 
 	arquivo.close();
+
+	pJ1->reseta_jogador(true, true, true);
+	pJ2->reseta_jogador(true, true, true);
 }
 
 //void Menu::RecuperarPontuacao()

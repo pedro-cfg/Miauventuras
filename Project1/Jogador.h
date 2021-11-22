@@ -29,7 +29,7 @@ public:
     virtual bool mover_dir();
     virtual bool pular();
 
-    void reseta_jogador(const bool resetaPontos = false, const bool resetaVidas = false);
+    void reseta_jogador(const bool resetaPontos = false, const bool resetaVidas = false, const bool resetaNome = false);
 
     void reseta_velocidade();
     void setEmpurrado(bool emp);

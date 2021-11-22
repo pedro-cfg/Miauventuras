@@ -96,14 +96,16 @@ bool Jogador::pular()
 	return false;
 }
 
-void Jogador::reseta_jogador(const bool resetaPontos, const bool resetaVidas)
+void Jogador::reseta_jogador(const bool resetaPontos, const bool resetaVidas, const bool resetaNome)
 {
 	if (resetaPontos)
 		pontos = 0;
-	reseta_colidiu();
-	reseta_velocidade();
 	if (resetaVidas)
 		vidas = 7;
+	if (resetaNome)
+		nome = "";
+	reseta_colidiu();
+	reseta_velocidade();
 	forma.setPosition(0, -100);
 	x = 0;
 	y = -100;

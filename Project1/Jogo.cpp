@@ -2,7 +2,7 @@
 #include "Jogo.h"
 
 Jogo::Jogo() :
-	dois_jogadores(true), /*temporário - armazenar numero de jogadores no arquivo também*/
+	dois_jogadores(true), /*temporï¿½rio - armazenar numero de jogadores no arquivo tambï¿½m*/
 	pJ1(NULL),
 	pJ2(NULL),
 	gerenciador_grafico(&menu_principal),
@@ -41,6 +41,7 @@ void Jogo::Executar()
 	while (gerenciador_grafico.JanelaAberta())
 	{
 		dT = relogio.restart().asSeconds();
+
 
 		gerenciador_grafico.EventosJanela(&maquina_de_estados);
 

@@ -223,5 +223,6 @@
     <None Include="..\.gitignore">
       <Filter>Arquivos de Recurso</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

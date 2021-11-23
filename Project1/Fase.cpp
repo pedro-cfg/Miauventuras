@@ -109,7 +109,7 @@ void Fase::Inserir_Entidade(Entidade* pE)
 	lista_entidades.Inserir(pE);
 }
 
-void Fase::reseta_fase(Jogador1* p1, Jogador2* p2)
+void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 {
 	lista_entidades.Limpar();
 	gerenciador_colisoes.LimpaListas();
@@ -117,11 +117,17 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2)
 	pJ2 = p2;
 	if (pJ1)
 	{
-		pJ1->reseta_jogador();
+		if (reinicio)
+			pJ1->reseta_jogador(true, true);
+		else
+			pJ1->reseta_jogador();
 	}
 	if (pJ2)
 	{
-		pJ2->reseta_jogador();
+		if (reinicio)
+			pJ2->reseta_jogador(true, true);
+		else
+			pJ2->reseta_jogador();
 	}
 
 	Gerar_Objetos();
@@ -138,12 +144,12 @@ void Fase::MorteJogadores()
 {
 	if (pJ1 && pJ1->Morreu())
 	{
-		pJ1->reseta_jogador(true, true);
+		pJ1->reseta_jogador();
 		pJ1 = NULL;
 	}
 	if (pJ2 && pJ2->Morreu())
 	{
-		pJ2->reseta_jogador(true, true);
+		pJ2->reseta_jogador();
 		pJ2 = NULL;
 	}
 	if (!(pJ1 || pJ2))
@@ -161,6 +167,13 @@ void Fase::Limpar()
 
 void Fase::GravarLista(fstream& arquivo)
 {
+	bool p1 = false, p2 = false;
+	if (pJ1)
+		p1 = true;
+	if (pJ2)
+		p2 = true;
+	arquivo.write((char*)&p1, sizeof(p1));
+	arquivo.write((char*)&p2, sizeof(p2));
 	lista_entidades.Gravar(arquivo);
 }
 
@@ -172,10 +185,17 @@ void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
 	Limpar();
 	gerenciador_colisoes.LimpaListas();
 
-	int tamanho_lista;
+	bool j1 = false, j2 = false;
 
-	pJ1 = p1;
-	pJ2 = p2;
+	arquivo.read((char*)&j1, sizeof(j1));
+	arquivo.read((char*)&j2, sizeof(j2));
+
+	if (j1 != false)
+		pJ1 = p1;
+	if (j1 == false)
+		pJ2 = p2;
+
+	int tamanho_lista;
 
 	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
 

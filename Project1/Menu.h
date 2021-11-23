@@ -19,6 +19,8 @@ protected:
 	int num_opcoes;
 	int linhas_texto;
 
+	static bool eventoPlacar;
+
 	sf::Font fonte;
 	sf::Text texto[7];
 public:
@@ -26,9 +28,11 @@ public:
 	virtual ~Menu();
 
 	static void setPonteiroJogo(Jogo* pJ);
+	static void setDoisJogadores(bool DJ);
+	static bool getDoisJogadores();
 
 	virtual void InicializaTexto();
-	
+
 	void ExecutaEstado(float dT);
 	virtual void Executar(float dT);
 	void imprimir_se();
@@ -44,6 +48,8 @@ public:
 	virtual void retiraTexto();
 
 	void SalvarPontuacao();
+
+	void setCorTexto();
 };
 
 #endif

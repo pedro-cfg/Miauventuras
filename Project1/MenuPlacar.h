@@ -11,6 +11,9 @@ public:
 	void InicializaTexto();
 	void Escolher_Opcao();
 
+	void Executar(float dT);
+
+	void setPlacar();
 	void RecuperarPontuacao();
 };
 

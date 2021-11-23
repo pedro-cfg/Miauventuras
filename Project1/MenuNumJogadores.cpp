@@ -1,4 +1,5 @@
 #include "MenuNumJogadores.h"
+#include "Jogo.h"
 
 MenuNumJogadores::MenuNumJogadores():
 	Menu()
@@ -53,9 +54,13 @@ void MenuNumJogadores::Escolher_Opcao()
 		pMaquinaEstados->setEstadoAtual(MENU_NOME);
 		break;
 	case 3: /*Voltar*/
-		pMaquinaEstados->setEstadoAtual(MENU_FASES);
+		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);
+		pJogo->getJogador1()->setNome("");
+		pJogo->getJogador2()->setNome("");
 		break;
 	default:
 		break;
 	}
+	indice = 1;
+	setCorTexto();
 }

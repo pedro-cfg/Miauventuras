@@ -1,5 +1,6 @@
 #include "MenuPrincipal.h"
 #include "Gerenciador_Grafico.h"
+#include "Jogo.h"
 
 MenuPrincipal::MenuPrincipal():
 	Menu()
@@ -56,9 +57,10 @@ void MenuPrincipal::Escolher_Opcao()
 		pMaquinaEstados->setEstadoAtual(MENU_NUM_JOGADORES);
 		break;
 	case 2: /*Carregar*/
-		/*ver pJogo->Carregar()*/
+		pJogo->Carregar();
 		break;
 	case 3:	/*Placar*/
+		eventoPlacar = true;
 		pMaquinaEstados->setEstadoAtual(MENU_PLACAR);
 		break;
 	case 4: /*Sair*/
@@ -67,4 +69,6 @@ void MenuPrincipal::Escolher_Opcao()
 	default:
 		break;
 	}
+	indice = 1;
+	setCorTexto();
 }

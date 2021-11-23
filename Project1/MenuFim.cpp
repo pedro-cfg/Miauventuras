@@ -1,5 +1,6 @@
 #include "MenuFim.h"
 #include "Gerenciador_Grafico.h"
+#include "Jogo.h"
 
 MenuFim::MenuFim()
 {
@@ -45,7 +46,7 @@ void MenuFim::InicializaTexto()
 	texto[1].setString("");
 	texto[1].setCharacterSize(45);
 	texto[1].setOrigin(sf::Vector2f(CalculaTamanho(texto[1]), 0.f));
-	texto[1].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 150.f, ALTURA_JANELA / 6.f * 3));
+	texto[1].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 20.f, ALTURA_JANELA / 6.f * 3));
 	texto[2].setFont(fonte);
 	texto[2].setFillColor(sf::Color::Black);
 	texto[2].setString("Voltar ao Menu Principal");
@@ -61,4 +62,6 @@ void MenuFim::Escolher_Opcao()
 		SalvarPontuacao();
 		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);
 	}
+	indice = 1;
+	setCorTexto();
 }

@@ -49,7 +49,7 @@ public:
 
     void setPontuacao(int pont);
     const int getPontuacao() const;
-    void setNome(string n);
+    void setNome(string n, bool retira = false);
     const string getNome() const;
 };
 

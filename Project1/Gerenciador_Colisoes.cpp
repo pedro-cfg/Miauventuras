@@ -14,16 +14,6 @@ Gerenciador_Colisoes::~Gerenciador_Colisoes()
 	pLista = NULL;
 }
 
-//void Gerenciador_Colisoes::Fim_de_Fase(Jogador* pJ)
-//{
-//	if (  pJ->getVidas() <= 0 || pJ->getX() >= 9915.f) {
-//		pLista->Limpar(1);
-//		LimpaListas();
-//		Ente::setExecutando(0);
-//		pJ->reseta_jogador();
-//		pF1->Gerar_Objetos();
-//	}
-//}
 
 void Gerenciador_Colisoes::LimpaListas()
 {

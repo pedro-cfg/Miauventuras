@@ -20,11 +20,6 @@
 class Jogo 
 {
 private:
-	//int estado_de_jogo; /* fechar janela = -1, menu = 0, fase 1 = 1, fase 2 = 2, carregar = 3, salvar = 4 */
-	//bool reinicio;
-	//bool dois_jogadores;
-	/**/
-	bool dois_jogadores;
 	Jogador1* pJ1;
 	Jogador2* pJ2;
 	Gerenciador_Grafico gerenciador_grafico;
@@ -58,9 +53,11 @@ public:
 	FaseSegunda* getSegundaFase();
 
 	void Gravar();
-	void Ler();
+	void Carregar();
 	void GravarJogador(fstream& arquivo);
 	void LerJogador(fstream& arquivo);
+
+	void MudaFundo(int fase);
 };
 
 #endif 

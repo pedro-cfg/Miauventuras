@@ -46,30 +46,32 @@ void MenuFases::Escolher_Opcao()
 	switch (indice)
 	{
 	case 1: /*Fase 1*/
+		pJogo->MudaFundo(1);
 		pMaquinaEstados->setEstadoAtual(PRIMEIRA_FASE);
 		if (dois_jogadores)
 		{
-			pJogo->getPrimeiraFase()->reseta_fase(pJogo->getJogador1(), pJogo->getJogador2());
+			pJogo->getPrimeiraFase()->reseta_fase(pJogo->getJogador1(), pJogo->getJogador2(), true);
 			pJogo->getJogador1()->setFase(1);
 			pJogo->getJogador2()->setFase(1);
 		}
 		else
 		{
-			pJogo->getPrimeiraFase()->reseta_fase(pJogo->getJogador1(), NULL);
+			pJogo->getPrimeiraFase()->reseta_fase(pJogo->getJogador1(), NULL, true);
 			pJogo->getJogador1()->setFase(1);
 		}
 		break;
 	case 2: /*Fase 2*/
+		pJogo->MudaFundo(2);
 		pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		if (dois_jogadores)
 		{
-			pJogo->getSegundaFase()->reseta_fase(pJogo->getJogador1(), pJogo->getJogador2());
+			pJogo->getSegundaFase()->reseta_fase(pJogo->getJogador1(), pJogo->getJogador2(), true);
 			pJogo->getJogador1()->setFase(2);
 			pJogo->getJogador2()->setFase(2);
 		}
 		else
 		{
-			pJogo->getSegundaFase()->reseta_fase(pJogo->getJogador1(), NULL);
+			pJogo->getSegundaFase()->reseta_fase(pJogo->getJogador1(), NULL, true);
 			pJogo->getJogador1()->setFase(2);
 		}
 		break;
@@ -79,4 +81,6 @@ void MenuFases::Escolher_Opcao()
 	default:
 		break;
 	}
+	indice = 1;
+	setCorTexto();
 }

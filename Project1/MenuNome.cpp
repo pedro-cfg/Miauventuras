@@ -30,7 +30,7 @@ void MenuNome::InicializaTexto()
 	texto[2].setFillColor(sf::Color::Black);
 	texto[2].setString("");
 	texto[2].setCharacterSize(45);
-	texto[2].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f - 30.f, ALTURA_JANELA / 6.f * 4));
+	texto[2].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f - 0.f, ALTURA_JANELA / 6.f * 4));
 }
 
 void MenuNome::Escolher_Opcao()
@@ -38,24 +38,30 @@ void MenuNome::Escolher_Opcao()
 	string nome1 = pJogo->getJogador1()->getNome();
 	string nome2 = pJogo->getJogador2()->getNome();
 
+	texto[1].setString("Jogador 1, informe seu nome:");
+
 	if (dois_jogadores)
 	{
 		if (nome1 == "")
 		{
-			pJogo->getJogador1()->setNome(texto[2].getString());
+			pJogo->getJogador1()->setNome(texto[2].getString(), true);
 			texto[1].setString("Jogador 2, informe seu nome:");
 		}
 		else if (nome2 == "")
 		{
-			pJogo->getJogador1()->setNome(texto[2].getString());
+			pJogo->getJogador2()->setNome(texto[2].getString(), true);
 			pMaquinaEstados->setEstadoAtual(MENU_FASES);
 		}
 	}
 	else
 	{
-		pJogo->getJogador1()->setNome(texto[2].getString());
+		pJogo->getJogador1()->setNome(texto[2].getString(), true);
 		pMaquinaEstados->setEstadoAtual(MENU_FASES);
 	}
+
+	texto[2].setString("");
+	indice = 1;
+	setCorTexto();
 }
 
 void MenuNome::incluiTexto(char letra)

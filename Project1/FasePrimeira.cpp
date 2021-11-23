@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FasePrimeira.h"
+#include "Gerenciador_Grafico.h"
 
 FasePrimeira::FasePrimeira() :
 	Fase() 
@@ -18,8 +19,11 @@ void FasePrimeira::Passou_Fase()
 		{
 			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
 			pSegFase->reseta_fase(pJ1, pJ2);
+			pGG->MudaFundo(2);
 			pJ1->reseta_jogador();
 			pJ2->reseta_jogador();
+			pJ1->setFase(2);
+			pJ2->setFase(2);
 			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}
@@ -28,8 +32,10 @@ void FasePrimeira::Passou_Fase()
 		if (pJ1->getX() >= 10000)
 		{
 			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
-			pSegFase->reseta_fase(pJ1, pJ2);
+			pSegFase->reseta_fase(pJ1, NULL);
+			pGG->MudaFundo(2);
 			pJ1->reseta_jogador();
+			pJ1->setFase(2);
 			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}
@@ -38,8 +44,10 @@ void FasePrimeira::Passou_Fase()
 		if (pJ2->getX() >= 10000)
 		{
 			Fase* pSegFase = static_cast<Fase*>(pMaquinaEstados->buscaEstado(SEGUNDA_FASE));
-			pSegFase->reseta_fase(pJ1, pJ2);
+			pSegFase->reseta_fase(NULL, pJ2);
+			pGG->MudaFundo(2);
 			pJ2->reseta_jogador();
+			pJ2->setFase(2);
 			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 	}

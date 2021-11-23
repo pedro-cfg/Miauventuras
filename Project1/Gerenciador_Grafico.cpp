@@ -128,22 +128,9 @@ void Gerenciador_Grafico::EventosJanela(MaquinaEstados* pMaqEstados)
 				char tecla = static_cast<char>(event.text.unicode);
 				if (tecla == '\b')
 					pM->retiraTexto();
-				//else if (tecla == '\n')
-				//	pM->Escolher_Opcao();
 				else
 					pM->incluiTexto(tecla);
 			}
-			/*else
-			{
-				switch (event.key.code)
-				{
-				case sf::Keyboard::Escape:
-					*estado_jogo = 4;
-					break;
-				case sf::Keyboard::Enter:
-					pM->Escolher_Opcao();
-				}
-			}*/
 			break;
 		default:
 			break;

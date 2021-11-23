@@ -46,6 +46,10 @@ void Jogador::mover(float dT)
 		velocidadeY = 0.0f;
 	}
 
+	if (colidiu_direita || colidiu_esquerda) {
+		velocidadeX = 0.f;
+	}
+
 	if (!colidiu_baixo && abs(y) >= getAltura() / 2.f)
 	{
 		velocidadeY += 981.0f * dT;
@@ -168,9 +172,12 @@ void Jogador::setFase(int f)
 	fase = f;
 }
 
-void Jogador::setNome(string n)
+void Jogador::setNome(string n, bool retira)
 {
-	n.pop_back();
+	if (retira) {
+		if (n != "")
+			n.pop_back();
+	}
 	nome = n;
 }
 

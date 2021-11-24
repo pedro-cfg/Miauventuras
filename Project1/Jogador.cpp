@@ -9,10 +9,7 @@ Jogador::Jogador() :
 	pontos = 0;
 	vidas = 7;
 
-	//CarregaTextura(JOGADOR1);
-	//forma.setPosition(sf::Vector2f(x, y));
-	//this->x = x;
-	//this->y = y;
+	tipo = "Jogador";
 
 	reseta_velocidade();
 
@@ -27,7 +24,6 @@ Jogador::Jogador() :
 
 Jogador::~Jogador()
 {
-
 }
 
 void Jogador::Executar(float dT)
@@ -136,30 +132,9 @@ bool Jogador::getVenceu() const
 	return venceu;
 }
 
-bool Jogador::Morreu() const
+void Jogador::operator+=(Inimigo* pInim)
 {
-	return (vidas <= 0);
-}
-
-void Jogador::Pontua(Inimigo* pI)
-{
-	int valorInimigo = pI->getValor();
-	for (int i = 0; i < valorInimigo; i++)
-	{
-		this->operator++();
-	}
-	/*Temporário!!!!!*/
-	cout << pontos << endl;
-}
-
-void Jogador::operator++()
-{
-	pontos++;
-}
-
-void Jogador::setTipo()
-{
-	tipo = "Jogador";
+	pontos += pInim->getValor();
 }
 
 const int Jogador::getFase() const

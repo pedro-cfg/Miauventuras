@@ -35,12 +35,13 @@ void MenuPlacar::Executar(float dT)
 {
 	setPlacar();
 	pGG->RestaurarVista();
-	imprimir_se();
+	desenhar();
 }
 
 void MenuPlacar::setPlacar()
 {
-	if (eventoPlacar) {
+	if (eventoPlacar) 
+	{
 		RecuperarPontuacao();
 
 		fonte.loadFromFile("Fontes/SIXTY.ttf");

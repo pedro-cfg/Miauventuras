@@ -11,7 +11,6 @@ Personagem::Personagem():
 
 Personagem::~Personagem() 
 {
-
 }
 
 int Personagem::getVidas() const
@@ -24,18 +23,14 @@ void Personagem::setVidas(int v)
 	vidas = v;
 }
 
-void Personagem::sofreDano()
-{
-	this->operator--();
-}
-
 void Personagem::operator--()
 {
 	vidas--;
 }
 
-void Personagem::mover(float dT)
+bool Personagem::Morreu() const
 {
+	return (vidas <= 0);
 }
 
 void Personagem::setVelocidadeEscalar(float v)
@@ -46,10 +41,6 @@ void Personagem::setVelocidadeEscalar(float v)
 float Personagem::getVelocidadeEscalar() const
 {
 	return velocidadeEscalar;
-}
-
-void Personagem::reseta_velocidade()
-{
 }
 
 void Personagem::setVelocidadeY(float v)

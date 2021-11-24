@@ -17,11 +17,14 @@
 #include "MaquinaEstados.h"
 #include "Estado.h"
 
+/*Classe principal*/
 class Jogo 
 {
 private:
+	/*Jogadores serão alocados dinamicamente na inicialização*/
 	Jogador1* pJ1;
 	Jogador2* pJ2;
+
 	Gerenciador_Grafico gerenciador_grafico;
 
 	MenuPrincipal menu_principal;
@@ -43,7 +46,6 @@ public:
 	void Executar();
 
 	void Inicializar();
-
 	void InicializarEstados();
 
 	Jogador1* getJogador1() const;
@@ -52,9 +54,10 @@ public:
 	FasePrimeira* getPrimeiraFase();
 	FaseSegunda* getSegundaFase();
 
+	/*Métodos de salvamento e carregamento*/
 	void Gravar();
 	void Carregar();
-	void GravarJogador(fstream& arquivo);
+	void GravarJogadores(fstream& arquivo);
 	void LerJogador(fstream& arquivo);
 
 	void MudaFundo(int fase);

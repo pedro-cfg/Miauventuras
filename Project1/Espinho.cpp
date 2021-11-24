@@ -6,8 +6,7 @@
 Espinho::Espinho():Obstaculo()
 {
 	CarregaTextura(ESPINHO);
-	setTipo();
-	ehPlataforma = false;
+	tipo = "Espinho";
 }
 
 Espinho::Espinho(float x, float y) :
@@ -18,8 +17,7 @@ Espinho::Espinho(float x, float y) :
 	CarregaTextura(ESPINHO);
 	forma.setPosition(sf::Vector2f(x, y));
 
-	setTipo();
-	ehPlataforma = false;
+	tipo = "Espinho";
 }
 
 Espinho::~Espinho() {
@@ -29,14 +27,9 @@ Espinho::~Espinho() {
 void Espinho::ExecutaImpedimento(Jogador* pJ)
 {
 	if (pJ->getContador() > 1.f) {
-		pJ->sofreDano();
+		pJ->operator--();
 	}
 	pJ->Atualiza_Contador(0.f, true);
-}
-
-void Espinho::setTipo()
-{
-	tipo = "Espinho";
 }
 
 void Espinho::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)

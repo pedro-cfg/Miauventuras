@@ -3,10 +3,11 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
-Aranha::Aranha():Inimigo()
+Aranha::Aranha():
+	Inimigo()
 {
 	CarregaTextura(ARANHA);
-	setTipo();
+	tipo = "Aranha";
 	valor = 1;
 }
 
@@ -21,7 +22,7 @@ Aranha::Aranha(float x, float y):
 	Xinicial = x;
 
 	valor = 1;
-	setTipo();
+	tipo = "Aranha";
 }
 
 Aranha::~Aranha() 
@@ -51,11 +52,6 @@ void Aranha::lancaProjetil()
 	}
 }
 
-void Aranha::setTipo()
-{
-	tipo = "Aranha";
-}
-
 void Aranha::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
 {
 	setVidas(numVidas);
@@ -67,4 +63,3 @@ void Aranha::Recuperar(float cX, float cY, float XI, int numVidas, float velX, f
 	pLista->Inserir(this);
 	pGC->Inserir(this);
 }
-

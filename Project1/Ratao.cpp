@@ -6,9 +6,7 @@ Ratao::Ratao():Inimigo()
 {
 	CarregaTextura(RATAO);
 	valor = 3;
-	setTipo();
-
-	ehChefao = true;
+	tipo = "Ratao";
 }
 
 Ratao::Ratao(float x, float y) :
@@ -21,21 +19,14 @@ Ratao::Ratao(float x, float y) :
 
 	Xinicial = x;
 
-	setTipo();
+	tipo = "Ratao";
 	vidas = 3;
 	valor = 3;
-
-	ehChefao = true;
 }
 
 Ratao::~Ratao() 
 {
 
-}
-
-void Ratao::setTipo()
-{
-	tipo = "Ratao";
 }
 
 void Ratao::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)

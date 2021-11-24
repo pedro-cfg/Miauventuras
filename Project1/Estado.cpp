@@ -14,7 +14,3 @@ Estado::Estado()
 Estado::~Estado()
 {
 }
-
-void Estado::ExecutaEstado(float dT)
-{
-}

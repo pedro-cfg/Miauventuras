@@ -23,11 +23,9 @@ public:
 
     void Limpar();
 
+    /*Métodos para salvamento da lista*/
     void Gravar(fstream& arquivo);
     void Gravar_Individual(Entidade* pE, fstream& arquivo);
-
-    ///*Limpa a lista a partir de um determinado índice ind*/
-    //void Limpar(int ind = 0);
 };
 
 #endif

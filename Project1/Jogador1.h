@@ -1,5 +1,8 @@
-#pragma once
+#ifndef _JOGADOR_1_H_
+#define _JOGADOR_1_H_
+
 #include "Jogador.h"
+
 class Jogador1: public Jogador
 {
 public:
@@ -12,3 +15,4 @@ public:
 	bool pular();
 };
 
+#endif

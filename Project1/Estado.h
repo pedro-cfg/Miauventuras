@@ -3,15 +3,18 @@
 
 #include "MaquinaEstados.h"
 
+/*Classe abstrata*/
 class Estado
 {
 protected:
 	static MaquinaEstados* pMaquinaEstados;
 public:
 	Estado();
-	~Estado();
+	virtual~Estado();
 	static void setMaquinaEstados(MaquinaEstados* pMaquina);
-	virtual void ExecutaEstado(float dT);
+
+	/*Método executado polimorficamente*/
+	virtual void ExecutaEstado(float dT){}
 };
 
 #endif

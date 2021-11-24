@@ -14,18 +14,8 @@ Ente::Ente()
 	contador_tempo = 0.f;
 }
 
-Ente::~Ente() {
-
-}
-
-
-
-void Ente::Executar(float dT) {
-
-}
-
-void Ente::imprimir_se() {
-
+Ente::~Ente() 
+{
 }
 
 void Ente::Atualiza_Contador(float dT, bool zera)
@@ -41,11 +31,3 @@ void Ente::Atualiza_Contador(float dT, bool zera)
 			contador_tempo = 0.f;
 	}
 }
-
-//int Ente::executando = 0;
-
-//void Ente::setExecutando(int exec)
-//{
-//	executando = exec;
-//}
-

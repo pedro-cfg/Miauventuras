@@ -1,9 +1,9 @@
-#pragma once
+#ifndef _STDAFX_H_
+#define _STDAFX_H_
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <SFML/Graphics.hpp>
-//#include <Windows.h>
 
 #include <iostream>
 #include <fstream>
@@ -30,3 +30,5 @@ using namespace std;
 #define PROJETIL "Texturas/projetil.png"
 #define FUNDO1 "Texturas/fundo1.png"
 #define FUNDO2 "Texturas/fundo2.png"
+
+#endif

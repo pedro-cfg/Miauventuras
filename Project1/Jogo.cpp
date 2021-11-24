@@ -4,7 +4,7 @@
 Jogo::Jogo() :
 	pJ1(NULL),
 	pJ2(NULL),
-	gerenciador_grafico(&menu_principal),
+	gerenciador_grafico(),
 	menu_principal(),
 	menu_fases(),
 	menu_nome(),
@@ -110,7 +110,7 @@ void Jogo::Gravar()
 	bool dois_jogadores = menu_fases.getDoisJogadores();
 	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
 
-	GravarJogador(arquivo);
+	GravarJogadores(arquivo);
 
 	if (faseJ1 == 2 || faseJ2 == 2)
 		segunda_fase.GravarLista(arquivo);
@@ -129,28 +129,29 @@ void Jogo::Carregar()
 
 	bool dois_jogadores;
 	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));
-	menu_fases.setDoisJogadores(dois_jogadores);
+	Menu::setDoisJogadores(dois_jogadores);
 
 	LerJogador(arquivo);
 
-	if (faseJ1 == 2 || faseJ2 == 2) {
+	if (faseJ1 == 2 || faseJ2 == 2) 
+	{
 		MudaFundo(2);
 		pJ1->setFase(2);
 		pJ2->setFase(2);
 		segunda_fase.LerLista(arquivo, pJ1, pJ2);
 		maquina_de_estados.setEstadoAtual(SEGUNDA_FASE);
 	}
-	else {
+	else 
+	{
 		MudaFundo(1);
 		pJ1->setFase(1);
 		pJ2->setFase(1);
 		primeira_fase.LerLista(arquivo, pJ1, pJ2);
 		maquina_de_estados.setEstadoAtual(PRIMEIRA_FASE);
 	}
-
 }
 
-void Jogo::GravarJogador(fstream& arquivo)
+void Jogo::GravarJogadores(fstream& arquivo)
 {
 	float x, y, x2, y2;
 	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;

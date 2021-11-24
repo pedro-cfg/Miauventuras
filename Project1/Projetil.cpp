@@ -8,7 +8,7 @@ Projetil::Projetil()
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
-	setTipo();
+	tipo = "Projetil";
 }
 
 Projetil::Projetil(Aranha* pAr) :
@@ -23,18 +23,18 @@ Projetil::Projetil(Aranha* pAr) :
 	velocidadeX = velocidadeEscalar * pAr->getDirecao();
 	velocidadeY = -velocidadeEscalar;
 
-	setTipo();
+	tipo = "Projetil";
 	contador_tempo = 0.f;
 }
 
 Projetil::~Projetil() 
 {
-
 }
 void Projetil::Executar(float dT)
 {
 	mover(dT);
-	if (contador_tempo > 3.f) {
+	if (contador_tempo > 3.f) 
+	{
 		pGC->Excluir(this);
 		Atualiza_Contador(0.f, true);
 	}
@@ -48,11 +48,6 @@ const float Projetil::getVelX() const
 const float Projetil::getVelY() const
 {
 	return velocidadeY;
-}
-
-void Projetil::setTipo()
-{
-	tipo = "Projetil";
 }
 
 void Projetil::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
@@ -77,4 +72,3 @@ void Projetil::mover(float dT)
 
 	Deslocar(dx, dy);
 }
-

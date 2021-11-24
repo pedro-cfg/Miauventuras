@@ -3,8 +3,6 @@
 
 int main() 
 {
-    srand(time(NULL));
-
     Jogo oJogoDoGato;
 
     return 0;

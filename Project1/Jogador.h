@@ -10,7 +10,7 @@ class Gerenciador_Colisoes;
 
 class Jogador: public Personagem
 {
-private: 
+protected:
     string nome;
     int pontos;
     float alturaPulo;
@@ -25,28 +25,23 @@ public:
 
     void Executar(float dT);
     void mover(float dT);
+
     virtual bool mover_esq();
     virtual bool mover_dir();
     virtual bool pular();
 
     void reseta_jogador(const bool resetaPontos = false, const bool resetaVidas = false, const bool resetaNome = false);
-
     void reseta_velocidade();
-    void setEmpurrado(bool emp);
 
+    /*Sobrecarga de operador += -> responsável pela pontuação*/
+    void operator+=(Inimigo* pInim);
+
+    void setEmpurrado(bool emp);
     void setVenceu(const bool v);
     bool getVenceu() const;
-
-    bool Morreu() const;
-
-    void Pontua(Inimigo* pI);
-    void operator++();
-
-    void setTipo();
-
+    //void setTipo();
     void setFase(int f);
     const int getFase() const;
-
     void setPontuacao(int pont);
     const int getPontuacao() const;
     void setNome(string n, bool retira = false);

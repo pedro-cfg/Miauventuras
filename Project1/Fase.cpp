@@ -4,6 +4,7 @@
 
 Fase::Fase() :
 	Ente(),
+	Estado(),
 	gerenciador_colisoes(&lista_entidades),
 	pJ1(NULL),
 	pJ2(NULL)
@@ -12,6 +13,8 @@ Fase::Fase() :
 
 Fase::~Fase()
 {
+	pJ1 = NULL;
+	pJ2 = NULL;
 }
 
 void Fase::ExecutaEstado(float dT)
@@ -55,6 +58,7 @@ void Fase::Gerar_Inimigos()
 	Gerar_Chefao();
 	int instancias, posicao;
 
+	/*Alcance de instâncias: 3-5*/
 	instancias = (rand() % 3) + 3;
 	for (int i = 0; i < instancias; i++)
 	{
@@ -64,6 +68,7 @@ void Fase::Gerar_Inimigos()
 		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pA));
 	}
 
+	/*Alcance de instâncias: 3-5*/
 	instancias = (rand() % 3) + 3;
 	for (int i = 0; i < instancias; i++)
 	{
@@ -79,6 +84,7 @@ void Fase::Gerar_Obstaculos()
 	Gerar_Plataformas();
 	int instancias, posicao;
 
+	/*Alcance de instâncias: 3-5*/
 	instancias = (rand() % 3) + 3;
 	for (int i = 0; i < instancias; i++) {
 		posicao = (rand() % 9000) + 300;
@@ -87,6 +93,7 @@ void Fase::Gerar_Obstaculos()
 		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pE));
 	}
 
+	/*Alcance de instâncias: 3-5*/
 	instancias = (rand() % 3) + 3;
 	for (int i = 0; i < instancias; i++) {
 		posicao = (rand() % 9000) + 300;
@@ -94,14 +101,6 @@ void Fase::Gerar_Obstaculos()
 		lista_entidades.Inserir(static_cast<Entidade*>(pT));
 		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pT));
 	}
-}
-
-void Fase::Gerar_Plataformas()
-{
-}
-
-void Fase::Gerar_Chefao()
-{
 }
 
 void Fase::Inserir_Entidade(Entidade* pE)
@@ -134,10 +133,6 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
-}
-
-void Fase::Passou_Fase()
-{
 }
 
 void Fase::MorteJogadores()
@@ -190,19 +185,19 @@ void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
 	arquivo.read((char*)&j1, sizeof(j1));
 	arquivo.read((char*)&j2, sizeof(j2));
 
-	if (j1 != false)
+	if (j1)
 		pJ1 = p1;
-	if (j1 == false)
+	if (j2)
 		pJ2 = p2;
 
 	int tamanho_lista;
 
 	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
 
-	for (int i = 0; i < tamanho_lista; i++) {
+	for (int i = 0; i < tamanho_lista; i++) 
+	{
 		LerLista_Individual(arquivo);
 	}
-
 }
 
 void Fase::LerLista_Individual(fstream& arquivo)
@@ -224,31 +219,38 @@ void Fase::LerLista_Individual(fstream& arquivo)
 	arquivo.read((char*)&velX, sizeof(velX));
 	arquivo.read((char*)&velY, sizeof(velY));
 
-	if (tipo == "Aranha") {
+	if (tipo == "Aranha") 
+	{
 		Aranha* pA = new Aranha;
 		pA->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Lagartixa") {
+	else if (tipo == "Lagartixa") 
+	{
 		Lagartixa* pL = new Lagartixa;
 		pL->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Ratao") {
+	else if (tipo == "Ratao") 
+	{
 		Ratao* pR = new Ratao;
 		pR->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Teia") {
+	else if (tipo == "Teia") 
+	{
 		Teia* pT = new Teia;
 		pT->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Espinho") {
+	else if (tipo == "Espinho") 
+	{
 		Espinho* pEsp = new Espinho;
 		pEsp->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Plataforma") {
+	else if (tipo == "Plataforma") 
+	{
 		Plataforma* pP = new Plataforma;
 		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}
-	else if (tipo == "Projetil") {
+	else if (tipo == "Projetil") 
+	{
 		Projetil* pP = new Projetil;
 		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
 	}

@@ -32,8 +32,7 @@ public:
 
 	void Excluir(Inimigo* pI);
 	void Excluir(Projetil* pP);
-	void Excluir(Jogador* pJ);
-
+	
 	void LimpaListas();
 
 	void Checa_Colisao(Jogador* pJ);

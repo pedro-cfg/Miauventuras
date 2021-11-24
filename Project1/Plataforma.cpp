@@ -5,8 +5,7 @@
 Plataforma::Plataforma()
 {
 	CarregaTextura(PLATAFORMA);
-	setTipo();
-	ehPlataforma = true;
+	tipo = "Plataforma";
 }
 
 Plataforma::Plataforma(float x, float y) :
@@ -17,8 +16,7 @@ Plataforma::Plataforma(float x, float y) :
 	this->x = x;
 	this->y = y;
 
-	setTipo();
-	ehPlataforma = true;
+	tipo = "Plataforma";
 }
 
 Plataforma::~Plataforma() 
@@ -32,11 +30,6 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cim
 	pP->setColidiuDireita(dir);
 	pP->setColidiuCima(cima);
 	pP->setColidiuBaixo(baixo);
-}
-
-void Plataforma::setTipo()
-{
-	tipo = "Plataforma";
 }
 
 void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)

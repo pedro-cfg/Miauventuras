@@ -1,8 +1,9 @@
 #include "Gerenciador_Grafico.h"
 
-Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
+Gerenciador_Grafico::Gerenciador_Grafico() :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
 	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_EXIBICAO, ALTURA_EXIBICAO)),
+	cor_fundo(173, 216, 230),
 	marcador1(800, -400),
 	marcador2(-800, -400)
 {
@@ -15,6 +16,7 @@ Gerenciador_Grafico::Gerenciador_Grafico(Menu* pM) :
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
+	/*Desaloca as texturas*/
 	map<string, sf::Texture*>::const_iterator it = mapa_texturas.begin();
 	while (it != mapa_texturas.end())
 	{
@@ -109,12 +111,13 @@ void Gerenciador_Grafico::EventosJanela(MaquinaEstados* pMaqEstados)
 				switch (event.key.code)
 				{
 				case sf::Keyboard::Escape:
-					pMaqEstados->setEstadoAtual(MENU_PAUSA);
+					if (id == PRIMEIRA_FASE || id == SEGUNDA_FASE)
+						pMaqEstados->setEstadoAtual(MENU_PAUSA);
 					break;
 				case sf::Keyboard::Enter:
 					if (id == MENU_NOME)
 					{
-						Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
+						MenuNome* pM = static_cast<MenuNome*>(pMaqEstados->getEstadoAtual());
 						pM->Escolher_Opcao();
 					}
 					break;
@@ -124,7 +127,7 @@ void Gerenciador_Grafico::EventosJanela(MaquinaEstados* pMaqEstados)
 		case sf::Event::TextEntered:
 			if (id == MENU_NOME && event.text.unicode <= 128)
 			{
-				Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
+				MenuNome* pM = static_cast<MenuNome*>(pMaqEstados->getEstadoAtual());
 				char tecla = static_cast<char>(event.text.unicode);
 				if (tecla == '\b')
 					pM->retiraTexto();
@@ -172,9 +175,22 @@ void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista, Jogador1* pJ1, Joga
 void Gerenciador_Grafico::MudaFundo(int fase)
 {
 	if (fase == 1)
+	{
+		setCorFundo(151, 240, 254);
 		fundo.setTexture(mapa_texturas[FUNDO1]);
-	else
+	}
+	else if (fase == 2)
+	{
+		setCorFundo(188, 202, 255);
 		fundo.setTexture(mapa_texturas[FUNDO2]);
+	}
+}
+
+void Gerenciador_Grafico::setCorFundo(int R, int G, int B)
+{
+	cor_fundo.r = R;
+	cor_fundo.g = G;
+	cor_fundo.b = B;
 }
 
 map<string, sf::Texture*> Gerenciador_Grafico::getMapaTexturas() const
@@ -232,7 +248,7 @@ void Gerenciador_Grafico::InicializaMapaTexturas()
 void Gerenciador_Grafico::AtualizarTela()
 {
 	janela.display();
-	janela.clear(sf::Color(173, 216, 230, 255));
+	janela.clear(cor_fundo);
 }
 
 void Gerenciador_Grafico::FecharJanela()
@@ -268,6 +284,7 @@ Gerenciador_Grafico::Marcador_Vida::Marcador_Vida(float x0, float y0) :
 
 Gerenciador_Grafico::Marcador_Vida::~Marcador_Vida()
 {
+	/*Desaloca vector de texturas*/
 	int tam = (int)texturas.size();
 	for (int i = 0; i < tam; i++)
 	{
@@ -312,4 +329,3 @@ sf::RectangleShape& Gerenciador_Grafico::Marcador_Vida::getforma()
 {
 	return forma_marcador;
 }
-

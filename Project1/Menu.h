@@ -16,7 +16,6 @@ protected:
 
 	int indice;
 
-	int num_opcoes;
 	int linhas_texto;
 
 	static bool eventoPlacar;
@@ -25,27 +24,24 @@ protected:
 	sf::Text texto[7];
 public:
 	Menu();
-	virtual ~Menu();
+	virtual~Menu();
 
 	static void setPonteiroJogo(Jogo* pJ);
 	static void setDoisJogadores(bool DJ);
 	static bool getDoisJogadores();
 
 	virtual void InicializaTexto();
+	virtual void Escolher_Opcao();
 
 	void ExecutaEstado(float dT);
 	virtual void Executar(float dT);
-	void imprimir_se();
 
-	virtual void Escolher_Opcao();
+	void desenhar();
 
 	float CalculaTamanho(sf::Text texto);
 
 	void opcao_acima();
 	void opcao_abaixo();
-
-	virtual void incluiTexto(char letra);
-	virtual void retiraTexto();
 
 	void SalvarPontuacao();
 

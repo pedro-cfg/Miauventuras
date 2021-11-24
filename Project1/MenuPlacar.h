@@ -1,5 +1,8 @@
-#pragma once
+#ifndef _MENU_PLACAR_H_
+#define _MENU_PLACAR_H_
+
 #include "Menu.h"
+
 class MenuPlacar : public Menu
 {
 private:
@@ -17,3 +20,4 @@ public:
 	void RecuperarPontuacao();
 };
 
+#endif

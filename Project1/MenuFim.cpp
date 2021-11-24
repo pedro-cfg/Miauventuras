@@ -17,14 +17,14 @@ void MenuFim::Executar(float dT)
 {
 	if (vitoria)
 	{
-		texto[1].setString("Vitoria!!!!! =D");
+		texto[1].setString("Vitoria!!!!! :D");
 	}
 	else
 	{
 		texto[1].setString("Derrota :(");
 	}
 	pGG->RestaurarVista();
-	imprimir_se();
+	desenhar();
 }
 
 void MenuFim::setVitoria(const bool v)
@@ -60,6 +60,8 @@ void MenuFim::Escolher_Opcao()
 	if (indice == 2)
 	{
 		SalvarPontuacao();
+		pJogo->getJogador1()->reseta_jogador(true, true, true);
+		pJogo->getJogador2()->reseta_jogador(true, true, true);
 		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);
 	}
 	indice = 1;

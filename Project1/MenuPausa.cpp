@@ -45,7 +45,7 @@ void MenuPausa::Escolher_Opcao()
 {
 	switch (indice)
 	{
-	case 1:
+	case 1: /*Continuar jogada*/
 		texto[2].setString("Salvar");
 		if (pJogo->getJogador1()->getFase() == 1)
 		{
@@ -56,12 +56,15 @@ void MenuPausa::Escolher_Opcao()
 			pMaquinaEstados->setEstadoAtual(SEGUNDA_FASE);
 		}
 		break;
-	case 2:
+	case 2: /*Salvar jogada*/
 		pJogo->Gravar();
 		texto[2].setString("Jogo Salvo!");
 		break;
-	case 3:
+	case 3: /*Voltar ao menu principal*/
 		texto[2].setString("Salvar");
+		SalvarPontuacao();
+		pJogo->getJogador1()->reseta_jogador(true, true, true);
+		pJogo->getJogador2()->reseta_jogador(true, true, true);
 		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);
 		break;
 	default:

@@ -19,11 +19,12 @@ protected:
     static ListaEntidades* pLista;
 
     string tipo;
-
 public: 
     Entidade();
-    ~Entidade();
+    virtual~Entidade();
+
     void desenhar();
+
     void setX(float x);
     void setY(float y);
     float getX() const;
@@ -39,13 +40,13 @@ public:
     void Reposicionar(float X, float Y);
     void Deslocar(float dx, float dy);
 
-    virtual void setTipo();
+    //virtual void setTipo();
     const string getTipo() const;
 
-    virtual void mover(float dT);
-    virtual void Executar(float dT);
-
-    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
+    /*Métodos executados polimorficamente*/
+    virtual void mover(float dT){}
+    virtual void Executar(float dT){}
+    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f){}
 };
 
 #endif 

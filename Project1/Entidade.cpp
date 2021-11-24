@@ -10,7 +10,6 @@ void Entidade::setGerenciadorColisoes(Gerenciador_Colisoes* pG)
 	pGC = pG;
 }
 
-
 ListaEntidades* Entidade::pLista = NULL;
 void Entidade::setPonteiroLista(ListaEntidades* pL)
 {
@@ -24,7 +23,7 @@ Entidade::Entidade() :
 	x(0),
 	y(0)
 {
-	setTipo();
+	tipo = "";
 }
 
 Entidade::~Entidade() 
@@ -44,7 +43,6 @@ void Entidade::Reposicionar(float X, float Y)
 	forma.setPosition(sf::Vector2f(X, Y));
 	setX(X);
 	setY(Y);
-	
 }
 
 void Entidade::Deslocar(float dx, float dy)
@@ -54,33 +52,15 @@ void Entidade::Deslocar(float dx, float dy)
 	y += dy;
 }
 
-void Entidade::setTipo()
-{
-	tipo = "";
-}
-
 const string Entidade::getTipo() const
 {
 	return tipo;
-}
-
-void Entidade::mover(float dT)
-{
-}
-
-void Entidade::Executar(float dT)
-{
-}
-
-void Entidade::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
-{
 }
 
 void Entidade::desenhar()
 {
 	pGG->DesenhaForma(forma);
 }
-
 
 void Entidade::setX(float x)
 {

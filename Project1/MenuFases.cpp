@@ -76,6 +76,8 @@ void MenuFases::Escolher_Opcao()
 		}
 		break;
 	case 3: /*Voltar*/
+		pJogo->getJogador1()->setNome("");
+		pJogo->getJogador2()->setNome("");
 		pMaquinaEstados->setEstadoAtual(MENU_NUM_JOGADORES);
 		break;
 	default:

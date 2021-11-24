@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 
+/*Lista template*/
 template <class TL >
 class Lista
 {
@@ -123,36 +124,6 @@ public:
 		pUltimo = NULL;
 		tam = 0;
 	}
-
-	//void Limpar(int ind = 0)
-	//{
-	//	Elemento<TL>* paux1 = pPrimeiro;
-	//	//Elemento<TL>* paux2 = NULL;
-
-	//	for (int i = 1; i < ind; i++)
-	//	{
-	//		paux1 = paux1->getProx();
-	//	}
-
-	//	TL* pT = new TL;
-
-	//	for (int i = ind; i < tam; i++) {
-	//		pT = Buscar(i);
-	//		Retirar(pT);
-	//	}
-
-	//	pUltimo = paux1;
-	//	tam = ind;
-	//	if (pUltimo != NULL)
-	//		pUltimo->setProx(NULL);
-	//	/*while (paux1 != NULL)
-	//	{
-	//		paux2 = paux1->getProx();
-	//		delete paux1;
-	//		paux1 = paux2;
-	//		tam--;
-	//	}*/
-	//}
 
 	int Quantidade()
 	{

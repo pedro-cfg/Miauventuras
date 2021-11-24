@@ -96,8 +96,3 @@ void ListaEntidades::Gravar_Individual(Entidade* pE, fstream& arquivo)
 	arquivo.write((char*)&velX, sizeof(velX));
 	arquivo.write((char*)&velY, sizeof(velY));
 }
-
-//void ListaEntidades::Limpar(int ind)
-//{
-//	LEs.Limpar(ind);
-//}

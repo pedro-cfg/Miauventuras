@@ -19,14 +19,18 @@ public:
 
     int getVidas() const;
     void setVidas(int v);
-
-    void sofreDano();
-    void operator--();
-
-    virtual void mover(float dT);
     void setVelocidadeEscalar(float v);
     float getVelocidadeEscalar() const;
-    virtual void reseta_velocidade();
+
+    /*Sobrecarga de operador -- -> responsável pelo dano*/
+    void operator--();
+
+    bool Morreu() const;
+
+    virtual void mover(float dT){}
+
+    virtual void reseta_velocidade(){}
+    void reseta_colidiu();
 
     void setVelocidadeY(float v);
     void setVelocidadeX(float v);
@@ -42,8 +46,6 @@ public:
     bool getColidiuBaixo() const;
     bool getColidiuDireita() const;
     bool getColidiuEsquerda() const;
-
-    void reseta_colidiu();
 };
 
 #endif

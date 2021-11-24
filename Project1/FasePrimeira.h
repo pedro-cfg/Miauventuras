@@ -10,7 +10,6 @@ public:
 	~FasePrimeira();
 
 	void Passou_Fase();
-
 	void Gerar_Plataformas();
 };
 

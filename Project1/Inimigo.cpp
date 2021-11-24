@@ -5,31 +5,19 @@ Inimigo::Inimigo() :
 	Personagem()
 {
 	vidas = 1;
-	//setTipo();
 	velocidadeEscalar = 100.f;
 	amplitude = 500.f;
 	vidas = 1;
 	direcao = 1.0f;
-	ehChefao = false;
 }
 
 Inimigo::~Inimigo()
 {
-
 }
-
-//void Inimigo::setTipo() {
-//	tipo = "Inimigo";
-//}
 
 int Inimigo::getValor() const
 {
 	return valor;
-}
-
-bool Inimigo::getEhChefao() const
-{
-	return ehChefao;
 }
 
 void Inimigo::Executar(float dT)

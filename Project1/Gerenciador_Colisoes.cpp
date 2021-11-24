@@ -1,16 +1,13 @@
 #include "Gerenciador_Colisoes.h"
-//#include "FasePrimeira.h"
 
 Gerenciador_Colisoes::Gerenciador_Colisoes(ListaEntidades* pL)
 {
 	pLista = pL;
-	//pF1 = NULL;
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes()
 {
 	LimpaListas();
-	//pF1 = NULL;
 	pLista = NULL;
 }
 
@@ -33,6 +30,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
 
+	/*Colisão com inimigos*/
 	while (iteInim != LIs.end())
 	{
 		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
@@ -48,25 +46,28 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
 			pJ->setEmpurrado(true);
-			if (pJ->getContador() > 1.f) {
-				pJ->sofreDano();
+			if (pJ->getContador() > 1.f) 
+			{
+				pJ->operator--();
 			}
 			pJ->Atualiza_Contador(0.f, true);
-			if (colidiuEsquerda || colidiuCima) {
+			if (colidiuEsquerda || colidiuCima) 
+			{
 				pJ->setVelocidadeX(500.f);
 			}
-			if (colidiuDireita) {
+			if (colidiuDireita) 
+			{
 				pJ->setVelocidadeX(-500.f);
 			}
 			pJ->setVelocidadeY(-500.f);
 		}
 		else if (colidiuBaixo)
 		{
-			pInim->sofreDano();
-			if (pInim->getVidas() <= 0)
+			pInim->operator--();
+			if (pInim->Morreu())
 			{
-				pJ->Pontua(pInim);
-				if (pInim->getEhChefao())
+				pJ->operator+=(pInim);
+				if (pInim->getTipo() == "Ratao")
 				{
 					pJ->setVenceu(true);
 				}
@@ -77,6 +78,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 	}
 
+	/*Colisão com obstáculos*/
 	while (iteObs != LOs.end())
 	{
 		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
@@ -92,7 +94,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
 		{
-			if (pObs->getEhPlataforma())
+			if (pObs->getTipo() == "Plataforma")
 			{
 				pObs->ExecutaImpedimento(static_cast<Personagem*>(pJ), colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 			}
@@ -103,6 +105,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		}
 	}
 
+	/*Colisão com projéteis*/
 	while (iteProj != LPs.end())
 	{
 		colidiuEsquerda = colidiuDireita = colidiuCima = colidiuBaixo = false;
@@ -118,7 +121,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
 		{
-			pJ->sofreDano();
+			pJ->operator--();
 			Excluir(pProj);
 		}
 	}
@@ -146,7 +149,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 			Entidade* pAux = static_cast<Entidade*> (pObs);
 			iteObs++;
 			
-			if (pObs->getEhPlataforma())
+			if (pObs->getTipo() == "Plataforma")
 			{
 				if (pAux != NULL)
 				{
@@ -213,11 +216,6 @@ void Gerenciador_Colisoes::Checa_Colisao_Individual(Personagem* pP, Entidade* pO
 	}
 }
 
-//void Gerenciador_Colisoes::setPrimeiraFase(FasePrimeira* pF)
-//{
-//	pF1 = pF;
-//}
-
 void Gerenciador_Colisoes::Inserir(Inimigo* pI)
 {
 	LIs.push_back(pI);
@@ -243,9 +241,4 @@ void Gerenciador_Colisoes::Excluir(Projetil* pP)
 {
 	LPs.remove(pP);
 	pLista->Retirar(static_cast<Entidade*>(pP));
-}
-
-void Gerenciador_Colisoes::Excluir(Jogador* pJ)
-{
-	pLista->Retirar(static_cast<Entidade*>(pJ));
 }

@@ -1,5 +1,8 @@
-#pragma once
+#ifndef _MENU_PAUSA_H_
+#define _MENU_PAUSA_H_
+
 #include "Menu.h"
+
 class MenuPausa : public Menu
 {
 public:
@@ -10,3 +13,4 @@ public:
 	void Escolher_Opcao();
 };
 
+#endif

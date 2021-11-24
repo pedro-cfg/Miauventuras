@@ -37,18 +37,19 @@ public:
 	void Gerar_Inimigos();
 	void Gerar_Obstaculos();
 
-	virtual void Gerar_Plataformas();
-	virtual void Gerar_Chefao();
+	virtual void Gerar_Plataformas(){}
+	virtual void Gerar_Chefao(){}
 
 	void Inserir_Entidade(Entidade* pE);
 
 	void reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio = false);
 
-	virtual void Passou_Fase();
+	virtual void Passou_Fase(){}
 	void MorteJogadores();
 
 	void Limpar();
 
+	/*Salvamento e carregamento da fase*/
 	void GravarLista(fstream& arquivo);
 	void LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2);
 	void LerLista_Individual(fstream& arquivo);

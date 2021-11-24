@@ -2,11 +2,11 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
-Teia::Teia()
+Teia::Teia():
+	Obstaculo()
 {
 	CarregaTextura(TEIA);
-	setTipo();
-	ehPlataforma = false;
+	tipo = "Teia";
 }
 
 Teia::Teia(float x, float y):
@@ -17,8 +17,7 @@ Teia::Teia(float x, float y):
 	CarregaTextura(TEIA);
 	forma.setPosition(sf::Vector2f(x, y));
 
-	setTipo();
-	ehPlataforma = false;
+	tipo = "Teia";
 }
 
 Teia::~Teia() 
@@ -29,11 +28,6 @@ Teia::~Teia()
 void Teia::ExecutaImpedimento(Jogador* pJ)
 {
 	pJ->setVelocidadeEscalar(pJ->getVelocidadeEscalar() * 0.5f);
-}
-
-void Teia::setTipo()
-{
-	tipo = "Teia";
 }
 
 void Teia::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)

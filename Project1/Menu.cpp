@@ -28,6 +28,7 @@ bool Menu::getDoisJogadores()
 
 Menu::Menu() :
 	Ente(),
+	Estado(),
 	linhas_texto(0),
 	indice(1)
 {
@@ -50,10 +51,10 @@ void Menu::ExecutaEstado(float dT)
 void Menu::Executar(float dT)
 {
 	pGG->RestaurarVista();
-	imprimir_se();
+	desenhar();
 }
 
-void Menu::imprimir_se()
+void Menu::desenhar()
 {
 	pGG->DesenhaTexto(texto, linhas_texto);
 }
@@ -86,14 +87,6 @@ void Menu::opcao_abaixo()
 		indice++;
 		texto[indice].setFillColor(sf::Color::Blue);
 	}
-}
-
-void Menu::incluiTexto(char letra)
-{
-}
-
-void Menu::retiraTexto()
-{
 }
 
 void Menu::SalvarPontuacao()
@@ -159,7 +152,6 @@ void Menu::SalvarPontuacao()
 	}
 
 	arquivo.close();
-
 }
 
 void Menu::setCorTexto()

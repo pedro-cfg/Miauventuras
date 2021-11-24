@@ -8,7 +8,6 @@ FaseSegunda::FaseSegunda():
 
 FaseSegunda::~FaseSegunda() 
 {
-
 }
 
 void FaseSegunda::Passou_Fase()

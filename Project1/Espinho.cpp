@@ -6,7 +6,6 @@
 Espinho::Espinho():Obstaculo()
 {
 	CarregaTextura(ESPINHO);
-	tipo = "Espinho";
 }
 
 Espinho::Espinho(float x, float y) :
@@ -16,8 +15,6 @@ Espinho::Espinho(float x, float y) :
 	this->y = y;
 	CarregaTextura(ESPINHO);
 	forma.setPosition(sf::Vector2f(x, y));
-
-	tipo = "Espinho";
 }
 
 Espinho::~Espinho() {
@@ -38,4 +35,19 @@ void Espinho::Recuperar(float cX, float cY, float XI, int numVidas, float velX, 
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);
+}
+
+void Espinho::Gravar_Individual(fstream& arquivo)
+{
+	string tipo = "Espinho";
+	int tamanho_tipo = tipo.size();
+	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	arquivo.write((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
 }

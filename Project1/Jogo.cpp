@@ -87,7 +87,7 @@ Jogador2* Jogo::getJogador2() const
 	return pJ2;
 }
 
-FasePrimeira* Jogo::getPrimeiraFase() 
+FasePrimeira* Jogo::getPrimeiraFase()
 {
 	return &primeira_fase;
 }
@@ -110,7 +110,11 @@ void Jogo::Gravar()
 	bool dois_jogadores = menu_fases.getDoisJogadores();
 	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
 
-	GravarJogadores(arquivo);
+	pJ1->Gravar_Individual(arquivo);
+	if (pJ2)
+		pJ2->Gravar_Individual(arquivo);
+	else
+		pJ1->Gravar_Individual(arquivo);
 
 	if (faseJ1 == 2 || faseJ2 == 2)
 		segunda_fase.GravarLista(arquivo);
@@ -131,9 +135,11 @@ void Jogo::Carregar()
 	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));
 	Menu::setDoisJogadores(dois_jogadores);
 
-	LerJogador(arquivo);
+	//LerJogador(arquivo);
+	pJ1->Ler_Jogador(arquivo);
+	pJ2->Ler_Jogador(arquivo);
 
-	if (faseJ1 == 2 || faseJ2 == 2) 
+	if (faseJ1 == 2 || faseJ2 == 2)
 	{
 		MudaFundo(2);
 		pJ1->setFase(2);
@@ -141,7 +147,7 @@ void Jogo::Carregar()
 		segunda_fase.LerLista(arquivo, pJ1, pJ2);
 		maquina_de_estados.setEstadoAtual(SEGUNDA_FASE);
 	}
-	else 
+	else
 	{
 		MudaFundo(1);
 		pJ1->setFase(1);
@@ -151,75 +157,76 @@ void Jogo::Carregar()
 	}
 }
 
-void Jogo::GravarJogadores(fstream& arquivo)
-{
-	float x, y, x2, y2;
-	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
-	string nome1, nome2;
+//void Jogo::GravarJogadores(fstream& arquivo)
+//{
+//	float x, y, x2, y2;
+//	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
+//	string nome1, nome2;
+//
+//	x = pJ1->getX();
+//	y = pJ1->getY();
+//	vidas = pJ1->getVidas();
+//	pontos = pJ1->getPontuacao();
+//
+//	x2 = pJ2->getX();
+//	y2 = pJ2->getY();
+//	vidas2 = pJ2->getVidas();
+//	pontos2 = pJ2->getPontuacao();
+//
+//	nome1 = pJ1->getNome();
+//	nome2 = pJ2->getNome();
+//	tamanhoNome1 = nome1.size();
+//	tamanhoNome2 = nome2.size();
+//
+//	arquivo.write((char*)&x, sizeof(x));
+//	arquivo.write((char*)&y, sizeof(y));
+//	arquivo.write((char*)&vidas, sizeof(vidas));
+//	arquivo.write((char*)&pontos, sizeof(pontos));
+//
+//	arquivo.write((char*)&x2, sizeof(x2));
+//	arquivo.write((char*)&y2, sizeof(y2));
+//	arquivo.write((char*)&vidas2, sizeof(vidas2));
+//	arquivo.write((char*)&pontos2, sizeof(pontos2));
+//
+//	arquivo.write((char*)&tamanhoNome1, sizeof(tamanhoNome1));
+//	arquivo.write((char*)&nome1[0], tamanhoNome1);
+//	arquivo.write((char*)&tamanhoNome2, sizeof(tamanhoNome2));
+//	arquivo.write((char*)&nome2[0], tamanhoNome2);
+//
+//}
 
-	x = pJ1->getX();
-	y = pJ1->getY();
-	vidas = pJ1->getVidas();
-	pontos = pJ1->getPontuacao();
-
-	x2 = pJ2->getX();
-	y2 = pJ2->getY();
-	vidas2 = pJ2->getVidas();
-	pontos2 = pJ2->getPontuacao();
-
-	nome1 = pJ1->getNome();
-	nome2 = pJ2->getNome();
-	tamanhoNome1 = nome1.size();
-	tamanhoNome2 = nome2.size();
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&vidas, sizeof(vidas));
-	arquivo.write((char*)&pontos, sizeof(pontos));
-
-	arquivo.write((char*)&x2, sizeof(x2));
-	arquivo.write((char*)&y2, sizeof(y2));
-	arquivo.write((char*)&vidas2, sizeof(vidas2));
-	arquivo.write((char*)&pontos2, sizeof(pontos2));
-
-	arquivo.write((char*)&tamanhoNome1, sizeof(tamanhoNome1));
-	arquivo.write((char*)&nome1[0], tamanhoNome1);
-	arquivo.write((char*)&tamanhoNome2, sizeof(tamanhoNome2));
-	arquivo.write((char*)&nome2[0], tamanhoNome2);
-
-}
-
-void Jogo::LerJogador(fstream& arquivo)
-{
-	float x, y, x2, y2;
-	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
-	string nome1, nome2;
-
-	arquivo.read((char*)&x, sizeof(x));
-	arquivo.read((char*)&y, sizeof(y));
-	arquivo.read((char*)&vidas, sizeof(vidas));
-	arquivo.read((char*)&pontos, sizeof(pontos));
-
-	pJ1->setVidas(vidas);
-	pJ1->setPontuacao(pontos);
-	pJ1->Reposicionar(x, y);
-
-	arquivo.read((char*)&x2, sizeof(x2));
-	arquivo.read((char*)&y2, sizeof(y2));
-	arquivo.read((char*)&vidas2, sizeof(vidas2));
-	arquivo.read((char*)&pontos2, sizeof(pontos2));
-
-	pJ2->setVidas(vidas2);
-	pJ2->setPontuacao(pontos2);
-	pJ2->Reposicionar(x2, y2);
-
-	arquivo.read((char*)&tamanhoNome1, sizeof(tamanhoNome1));
-	nome1.resize(tamanhoNome1);
-	arquivo.read((char*)&nome1[0], tamanhoNome1);
-	arquivo.read((char*)&tamanhoNome2, sizeof(tamanhoNome2));
-	nome2.resize(tamanhoNome2);
-	arquivo.read((char*)&nome2[0], tamanhoNome2);
-}
+//void Jogo::LerJogador(fstream& arquivo)
+//{
+//	float x, y, x2, y2;
+//	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
+//	string nome1, nome2;
+//
+//	arquivo.read((char*)&x, sizeof(x));
+//	arquivo.read((char*)&y, sizeof(y));
+//	arquivo.read((char*)&vidas, sizeof(vidas));
+//	arquivo.read((char*)&pontos, sizeof(pontos));
+//
+//	pJ1->setVidas(vidas);
+//	pJ1->setPontuacao(pontos);
+//	pJ1->Reposicionar(x, y);
+//
+//	arquivo.read((char*)&tamanhoNome1, sizeof(tamanhoNome1));
+//	nome1.resize(tamanhoNome1);
+//	arquivo.read((char*)&nome1[0], tamanhoNome1);
+//
+//	arquivo.read((char*)&x2, sizeof(x2));
+//	arquivo.read((char*)&y2, sizeof(y2));
+//	arquivo.read((char*)&vidas2, sizeof(vidas2));
+//	arquivo.read((char*)&pontos2, sizeof(pontos2));
+//
+//	pJ2->setVidas(vidas2);
+//	pJ2->setPontuacao(pontos2);
+//	pJ2->Reposicionar(x2, y2);
+//
+//	arquivo.read((char*)&tamanhoNome2, sizeof(tamanhoNome2));
+//	nome2.resize(tamanhoNome2);
+//	arquivo.read((char*)&nome2[0], tamanhoNome2);
+//}
 
 void Jogo::MudaFundo(int fase)
 {

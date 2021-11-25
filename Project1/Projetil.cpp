@@ -8,7 +8,6 @@ Projetil::Projetil()
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
-	tipo = "Projetil";
 }
 
 Projetil::Projetil(Aranha* pAr) :
@@ -23,7 +22,6 @@ Projetil::Projetil(Aranha* pAr) :
 	velocidadeX = velocidadeEscalar * pAr->getDirecao();
 	velocidadeY = -velocidadeEscalar;
 
-	tipo = "Projetil";
 	contador_tempo = 0.f;
 }
 
@@ -59,6 +57,21 @@ void Projetil::Recuperar(float cX, float cY, float XI, int numVidas, float velX,
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);
+}
+
+void Projetil::Gravar_Individual(fstream& arquivo)
+{
+	string tipo = "Projetil";
+	int tamanho_tipo = tipo.size();
+	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	arquivo.write((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&velocidadeX, sizeof(velocidadeX));
+	arquivo.write((char*)&velocidadeY, sizeof(velocidadeY));
 }
 
 void Projetil::mover(float dT)

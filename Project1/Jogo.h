@@ -59,8 +59,8 @@ public:
 	/*Métodos de salvamento e carregamento*/
 	void Gravar();
 	void Carregar();
-	void GravarJogadores(fstream& arquivo);
-	void LerJogador(fstream& arquivo);
+	//void GravarJogadores(fstream& arquivo);
+	//void LerJogador(fstream& arquivo);
 
 	void MudaFundo(int fase);
 };

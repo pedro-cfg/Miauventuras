@@ -25,7 +25,7 @@ public:
 
     /*Métodos para salvamento da lista*/
     void Gravar(fstream& arquivo);
-    void Gravar_Individual(Entidade* pE, fstream& arquivo);
+    //void Gravar_Individual(Entidade* pE, fstream& arquivo);
 };
 
 #endif

@@ -2,10 +2,16 @@
 #include "Obstaculo.h"
 
 Obstaculo::Obstaculo() :
-	Entidade() 
+	Entidade(),
+	EhPlataforma(false)
 {
 }
 
 Obstaculo::~Obstaculo() 
 {
+}
+
+const bool Obstaculo::getEhPlataforma() const
+{
+	return EhPlataforma;
 }

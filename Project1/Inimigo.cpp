@@ -2,7 +2,8 @@
 #include "Obstaculo.h"
 
 Inimigo::Inimigo() :
-	Personagem()
+	Personagem(),
+	ehChefao(false)
 {
 	vidas = 1;
 	velocidadeEscalar = 100.f;
@@ -18,6 +19,11 @@ Inimigo::~Inimigo()
 int Inimigo::getValor() const
 {
 	return valor;
+}
+
+const bool Inimigo::getEhChefao() const
+{
+	return ehChefao;
 }
 
 void Inimigo::Executar(float dT)

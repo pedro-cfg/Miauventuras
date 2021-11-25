@@ -6,7 +6,6 @@ Teia::Teia():
 	Obstaculo()
 {
 	CarregaTextura(TEIA);
-	tipo = "Teia";
 }
 
 Teia::Teia(float x, float y):
@@ -16,8 +15,6 @@ Teia::Teia(float x, float y):
 	this->y = y;
 	CarregaTextura(TEIA);
 	forma.setPosition(sf::Vector2f(x, y));
-
-	tipo = "Teia";
 }
 
 Teia::~Teia() 
@@ -36,4 +33,19 @@ void Teia::Recuperar(float cX, float cY, float XI, int numVidas, float velX, flo
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);
+}
+
+void Teia::Gravar_Individual(fstream& arquivo)
+{
+	string tipo = "Teia";
+	int tamanho_tipo = tipo.size();
+	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	arquivo.write((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
 }

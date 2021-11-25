@@ -17,8 +17,6 @@ protected:
 
     static Gerenciador_Colisoes* pGC;
     static ListaEntidades* pLista;
-
-    string tipo;
 public: 
     Entidade();
     virtual~Entidade();
@@ -40,12 +38,10 @@ public:
     void Reposicionar(float X, float Y);
     void Deslocar(float dx, float dy);
 
-    //virtual void setTipo();
-    const string getTipo() const;
-
     /*Métodos executados polimorficamente*/
     virtual void mover(float dT){}
     virtual void Executar(float dT){}
+    virtual void Gravar_Individual(fstream& arquivo);
     virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f){}
 };
 

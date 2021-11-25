@@ -3,15 +3,14 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
-Aranha::Aranha():
+Aranha::Aranha() :
 	Inimigo()
 {
 	CarregaTextura(ARANHA);
-	tipo = "Aranha";
 	valor = 1;
 }
 
-Aranha::Aranha(float x, float y):
+Aranha::Aranha(float x, float y) :
 	Inimigo()
 {
 	CarregaTextura(ARANHA);
@@ -22,10 +21,10 @@ Aranha::Aranha(float x, float y):
 	Xinicial = x;
 
 	valor = 1;
-	tipo = "Aranha";
+
 }
 
-Aranha::~Aranha() 
+Aranha::~Aranha()
 {
 
 }
@@ -42,9 +41,9 @@ void Aranha::Executar(float dT)
 }
 
 void Aranha::lancaProjetil()
- {
+{
 	Projetil* pNovo = new Projetil(this);
-	
+
 	if (pNovo)
 	{
 		pLista->Inserir(pNovo);
@@ -56,10 +55,25 @@ void Aranha::Recuperar(float cX, float cY, float XI, int numVidas, float velX, f
 {
 	setVidas(numVidas);
 	Reposicionar(cX, cY);
-	
-	direcao = velX/abs(velX);
-	Xinicial = XI; 
+
+	direcao = velX / abs(velX);
+	Xinicial = XI;
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);
+}
+
+void Aranha::Gravar_Individual(fstream& arquivo)
+{
+	string tipo = "Aranha";
+	int tamanho_tipo = tipo.size();
+	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	arquivo.write((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
+	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
+	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
 }

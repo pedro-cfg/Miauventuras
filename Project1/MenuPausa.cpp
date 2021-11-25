@@ -1,6 +1,8 @@
 #include "MenuPausa.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuPausa::MenuPausa():
 	Menu()
 {

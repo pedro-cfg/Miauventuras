@@ -3,14 +3,17 @@
 
 #include "Menu.h"
 
-class MenuPrincipal : public Menu
-{
-public:
-	MenuPrincipal();
-	~MenuPrincipal();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
-};
+	class MenuPrincipal : public Menu
+	{
+	public:
+		MenuPrincipal();
+		~MenuPrincipal();
 
+		void InicializaTexto();
+		void Escolher_Opcao();
+	};
+
+}
 #endif

@@ -8,44 +8,48 @@ class FasePrimeira;
 class Jogador;
 class Jogo;
 
-class Menu: public Ente, public Estado 
-{
-protected:
-	static Jogo* pJogo;
-	static bool dois_jogadores;
+namespace Menus {
 
-	int indice;
+	class Menu : public Ente, public Estado
+	{
+	protected:
+		static Jogo* pJogo;
+		static bool dois_jogadores;
 
-	int linhas_texto;
+		int indice;
 
-	static bool eventoPlacar;
+		int linhas_texto;
 
-	sf::Font fonte;
-	sf::Text texto[7];
-public:
-	Menu();
-	virtual~Menu();
+		static bool eventoPlacar;
 
-	static void setPonteiroJogo(Jogo* pJ);
-	static void setDoisJogadores(bool DJ);
-	static bool getDoisJogadores();
+		sf::Font fonte;
+		sf::Text texto[7];
+	public:
+		Menu();
+		virtual~Menu();
 
-	virtual void InicializaTexto();
-	virtual void Escolher_Opcao();
+		static void setPonteiroJogo(Jogo* pJ);
+		static void setDoisJogadores(bool DJ);
+		static bool getDoisJogadores();
 
-	void ExecutaEstado(float dT);
-	virtual void Executar(float dT);
+		virtual void InicializaTexto();
+		virtual void Escolher_Opcao();
 
-	void desenhar();
+		void ExecutaEstado(float dT);
+		virtual void Executar(float dT);
 
-	float CalculaTamanho(sf::Text texto);
+		void desenhar();
 
-	void opcao_acima();
-	void opcao_abaixo();
+		float CalculaTamanho(sf::Text texto);
 
-	void SalvarPontuacao();
+		void opcao_acima();
+		void opcao_abaixo();
 
-	void setCorTexto();
-};
+		void SalvarPontuacao();
+
+		void setCorTexto();
+	};
+
+}
 
 #endif

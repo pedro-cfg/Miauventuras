@@ -1,6 +1,8 @@
 #include "MenuPlacar.h"
 #include "Gerenciador_Grafico.h"
 
+using namespace Menus;
+
 MenuPlacar::MenuPlacar() :
 	Menu()
 {

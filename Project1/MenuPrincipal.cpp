@@ -2,6 +2,8 @@
 #include "Gerenciador_Grafico.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuPrincipal::MenuPrincipal():
 	Menu()
 

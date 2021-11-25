@@ -2,6 +2,8 @@
 #include "Gerenciador_Grafico.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuFim::MenuFim()
 {
 	linhas_texto = 3;

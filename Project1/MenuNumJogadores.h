@@ -3,14 +3,18 @@
 
 #include "Menu.h"
 
-class MenuNumJogadores : public Menu
-{
-public:
-	MenuNumJogadores();
-	~MenuNumJogadores();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
-};
+	class MenuNumJogadores : public Menu
+	{
+	public:
+		MenuNumJogadores();
+		~MenuNumJogadores();
+
+		void InicializaTexto();
+		void Escolher_Opcao();
+	};
+
+}
 
 #endif

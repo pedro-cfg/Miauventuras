@@ -3,14 +3,18 @@
 
 #include "Menu.h"
 
-class MenuPausa : public Menu
-{
-public:
-	MenuPausa();
-	~MenuPausa();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
-};
+	class MenuPausa : public Menu
+	{
+	public:
+		MenuPausa();
+		~MenuPausa();
+
+		void InicializaTexto();
+		void Escolher_Opcao();
+	};
+
+}
 
 #endif

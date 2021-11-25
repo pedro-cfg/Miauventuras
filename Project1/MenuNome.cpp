@@ -1,6 +1,8 @@
 #include "MenuNome.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuNome::MenuNome()
 {
 	InicializaTexto();

@@ -16,6 +16,7 @@
 #include "MenuPrincipal.h"
 #include "MaquinaEstados.h"
 #include "Estado.h"
+using namespace Menus;
 
 /*Classe principal*/
 class Jogo 
@@ -39,6 +40,7 @@ private:
 	FaseSegunda segunda_fase;
 
 	MaquinaEstados maquina_de_estados;
+
 public:
 	Jogo();
 	~Jogo();

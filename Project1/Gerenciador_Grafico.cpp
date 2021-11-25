@@ -1,4 +1,5 @@
 #include "Gerenciador_Grafico.h"
+using namespace Menus;
 
 Gerenciador_Grafico::Gerenciador_Grafico() :
 	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),

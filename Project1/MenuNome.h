@@ -3,17 +3,21 @@
 
 #include "Menu.h"
 
-class MenuNome : public Menu
-{
-public:
-	MenuNome();
-	~MenuNome();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
+	class MenuNome : public Menu
+	{
+	public:
+		MenuNome();
+		~MenuNome();
 
-	void incluiTexto(char letra);
-	void retiraTexto();
-};
+		void InicializaTexto();
+		void Escolher_Opcao();
+
+		void incluiTexto(char letra);
+		void retiraTexto();
+	};
+
+}
 
 #endif

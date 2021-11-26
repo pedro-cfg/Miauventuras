@@ -46,6 +46,9 @@ public:
     const int getPontuacao() const;
     void setNome(string n, bool retira = false);
     const string getNome() const;
+
+    void Gravar_Individual(fstream& arquivo);
+    void Ler_Jogador(fstream& arquivo);
 };
 
 #endif

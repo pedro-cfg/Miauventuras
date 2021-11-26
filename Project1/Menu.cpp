@@ -5,6 +5,7 @@
 #include "Jogador.h"
 #include "Jogo.h"
 #include "MenuPlacar.h"
+using namespace Menus;
 
 Jogo* Menu::pJogo = NULL;
 

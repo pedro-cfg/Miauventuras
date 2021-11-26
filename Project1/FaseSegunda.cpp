@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FaseSegunda.h"
+using namespace Menus;
 
 FaseSegunda::FaseSegunda():
 	Fase() 

@@ -67,7 +67,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			if (pInim->Morreu())
 			{
 				pJ->operator+=(pInim);
-				if (pInim->getTipo() == "Ratao")
+				if (pInim->getEhChefao())
 				{
 					pJ->setVenceu(true);
 				}
@@ -94,7 +94,7 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 
 		if (colidiuEsquerda || colidiuBaixo || colidiuCima || colidiuDireita)
 		{
-			if (pObs->getTipo() == "Plataforma")
+			if (pObs->getEhPlataforma())
 			{
 				pObs->ExecutaImpedimento(static_cast<Personagem*>(pJ), colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo);
 			}
@@ -149,7 +149,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 			Entidade* pAux = static_cast<Entidade*> (pObs);
 			iteObs++;
 			
-			if (pObs->getTipo() == "Plataforma")
+			if (pObs->getEhPlataforma())
 			{
 				if (pAux != NULL)
 				{

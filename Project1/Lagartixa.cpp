@@ -7,7 +7,7 @@ Lagartixa::Lagartixa():
 {
 	CarregaTextura(LAGARTIXA);
 	valor = 2;
-	tipo = "Lagartixa";
+
 }
 
 Lagartixa::Lagartixa(float x, float y) :
@@ -22,7 +22,6 @@ Lagartixa::Lagartixa(float x, float y) :
 	Xinicial = x;
 
 	valor = 2;
-	tipo = "Lagartixa";
 }
 
 Lagartixa::~Lagartixa() 
@@ -44,4 +43,19 @@ void Lagartixa::Recuperar(float cX, float cY, float XI, int numVidas, float velX
 
 	pLista->Inserir(this);
 	pGC->Inserir(this);
+}
+
+void Lagartixa::Gravar_Individual(fstream& arquivo)
+{
+	string tipo = "Lagartixa";
+	int tamanho_tipo = tipo.size();
+	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
+	arquivo.write((char*)&tipo[0], tamanho_tipo);
+
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
+	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
+	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
 }

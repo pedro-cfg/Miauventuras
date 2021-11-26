@@ -1,6 +1,8 @@
 #include "MenuNumJogadores.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuNumJogadores::MenuNumJogadores():
 	Menu()
 {

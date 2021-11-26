@@ -3,19 +3,23 @@
 
 #include "Menu.h"
 
-class MenuFim : public Menu
-{
-private:
-	bool vitoria;
-public:
-	MenuFim();
-	~MenuFim();
+namespace Menus {
 
-	void Executar(float dT);
-	void setVitoria(const bool v);
+	class MenuFim : public Menu
+	{
+	private:
+		bool vitoria;
+	public:
+		MenuFim();
+		~MenuFim();
 
-	void InicializaTexto();
-	void Escolher_Opcao();
-};
+		void Executar(float dT);
+		void setVitoria(const bool v);
+
+		void InicializaTexto();
+		void Escolher_Opcao();
+	};
+
+}
 
 #endif

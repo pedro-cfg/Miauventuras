@@ -1,6 +1,8 @@
 #include "MenuFases.h"
 #include "Jogo.h"
 
+using namespace Menus;
+
 MenuFases::MenuFases():
 	Menu()
 {

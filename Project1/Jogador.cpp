@@ -9,8 +9,6 @@ Jogador::Jogador() :
 	pontos = 0;
 	vidas = 7;
 
-	tipo = "Jogador";
-
 	reseta_velocidade();
 
 	alturaPulo = 350.0f;
@@ -169,4 +167,31 @@ const int Jogador::getPontuacao() const
 const string Jogador::getNome() const
 {
 	return nome;
+}
+
+void Jogador::Gravar_Individual(fstream& arquivo)
+{
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&pontos, sizeof(pontos));
+
+	int tamanhoNome = nome.size();
+	arquivo.write((char*)&tamanhoNome, sizeof(tamanhoNome));
+	arquivo.write((char*)&nome[0], tamanhoNome);
+}
+
+void Jogador::Ler_Jogador(fstream& arquivo)
+{
+	arquivo.read((char*)&x, sizeof(x));
+	arquivo.read((char*)&y, sizeof(y));
+	arquivo.read((char*)&vidas, sizeof(vidas));
+	arquivo.read((char*)&pontos, sizeof(pontos));
+	Reposicionar(x, y);
+
+	int tamanhoNome;
+
+	arquivo.read((char*)&tamanhoNome, sizeof(tamanhoNome));
+	nome.resize(tamanhoNome);
+	arquivo.read((char*)&nome[0], tamanhoNome);
 }

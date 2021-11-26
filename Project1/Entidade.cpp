@@ -23,7 +23,6 @@ Entidade::Entidade() :
 	x(0),
 	y(0)
 {
-	tipo = "";
 }
 
 Entidade::~Entidade() 
@@ -52,9 +51,9 @@ void Entidade::Deslocar(float dx, float dy)
 	y += dy;
 }
 
-const string Entidade::getTipo() const
+
+void Entidade::Gravar_Individual(fstream& arquivo)
 {
-	return tipo;
 }
 
 void Entidade::desenhar()

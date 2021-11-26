@@ -3,21 +3,25 @@
 
 #include "Menu.h"
 
-class MenuPlacar : public Menu
-{
-private:
-	string placar[5];
-public:
-	MenuPlacar();
-	~MenuPlacar();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
+	class MenuPlacar : public Menu
+	{
+	private:
+		string placar[5];
+	public:
+		MenuPlacar();
+		~MenuPlacar();
 
-	void Executar(float dT);
+		void InicializaTexto();
+		void Escolher_Opcao();
 
-	void setPlacar();
-	void RecuperarPontuacao();
-};
+		void Executar(float dT);
+
+		void setPlacar();
+		void RecuperarPontuacao();
+	};
+
+}
 
 #endif

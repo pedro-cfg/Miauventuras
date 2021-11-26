@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Fase.h"
 #include "Gerenciador_Grafico.h"
+using namespace Menus;
 
 Fase::Fase() :
 	Ente(),

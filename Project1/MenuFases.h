@@ -3,14 +3,18 @@
 
 #include "Menu.h"
 
-class MenuFases : public Menu
-{
-public:
-	MenuFases();
-	~MenuFases();
+namespace Menus {
 
-	void InicializaTexto();
-	void Escolher_Opcao();
-};
+	class MenuFases : public Menu
+	{
+	public:
+		MenuFases();
+		~MenuFases();
+
+		void InicializaTexto();
+		void Escolher_Opcao();
+	};
+
+}
 
 #endif

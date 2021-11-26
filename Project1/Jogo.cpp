@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Jogo.h"
 
+#include <filesystem>
+
 Jogo::Jogo() :
 	pJ1(NULL),
 	pJ2(NULL),
@@ -99,52 +101,41 @@ FaseSegunda* Jogo::getSegundaFase()
 
 void Jogo::Gravar()
 {
-	fstream arquivo;
-	arquivo.open("Persistencia/memoria.bin", ios::binary | ios::out | ios::trunc);
-
-	int faseJ1 = pJ1->getFase();
-	int faseJ2 = pJ2->getFase();
-	arquivo.write((char*)&faseJ1, sizeof(faseJ1));
-	arquivo.write((char*)&faseJ2, sizeof(faseJ2));
-
-	bool dois_jogadores = menu_fases.getDoisJogadores();
-	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
-
-	pJ1->Gravar_Individual(arquivo);
-	if (pJ2)
-		pJ2->Gravar_Individual(arquivo);
-	else
-		pJ1->Gravar_Individual(arquivo);
-
-	if (faseJ1 == 2 || faseJ2 == 2)
-		segunda_fase.GravarLista(arquivo);
-	else
-		primeira_fase.GravarLista(arquivo);
+	//std::filesystem::remove_all("Persistencia");
+	//std::filesystem::create_directory("Persistencia");
+	GravarJogadores();
+	GravarFase();
 }
 
 void Jogo::Carregar()
 {
-	fstream arquivo;
-	arquivo.open("Persistencia/memoria.bin", ios::binary | ios::in);
+	CarregarJogadores();
+	CarregarFase();
+}
 
-	int faseJ1, faseJ2;
-	arquivo.read((char*)&faseJ1, sizeof(faseJ1));
-	arquivo.read((char*)&faseJ2, sizeof(faseJ2));
+void Jogo::CarregarJogadores()
+{
+	fstream arquivo;
+	arquivo.open("Persistencia/Jogadores.bin", ios::binary | ios::in);
 
 	bool dois_jogadores;
 	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));
 	Menu::setDoisJogadores(dois_jogadores);
 
-	//LerJogador(arquivo);
-	pJ1->Ler_Jogador(arquivo);
-	pJ2->Ler_Jogador(arquivo);
+	pJ1->Carregar(arquivo);
+	pJ2->Carregar(arquivo);
 
-	if (faseJ1 == 2 || faseJ2 == 2)
+	arquivo.close();
+}
+
+void Jogo::CarregarFase()
+{
+	if (pJ1->getFase() == 2 || pJ2->getFase() == 2)
 	{
 		MudaFundo(2);
 		pJ1->setFase(2);
 		pJ2->setFase(2);
-		segunda_fase.LerLista(arquivo, pJ1, pJ2);
+		segunda_fase.Carregar(pJ1, pJ2);
 		maquina_de_estados.setEstadoAtual(SEGUNDA_FASE);
 	}
 	else
@@ -152,81 +143,32 @@ void Jogo::Carregar()
 		MudaFundo(1);
 		pJ1->setFase(1);
 		pJ2->setFase(1);
-		primeira_fase.LerLista(arquivo, pJ1, pJ2);
+		primeira_fase.Carregar(pJ1, pJ2);
 		maquina_de_estados.setEstadoAtual(PRIMEIRA_FASE);
 	}
 }
 
-//void Jogo::GravarJogadores(fstream& arquivo)
-//{
-//	float x, y, x2, y2;
-//	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
-//	string nome1, nome2;
-//
-//	x = pJ1->getX();
-//	y = pJ1->getY();
-//	vidas = pJ1->getVidas();
-//	pontos = pJ1->getPontuacao();
-//
-//	x2 = pJ2->getX();
-//	y2 = pJ2->getY();
-//	vidas2 = pJ2->getVidas();
-//	pontos2 = pJ2->getPontuacao();
-//
-//	nome1 = pJ1->getNome();
-//	nome2 = pJ2->getNome();
-//	tamanhoNome1 = nome1.size();
-//	tamanhoNome2 = nome2.size();
-//
-//	arquivo.write((char*)&x, sizeof(x));
-//	arquivo.write((char*)&y, sizeof(y));
-//	arquivo.write((char*)&vidas, sizeof(vidas));
-//	arquivo.write((char*)&pontos, sizeof(pontos));
-//
-//	arquivo.write((char*)&x2, sizeof(x2));
-//	arquivo.write((char*)&y2, sizeof(y2));
-//	arquivo.write((char*)&vidas2, sizeof(vidas2));
-//	arquivo.write((char*)&pontos2, sizeof(pontos2));
-//
-//	arquivo.write((char*)&tamanhoNome1, sizeof(tamanhoNome1));
-//	arquivo.write((char*)&nome1[0], tamanhoNome1);
-//	arquivo.write((char*)&tamanhoNome2, sizeof(tamanhoNome2));
-//	arquivo.write((char*)&nome2[0], tamanhoNome2);
-//
-//}
+void Jogo::GravarJogadores()
+{
+	fstream arquivo;
+	arquivo.open("Persistencia/Jogadores.bin", ios::binary | ios::out | ios::trunc);
 
-//void Jogo::LerJogador(fstream& arquivo)
-//{
-//	float x, y, x2, y2;
-//	int vidas, vidas2, pontos, pontos2, tamanhoNome1, tamanhoNome2;
-//	string nome1, nome2;
-//
-//	arquivo.read((char*)&x, sizeof(x));
-//	arquivo.read((char*)&y, sizeof(y));
-//	arquivo.read((char*)&vidas, sizeof(vidas));
-//	arquivo.read((char*)&pontos, sizeof(pontos));
-//
-//	pJ1->setVidas(vidas);
-//	pJ1->setPontuacao(pontos);
-//	pJ1->Reposicionar(x, y);
-//
-//	arquivo.read((char*)&tamanhoNome1, sizeof(tamanhoNome1));
-//	nome1.resize(tamanhoNome1);
-//	arquivo.read((char*)&nome1[0], tamanhoNome1);
-//
-//	arquivo.read((char*)&x2, sizeof(x2));
-//	arquivo.read((char*)&y2, sizeof(y2));
-//	arquivo.read((char*)&vidas2, sizeof(vidas2));
-//	arquivo.read((char*)&pontos2, sizeof(pontos2));
-//
-//	pJ2->setVidas(vidas2);
-//	pJ2->setPontuacao(pontos2);
-//	pJ2->Reposicionar(x2, y2);
-//
-//	arquivo.read((char*)&tamanhoNome2, sizeof(tamanhoNome2));
-//	nome2.resize(tamanhoNome2);
-//	arquivo.read((char*)&nome2[0], tamanhoNome2);
-//}
+	bool dois_jogadores = Menu::getDoisJogadores();
+	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));
+
+	pJ1->GravarInfo(arquivo);
+	pJ2->GravarInfo(arquivo);
+
+	arquivo.close();
+}
+
+void Jogo::GravarFase()
+{
+	if (pJ1->getFase() == 2 || pJ2->getFase() == 2)
+		segunda_fase.Gravar();
+	else
+		primeira_fase.Gravar();
+}
 
 void Jogo::MudaFundo(int fase)
 {

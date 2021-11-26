@@ -29,29 +29,12 @@ Ratao::~Ratao()
 
 }
 
-void Ratao::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Ratao::Gravar()
 {
-	setVidas(numVidas);
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open("Persistencia/Ratao.bin", ios::binary | ios::out | ios::app);
 
-	velocidadeX = velX;
-	Xinicial = cX;
-
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
-
-void Ratao::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Ratao";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
-	arquivo.write((char*)&vidas, sizeof(vidas));
-	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
-	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
+	GravarInfo(arquivo);
+	
+	arquivo.close();
 }

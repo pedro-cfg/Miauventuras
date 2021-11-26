@@ -29,25 +29,12 @@ void Espinho::ExecutaImpedimento(Jogador* pJ)
 	pJ->Atualiza_Contador(0.f, true);
 }
 
-void Espinho::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Espinho::Gravar()
 {
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open("Persistencia/Espinhos.bin", ios::binary | ios::out | ios::app);
 
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
+	GravarInfo(arquivo);
 
-void Espinho::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Espinho";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	arquivo.close();
 }

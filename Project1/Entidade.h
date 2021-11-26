@@ -41,8 +41,10 @@ public:
     /*Métodos executados polimorficamente*/
     virtual void mover(float dT){}
     virtual void Executar(float dT){}
-    virtual void Gravar_Individual(fstream& arquivo);
-    virtual void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f){}
+
+    virtual void Gravar(){}
+    virtual void GravarInfo(fstream& arquivo){}
+    virtual void Carregar(fstream& arquivo){}
 };
 
 #endif 

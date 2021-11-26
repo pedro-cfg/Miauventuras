@@ -11,6 +11,7 @@ private:
 	float velocidadeEscalar;
 	float velocidadeX;
 	float velocidadeY;
+	/*Aranha* pAr*/
 public:
 	Projetil();
 	Projetil(Aranha* pAr);
@@ -23,10 +24,10 @@ public:
 
 	const float getVelX() const;
 	const float getVelY() const;
-	//void setTipo();
 
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
-	virtual void Gravar_Individual(fstream& arquivo);
+	void Carregar(fstream& arquivo);
+	void Gravar();
+	void GravarInfo(fstream& arquivo);
 };
 
 #endif 

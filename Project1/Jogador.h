@@ -47,8 +47,8 @@ public:
     void setNome(string n, bool retira = false);
     const string getNome() const;
 
-    void Gravar_Individual(fstream& arquivo);
-    void Ler_Jogador(fstream& arquivo);
+    void GravarInfo(fstream& arquivo);
+    void Carregar(fstream& arquivo);
 };
 
 #endif

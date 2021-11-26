@@ -48,26 +48,28 @@ const float Projetil::getVelY() const
 	return velocidadeY;
 }
 
-void Projetil::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Projetil::Carregar(fstream& arquivo)
 {
-	Reposicionar(cX, cY);
+	arquivo.read((char*)&x, sizeof(x));
+	arquivo.read((char*)&y, sizeof(y));
+	arquivo.read((char*)&velocidadeX, sizeof(velocidadeX));
+	arquivo.read((char*)&velocidadeY, sizeof(velocidadeY));
 
-	velocidadeX = velX;
-	velocidadeY = velY;
-
-	pLista->Inserir(this);
-	pGC->Inserir(this);
+	Reposicionar(x, y);
 }
 
-void Projetil::Gravar_Individual(fstream& arquivo)
+void Projetil::Gravar()
 {
-	string tipo = "Projetil";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
+	fstream arquivo;
+	arquivo.open("Persistencia/Projeteis.bin", ios::binary | ios::out | ios::app);
 
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	GravarInfo(arquivo);
+
+	arquivo.close();
+}
+
+void Projetil::GravarInfo(fstream& arquivo)
+{
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&velocidadeX, sizeof(velocidadeX));

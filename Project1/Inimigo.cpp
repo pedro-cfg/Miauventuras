@@ -107,4 +107,29 @@ const float Inimigo::getXinicial() const
 	return Xinicial;
 }
 
+void Inimigo::GravarInfo(fstream& arquivo)
+{
+	arquivo.write((char*)&x, sizeof(x));
+	arquivo.write((char*)&y, sizeof(y));
+	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
+	arquivo.write((char*)&vidas, sizeof(vidas));
+	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
+	arquivo.write((char*)&velocidadeX, sizeof(velocidadeX));
+	arquivo.write((char*)&velocidadeY, sizeof(velocidadeY));
+}
+
+void Inimigo::Carregar(fstream& arquivo)
+{
+	arquivo.read((char*)&x, sizeof(x));
+	arquivo.read((char*)&y, sizeof(y));
+	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
+	arquivo.read((char*)&vidas, sizeof(vidas));
+	arquivo.read((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
+	arquivo.read((char*)&velocidadeX, sizeof(velocidadeX));
+	arquivo.read((char*)&velocidadeY, sizeof(velocidadeY));
+
+	Reposicionar(x, y);
+	direcao = (abs(velocidadeX) / velocidadeX);
+}
+
 

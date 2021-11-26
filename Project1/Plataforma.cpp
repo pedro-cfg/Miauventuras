@@ -32,27 +32,14 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cim
 	pP->setColidiuBaixo(baixo);
 }
 
-void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Plataforma::Gravar()
 {
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open("Persistencia/Plataformas.bin", ios::binary | ios::out | ios::app);
 
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
+	GravarInfo(arquivo);
 
-void Plataforma::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Plataforma";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	arquivo.close();
 }
 
 

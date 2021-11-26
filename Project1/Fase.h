@@ -50,9 +50,16 @@ public:
 	void Limpar();
 
 	/*Salvamento e carregamento da fase*/
-	void GravarLista(fstream& arquivo);
-	void LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2);
-	void LerLista_Individual(fstream& arquivo);
+	void Gravar();
+	void GravarJogadores();
+	void GravarEntidades();
+	void LimparArquivos();
+	void Carregar(Jogador1* p1, Jogador2* p2);
+	void CarregarJogadores(Jogador1* p1, Jogador2* p2);
+	void CarregarEntidades();
+	void CarregarInimigos();
+	void CarregarObstaculos();
+	void CarregarProjeteis();
 };
 
 #endif

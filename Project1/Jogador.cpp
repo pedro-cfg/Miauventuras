@@ -169,8 +169,9 @@ const string Jogador::getNome() const
 	return nome;
 }
 
-void Jogador::Gravar_Individual(fstream& arquivo)
+void Jogador::GravarInfo(fstream& arquivo)
 {
+	arquivo.write((char*)&fase, sizeof(fase));
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&vidas, sizeof(vidas));
@@ -181,8 +182,9 @@ void Jogador::Gravar_Individual(fstream& arquivo)
 	arquivo.write((char*)&nome[0], tamanhoNome);
 }
 
-void Jogador::Ler_Jogador(fstream& arquivo)
+void Jogador::Carregar(fstream& arquivo)
 {
+	arquivo.read((char*)&fase, sizeof(fase));
 	arquivo.read((char*)&x, sizeof(x));
 	arquivo.read((char*)&y, sizeof(y));
 	arquivo.read((char*)&vidas, sizeof(vidas));
@@ -190,7 +192,6 @@ void Jogador::Ler_Jogador(fstream& arquivo)
 	Reposicionar(x, y);
 
 	int tamanhoNome;
-
 	arquivo.read((char*)&tamanhoNome, sizeof(tamanhoNome));
 	nome.resize(tamanhoNome);
 	arquivo.read((char*)&nome[0], tamanhoNome);

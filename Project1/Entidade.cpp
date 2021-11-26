@@ -51,11 +51,6 @@ void Entidade::Deslocar(float dx, float dy)
 	y += dy;
 }
 
-
-void Entidade::Gravar_Individual(fstream& arquivo)
-{
-}
-
 void Entidade::desenhar()
 {
 	pGG->DesenhaForma(forma);

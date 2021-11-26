@@ -159,10 +159,23 @@ void Fase::MorteJogadores()
 void Fase::Limpar()
 {
 	lista_entidades.Limpar();
+	pJ1 = NULL;
+	pJ2 = NULL;
+	gerenciador_colisoes.LimpaListas();
 }
 
-void Fase::GravarLista(fstream& arquivo)
+void Fase::Gravar()
 {
+	GravarJogadores();
+	LimparArquivos();
+	GravarEntidades();
+}
+
+void Fase::GravarJogadores()
+{
+	fstream arquivo;
+	arquivo.open("Persistencia/JogadoresFase.bin", ios::binary | ios::out | ios::trunc);
+
 	bool p1 = false, p2 = false;
 	if (pJ1)
 		p1 = true;
@@ -170,19 +183,63 @@ void Fase::GravarLista(fstream& arquivo)
 		p2 = true;
 	arquivo.write((char*)&p1, sizeof(p1));
 	arquivo.write((char*)&p2, sizeof(p2));
-	lista_entidades.Gravar(arquivo);
+
+	arquivo.close();
 }
 
-void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
+void Fase::GravarEntidades()
+{
+	lista_entidades.Gravar();
+}
+
+void Fase::LimparArquivos()
+{
+	fstream limpo;
+	limpo.open("Persistencia/Aranhas.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Espinhos.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Lagartixas.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Plataformas.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Projeteis.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Ratao.bin", ios::binary | ios::trunc);
+	limpo.close();
+
+	limpo.open("Persistencia/Teias.bin", ios::binary | ios::trunc);
+	limpo.close();
+}
+
+void Fase::Carregar(Jogador1* p1, Jogador2* p2)
 {
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
-
 	Limpar();
-	gerenciador_colisoes.LimpaListas();
+
+	CarregarJogadores(p1, p2);
+	CarregarEntidades();
+}
+
+void Fase::CarregarEntidades()
+{
+	CarregarInimigos();
+	CarregarObstaculos();
+	CarregarProjeteis();
+}
+
+void Fase::CarregarJogadores(Jogador1* p1, Jogador2* p2)
+{
+	fstream arquivo;
+	arquivo.open("Persistencia/JogadoresFase.bin", ios::binary | ios::in);
 
 	bool j1 = false, j2 = false;
-
 	arquivo.read((char*)&j1, sizeof(j1));
 	arquivo.read((char*)&j2, sizeof(j2));
 
@@ -191,68 +248,116 @@ void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
 	if (j2)
 		pJ2 = p2;
 
-	int tamanho_lista;
-
-	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
-
-	for (int i = 0; i < tamanho_lista; i++) 
-	{
-		LerLista_Individual(arquivo);
-	}
+	arquivo.close();
 }
 
-void Fase::LerLista_Individual(fstream& arquivo)
+void Fase::CarregarInimigos()
 {
-	string tipo;
-	int tamanho_tipo;
+	fstream arquivo;
 
-	float x, y, Xinicial, velX, velY;
-	int vidas;
+	arquivo.open("Persistencia/Aranhas.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
+	{
+		Aranha* pAux = new Aranha();
 
-	arquivo.read((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	tipo.resize(tamanho_tipo);
-	arquivo.read((char*)&tipo[0], tamanho_tipo);
+		pAux->Carregar(arquivo);
 
-	arquivo.read((char*)&x, sizeof(x));
-	arquivo.read((char*)&y, sizeof(y));
-	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
-	arquivo.read((char*)&vidas, sizeof(vidas));
-	arquivo.read((char*)&velX, sizeof(velX));
-	arquivo.read((char*)&velY, sizeof(velY));
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+	}
+	arquivo.close();
 
-	if (tipo == "Aranha") 
+	cout << lista_entidades.LEs.Quantidade() << endl;
+
+	arquivo.open("Persistencia/Lagartixas.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Aranha* pA = new Aranha;
-		pA->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Lagartixa* pAux = new Lagartixa();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
 	}
-	else if (tipo == "Lagartixa") 
+	arquivo.close();
+
+	cout << lista_entidades.LEs.Quantidade() << endl;
+
+	arquivo.open("Persistencia/Ratao.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Lagartixa* pL = new Lagartixa;
-		pL->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Ratao* pAux = new Ratao();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
 	}
-	else if (tipo == "Ratao") 
+	arquivo.close();
+
+	cout << lista_entidades.LEs.Quantidade() << endl;
+}
+
+void Fase::CarregarObstaculos()
+{
+	fstream arquivo;
+
+	arquivo.open("Persistencia/Espinhos.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Ratao* pR = new Ratao;
-		pR->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Espinho* pAux = new Espinho();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
 	}
-	else if (tipo == "Teia") 
+	arquivo.close();
+
+	cout << lista_entidades.LEs.Quantidade() << endl;
+
+	arquivo.open("Persistencia/Plataformas.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Teia* pT = new Teia;
-		pT->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Plataforma* pAux = new Plataforma();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
 	}
-	else if (tipo == "Espinho") 
+	arquivo.close();
+
+	cout << lista_entidades.LEs.Quantidade() << endl;
+
+	arquivo.open("Persistencia/Teias.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Espinho* pEsp = new Espinho;
-		pEsp->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Teia* pAux = new Teia();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
 	}
-	else if (tipo == "Plataforma") 
+	arquivo.close();
+
+	cout << lista_entidades.LEs.Quantidade() << endl;
+}
+
+void Fase::CarregarProjeteis()
+{
+	fstream arquivo;
+
+	arquivo.open("Persistencia/Projeteis.bin", ios::binary | ios::in);
+	while (!arquivo.eof())
 	{
-		Plataforma* pP = new Plataforma;
-		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		Projetil* pAux = new Projetil();
+
+		pAux->Carregar(arquivo);
+
+		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+		gerenciador_colisoes.Inserir(pAux);
 	}
-	else if (tipo == "Projetil") 
-	{
-		Projetil* pP = new Projetil;
-		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
-	}
+	arquivo.close();
 }

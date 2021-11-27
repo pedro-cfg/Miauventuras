@@ -24,9 +24,14 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 	pJ->reseta_colidiu();
 	pJ->reseta_velocidade();
 
+	Colisao_Com_Inimigos(pJ);
+	Colisao_Com_Obstaculos(pJ);
+	Colisao_Com_Projeteis(pJ);
+}
+
+void Gerenciador_Colisoes::Colisao_Com_Inimigos(Jogador* pJ)
+{
 	iteInim = LIs.begin();
-	iteObs = LOs.begin();
-	iteProj = LPs.begin();
 
 	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
 
@@ -46,16 +51,16 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		if (colidiuCima || colidiuEsquerda || colidiuDireita)
 		{
 			pJ->setEmpurrado(true);
-			if (pJ->getContador() > 1.f) 
+			if (pJ->getContador() > 1.f)
 			{
 				pJ->operator--();
 			}
 			pJ->Atualiza_Contador(0.f, true);
-			if (colidiuEsquerda || colidiuCima) 
+			if (colidiuEsquerda || colidiuCima)
 			{
 				pJ->setVelocidadeX(500.f);
 			}
-			if (colidiuDireita) 
+			if (colidiuDireita)
 			{
 				pJ->setVelocidadeX(-500.f);
 			}
@@ -77,6 +82,13 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 		}
 
 	}
+}
+
+void Gerenciador_Colisoes::Colisao_Com_Obstaculos(Jogador* pJ)
+{
+	iteObs = LOs.begin();
+
+	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
 
 	/*Colisão com obstáculos*/
 	while (iteObs != LOs.end())
@@ -104,6 +116,13 @@ void Gerenciador_Colisoes::Checa_Colisao(Jogador* pJ)
 			}
 		}
 	}
+}
+
+void Gerenciador_Colisoes::Colisao_Com_Projeteis(Jogador* pJ)
+{
+	iteProj = LPs.begin();
+
+	bool colidiuEsquerda, colidiuDireita, colidiuCima, colidiuBaixo;
 
 	/*Colisão com projéteis*/
 	while (iteProj != LPs.end())

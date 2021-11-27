@@ -8,13 +8,17 @@
 class Projetil: public Entidade 
 {
 private:
+	static int cont;
 	float velocidadeEscalar;
 	float velocidadeX;
 	float velocidadeY;
+	/*Aranha* pAr*/
 public:
 	Projetil();
 	Projetil(Aranha* pAr);
 	~Projetil();
+
+	static int getQuantidade();
 
 	//static void Excluir(Projetil* pP);
 
@@ -23,10 +27,9 @@ public:
 
 	const float getVelX() const;
 	const float getVelY() const;
-	//void setTipo();
 
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
-	virtual void Gravar_Individual(fstream& arquivo);
+	void Carregar(fstream& arquivo);
+	void GravarInfo(fstream& arquivo);
 };
 
 #endif 

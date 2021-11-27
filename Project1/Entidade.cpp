@@ -40,8 +40,8 @@ void Entidade::CarregaTextura(string caminho)
 void Entidade::Reposicionar(float X, float Y)
 {
 	forma.setPosition(sf::Vector2f(X, Y));
-	setX(X);
-	setY(Y);
+	x = X;
+	y = Y;
 }
 
 void Entidade::Deslocar(float dx, float dy)
@@ -49,11 +49,6 @@ void Entidade::Deslocar(float dx, float dy)
 	forma.move(dx, dy);
 	x += dx;
 	y += dy;
-}
-
-
-void Entidade::Gravar_Individual(fstream& arquivo)
-{
 }
 
 void Entidade::desenhar()

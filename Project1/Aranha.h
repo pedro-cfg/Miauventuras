@@ -8,17 +8,21 @@ class Projetil;
 class Aranha: public Inimigo 
 {
 private:
-
+	static int cont;
+	Projetil* pProj;
 public:
 	Aranha();
 	Aranha(float x, float y);
 	~Aranha();
 
+	static int getQuantidade();
+
 	void Executar(float dT);
 	void lancaProjetil();
 
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
-	virtual void Gravar_Individual(fstream& arquivo);
+	void Gravar();
+	void GravarInfo(fstream& arquivo);
+	void Carregar(fstream& arquivo);
 };
 
 #endif

@@ -2,9 +2,16 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Plataforma::cont = 0;
+int Plataforma::getQuantidade()
+{
+	return cont;
+}
+
 Plataforma::Plataforma():
 	Obstaculo()
 {
+	cont++;
 	EhPlataforma = true;
 	CarregaTextura(PLATAFORMA);
 }
@@ -12,6 +19,7 @@ Plataforma::Plataforma():
 Plataforma::Plataforma(float x, float y) :
 	Obstaculo() 
 {
+	cont++;
 	EhPlataforma = true;
 	CarregaTextura(PLATAFORMA);
 	forma.setPosition(sf::Vector2f(x, y));
@@ -21,7 +29,7 @@ Plataforma::Plataforma(float x, float y) :
 
 Plataforma::~Plataforma() 
 {
-
+	cont--;
 }
 
 void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo)
@@ -32,27 +40,14 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cim
 	pP->setColidiuBaixo(baixo);
 }
 
-void Plataforma::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Plataforma::Gravar()
 {
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::out | ios::app);
 
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
+	GravarInfo(arquivo);
 
-void Plataforma::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Plataforma";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	arquivo.close();
 }
 
 

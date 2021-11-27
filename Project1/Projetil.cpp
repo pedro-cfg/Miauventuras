@@ -3,8 +3,15 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Projetil::cont = 0;
+int Projetil::getQuantidade()
+{
+	return cont;
+}
+
 Projetil::Projetil()
 {
+	cont++;
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
@@ -13,6 +20,7 @@ Projetil::Projetil()
 Projetil::Projetil(Aranha* pAr) :
 	Entidade() 
 {
+	cont++;
 	x = pAr->getX();
 	y = pAr->getY();
 	CarregaTextura(PROJETIL);
@@ -27,15 +35,17 @@ Projetil::Projetil(Aranha* pAr) :
 
 Projetil::~Projetil() 
 {
+	cont--;
 }
+
 void Projetil::Executar(float dT)
 {
 	mover(dT);
-	if (contador_tempo > 3.f) 
-	{
-		pGC->Excluir(this);
-		Atualiza_Contador(0.f, true);
-	}
+	//if (contador_tempo > 3.f) 
+	//{
+	//	pGC->Excluir(this);
+	//	Atualiza_Contador(0.f, true);
+	//}
 }
 
 const float Projetil::getVelX() const
@@ -48,26 +58,18 @@ const float Projetil::getVelY() const
 	return velocidadeY;
 }
 
-void Projetil::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Projetil::Carregar(fstream& arquivo)
 {
-	Reposicionar(cX, cY);
+	arquivo.read((char*)&x, sizeof(x));
+	arquivo.read((char*)&y, sizeof(y));
+	arquivo.read((char*)&velocidadeX, sizeof(velocidadeX));
+	arquivo.read((char*)&velocidadeY, sizeof(velocidadeY));
 
-	velocidadeX = velX;
-	velocidadeY = velY;
-
-	pLista->Inserir(this);
-	pGC->Inserir(this);
+	Reposicionar(x, y);
 }
 
-void Projetil::Gravar_Individual(fstream& arquivo)
+void Projetil::GravarInfo(fstream& arquivo)
 {
-	string tipo = "Projetil";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&velocidadeX, sizeof(velocidadeX));

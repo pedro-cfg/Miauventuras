@@ -2,15 +2,23 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Teia::cont = 0;
+int Teia::getQuantidade()
+{
+	return cont;
+}
+
 Teia::Teia():
 	Obstaculo()
 {
+	cont++;
 	CarregaTextura(TEIA);
 }
 
 Teia::Teia(float x, float y):
 	Obstaculo() 
 {
+	cont++;
 	this->x = x;
 	this->y = y;
 	CarregaTextura(TEIA);
@@ -19,7 +27,7 @@ Teia::Teia(float x, float y):
 
 Teia::~Teia() 
 {
-
+	cont--;
 }
 
 void Teia::ExecutaImpedimento(Jogador* pJ)
@@ -27,25 +35,12 @@ void Teia::ExecutaImpedimento(Jogador* pJ)
 	pJ->setVelocidadeEscalar(pJ->getVelocidadeEscalar() * 0.5f);
 }
 
-void Teia::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Teia::Gravar()
 {
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open(TEIAS_SAVE, ios::binary | ios::out | ios::app);
 
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
+	GravarInfo(arquivo);
 
-void Teia::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Teia";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	arquivo.close();
 }

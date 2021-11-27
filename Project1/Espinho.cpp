@@ -3,22 +3,31 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Espinho::cont = 0;
+int Espinho::getQuantidade()
+{
+	return cont;
+}
+
 Espinho::Espinho():Obstaculo()
 {
+	cont++;
 	CarregaTextura(ESPINHO);
 }
 
 Espinho::Espinho(float x, float y) :
 	Obstaculo() 
 {
+	cont++;
 	this->x = x;
 	this->y = y;
 	CarregaTextura(ESPINHO);
 	forma.setPosition(sf::Vector2f(x, y));
 }
 
-Espinho::~Espinho() {
-
+Espinho::~Espinho() 
+{
+	cont--;
 }
 
 void Espinho::ExecutaImpedimento(Jogador* pJ)
@@ -29,25 +38,12 @@ void Espinho::ExecutaImpedimento(Jogador* pJ)
 	pJ->Atualiza_Contador(0.f, true);
 }
 
-void Espinho::Recuperar(float cX, float cY, float XI, int numVidas, float velX, float velY)
+void Espinho::Gravar()
 {
-	Reposicionar(cX, cY);
+	fstream arquivo;
+	arquivo.open(ESPINHOS_SAVE, ios::binary | ios::out | ios::app);
 
-	pLista->Inserir(this);
-	pGC->Inserir(this);
-}
+	GravarInfo(arquivo);
 
-void Espinho::Gravar_Individual(fstream& arquivo)
-{
-	string tipo = "Espinho";
-	int tamanho_tipo = tipo.size();
-	arquivo.write((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	arquivo.write((char*)&tipo[0], tamanho_tipo);
-
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
-	arquivo.write((char*)&x, sizeof(x));
-	arquivo.write((char*)&y, sizeof(y));
+	arquivo.close();
 }

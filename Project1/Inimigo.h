@@ -15,9 +15,7 @@ protected:
 	bool ehChefao;
 public:
 	Inimigo();
-	~Inimigo();
-
-	/*void setTipo();*/
+	virtual~Inimigo();
 
 	int getValor() const;
 	const bool getEhChefao() const;
@@ -33,6 +31,9 @@ public:
 	void InimigoEmPlataforma(Obstaculo* pO);
 
 	const float getXinicial() const;
+
+	virtual void GravarInfo(fstream& arquivo);
+	virtual void Carregar(fstream& arquivo);
 };
 
 #endif

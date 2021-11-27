@@ -5,17 +5,18 @@
 
 class Teia: public Obstaculo 
 {
+private:
+	static int cont;
 public:
 	Teia();
 	Teia(float x, float y);
 	~Teia();
 
+	static int getQuantidade();
+
 	void ExecutaImpedimento(Jogador* pJ);
 
-	//void setTipo();
-
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
-	virtual void Gravar_Individual(fstream& arquivo);
+	void Gravar();
 };
 
 #endif 

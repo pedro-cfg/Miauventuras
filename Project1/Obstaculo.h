@@ -10,12 +10,15 @@ protected:
 	bool EhPlataforma;
 public:
 	Obstaculo();
-	~Obstaculo();
+	virtual~Obstaculo();
 
 	virtual void ExecutaImpedimento(Jogador* pJ) {}
 	virtual void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo) {}
 
 	const bool getEhPlataforma() const;
+
+	void GravarInfo(fstream& arquivo);
+	void Carregar(fstream& arquivo);
 };
 
 #endif

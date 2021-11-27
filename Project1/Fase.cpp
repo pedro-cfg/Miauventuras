@@ -159,10 +159,22 @@ void Fase::MorteJogadores()
 void Fase::Limpar()
 {
 	lista_entidades.Limpar();
+	pJ1 = NULL;
+	pJ2 = NULL;
+	gerenciador_colisoes.LimpaListas();
 }
 
-void Fase::GravarLista(fstream& arquivo)
+void Fase::Gravar()
 {
+	GravarJogadores();
+	GravarEntidades();
+}
+
+void Fase::GravarJogadores()
+{
+	fstream arquivo;
+	arquivo.open(JOGADORESFASE_SAVE, ios::binary | ios::out | ios::trunc);
+
 	bool p1 = false, p2 = false;
 	if (pJ1)
 		p1 = true;
@@ -170,89 +182,300 @@ void Fase::GravarLista(fstream& arquivo)
 		p2 = true;
 	arquivo.write((char*)&p1, sizeof(p1));
 	arquivo.write((char*)&p2, sizeof(p2));
-	lista_entidades.Gravar(arquivo);
+
+	arquivo.close();
 }
 
-void Fase::LerLista(fstream& arquivo, Jogador1* p1, Jogador2* p2)
+void Fase::GravarEntidades()
+{
+	int cont;
+	fstream arquivo;
+
+	arquivo.open(ARANHAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Aranha::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(ESPINHOS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Espinho::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(LAGARTIXAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Lagartixa::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Plataforma::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(RATAO_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Ratao::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(TEIAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Teia::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	lista_entidades.Gravar();
+}
+
+void Fase::Carregar(Jogador1* p1, Jogador2* p2)
 {
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
-
 	Limpar();
-	gerenciador_colisoes.LimpaListas();
 
-	bool j1 = false, j2 = false;
-
-	arquivo.read((char*)&j1, sizeof(j1));
-	arquivo.read((char*)&j2, sizeof(j2));
-
-	if (j1)
-		pJ1 = p1;
-	if (j2)
-		pJ2 = p2;
-
-	int tamanho_lista;
-
-	arquivo.read((char*)&tamanho_lista, sizeof(tamanho_lista));
-
-	for (int i = 0; i < tamanho_lista; i++) 
-	{
-		LerLista_Individual(arquivo);
-	}
+	CarregarJogadores(p1, p2);
+	CarregarEntidades();
 }
 
-void Fase::LerLista_Individual(fstream& arquivo)
+void Fase::CarregarEntidades()
 {
-	string tipo;
-	int tamanho_tipo;
+	CarregarInimigos();
+	CarregarObstaculos();
+	//CarregarProjeteis();
+}
 
-	float x, y, Xinicial, velX, velY;
-	int vidas;
+void Fase::CarregarJogadores(Jogador1* p1, Jogador2* p2)
+{
+	fstream arquivo;
 
-	arquivo.read((char*)&tamanho_tipo, sizeof(tamanho_tipo));
-	tipo.resize(tamanho_tipo);
-	arquivo.read((char*)&tipo[0], tamanho_tipo);
+	arquivo.open(JOGADORESFASE_SAVE, ios::binary | ios::in);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-	arquivo.read((char*)&x, sizeof(x));
-	arquivo.read((char*)&y, sizeof(y));
-	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
-	arquivo.read((char*)&vidas, sizeof(vidas));
-	arquivo.read((char*)&velX, sizeof(velX));
-	arquivo.read((char*)&velY, sizeof(velY));
+		bool j1 = false, j2 = false;
+		arquivo.read((char*)&j1, sizeof(j1));
+		arquivo.read((char*)&j2, sizeof(j2));
 
-	if (tipo == "Aranha") 
-	{
-		Aranha* pA = new Aranha;
-		pA->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		if (j1)
+			pJ1 = p1;
+		if (j2)
+			pJ2 = p2;
 	}
-	else if (tipo == "Lagartixa") 
+	catch (const char* erro)
 	{
-		Lagartixa* pL = new Lagartixa;
-		pL->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		cerr << erro << endl;
 	}
-	else if (tipo == "Ratao") 
+	arquivo.close();
+}
+
+void Fase::CarregarInimigos()
+{
+	fstream arquivo;
+	int cont;
+
+	arquivo.open(ARANHAS_SAVE, ios::binary | ios::in);
+
+	try
 	{
-		Ratao* pR = new Ratao;
-		pR->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Aranha* pAux = new Aranha();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
+
 	}
-	else if (tipo == "Teia") 
+	catch (const char* erro)
 	{
-		Teia* pT = new Teia;
-		pT->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		cerr << erro << endl;
 	}
-	else if (tipo == "Espinho") 
+	arquivo.close();
+
+	arquivo.open(LAGARTIXAS_SAVE, ios::binary | ios::in);
+
+	try
 	{
-		Espinho* pEsp = new Espinho;
-		pEsp->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Lagartixa* pAux = new Lagartixa();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
 	}
-	else if (tipo == "Plataforma") 
+	catch (const char* erro)
 	{
-		Plataforma* pP = new Plataforma;
-		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		cerr << erro << endl;
 	}
-	else if (tipo == "Projetil") 
+	arquivo.close();
+
+	arquivo.open(RATAO_SAVE, ios::binary | ios::in);
+	try
 	{
-		Projetil* pP = new Projetil;
-		pP->Recuperar(x, y, Xinicial, vidas, velX, velY);
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Ratao* pAux = new Ratao();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
 	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+}
+
+void Fase::CarregarObstaculos()
+{
+	fstream arquivo;
+	int cont;
+
+	arquivo.open(ESPINHOS_SAVE, ios::binary | ios::in);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Espinho* pAux = new Espinho();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::in);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Plataforma* pAux = new Plataforma();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(TEIAS_SAVE, ios::binary | ios::in);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Teia* pAux = new Teia();
+
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
 }

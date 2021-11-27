@@ -5,15 +5,16 @@
 
 class Ratao: public Inimigo 
 {
+private:
+	static int cont;
 public:
 	Ratao();
 	Ratao(float x, float y);
 	~Ratao();
 
-	//void setTipo();
+	static int getQuantidade();
 
-	void Recuperar(float cX, float cY, float XI = 0.f, int numVidas = 0, float velX = 0.f, float velY = 0.f);
-	virtual void Gravar_Individual(fstream& arquivo);
+	void Gravar();
 };
 
 #endif 

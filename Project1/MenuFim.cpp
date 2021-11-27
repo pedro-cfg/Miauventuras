@@ -36,10 +36,9 @@ void MenuFim::setVitoria(const bool v)
 
 void MenuFim::InicializaTexto()
 {
-	fonte.loadFromFile("Fontes/SIXTY.ttf");
 	texto[0].setFont(fonte);
 	texto[0].setFillColor(sf::Color::Black);
-	texto[0].setString("OJogoDoGato");
+	texto[0].setString("Miauventuras");
 	texto[0].setCharacterSize(180);
 	texto[0].setOrigin(sf::Vector2f(CalculaTamanho(texto[0]), 160.f));
 	texto[0].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 160.f, ALTURA_JANELA / 6.f * 1));
@@ -61,7 +60,10 @@ void MenuFim::Escolher_Opcao()
 {
 	if (indice == 2)
 	{
-		SalvarPontuacao();
+		if (vitoria)
+		{
+			SalvarPontuacao();
+		}
 		pJogo->getJogador1()->reseta_jogador(true, true, true);
 		pJogo->getJogador2()->reseta_jogador(true, true, true);
 		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);

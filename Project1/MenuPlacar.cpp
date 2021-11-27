@@ -46,7 +46,6 @@ void MenuPlacar::setPlacar()
 	{
 		RecuperarPontuacao();
 
-		fonte.loadFromFile("Fontes/SIXTY.ttf");
 		texto[0].setFont(fonte);
 		texto[0].setFillColor(sf::Color::Black);
 		texto[0].setString("Placar");

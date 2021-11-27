@@ -101,8 +101,6 @@ FaseSegunda* Jogo::getSegundaFase()
 
 void Jogo::Gravar()
 {
-	//std::filesystem::remove_all("Persistencia");
-	//std::filesystem::create_directory("Persistencia");
 	GravarJogadores();
 	GravarFase();
 }
@@ -116,7 +114,7 @@ void Jogo::Carregar()
 void Jogo::CarregarJogadores()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/Jogadores.bin", ios::binary | ios::in);
+	arquivo.open(JOGADORES_SAVE, ios::binary | ios::in);
 
 	bool dois_jogadores;
 	arquivo.read((char*)&dois_jogadores, sizeof(dois_jogadores));
@@ -151,7 +149,7 @@ void Jogo::CarregarFase()
 void Jogo::GravarJogadores()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/Jogadores.bin", ios::binary | ios::out | ios::trunc);
+	arquivo.open(JOGADORES_SAVE, ios::binary | ios::out | ios::trunc);
 
 	bool dois_jogadores = Menu::getDoisJogadores();
 	arquivo.write((char*)&dois_jogadores, sizeof(dois_jogadores));

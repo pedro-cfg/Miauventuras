@@ -30,6 +30,6 @@ bool Jogador1::mover_dir()
 
 bool Jogador1::pular()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Space));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::W));
 }
 

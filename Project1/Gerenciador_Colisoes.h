@@ -36,6 +36,9 @@ public:
 	void LimpaListas();
 
 	void Checa_Colisao(Jogador* pJ);
+	void Colisao_Com_Inimigos(Jogador* pJ);
+	void Colisao_Com_Obstaculos(Jogador* pJ);
+	void Colisao_Com_Projeteis(Jogador* pJ);
 	void Checa_Colisao_Inimigos();
 	void Checa_Colisao_Individual(Personagem* pP, Entidade* pOutro, bool& esq, bool& dir, bool& cima, bool& baixo);
 };

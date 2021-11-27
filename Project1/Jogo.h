@@ -65,9 +65,6 @@ public:
 	void CarregarJogadores();
 	void CarregarFase();
 
-	//void GravarJogadores(fstream& arquivo);
-	//void LerJogador(fstream& arquivo);
-
 	void MudaFundo(int fase);
 };
 

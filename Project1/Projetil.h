@@ -8,6 +8,7 @@
 class Projetil: public Entidade 
 {
 private:
+	static int cont;
 	float velocidadeEscalar;
 	float velocidadeX;
 	float velocidadeY;
@@ -16,6 +17,8 @@ public:
 	Projetil();
 	Projetil(Aranha* pAr);
 	~Projetil();
+
+	static int getQuantidade();
 
 	//static void Excluir(Projetil* pP);
 
@@ -26,7 +29,6 @@ public:
 	const float getVelY() const;
 
 	void Carregar(fstream& arquivo);
-	void Gravar();
 	void GravarInfo(fstream& arquivo);
 };
 

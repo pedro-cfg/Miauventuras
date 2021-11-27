@@ -3,8 +3,15 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Projetil::cont = 0;
+int Projetil::getQuantidade()
+{
+	return cont;
+}
+
 Projetil::Projetil()
 {
+	cont++;
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
@@ -13,6 +20,7 @@ Projetil::Projetil()
 Projetil::Projetil(Aranha* pAr) :
 	Entidade() 
 {
+	cont++;
 	x = pAr->getX();
 	y = pAr->getY();
 	CarregaTextura(PROJETIL);
@@ -27,15 +35,17 @@ Projetil::Projetil(Aranha* pAr) :
 
 Projetil::~Projetil() 
 {
+	cont--;
 }
+
 void Projetil::Executar(float dT)
 {
 	mover(dT);
-	if (contador_tempo > 3.f) 
-	{
-		pGC->Excluir(this);
-		Atualiza_Contador(0.f, true);
-	}
+	//if (contador_tempo > 3.f) 
+	//{
+	//	pGC->Excluir(this);
+	//	Atualiza_Contador(0.f, true);
+	//}
 }
 
 const float Projetil::getVelX() const
@@ -56,16 +66,6 @@ void Projetil::Carregar(fstream& arquivo)
 	arquivo.read((char*)&velocidadeY, sizeof(velocidadeY));
 
 	Reposicionar(x, y);
-}
-
-void Projetil::Gravar()
-{
-	fstream arquivo;
-	arquivo.open("Persistencia/Projeteis.bin", ios::binary | ios::out | ios::app);
-
-	GravarInfo(arquivo);
-
-	arquivo.close();
 }
 
 void Projetil::GravarInfo(fstream& arquivo)

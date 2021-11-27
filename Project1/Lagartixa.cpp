@@ -2,17 +2,24 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Lagartixa::cont = 0;
+int Lagartixa::getQuantidade()
+{
+	return cont;
+}
+
 Lagartixa::Lagartixa():
 	Inimigo()
 {
+	cont++;
 	CarregaTextura(LAGARTIXA);
 	valor = 2;
-
 }
 
 Lagartixa::Lagartixa(float x, float y) :
 	Inimigo() 
 {
+	cont++;
 	CarregaTextura(LAGARTIXA);
 	forma.setPosition(sf::Vector2f(x, y));
 	this->x = x;
@@ -26,6 +33,7 @@ Lagartixa::Lagartixa(float x, float y) :
 
 Lagartixa::~Lagartixa() 
 {
+	cont--;
 }
 
 void Lagartixa::reseta_velocidade()
@@ -36,7 +44,7 @@ void Lagartixa::reseta_velocidade()
 void Lagartixa::Gravar()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/Lagartixas.bin", ios::binary | ios::out | ios::app);
+	arquivo.open(LAGARTIXAS_SAVE, ios::binary | ios::out | ios::app);
 
 	GravarInfo(arquivo);
 

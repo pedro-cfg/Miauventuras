@@ -33,7 +33,7 @@ Menu::Menu() :
 	linhas_texto(0),
 	indice(1)
 {
-
+	fonte.loadFromFile("Fontes/Catpaw.ttf");
 }
 
 Menu::~Menu()

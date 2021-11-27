@@ -60,6 +60,5 @@ void ListaEntidades::Gravar()
 	{
 		pE = LEs.Buscar(i);
 		pE->Gravar();
-		cout << i << endl;
 	}
 }

@@ -167,14 +167,13 @@ void Fase::Limpar()
 void Fase::Gravar()
 {
 	GravarJogadores();
-	LimparArquivos();
 	GravarEntidades();
 }
 
 void Fase::GravarJogadores()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/JogadoresFase.bin", ios::binary | ios::out | ios::trunc);
+	arquivo.open(JOGADORESFASE_SAVE, ios::binary | ios::out | ios::trunc);
 
 	bool p1 = false, p2 = false;
 	if (pJ1)
@@ -189,32 +188,100 @@ void Fase::GravarJogadores()
 
 void Fase::GravarEntidades()
 {
+	int cont;
+	fstream arquivo;
+
+	arquivo.open(ARANHAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Aranha::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(ESPINHOS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Espinho::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(LAGARTIXAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Lagartixa::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Plataforma::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(RATAO_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Ratao::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
+	arquivo.open(TEIAS_SAVE, ios::binary | ios::out | ios::trunc);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
+
+		cont = Teia::getQuantidade();
+		arquivo.write((char*)&cont, sizeof(cont));
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
+	arquivo.close();
+
 	lista_entidades.Gravar();
-}
-
-void Fase::LimparArquivos()
-{
-	fstream limpo;
-	limpo.open("Persistencia/Aranhas.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Espinhos.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Lagartixas.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Plataformas.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Projeteis.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Ratao.bin", ios::binary | ios::trunc);
-	limpo.close();
-
-	limpo.open("Persistencia/Teias.bin", ios::binary | ios::trunc);
-	limpo.close();
 }
 
 void Fase::Carregar(Jogador1* p1, Jogador2* p2)
@@ -231,133 +298,184 @@ void Fase::CarregarEntidades()
 {
 	CarregarInimigos();
 	CarregarObstaculos();
-	CarregarProjeteis();
+	//CarregarProjeteis();
 }
 
 void Fase::CarregarJogadores(Jogador1* p1, Jogador2* p2)
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/JogadoresFase.bin", ios::binary | ios::in);
 
-	bool j1 = false, j2 = false;
-	arquivo.read((char*)&j1, sizeof(j1));
-	arquivo.read((char*)&j2, sizeof(j2));
+	arquivo.open(JOGADORESFASE_SAVE, ios::binary | ios::in);
+	try
+	{
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-	if (j1)
-		pJ1 = p1;
-	if (j2)
-		pJ2 = p2;
+		bool j1 = false, j2 = false;
+		arquivo.read((char*)&j1, sizeof(j1));
+		arquivo.read((char*)&j2, sizeof(j2));
 
+		if (j1)
+			pJ1 = p1;
+		if (j2)
+			pJ2 = p2;
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
+	}
 	arquivo.close();
 }
 
 void Fase::CarregarInimigos()
 {
 	fstream arquivo;
+	int cont;
 
-	arquivo.open("Persistencia/Aranhas.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	arquivo.open(ARANHAS_SAVE, ios::binary | ios::in);
+
+	try
 	{
-		Aranha* pAux = new Aranha();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Aranha* pAux = new Aranha();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
+
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
 	}
 	arquivo.close();
 
-	cout << lista_entidades.LEs.Quantidade() << endl;
+	arquivo.open(LAGARTIXAS_SAVE, ios::binary | ios::in);
 
-	arquivo.open("Persistencia/Lagartixas.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	try
 	{
-		Lagartixa* pAux = new Lagartixa();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Lagartixa* pAux = new Lagartixa();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
 	}
 	arquivo.close();
 
-	cout << lista_entidades.LEs.Quantidade() << endl;
-
-	arquivo.open("Persistencia/Ratao.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	arquivo.open(RATAO_SAVE, ios::binary | ios::in);
+	try
 	{
-		Ratao* pAux = new Ratao();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Ratao* pAux = new Ratao();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
 	}
 	arquivo.close();
-
-	cout << lista_entidades.LEs.Quantidade() << endl;
 }
 
 void Fase::CarregarObstaculos()
 {
 	fstream arquivo;
+	int cont;
 
-	arquivo.open("Persistencia/Espinhos.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	arquivo.open(ESPINHOS_SAVE, ios::binary | ios::in);
+	try
 	{
-		Espinho* pAux = new Espinho();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Espinho* pAux = new Espinho();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
 	}
 	arquivo.close();
 
-	cout << lista_entidades.LEs.Quantidade() << endl;
-
-	arquivo.open("Persistencia/Plataformas.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::in);
+	try
 	{
-		Plataforma* pAux = new Plataforma();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Plataforma* pAux = new Plataforma();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
+	}
+	catch (const char* erro)
+	{
+		cerr << erro << endl;
 	}
 	arquivo.close();
 
-	cout << lista_entidades.LEs.Quantidade() << endl;
-
-	arquivo.open("Persistencia/Teias.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	arquivo.open(TEIAS_SAVE, ios::binary | ios::in);
+	try
 	{
-		Teia* pAux = new Teia();
+		if (!arquivo)
+			throw "ERRO AO ABRIR ARQUIVO";
 
-		pAux->Carregar(arquivo);
+		arquivo.read((char*)&cont, sizeof(cont));
+		for (int i = 0; i < cont; i++)
+		{
+			Teia* pAux = new Teia();
 
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+			pAux->Carregar(arquivo);
+
+			lista_entidades.Inserir(static_cast<Entidade*>(pAux));
+			gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pAux));
+		}
 	}
-	arquivo.close();
-
-	cout << lista_entidades.LEs.Quantidade() << endl;
-}
-
-void Fase::CarregarProjeteis()
-{
-	fstream arquivo;
-
-	arquivo.open("Persistencia/Projeteis.bin", ios::binary | ios::in);
-	while (!arquivo.eof())
+	catch (const char* erro)
 	{
-		Projetil* pAux = new Projetil();
-
-		pAux->Carregar(arquivo);
-
-		lista_entidades.Inserir(static_cast<Entidade*>(pAux));
-		gerenciador_colisoes.Inserir(pAux);
+		cerr << erro << endl;
 	}
 	arquivo.close();
 }

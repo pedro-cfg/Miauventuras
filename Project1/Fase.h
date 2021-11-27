@@ -53,7 +53,6 @@ public:
 	void Gravar();
 	void GravarJogadores();
 	void GravarEntidades();
-	void LimparArquivos();
 	void Carregar(Jogador1* p1, Jogador2* p2);
 	void CarregarJogadores(Jogador1* p1, Jogador2* p2);
 	void CarregarEntidades();

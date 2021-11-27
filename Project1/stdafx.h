@@ -31,4 +31,13 @@ using namespace std;
 #define FUNDO1 "Texturas/fundo1.png"
 #define FUNDO2 "Texturas/fundo2.png"
 
+#define JOGADORES_SAVE "Persistencia/Salvamento/Jogadores.bin"
+#define JOGADORESFASE_SAVE "Persistencia/Salvamento/JogadoresFase.bin"
+#define ARANHAS_SAVE "Persistencia/Salvamento/Aranhas.bin"
+#define LAGARTIXAS_SAVE "Persistencia/Salvamento/Lagartixas.bin"
+#define RATAO_SAVE "Persistencia/Salvamento/Ratao.bin"
+#define PLATAFORMAS_SAVE "Persistencia/Salvamento/Plataformas.bin"
+#define TEIAS_SAVE "Persistencia/Salvamento/Teias.bin"
+#define ESPINHOS_SAVE "Persistencia/Salvamento/Espinhos.bin"
+
 #endif

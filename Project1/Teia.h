@@ -5,10 +5,14 @@
 
 class Teia: public Obstaculo 
 {
+private:
+	static int cont;
 public:
 	Teia();
 	Teia(float x, float y);
 	~Teia();
+
+	static int getQuantidade();
 
 	void ExecutaImpedimento(Jogador* pJ);
 

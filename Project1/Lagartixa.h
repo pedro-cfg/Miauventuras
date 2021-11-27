@@ -5,10 +5,14 @@
 
 class Lagartixa: public Inimigo 
 {
+private:
+	static int cont;
 public:
 	Lagartixa();
 	Lagartixa(float x, float y);
 	~Lagartixa();
+
+	static int getQuantidade();
 
 	void reseta_velocidade();
 

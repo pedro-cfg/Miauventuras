@@ -40,8 +40,8 @@ void Entidade::CarregaTextura(string caminho)
 void Entidade::Reposicionar(float X, float Y)
 {
 	forma.setPosition(sf::Vector2f(X, Y));
-	setX(X);
-	setY(Y);
+	x = X;
+	y = Y;
 }
 
 void Entidade::Deslocar(float dx, float dy)

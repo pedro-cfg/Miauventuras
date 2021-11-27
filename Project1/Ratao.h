@@ -5,10 +5,14 @@
 
 class Ratao: public Inimigo 
 {
+private:
+	static int cont;
 public:
 	Ratao();
 	Ratao(float x, float y);
 	~Ratao();
+
+	static int getQuantidade();
 
 	void Gravar();
 };

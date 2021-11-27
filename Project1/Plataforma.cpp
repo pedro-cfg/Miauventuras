@@ -2,9 +2,16 @@
 #include "ListaEntidades.h"
 #include "Gerenciador_Colisoes.h"
 
+int Plataforma::cont = 0;
+int Plataforma::getQuantidade()
+{
+	return cont;
+}
+
 Plataforma::Plataforma():
 	Obstaculo()
 {
+	cont++;
 	EhPlataforma = true;
 	CarregaTextura(PLATAFORMA);
 }
@@ -12,6 +19,7 @@ Plataforma::Plataforma():
 Plataforma::Plataforma(float x, float y) :
 	Obstaculo() 
 {
+	cont++;
 	EhPlataforma = true;
 	CarregaTextura(PLATAFORMA);
 	forma.setPosition(sf::Vector2f(x, y));
@@ -21,7 +29,7 @@ Plataforma::Plataforma(float x, float y) :
 
 Plataforma::~Plataforma() 
 {
-
+	cont--;
 }
 
 void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo)
@@ -35,7 +43,7 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cim
 void Plataforma::Gravar()
 {
 	fstream arquivo;
-	arquivo.open("Persistencia/Plataformas.bin", ios::binary | ios::out | ios::app);
+	arquivo.open(PLATAFORMAS_SAVE, ios::binary | ios::out | ios::app);
 
 	GravarInfo(arquivo);
 

@@ -9,6 +9,7 @@
 #include "MenuNome.h"
 #include "Menu.h"
 #include "MaquinaEstados.h"
+#include "Marcador_Vida.h"
 
 class Gerenciador_Grafico 
 {
@@ -21,27 +22,8 @@ private:
 	sf::RectangleShape fundo;
 	sf::Color cor_fundo;
 
-	/*Classe gráfica aninhada - marcador de vida*/
-	class Marcador_Vida
-	{
-	private:
-		float x;
-		float y;
-		/*Ponteiro para o jogador ao qual o marcador se refere*/
-		Jogador* pJogador;
-		/*Vector com as texturas do marcador*/
-		vector<sf::Texture*> texturas;
-		sf::RectangleShape forma_marcador;
-	public:
-		Marcador_Vida(float x0, float y0);
-		~Marcador_Vida();
-
-		void CarregaTextura(string caminho);
-		void setJogador(Jogador* pJ);
-		void AtualizaMarcador(sf::View* vista);
-		sf::RectangleShape& getforma();
-	};
-
+	Marcador_Vida marcador1;
+	Marcador_Vida marcador2;
 public:
 	Gerenciador_Grafico();
 	~Gerenciador_Grafico();
@@ -63,11 +45,6 @@ public:
 	map<string, sf::Texture*> getMapaTexturas() const;
 	void InicializaMapaTexturas();
 
-private:
-	/*Marcadores de vida dos jogadores 1 e 2*/
-	Marcador_Vida marcador1;
-	Marcador_Vida marcador2;
-public:
 	Marcador_Vida* getMarcador1();
 	Marcador_Vida* getMarcador2();
 };

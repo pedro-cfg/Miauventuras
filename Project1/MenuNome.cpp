@@ -15,10 +15,9 @@ MenuNome::~MenuNome()
 
 void MenuNome::InicializaTexto()
 {
-	fonte.loadFromFile("Fontes/SIXTY.ttf");
 	texto[0].setFont(fonte);
 	texto[0].setFillColor(sf::Color::Black);
-	texto[0].setString("OJogoDoGato");
+	texto[0].setString("Miauventuras");
 	texto[0].setCharacterSize(180);
 	texto[0].setOrigin(sf::Vector2f(CalculaTamanho(texto[0]), 160.f));
 	texto[0].setPosition(sf::Vector2f(LARGURA_JANELA / 2.f + 160.f, ALTURA_JANELA / 6.f * 1));

@@ -10,7 +10,7 @@ class Entidade;
 class ListaEntidades
 {
 private:
-    //Lista<Entidade> LEs;
+    Lista<Entidade> LEs;
 public: 
     ListaEntidades();
     ~ListaEntidades();
@@ -22,7 +22,7 @@ public:
     void Desenha();
 
     void Limpar();
-    Lista<Entidade> LEs;
+
     /*Métodos para salvamento da lista*/
     void Gravar();
 };

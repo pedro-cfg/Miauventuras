@@ -17,8 +17,6 @@ public:
 	Inimigo();
 	virtual~Inimigo();
 
-	/*void setTipo();*/
-
 	int getValor() const;
 	const bool getEhChefao() const;
 
@@ -34,8 +32,8 @@ public:
 
 	const float getXinicial() const;
 
-	void GravarInfo(fstream& arquivo);
-	void Carregar(fstream& arquivo);
+	virtual void GravarInfo(fstream& arquivo);
+	virtual void Carregar(fstream& arquivo);
 };
 
 #endif

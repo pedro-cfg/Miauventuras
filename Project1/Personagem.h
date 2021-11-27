@@ -28,6 +28,7 @@ public:
     bool Morreu() const;
 
     virtual void mover(float dT){}
+    virtual void Executar(float dT){}
 
     virtual void reseta_velocidade(){}
     void reseta_colidiu();
@@ -35,17 +36,12 @@ public:
     void setVelocidadeY(float v);
     void setVelocidadeX(float v);
 
-    float getContador();
+    float getContador() const;
 
     void setColidiuCima(bool colidiu);
     void setColidiuBaixo(bool colidiu);
     void setColidiuDireita(bool colidiu);
     void setColidiuEsquerda(bool colidiu);
-
-    bool getColidiuCima() const;
-    bool getColidiuBaixo() const;
-    bool getColidiuDireita() const;
-    bool getColidiuEsquerda() const;
 };
 
 #endif

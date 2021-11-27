@@ -49,7 +49,7 @@ void Fase::Executar(float dT)
 
 void Fase::Gerar_Objetos()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	Gerar_Inimigos();
 	Gerar_Obstaculos();
 }
@@ -298,7 +298,6 @@ void Fase::CarregarEntidades()
 {
 	CarregarInimigos();
 	CarregarObstaculos();
-	//CarregarProjeteis();
 }
 
 void Fase::CarregarJogadores(Jogador1* p1, Jogador2* p2)

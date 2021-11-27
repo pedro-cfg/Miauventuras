@@ -12,15 +12,12 @@ private:
 	float velocidadeEscalar;
 	float velocidadeX;
 	float velocidadeY;
-	/*Aranha* pAr*/
 public:
 	Projetil();
 	Projetil(Aranha* pAr);
 	~Projetil();
 
 	static int getQuantidade();
-
-	//static void Excluir(Projetil* pP);
 
 	void mover(float dT);
 	void Executar(float dT);

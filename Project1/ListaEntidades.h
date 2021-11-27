@@ -23,7 +23,7 @@ public:
 
     void Limpar();
 
-    /*Métodos para salvamento da lista*/
+    /*Método para salvamento da lista*/
     void Gravar();
 };
 

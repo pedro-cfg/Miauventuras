@@ -13,7 +13,9 @@ public:
 	virtual~Obstaculo();
 
 	virtual void ExecutaImpedimento(Jogador* pJ) {}
-	virtual void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo) {}
+	virtual void ExecutaImpedimento(Personagem* pP, const bool esq, const bool dir, const bool cima, const bool baixo) {}
+
+	void Executar(float dT){}
 
 	const bool getEhPlataforma() const;
 

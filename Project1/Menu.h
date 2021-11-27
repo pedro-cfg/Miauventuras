@@ -33,7 +33,7 @@ namespace Menus {
 		static bool getDoisJogadores();
 
 		virtual void InicializaTexto();
-		virtual void Escolher_Opcao();
+		virtual void Escolher_Opcao() = 0;
 
 		void ExecutaEstado(float dT);
 		virtual void Executar(float dT);

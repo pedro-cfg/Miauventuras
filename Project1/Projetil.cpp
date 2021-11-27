@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "Projetil.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Projetil::cont = 0;
 int Projetil::getQuantidade()
@@ -15,6 +13,8 @@ Projetil::Projetil()
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
+	velocidadeX = 0.0f;
+	velocidadeY = 0.0f;
 }
 
 Projetil::Projetil(Aranha* pAr) :
@@ -41,11 +41,6 @@ Projetil::~Projetil()
 void Projetil::Executar(float dT)
 {
 	mover(dT);
-	//if (contador_tempo > 3.f) 
-	//{
-	//	pGC->Excluir(this);
-	//	Atualiza_Contador(0.f, true);
-	//}
 }
 
 const float Projetil::getVelX() const

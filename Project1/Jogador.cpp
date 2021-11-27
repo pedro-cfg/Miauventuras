@@ -1,6 +1,4 @@
 #include "Jogador.h"
-#include "Gerenciador_Colisoes.h"
-#include "Gerenciador_Grafico.h"
 
 Jogador::Jogador() :
 	Personagem(),

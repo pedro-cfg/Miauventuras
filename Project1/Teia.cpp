@@ -1,6 +1,4 @@
 #include "Teia.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Teia::cont = 0;
 int Teia::getQuantidade()

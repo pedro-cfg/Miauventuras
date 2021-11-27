@@ -1,6 +1,4 @@
 #include "Ratao.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Ratao::cont = 0;
 int Ratao::getQuantidade()

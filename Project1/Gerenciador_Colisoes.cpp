@@ -252,6 +252,7 @@ void Gerenciador_Colisoes::Inserir(Projetil* pP)
 
 void Gerenciador_Colisoes::Excluir(Inimigo* pI)
 {
+	pI->diminui_cont();
 	LIs.remove(pI);
 	pLista->Retirar(static_cast<Entidade*>(pI));
 }

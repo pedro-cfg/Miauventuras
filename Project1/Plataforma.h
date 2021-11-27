@@ -16,6 +16,7 @@ public:
 
 	void ExecutaImpedimento(Personagem* pP, const bool esq, const bool dir, const bool cima, const bool baixo);
 
+	static void reseta_cont();
 	void Gravar();
 };
 

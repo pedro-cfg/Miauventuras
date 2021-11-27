@@ -35,6 +35,16 @@ Ratao::~Ratao()
 	cont--;
 }
 
+void Ratao::reseta_cont()
+{
+	cont = 0;
+}
+
+void Ratao::diminui_cont()
+{
+	cont--;
+}
+
 void Ratao::Gravar()
 {
 	fstream arquivo;

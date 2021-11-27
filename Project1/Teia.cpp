@@ -33,6 +33,11 @@ void Teia::ExecutaImpedimento(Jogador* pJ)
 	pJ->setVelocidadeEscalar(pJ->getVelocidadeEscalar() * 0.5f);
 }
 
+void Teia::reseta_cont()
+{
+	cont = 0;
+}
+
 void Teia::Gravar()
 {
 	fstream arquivo;

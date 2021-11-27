@@ -14,6 +14,8 @@ public:
 
 	static int getQuantidade();
 
+	static void reseta_cont();
+	void diminui_cont();
 	void Gravar();
 };
 

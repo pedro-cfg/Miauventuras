@@ -113,6 +113,7 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 {
 	lista_entidades.Limpar();
 	gerenciador_colisoes.LimpaListas();
+	reseta_entidades_cont();
 	pJ1 = p1;
 	pJ2 = p2;
 	if (pJ1)
@@ -134,6 +135,16 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
+}
+
+void Fase::reseta_entidades_cont()
+{
+	Aranha::reseta_cont();
+	Lagartixa::reseta_cont();
+	Ratao::reseta_cont();
+	Plataforma::reseta_cont();
+	Teia::reseta_cont();
+	Espinho::reseta_cont();
 }
 
 void Fase::MorteJogadores()

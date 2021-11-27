@@ -14,7 +14,7 @@ public:
 	static void setMaquinaEstados(MaquinaEstados* pMaquina);
 
 	/*Método executado polimorficamente*/
-	virtual void ExecutaEstado(float dT){}
+	virtual void ExecutaEstado(float dT) = 0;
 };
 
 #endif

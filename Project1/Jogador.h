@@ -39,7 +39,6 @@ public:
     void setEmpurrado(bool emp);
     void setVenceu(const bool v);
     bool getVenceu() const;
-    //void setTipo();
     void setFase(int f);
     const int getFase() const;
     void setPontuacao(int pont);

@@ -14,7 +14,7 @@ public:
 
 	static int getQuantidade();
 
-	void ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo);
+	void ExecutaImpedimento(Personagem* pP, const bool esq, const bool dir, const bool cima, const bool baixo);
 
 	void Gravar();
 };

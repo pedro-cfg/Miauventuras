@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "Espinho.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Espinho::cont = 0;
 int Espinho::getQuantidade()

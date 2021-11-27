@@ -40,7 +40,7 @@ public:
 
     /*Métodos executados polimorficamente*/
     virtual void mover(float dT){}
-    virtual void Executar(float dT){}
+    virtual void Executar(float dT) = 0;
 
     virtual void Gravar(){}
     virtual void GravarInfo(fstream& arquivo){}

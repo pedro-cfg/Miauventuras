@@ -53,7 +53,7 @@ void Personagem::setVelocidadeX(float v)
 	velocidadeX = v;
 }
 
-float Personagem::getContador()
+float Personagem::getContador() const
 {
 	return contador_tempo;
 }
@@ -81,25 +81,4 @@ void Personagem::setColidiuDireita(bool colidiu)
 void Personagem::setColidiuEsquerda(bool colidiu)
 {
 	colidiu_esquerda = colidiu;
-}
-
-
-bool Personagem::getColidiuCima() const
-{
-	return colidiu_cima;
-}
-
-bool Personagem::getColidiuBaixo() const
-{
-	return colidiu_baixo;
-}
-
-bool Personagem::getColidiuDireita() const
-{
-	return colidiu_direita;
-}
-
-bool Personagem::getColidiuEsquerda() const
-{
-	return colidiu_esquerda;
 }

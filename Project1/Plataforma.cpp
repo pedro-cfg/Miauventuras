@@ -1,6 +1,4 @@
 #include "Plataforma.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Plataforma::cont = 0;
 int Plataforma::getQuantidade()
@@ -32,7 +30,7 @@ Plataforma::~Plataforma()
 	cont--;
 }
 
-void Plataforma::ExecutaImpedimento(Personagem* pP, bool esq, bool dir, bool cima, bool baixo)
+void Plataforma::ExecutaImpedimento(Personagem* pP, const bool esq, const bool dir, const bool cima, const bool baixo)
 {
 	pP->setColidiuEsquerda(esq);
 	pP->setColidiuDireita(dir);

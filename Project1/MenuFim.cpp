@@ -19,7 +19,7 @@ void MenuFim::Executar(float dT)
 {
 	if (vitoria)
 	{
-		texto[1].setString("Vitoria!!!!! :D");
+		texto[1].setString("Vitoria :)");
 	}
 	else
 	{

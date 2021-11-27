@@ -11,7 +11,6 @@
 #include "Plataforma.h"
 #include "Teia.h"
 #include "Espinho.h"
-#include "Projetil.h"
 #include "Jogador.h"
 #include "Jogador1.h"
 #include "Jogador2.h"
@@ -44,7 +43,7 @@ public:
 
 	void reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio = false);
 
-	virtual void Passou_Fase(){}
+	virtual void Passou_Fase() = 0;
 	void MorteJogadores();
 
 	void Limpar();
@@ -58,7 +57,6 @@ public:
 	void CarregarEntidades();
 	void CarregarInimigos();
 	void CarregarObstaculos();
-	void CarregarProjeteis();
 };
 
 #endif

@@ -19,8 +19,11 @@ public:
 	Marcador_Vida(float x0, float y0);
 	~Marcador_Vida();
 
+	void Executar(float dT){}
+
 	void CarregaTextura(string caminho);
 	void setJogador(Jogador* pJ);
+
 	void AtualizaMarcador(sf::View* vista);
 	void desenhar();
 };

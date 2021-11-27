@@ -5,10 +5,11 @@ Inimigo::Inimigo() :
 	Personagem(),
 	ehChefao(false)
 {
+	valor = 0;
+	Xinicial = 0.0f;
 	vidas = 1;
 	velocidadeEscalar = 100.f;
 	amplitude = 500.f;
-	vidas = 1;
 	direcao = 1.0f;
 }
 
@@ -86,7 +87,7 @@ float Inimigo::getDirecao() const
 	return direcao;
 }
 
-float Inimigo::getVelX()
+float Inimigo::getVelX() const
 {
 	return velocidadeX;
 }

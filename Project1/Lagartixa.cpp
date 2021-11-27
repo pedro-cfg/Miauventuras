@@ -1,6 +1,4 @@
 #include "Lagartixa.h"
-#include "ListaEntidades.h"
-#include "Gerenciador_Colisoes.h"
 
 int Lagartixa::cont = 0;
 int Lagartixa::getQuantidade()

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Jogo.h"
 
-#include <filesystem>
-
 Jogo::Jogo() :
 	pJ1(NULL),
 	pJ2(NULL),

@@ -14,7 +14,7 @@ public:
 
 	static void setGerenciadorGrafico(Gerenciador_Grafico* pG);
 
-	virtual void Executar(float dT){}
+	virtual void Executar(float dT) = 0;
 	virtual void desenhar(){}
 
 	void Atualiza_Contador(float dT, bool zera = false);

@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "Menu.h"
-#include "Gerenciador_Grafico.h"
-#include "FasePrimeira.h"
-#include "Jogador.h"
 #include "Jogo.h"
-#include "MenuPlacar.h"
 using namespace Menus;
 
 Jogo* Menu::pJogo = NULL;
@@ -58,10 +54,6 @@ void Menu::Executar(float dT)
 void Menu::desenhar()
 {
 	pGG->DesenhaTexto(texto, linhas_texto);
-}
-
-void Menu::Escolher_Opcao()
-{
 }
 
 float Menu::CalculaTamanho(sf::Text texto)

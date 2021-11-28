@@ -65,7 +65,6 @@ void Jogo::Inicializar()
 
 void Jogo::InicializarEstados()
 {
-	Estado::setMaquinaEstados(&maquina_de_estados);
 	maquina_de_estados.incluirEstado(MENU_PRINCIPAL, static_cast<Estado*>(&menu_principal));
 	maquina_de_estados.incluirEstado(MENU_FASES, static_cast<Estado*>(&menu_fases));
 	maquina_de_estados.incluirEstado(MENU_NUM_JOGADORES, static_cast<Estado*>(&menu_num_jogadores));

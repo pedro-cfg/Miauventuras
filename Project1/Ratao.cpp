@@ -32,7 +32,6 @@ Ratao::Ratao(float x, float y) :
 
 Ratao::~Ratao() 
 {
-	cont--;
 }
 
 void Ratao::reseta_cont()

@@ -15,7 +15,7 @@ protected:
 
 public:
     Personagem();
-    ~Personagem();
+    virtual~Personagem();
 
     int getVidas() const;
     void setVidas(int v);

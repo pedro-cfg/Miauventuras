@@ -31,7 +31,6 @@ Lagartixa::Lagartixa(float x, float y) :
 
 Lagartixa::~Lagartixa() 
 {
-	cont--;
 }
 
 void Lagartixa::reseta_velocidade()

@@ -36,7 +36,6 @@ Aranha::Aranha(float x, float y) :
 
 Aranha::~Aranha()
 {
-	cont--;
 }
 
 void Aranha::Executar(float dT)

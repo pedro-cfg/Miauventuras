@@ -96,13 +96,13 @@ void Gerenciador_Grafico::EventosJanela(MaquinaEstados* pMaqEstados)
 				Menu* pM = static_cast<Menu*>(pMaqEstados->getEstadoAtual());
 				switch (event.key.code)
 				{
-				case sf::Keyboard::Up:
+				case sf::Keyboard::W:
 					pM->opcao_acima();
 					break;
-				case sf::Keyboard::Down:
+				case sf::Keyboard::S:
 					pM->opcao_abaixo();
 					break;
-				case sf::Keyboard::Enter:
+				case sf::Keyboard::Space:
 					pM->Escolher_Opcao();
 					break;
 				}

@@ -13,7 +13,7 @@ FaseSegunda::~FaseSegunda()
 
 int FaseSegunda::Numero_Instancias()
 {
-	return (rand() % 5) + 3;
+	return (rand() % 3) + 5;
 }
 
 void FaseSegunda::Passou_Fase()

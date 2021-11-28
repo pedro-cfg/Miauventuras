@@ -10,6 +10,7 @@ class Inimigo: public Personagem
 protected:
 	float Xinicial;
 	float amplitude;
+	float tempo;
 	int valor;
 	float direcao;
 	bool ehChefao;
@@ -21,12 +22,13 @@ public:
 	const bool getEhChefao() const;
 
 	virtual void Executar(float dT);
-	void mover(float dT);
+	virtual void mover(float dT);
 
 	float getDirecao() const;
 	float getVelX() const;
 
 	virtual void reseta_velocidade();
+	virtual void diminui_cont() = 0;
 	
 	void InimigoEmPlataforma(Obstaculo* pO);
 

@@ -11,6 +11,11 @@ FasePrimeira::~FasePrimeira()
 {
 }
 
+int FasePrimeira::Numero_Instancias()
+{
+	return (rand() % 3) + 3;
+}
+
 void FasePrimeira::Passou_Fase()
 {
 	if (pJ1 && pJ2)

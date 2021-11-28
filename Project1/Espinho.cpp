@@ -36,6 +36,11 @@ void Espinho::ExecutaImpedimento(Jogador* pJ)
 	pJ->Atualiza_Contador(0.f, true);
 }
 
+void Espinho::reseta_cont()
+{
+	cont = 0;
+}
+
 void Espinho::Gravar()
 {
 	fstream arquivo;

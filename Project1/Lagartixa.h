@@ -16,6 +16,8 @@ public:
 
 	void reseta_velocidade();
 
+	static void reseta_cont();
+	void diminui_cont();
 	void Gravar();
 };
 

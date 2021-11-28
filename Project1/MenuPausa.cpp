@@ -64,7 +64,7 @@ void MenuPausa::Escolher_Opcao()
 		break;
 	case 3: /*Voltar ao menu principal*/
 		texto[2].setString("Salvar");
-		SalvarPontuacao();
+		//SalvarPontuacao();
 		pJogo->getJogador1()->reseta_jogador(true, true, true);
 		pJogo->getJogador2()->reseta_jogador(true, true, true);
 		pMaquinaEstados->setEstadoAtual(MENU_PRINCIPAL);

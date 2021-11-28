@@ -61,7 +61,7 @@ void Marcador_Vida::AtualizaMarcador(sf::View* vista)
 	}
 }
 
-void Marcador_Vida::desenhar()
+sf::RectangleShape& Marcador_Vida::getForma()
 {
-	pGG->DesenhaForma(forma_marcador);
+	return forma_marcador;
 }

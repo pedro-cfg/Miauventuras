@@ -59,8 +59,8 @@ void Fase::Gerar_Inimigos()
 	Gerar_Chefao();
 	int instancias, posicao;
 
-	/*Alcance de instâncias: 3-5*/
-	instancias = (rand() % 3) + 3;
+	/*Alcance de instâncias: 3-5 ou 5-7*/
+	instancias = Numero_Instancias();
 	for (int i = 0; i < instancias; i++)
 	{
 		posicao = (rand() % 9000) + 300;
@@ -69,8 +69,8 @@ void Fase::Gerar_Inimigos()
 		gerenciador_colisoes.Inserir(static_cast<Inimigo*>(pA));
 	}
 
-	/*Alcance de instâncias: 3-5*/
-	instancias = (rand() % 3) + 3;
+	/*Alcance de instâncias: 3-5 ou 5-7*/
+	instancias = Numero_Instancias();
 	for (int i = 0; i < instancias; i++)
 	{
 		posicao = (rand() % 9000) + 300;
@@ -85,8 +85,8 @@ void Fase::Gerar_Obstaculos()
 	Gerar_Plataformas();
 	int instancias, posicao;
 
-	/*Alcance de instâncias: 3-5*/
-	instancias = (rand() % 3) + 3;
+	/*Alcance de instâncias: 3-5 ou 5-7*/
+	instancias = Numero_Instancias();
 	for (int i = 0; i < instancias; i++) {
 		posicao = (rand() % 9000) + 300;
 		Espinho* pE = new Espinho((float)posicao, -75);
@@ -94,8 +94,8 @@ void Fase::Gerar_Obstaculos()
 		gerenciador_colisoes.Inserir(static_cast<Obstaculo*>(pE));
 	}
 
-	/*Alcance de instâncias: 3-5*/
-	instancias = (rand() % 3) + 3;
+	/*Alcance de instâncias: 3-5 ou 5-7*/
+	instancias = Numero_Instancias();
 	for (int i = 0; i < instancias; i++) {
 		posicao = (rand() % 9000) + 300;
 		Teia* pT = new Teia((float)posicao, -200);
@@ -113,6 +113,7 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 {
 	lista_entidades.Limpar();
 	gerenciador_colisoes.LimpaListas();
+	reseta_entidades_cont();
 	pJ1 = p1;
 	pJ2 = p2;
 	if (pJ1)
@@ -134,6 +135,16 @@ void Fase::reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio)
 
 	Entidade::setPonteiroLista(&lista_entidades);
 	Entidade::setGerenciadorColisoes(&gerenciador_colisoes);
+}
+
+void Fase::reseta_entidades_cont()
+{
+	Aranha::reseta_cont();
+	Lagartixa::reseta_cont();
+	Ratao::reseta_cont();
+	Plataforma::reseta_cont();
+	Teia::reseta_cont();
+	Espinho::reseta_cont();
 }
 
 void Fase::MorteJogadores()

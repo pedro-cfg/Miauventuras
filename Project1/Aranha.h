@@ -20,6 +20,8 @@ public:
 	void Executar(float dT);
 	void lancaProjetil();
 
+	static void reseta_cont();
+	void diminui_cont();
 	void Gravar();
 	void GravarInfo(fstream& arquivo);
 	void Carregar(fstream& arquivo);

@@ -36,12 +36,14 @@ public:
 	void Gerar_Inimigos();
 	void Gerar_Obstaculos();
 
+	virtual int Numero_Instancias() = 0;
 	virtual void Gerar_Plataformas(){}
 	virtual void Gerar_Chefao(){}
 
 	void Inserir_Entidade(Entidade* pE);
 
 	void reseta_fase(Jogador1* p1, Jogador2* p2, bool reinicio = false);
+	void reseta_entidades_cont();
 
 	virtual void Passou_Fase() = 0;
 	void MorteJogadores();

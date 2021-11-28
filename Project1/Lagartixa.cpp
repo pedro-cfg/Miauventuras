@@ -39,6 +39,16 @@ void Lagartixa::reseta_velocidade()
 	velocidadeEscalar = 500.0f;
 }
 
+void Lagartixa::reseta_cont()
+{
+	cont = 0;
+}
+
+void Lagartixa::diminui_cont()
+{
+	cont--;
+}
+
 void Lagartixa::Gravar()
 {
 	fstream arquivo;

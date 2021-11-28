@@ -38,6 +38,11 @@ void Plataforma::ExecutaImpedimento(Personagem* pP, const bool esq, const bool d
 	pP->setColidiuBaixo(baixo);
 }
 
+void Plataforma::reseta_cont()
+{
+	cont = 0;
+}
+
 void Plataforma::Gravar()
 {
 	fstream arquivo;

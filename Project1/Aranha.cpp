@@ -63,10 +63,20 @@ void Aranha::lancaProjetil()
 	}
 }
 
+void Aranha::reseta_cont()
+{
+	cont = 0;
+}
+
+void Aranha::diminui_cont()
+{
+	cont--;
+}
+
 void Aranha::Gravar()
 {
 	fstream arquivo;
-	arquivo.open(ARANHAS_SAVE, ios::binary | ios::out | ios::app );
+	arquivo.open(ARANHAS_SAVE, ios::binary | ios::out | ios::app);
 
 	GravarInfo(arquivo);
 
@@ -75,6 +85,7 @@ void Aranha::Gravar()
 
 void Aranha::GravarInfo(fstream& arquivo)
 {
+	bool projetil = false;
 	arquivo.write((char*)&x, sizeof(x));
 	arquivo.write((char*)&y, sizeof(y));
 	arquivo.write((char*)&Xinicial, sizeof(Xinicial));
@@ -82,11 +93,16 @@ void Aranha::GravarInfo(fstream& arquivo)
 	arquivo.write((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
 	arquivo.write((char*)&velocidadeX, sizeof(velocidadeX));
 	arquivo.write((char*)&velocidadeY, sizeof(velocidadeY));
-	pProj->GravarInfo(arquivo);
+	if (pProj)
+		projetil = true;
+	arquivo.write((char*)&projetil, sizeof(projetil));
+	if (projetil)
+		pProj->GravarInfo(arquivo);
 }
 
 void Aranha::Carregar(fstream& arquivo)
 {
+	bool projetil = false;
 	arquivo.read((char*)&x, sizeof(x));
 	arquivo.read((char*)&y, sizeof(y));
 	arquivo.read((char*)&Xinicial, sizeof(Xinicial));
@@ -94,11 +110,11 @@ void Aranha::Carregar(fstream& arquivo)
 	arquivo.read((char*)&velocidadeEscalar, sizeof(velocidadeEscalar));
 	arquivo.read((char*)&velocidadeX, sizeof(velocidadeX));
 	arquivo.read((char*)&velocidadeY, sizeof(velocidadeY));
+	arquivo.read((char*)&projetil, sizeof(projetil));
 
-	Projetil* pNovo = new Projetil();
-
-	if (pNovo)
+	if (projetil)
 	{
+		Projetil* pNovo = new Projetil();
 		pProj = pNovo;
 		pProj->Carregar(arquivo);
 		pLista->Inserir(pProj);

@@ -16,6 +16,7 @@ public:
 
 	void ExecutaImpedimento(Jogador* pJ);
 
+	static void reseta_cont();
 	void Gravar();
 };
 

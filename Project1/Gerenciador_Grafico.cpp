@@ -160,13 +160,13 @@ void Gerenciador_Grafico::DesenhaTudo(ListaEntidades& lista, Jogador1* pJ1, Joga
 	if (pJ1)
 	{
 		marcador1.AtualizaMarcador(&vista);
-		marcador1.desenhar();
+		DesenhaForma(marcador1.getForma());
 		pJ1->desenhar();
 	}
 	if (pJ2)
 	{
 		marcador2.AtualizaMarcador(&vista);
-		marcador2.desenhar();
+		DesenhaForma(marcador2.getForma());
 		pJ2->desenhar();
 	}
 	lista.Desenha();

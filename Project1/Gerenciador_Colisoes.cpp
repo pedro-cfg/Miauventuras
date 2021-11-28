@@ -58,13 +58,22 @@ void Gerenciador_Colisoes::Colisao_Com_Inimigos(Jogador* pJ)
 			pJ->Atualiza_Contador(0.f, true);
 			if (colidiuEsquerda || colidiuCima)
 			{
-				pJ->setVelocidadeX(500.f);
+				if (!pInim->getEhChefao())
+					pJ->setVelocidadeX(500.f);
+				else
+					pJ->setVelocidadeX(800.f);
 			}
 			if (colidiuDireita)
 			{
-				pJ->setVelocidadeX(-500.f);
+				if (!pInim->getEhChefao())
+					pJ->setVelocidadeX(-500.f);
+				else
+					pJ->setVelocidadeX(-800.f);
 			}
-			pJ->setVelocidadeY(-500.f);
+			if (!pInim->getEhChefao())
+				pJ->setVelocidadeY(-500.f);
+			else
+				pJ->setVelocidadeY(-800.f);
 		}
 		else if (colidiuBaixo)
 		{
@@ -78,7 +87,12 @@ void Gerenciador_Colisoes::Colisao_Com_Inimigos(Jogador* pJ)
 				}
 				Excluir(pInim);
 			}
-			pJ->setVelocidadeY(-500.f);
+			if (!pInim->getEhChefao())
+				pJ->setVelocidadeY(-500.f);
+			else {
+				pJ->setVelocidadeY(-800.f);
+				pJ->setVelocidadeX(-600.f);
+			}
 		}
 
 	}
@@ -167,7 +181,7 @@ void Gerenciador_Colisoes::Checa_Colisao_Inimigos()
 			Obstaculo* pObs = (*iteObs);
 			Entidade* pAux = static_cast<Entidade*> (pObs);
 			iteObs++;
-			
+
 			if (pObs->getEhPlataforma())
 			{
 				if (pAux != NULL)
@@ -252,6 +266,7 @@ void Gerenciador_Colisoes::Inserir(Projetil* pP)
 
 void Gerenciador_Colisoes::Excluir(Inimigo* pI)
 {
+	pI->diminui_cont();
 	LIs.remove(pI);
 	pLista->Retirar(static_cast<Entidade*>(pI));
 }

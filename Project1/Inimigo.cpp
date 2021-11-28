@@ -3,7 +3,8 @@
 
 Inimigo::Inimigo() :
 	Personagem(),
-	ehChefao(false)
+	ehChefao(false),
+	tempo(0.f)
 {
 	valor = 0;
 	Xinicial = 0.0f;
@@ -46,6 +47,7 @@ void Inimigo::mover(float dT)
 	}
 	else
 		velocidadeY = 0.0f;
+
 	if (direcao > 0)
 	{
 		if (!colidiu_direita)

@@ -9,6 +9,7 @@ public:
 	FasePrimeira();
 	~FasePrimeira();
 
+	int Numero_Instancias();
 	void Passou_Fase();
 	void Gerar_Plataformas();
 };

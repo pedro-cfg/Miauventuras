@@ -13,7 +13,7 @@ class Jogador: public Personagem
 protected:
     string nome;
     int pontos;
-    float alturaPulo;
+    const float alturaPulo;
     bool podePular;
     bool empurrado;
     bool venceu;

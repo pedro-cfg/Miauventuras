@@ -5,7 +5,7 @@
 #include "Ente.h"
 #include "Jogador.h"
 
-class Marcador_Vida : public Ente
+class Marcador_Vida
 {
 private:
 	float x;
@@ -19,13 +19,11 @@ public:
 	Marcador_Vida(float x0, float y0);
 	~Marcador_Vida();
 
-	void Executar(float dT){}
-
 	void CarregaTextura(string caminho);
 	void setJogador(Jogador* pJ);
 
 	void AtualizaMarcador(sf::View* vista);
-	void desenhar();
+	sf::RectangleShape& getForma();
 };
 
 #endif

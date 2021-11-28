@@ -20,16 +20,16 @@ Jogador1::~Jogador1()
 
 bool Jogador1::mover_esq()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::A));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Left));
 }
 
 bool Jogador1::mover_dir()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::D));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Right));
 }
 
 bool Jogador1::pular()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::W));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Up));
 }
 

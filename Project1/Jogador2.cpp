@@ -19,15 +19,15 @@ Jogador2::~Jogador2()
 
 bool Jogador2::mover_esq()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Left));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::A));
 }
 
 bool Jogador2::mover_dir()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Right));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::D));
 }
 
 bool Jogador2::pular()
 {
-	return (sf::Keyboard::isKeyPressed(sf::Keyboard::Up));
+	return (sf::Keyboard::isKeyPressed(sf::Keyboard::W));
 }

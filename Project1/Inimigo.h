@@ -28,7 +28,7 @@ public:
 	float getVelX() const;
 
 	virtual void reseta_velocidade();
-	virtual void diminui_cont() = 0;
+	virtual void diminui_cont(){}
 	
 	void InimigoEmPlataforma(Obstaculo* pO);
 

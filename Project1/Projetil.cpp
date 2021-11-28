@@ -1,15 +1,8 @@
 #include "stdafx.h"
 #include "Projetil.h"
 
-int Projetil::cont = 0;
-int Projetil::getQuantidade()
-{
-	return cont;
-}
-
 Projetil::Projetil()
 {
-	cont++;
 	CarregaTextura(PROJETIL);
 	velocidadeEscalar = 700.f;
 	contador_tempo = 0.f;
@@ -20,7 +13,6 @@ Projetil::Projetil()
 Projetil::Projetil(Aranha* pAr) :
 	Entidade() 
 {
-	cont++;
 	x = pAr->getX();
 	y = pAr->getY();
 	CarregaTextura(PROJETIL);
@@ -35,7 +27,6 @@ Projetil::Projetil(Aranha* pAr) :
 
 Projetil::~Projetil() 
 {
-	cont--;
 }
 
 void Projetil::Executar(float dT)

@@ -8,7 +8,6 @@
 class Projetil: public Entidade 
 {
 private:
-	static int cont;
 	float velocidadeEscalar;
 	float velocidadeX;
 	float velocidadeY;
@@ -16,8 +15,6 @@ public:
 	Projetil();
 	Projetil(Aranha* pAr);
 	~Projetil();
-
-	static int getQuantidade();
 
 	void mover(float dT);
 	void Executar(float dT);

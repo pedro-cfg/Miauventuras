@@ -6,6 +6,7 @@ MaquinaEstados::MaquinaEstados(idEstado idInicial, Estado* estadoInicial)
 	incluirEstado(idInicial, estadoInicial);
 	estadoAtual = estadoInicial;
 	idEstadoAtual = idInicial;
+	Estado::setMaquinaEstados(this);
 }
 
 MaquinaEstados::~MaquinaEstados()

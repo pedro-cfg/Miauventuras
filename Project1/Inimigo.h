@@ -10,6 +10,7 @@ class Inimigo: public Personagem
 protected:
 	float Xinicial;
 	float amplitude;
+	float tempo;
 	int valor;
 	float direcao;
 	bool ehChefao;

@@ -36,6 +36,7 @@ public:
 	void Gerar_Inimigos();
 	void Gerar_Obstaculos();
 
+	virtual int Numero_Instancias() = 0;
 	virtual void Gerar_Plataformas(){}
 	virtual void Gerar_Chefao(){}
 

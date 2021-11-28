@@ -14,6 +14,8 @@ public:
 
 	static int getQuantidade();
 
+	void mover(float dT);
+
 	static void reseta_cont();
 	void diminui_cont();
 	void Gravar();

@@ -22,7 +22,7 @@ public:
 	const bool getEhChefao() const;
 
 	virtual void Executar(float dT);
-	void mover(float dT);
+	virtual void mover(float dT);
 
 	float getDirecao() const;
 	float getVelX() const;

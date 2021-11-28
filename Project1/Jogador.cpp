@@ -2,14 +2,14 @@
 
 Jogador::Jogador() :
 	Personagem(),
-	nome("")
+	nome(""),
+	alturaPulo(350.0f)
 {
 	pontos = 0;
 	vidas = 7;
 
 	reseta_velocidade();
 
-	alturaPulo = 350.0f;
 	podePular = true;
 	empurrado = false;
 

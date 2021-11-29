@@ -2,7 +2,7 @@
 using namespace Menus;
 
 Gerenciador_Grafico::Gerenciador_Grafico() :
-	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Teste!"),
+	janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), "Miauventuras"),
 	vista(sf::Vector2f(0.f, 0.f), sf::Vector2f(LARGURA_EXIBICAO, ALTURA_EXIBICAO)),
 	cor_fundo(173, 216, 230),
 	marcador1(-800, -400),
